@@ -134,7 +134,8 @@
 
     async function init() {
       try {
-        const response = await fetch('./events.json');
+        // Cache-busting parameter guarantees fresh fetch of events.json
+        const response = await fetch('./events.json?v=' + new Date().getTime());
         if (response.ok) {
           eventsData = await response.json();
         }
@@ -193,9 +194,16 @@
       const viewMonth = displayedDate.getMonth();
 
       const filtered = eventsData.filter(e => {
-        const matchesDate = e.year === viewYear && e.month === viewMonth && e.date === selectedDay;
-        const matchesCity = selectedCity === 'ALL' || e.city.toLowerCase().includes(selectedCity.toLowerCase());
-        const matchesTag = currentTag === 'ALL' || e.tags.includes(currentTag);
+        // Exact numeric parsing prevents type mismatch between string/number dates
+        const matchesDate = (Number(e.year) === viewYear) && 
+                            (Number(e.month) === viewMonth) && 
+                            (Number(e.date) === selectedDay);
+                            
+        const matchesCity = (selectedCity === 'ALL') || 
+                            (e.city.toLowerCase().trim() === selectedCity.toLowerCase().trim());
+                            
+        const matchesTag = (currentTag === 'ALL') || e.tags.includes(currentTag);
+
         return matchesDate && matchesCity && matchesTag;
       });
 
