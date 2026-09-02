@@ -3,267 +3,273 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inside Riviera - What's On Today</title>
+  <title>Inside Riviera - Event Aggregator</title>
   <style>
     :root {
-      --pink-primary: #FF007A;
-      --yellow-lime: #D2FF00;
-      --dark-card: #121212;
-      --text-main: #222222;
-      --text-muted: #666666;
-      --bg-gray: #F8F9FA;
+      --primary: #10b981;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg-gray); color: var(--text-main); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
     header {
-      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%), 
-                  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
-      padding: 50px 20px 100px; text-align: center; color: white; position: relative;
+      margin-bottom: 24px;
+      text-align: center;
     }
 
-    .brand-logo { display: inline-block; border: 2px solid white; padding: 4px 10px; font-weight: 900; font-size: 1.2rem; border-radius: 6px; letter-spacing: 1px; margin-bottom: 20px; background: rgba(0,0,0,0.2); backdrop-filter: blur(4px); }
-    .hero-title { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase; line-height: 1.1; color: #FFFFFF; }
-    .hero-title .highlight { color: var(--yellow-lime); display: block; font-size: 3.2rem; margin-top: 2px; text-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-    .hero-subtitle { margin-top: 14px; font-size: 0.95rem; color: #FFFFFF; opacity: 0.95; font-weight: 500; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.4; }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 2rem;
+    }
 
-    .container { max-width: 1000px; margin: 0 auto 40px; padding: 0 20px; position: relative; z-index: 10; }
-    .calendar-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 12px 35px rgba(0,0,0,0.15); max-width: 450px; margin: -60px auto 30px; position: relative; z-index: 20; }
-    .calendar-month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-main); }
-    .nav-btn { background: #F0F0F0; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+    .subtitle {
+      color: var(--text-muted);
+      margin: 0;
+    }
 
-    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; font-size: 0.9rem; }
-    .calendar-day-head { font-weight: 700; color: var(--text-muted); padding-bottom: 8px; font-size: 0.8rem; }
-    .calendar-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; font-weight: 600; position: relative; }
-    .calendar-day.active { background: var(--pink-primary); color: white; font-weight: 800; box-shadow: 0 4px 10px rgba(255, 0, 122, 0.4); }
-    .calendar-day.empty { cursor: default; }
+    /* Calendar Controls */
+    .calendar-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-bg);
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 24px;
+    }
 
-    .filter-bar { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
-    select { padding: 12px 18px; border-radius: 20px; border: 1px solid #E0E0E0; outline: none; font-size: 0.95rem; font-weight: 600; background: #FFF; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .date-display {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
 
-    .tags-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
-    .tag-chip { padding: 10px 18px; border-radius: 25px; background: #FFFFFF; font-size: 0.85rem; font-weight: 700; cursor: pointer; border: 1px solid #EAEAEA; transition: all 0.2s ease; }
-    .tag-chip.active { background: var(--yellow-lime); color: #000000; border-color: var(--yellow-lime); }
+    /* Event Grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
 
-    .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-    .event-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.06); cursor: pointer; display: flex; flex-direction: column; transition: transform 0.2s ease; }
-    .event-card:hover { transform: translateY(-4px); }
-    .event-image { height: 160px; background-size: cover; background-position: center; position: relative; }
-    .event-tags-overlay { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; }
-    .event-tag { background: rgba(0,0,0,0.75); color: white; font-size: 0.68rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; backdrop-filter: blur(4px); }
-    .event-content { padding: 18px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .event-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
-    .event-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; font-weight: 600; }
+    .event-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(3px); }
-    .modal-card { background: white; width: 90%; max-width: 440px; border-radius: 24px; overflow: hidden; animation: popIn 0.25s ease; }
-    @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .modal-image { height: 210px; background-size: cover; background-position: center; position: relative; }
-    .modal-close { position: absolute; top: 15px; right: 15px; background: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-    .modal-body { padding: 22px; }
-    
-    .btn-action { display: block; width: 100%; text-align: center; background: var(--pink-primary); color: white; font-weight: 800; padding: 14px; border-radius: 14px; border: none; margin-top: 12px; cursor: pointer; text-decoration: none; font-size: 0.95rem; }
-    .btn-secondary { background: #F0F0F0; color: #222; margin-top: 8px; }
+    .event-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      height: 180px;
+      background-color: #e2e8f0;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .card-content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-content h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .meta {
+      display: flex;
+      gap: 12px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .description {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .official-btn {
+      display: inline-block;
+      text-align: center;
+      background-color: #f1f5f9;
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .official-btn:hover {
+      background-color: #e2e8f0;
+    }
+
+    .no-events {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      border-radius: 12px;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="brand-logo">iR</div>
-    <div class="hero-title">WHAT'S ON <span class="highlight">TODAY</span></div>
-    <p class="hero-subtitle">Events, markets, and things to do across Vallebona, Ventimiglia, Vallecrosia, Bordighera, Ospedaletti, Sanremo, Menton & Monte-Carlo.</p>
-  </header>
-
   <div class="container">
-    <div class="calendar-card">
-      <div class="calendar-month-header">
-        <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
-        <span id="monthYearDisplay">MONTH YEAR</span>
-        <button class="nav-btn" onclick="changeMonth(1)">›</button>
-      </div>
-      <div class="calendar-grid">
-        <div class="calendar-day-head">MON</div><div class="calendar-day-head">TUE</div><div class="calendar-day-head">WED</div>
-        <div class="calendar-day-head">THU</div><div class="calendar-day-head">FRI</div><div class="calendar-day-head">SAT</div><div class="calendar-day-head">SUN</div>
-      </div>
-      <div class="calendar-grid" id="calendarDays"></div>
+    <header>
+      <h1>Inside Riviera</h1>
+      <p class="subtitle">Events & Activities across the French & Italian Riviera</p>
+    </header>
+
+    <div class="calendar-bar">
+      <div class="date-display" id="current-date-title">Events for September 2, 2026</div>
     </div>
 
-    <div class="filter-bar">
-      <select id="cityFilter" onchange="applyFilters()">
-        <option value="ALL">All Cities (Riviera Coastal & Inland Towns)</option>
-        <option value="Vallebona">Vallebona</option>
-        <option value="Ventimiglia">Ventimiglia</option>
-        <option value="Vallecrosia">Vallecrosia</option>
-        <option value="Bordighera">Bordighera</option>
-        <option value="Ospedaletti">Ospedaletti</option>
-        <option value="Sanremo">Sanremo</option>
-        <option value="Menton">Menton</option>
-        <option value="Monte-Carlo">Monte-Carlo</option>
-      </select>
-    </div>
-
-    <div class="tags-container">
-      <button class="tag-chip active" onclick="filterTag('ALL', this)">All Events</button>
-      <button class="tag-chip" onclick="filterTag('Beach Party', this)">Beach Party</button>
-      <button class="tag-chip" onclick="filterTag('Town Festival', this)">Town Festival</button>
-      <button class="tag-chip" onclick="filterTag('Concert', this)">Concert</button>
-      <button class="tag-chip" onclick="filterTag('Food & Drinks', this)">Food & Drinks</button>
-      <button class="tag-chip" onclick="filterTag('Market', this)">Market</button>
-    </div>
-
-    <div class="events-grid" id="eventsList"></div>
-  </div>
-
-  <!-- Event Details Modal -->
-  <div class="modal-overlay" id="eventModal">
-    <div class="modal-card">
-      <div class="modal-image" id="modalImg"><button class="modal-close" onclick="closeModal()">✕</button></div>
-      <div class="modal-body">
-        <h2 id="modalTitle" style="margin-bottom: 8px; font-size: 1.25rem;"></h2>
-        <p id="modalMeta" style="color: var(--pink-primary); font-weight: bold; margin-bottom: 12px; font-size: 0.9rem;"></p>
-        <p id="modalDesc" style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;"></p>
-
-        <a id="modalWebBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-action">VISIT OFFICIAL WEBSITE ↗</a>
-        <button class="btn-action btn-secondary" onclick="closeModal()">CLOSE</button>
-      </div>
+    <div class="events-grid" id="events-container">
+      <!-- Cards render dynamically -->
     </div>
   </div>
 
   <script>
-    let eventsData = [];
-    let displayedDate = new Date();
-    let selectedDay = displayedDate.getDate();
-    let currentTag = 'ALL';
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let allEvents = [];
+    
+    // Explicit initial date setup (September 2, 2026)
+    const activeDate = new Date(2026, 8, 2); 
 
-    async function init() {
+    async function loadEvents() {
       try {
-        const response = await fetch('./events.json?v=' + new Date().getTime());
-        if (response.ok) {
-          eventsData = await response.json();
-        }
+        const response = await fetch('events.json?v=' + new Date().getTime());
+        if (!response.ok) throw new Error('Failed to load events');
+        
+        allEvents = await response.json();
+        
+        // Render events for the active date on page load
+        renderEventsForDate(
+          activeDate.getFullYear(), 
+          activeDate.getMonth(), 
+          activeDate.getDate()
+        );
       } catch (err) {
-        console.log('Unable to load events.json, waiting for scraper run.');
+        console.error("Error loading events.json:", err);
+        document.getElementById("events-container").innerHTML = `
+          <div class="no-events">
+            <p>Unable to load event feed. Ensure <code>events.json</code> exists.</p>
+          </div>
+        `;
       }
-      generateCalendar();
     }
 
-    function generateCalendar() {
-      const year = displayedDate.getFullYear();
-      const month = displayedDate.getMonth();
-      document.getElementById('monthYearDisplay').innerText = `${monthNames[month]} ${year}`;
+    function renderEventsForDate(selectedYear, selectedMonth, selectedDay) {
+      const container = document.getElementById("events-container");
+      container.innerHTML = "";
 
-      const firstDayOfMonth = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      let startingIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
+      const monthNames = ["January", "February", "March", "April", "May", "June", 
+                          "July", "August", "September", "October", "November", "December"];
 
-      const calendarDaysContainer = document.getElementById('calendarDays');
-      calendarDaysContainer.innerHTML = '';
+      document.getElementById("current-date-title").innerText = 
+        `Events for ${monthNames[selectedMonth]} ${selectedDay}, ${selectedYear}`;
 
-      for (let i = 0; i < startingIndex; i++) {
-        const emptyDiv = document.createElement('div');
-        emptyDiv.className = 'calendar-day empty';
-        calendarDaysContainer.appendChild(emptyDiv);
-      }
+      // Flexible multi-format date filtering logic
+      const filteredEvents = allEvents.filter(event => {
+        // 1. Matches 0-indexed month (month: 8)
+        const matchesJSMonth = Number(event.year) === selectedYear && 
+                               Number(event.month) === selectedMonth && 
+                               Number(event.date) === selectedDay;
 
-      for (let day = 1; day <= daysInMonth; day++) {
-        const dayDiv = document.createElement('div');
-        dayDiv.className = 'calendar-day';
-        if (day === selectedDay) dayDiv.classList.add('active');
-        
-        const hasEvents = eventsData.some(e => Number(e.year) === year && Number(e.month) === month && Number(e.date) === day);
-        
-        dayDiv.innerHTML = `<span>${day}</span>${hasEvents ? '<span style="display:block; width:5px; height:5px; background:#D2FF00; border-radius:50%; margin-top:2px;"></span>' : ''}`;
-        dayDiv.onclick = () => selectDate(day);
-        calendarDaysContainer.appendChild(dayDiv);
-      }
-      renderEvents();
-    }
+        // 2. Matches 1-indexed month (raw_month: 9)
+        const matchesRawMonth = Number(event.year) === selectedYear && 
+                                Number(event.raw_month) === (selectedMonth + 1) && 
+                                Number(event.date) === selectedDay;
 
-    function changeMonth(direction) {
-      displayedDate.setMonth(displayedDate.getMonth() + direction);
-      selectedDay = 1;
-      generateCalendar();
-    }
+        // 3. Matches formatted ISO string ("2026-09-02")
+        const formattedSelected = `${selectedYear}-${String(selectedMonth + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`;
+        const matchesISO = event.formatted_date === formattedSelected;
 
-    function selectDate(day) {
-      selectedDay = day;
-      generateCalendar();
-    }
-
-    function renderEvents() {
-      const selectedCity = document.getElementById('cityFilter').value;
-      const listContainer = document.getElementById('eventsList');
-      listContainer.innerHTML = '';
-
-      const viewYear = displayedDate.getFullYear();
-      const viewMonth = displayedDate.getMonth();
-
-      const filtered = eventsData.filter(e => {
-        const matchesDate = (Number(e.year) === viewYear) && 
-                            (Number(e.month) === viewMonth) && 
-                            (Number(e.date) === selectedDay);
-                            
-        const matchesCity = (selectedCity === 'ALL') || 
-                            (e.city.toLowerCase().trim() === selectedCity.toLowerCase().trim());
-                            
-        const matchesTag = (currentTag === 'ALL') || e.tags.includes(currentTag);
-
-        return matchesDate && matchesCity && matchesTag;
+        return matchesJSMonth || matchesRawMonth || matchesISO;
       });
 
-      if (filtered.length === 0) {
-        listContainer.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted); text-align: center; padding: 40px 0;">No events found for ${monthNames[viewMonth]} ${selectedDay}, ${viewYear}.</p>`;
+      if (filteredEvents.length === 0) {
+        container.innerHTML = `
+          <div class="no-events">
+            <p>No events found for ${monthNames[selectedMonth]} ${selectedDay}, ${selectedYear}.</p>
+          </div>
+        `;
         return;
       }
 
-      filtered.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'event-card';
-        card.onclick = () => openModal(item);
-        card.innerHTML = `
-          <div class="event-image" style="background-image: url('${item.img}')">
-            <div class="event-tags-overlay">${item.tags.map(t => `<span class="event-tag">${t}</span>`).join('')}</div>
-          </div>
-          <div class="event-content">
-            <div class="event-title">${item.title}</div>
-            <div class="event-meta"><span>📍 ${item.city}</span><span>🕒 ${item.time}</span></div>
+      filteredEvents.forEach(event => {
+        const tag = (event.tags && event.tags.length > 0) ? event.tags[0] : "Event";
+        const cardHtml = `
+          <div class="event-card">
+            <div class="card-img-wrapper">
+              <img src="${event.img}" alt="${event.title}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
+              <span class="tag">${tag}</span>
+            </div>
+            <div class="card-content">
+              <h3>${event.title}</h3>
+              <div class="meta">
+                <span>📍 ${event.city}</span>
+                <span>🕒 ${event.time}</span>
+              </div>
+              <div class="description">${event.desc}</div>
+              <a href="${event.url}" target="_blank" rel="noopener" class="official-btn">Visit Official Website</a>
+            </div>
           </div>
         `;
-        listContainer.appendChild(card);
+        container.insertAdjacentHTML("beforeend", cardHtml);
       });
     }
 
-    function filterTag(tag, element) {
-      currentTag = tag;
-      document.querySelectorAll('.tag-chip').forEach(el => el.classList.remove('active'));
-      element.classList.add('active');
-      renderEvents();
-    }
-
-    function applyFilters() { renderEvents(); }
-
-    function openModal(item) {
-      document.getElementById('modalTitle').innerText = item.title;
-      document.getElementById('modalMeta').innerText = `📍 ${item.city} • 🕒 ${item.time}`;
-      document.getElementById('modalDesc').innerText = item.desc || "No additional description provided.";
-      document.getElementById('modalImg').style.backgroundImage = `url('${item.img}')`;
-      
-      const webBtn = document.getElementById('modalWebBtn');
-      if (item.url) {
-        webBtn.href = item.url;
-        webBtn.style.display = 'block';
-      } else {
-        webBtn.style.display = 'none';
-      }
-
-      document.getElementById('eventModal').style.display = 'flex';
-    }
-
-    function closeModal() { document.getElementById('eventModal').style.display = 'none'; }
-
-    init();
+    // Initialize on load
+    document.addEventListener("DOMContentLoaded", loadEvents);
   </script>
 </body>
 </html>
