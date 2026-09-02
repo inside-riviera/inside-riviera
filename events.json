@@ -4,69 +4,69 @@
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Bordilandia Park",
+    "title": "Bordighera Sea Market",
     "city": "Bordighera",
-    "time": "21:00",
+    "time": "19:00",
     "tags": [
-      "Town Festival"
+      "Market"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Visit Bordighera event: Bordilandia Park."
+    "desc": "Evening market along the Bordighera promenade."
   },
   {
     "id": 2,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Un mare di eventi",
-    "city": "Bordighera",
-    "time": "21:00",
+    "title": "Vallebona Historic Village Walk",
+    "city": "Vallebona",
+    "time": "18:00",
     "tags": [
       "Town Festival"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Visit Bordighera event: Un mare di eventi."
+    "desc": "Cultural walk in Vallebona old town."
   },
   {
     "id": 3,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "BEERinBÓ",
-    "city": "Bordighera",
-    "time": "21:00",
+    "title": "Ventimiglia Sunset Aperitivo",
+    "city": "Ventimiglia",
+    "time": "19:30",
     "tags": [
-      "Town Festival"
+      "Food & Drinks"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Visit Bordighera event: BEERinBÓ."
+    "desc": "Sunset drinks at Ventimiglia marina."
   },
   {
     "id": 4,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "RESTA IN CONTATTO CON NOI",
-    "city": "Bordighera",
+    "title": "Ospedaletti Seaside Concert",
+    "city": "Ospedaletti",
     "time": "21:00",
     "tags": [
-      "Town Festival"
+      "Concert"
     ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Visit Bordighera event: RESTA IN CONTATTO CON NOI."
+    "img": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80",
+    "desc": "Live music on Ospedaletti seafront."
   },
   {
     "id": 5,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "RICHIEDI INFORMAZIONI",
-    "city": "Bordighera",
-    "time": "21:00",
+    "title": "Vallecrosia Summer Festival",
+    "city": "Vallecrosia",
+    "time": "20:00",
     "tags": [
       "Town Festival"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Visit Bordighera event: RICHIEDI INFORMAZIONI."
+    "desc": "Local food and entertainment in Vallecrosia."
   }
 ]
