@@ -21,11 +21,11 @@
       color: var(--text-main); 
     }
 
-    /* Main Hero Header using uploaded sunset background */
+    /* Main Hero Header */
     header {
       background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%), 
                   url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
-      padding: 50px 20px 100px; /* Increased bottom padding to prevent cut off */
+      padding: 50px 20px 100px;
       text-align: center;
       color: white;
       position: relative;
@@ -44,7 +44,6 @@
       backdrop-filter: blur(4px);
     }
 
-    /* Header Typography matching Screenshot 2 */
     .hero-title { 
       font-size: 2.2rem; 
       font-weight: 900; 
@@ -73,7 +72,7 @@
       margin-right: auto;
     }
 
-    /* Main Layout - Adjusted spacing to eliminate clipping */
+    /* Container Spacing */
     .container { 
       max-width: 1000px; 
       margin: 0 auto 40px; 
@@ -82,14 +81,14 @@
       z-index: 10;
     }
 
-    /* Centered Calendar Card */
+    /* Dynamic Calendar Card */
     .calendar-card {
       background: white;
       border-radius: 24px;
       padding: 24px;
       box-shadow: 0 12px 35px rgba(0,0,0,0.15);
       max-width: 450px;
-      margin: -60px auto 30px; /* Overlaps nicely without cutting content */
+      margin: -60px auto 30px;
       position: relative;
       z-index: 20;
     }
@@ -99,13 +98,29 @@
       justify-content: space-between; 
       align-items: center; 
       margin-bottom: 20px; 
-      padding-top: 4px; /* Internal spacing fix */
       font-size: 1.2rem;
       font-weight: 800; 
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: var(--text-main);
     }
+
+    .nav-btn {
+      background: #F0F0F0;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .nav-btn:hover { background: #E0E0E0; }
 
     .calendar-grid { 
       display: grid; 
@@ -165,7 +180,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
-    /* Tag Chips matching Screenshot 2 colors */
+    /* Tag Chips */
     .tags-container { 
       display: flex; 
       justify-content: center;
@@ -275,7 +290,6 @@
 </head>
 <body>
 
-  <!-- Background Header -->
   <header>
     <div class="brand-logo">iR</div>
     <div class="hero-title">
@@ -287,27 +301,19 @@
 
   <div class="container">
     
-    <!-- Centered Calendar -->
     <div class="calendar-card">
       <div class="calendar-month-header">
-        <span>JUNE 2025</span>
+        <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
+        <span id="monthYearDisplay">MONTH YEAR</span>
+        <button class="nav-btn" onclick="changeMonth(1)">›</button>
       </div>
       <div class="calendar-grid">
         <div class="calendar-day-head">MON</div><div class="calendar-day-head">TUE</div><div class="calendar-day-head">WED</div>
         <div class="calendar-day-head">THU</div><div class="calendar-day-head">FRI</div><div class="calendar-day-head">SAT</div><div class="calendar-day-head">SUN</div>
-        
-        <div class="calendar-day empty"></div><div class="calendar-day empty"></div><div class="calendar-day empty"></div>
-        <div class="calendar-day empty"></div><div class="calendar-day empty"></div><div class="calendar-day empty"></div><div class="calendar-day">1</div>
-        <div class="calendar-day">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div>
-        <div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div>
-        <div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div>
-        <div class="calendar-day active" onclick="selectDate(12, this)">12</div>
-        <div class="calendar-day" onclick="selectDate(13, this)">13</div>
-        <div class="calendar-day" onclick="selectDate(14, this)">14</div><div class="calendar-day">15</div>
       </div>
+      <div class="calendar-grid" id="calendarDays"></div>
     </div>
 
-    <!-- City Filter -->
     <div class="filter-bar">
       <select id="cityFilter" onchange="applyFilters()">
         <option value="ALL">All Cities (Sanremo to Monte-Carlo)</option>
@@ -318,7 +324,6 @@
       </select>
     </div>
 
-    <!-- Category Filter Chips -->
     <div class="tags-container">
       <button class="tag-chip active" onclick="filterTag('ALL', this)">All Events</button>
       <button class="tag-chip" onclick="filterTag('Beach Party', this)">Beach Party</button>
@@ -328,12 +333,10 @@
       <button class="tag-chip" onclick="filterTag('Market', this)">Market</button>
     </div>
 
-    <!-- Events Cards Grid -->
     <div class="events-grid" id="eventsList"></div>
 
   </div>
 
-  <!-- Detail Pop-up -->
   <div class="modal-overlay" id="eventModal">
     <div class="modal-card">
       <div class="modal-image" id="modalImg">
@@ -349,30 +352,90 @@
   </div>
 
   <script>
+    // Sample Events (Year, Month index 0-11, Day)
+    const todayDate = new Date();
+    const currentYearNum = todayDate.getFullYear();
+    const currentMonthNum = todayDate.getMonth();
+    const currentDayNum = todayDate.getDate();
+
     const eventsData = [
-      { id: 1, date: 12, title: "Monte-Carlo Summer Festival", city: "Monte-Carlo", time: "18:00", tags: ["Concert"], img: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80", desc: "An unforgettable evening of music and great vibes in the heart of Monte-Carlo." },
-      { id: 2, date: 12, title: "Menton Morning Market", city: "Menton", time: "08:00 - 13:00", tags: ["Market", "Food & Drinks"], img: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=600&q=80", desc: "Explore fresh local produce, artisanal cheeses, and Mediterranean flowers." },
-      { id: 3, date: 12, title: "Sunset DJ Set Plage", city: "Sanremo", time: "19:00", tags: ["Beach Party", "Food & Drinks"], img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80", desc: "Dance by the sea with sunset cocktails and deep house sets." },
-      { id: 4, date: 13, title: "Voiles de Saint-Tropez", city: "Saint-Tropez", time: "All Day", tags: ["Town Festival"], img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80", desc: "Classic yacht regatta showcasing world-class sailing along the French Riviera." }
+      { id: 1, year: currentYearNum, month: currentMonthNum, date: currentDayNum, title: "Monte-Carlo Summer Festival", city: "Monte-Carlo", time: "18:00", tags: ["Concert"], img: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80", desc: "An unforgettable evening of music and great vibes in the heart of Monte-Carlo." },
+      { id: 2, year: currentYearNum, month: currentMonthNum, date: currentDayNum, title: "Menton Morning Market", city: "Menton", time: "08:00 - 13:00", tags: ["Market", "Food & Drinks"], img: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=600&q=80", desc: "Explore fresh local produce, artisanal cheeses, and Mediterranean flowers." },
+      { id: 3, year: currentYearNum, month: currentMonthNum, date: currentDayNum, title: "Sunset DJ Set Plage", city: "Sanremo", time: "19:00", tags: ["Beach Party", "Food & Drinks"], img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80", desc: "Dance by the sea with sunset cocktails and deep house sets." },
+      { id: 4, year: currentYearNum, month: currentMonthNum, date: (currentDayNum + 1), title: "Voiles de Saint-Tropez", city: "Saint-Tropez", time: "All Day", tags: ["Town Festival"], img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80", desc: "Classic yacht regatta showcasing world-class sailing along the French Riviera." }
     ];
 
-    let currentDate = 12;
+    let displayedDate = new Date();
+    let selectedDay = displayedDate.getDate();
     let currentTag = 'ALL';
+
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    function generateCalendar() {
+      const year = displayedDate.getFullYear();
+      const month = displayedDate.getMonth();
+
+      document.getElementById('monthYearDisplay').innerText = `${monthNames[month]} ${year}`;
+
+      const firstDayOfMonth = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // Convert Sunday-indexed (0) to Monday-indexed (0=Mon, 6=Sun)
+      let startingIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
+
+      const calendarDaysContainer = document.getElementById('calendarDays');
+      calendarDaysContainer.innerHTML = '';
+
+      // Empty spaces before first day
+      for (let i = 0; i < startingIndex; i++) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'calendar-day empty';
+        calendarDaysContainer.appendChild(emptyDiv);
+      }
+
+      // Days of month
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day';
+        if (day === selectedDay) {
+          dayDiv.classList.add('active');
+        }
+        dayDiv.innerText = day;
+        dayDiv.onclick = () => selectDate(day);
+        calendarDaysContainer.appendChild(dayDiv);
+      }
+
+      renderEvents();
+    }
+
+    function changeMonth(direction) {
+      displayedDate.setMonth(displayedDate.getMonth() + direction);
+      selectedDay = 1; // Default to 1st day when month changes
+      generateCalendar();
+    }
+
+    function selectDate(day) {
+      selectedDay = day;
+      generateCalendar();
+    }
 
     function renderEvents() {
       const selectedCity = document.getElementById('cityFilter').value;
       const listContainer = document.getElementById('eventsList');
       listContainer.innerHTML = '';
 
+      const viewYear = displayedDate.getFullYear();
+      const viewMonth = displayedDate.getMonth();
+
       const filtered = eventsData.filter(e => {
-        const matchesDate = e.date === currentDate;
+        const matchesDate = e.year === viewYear && e.month === viewMonth && e.date === selectedDay;
         const matchesCity = selectedCity === 'ALL' || e.city === selectedCity;
         const matchesTag = currentTag === 'ALL' || e.tags.includes(currentTag);
         return matchesDate && matchesCity && matchesTag;
       });
 
       if (filtered.length === 0) {
-        listContainer.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted); text-align: center; padding: 40px 0;">No events found for June ${currentDate}.</p>`;
+        listContainer.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted); text-align: center; padding: 40px 0;">No events scheduled for ${monthNames[viewMonth]} ${selectedDay}, ${viewYear}.</p>`;
         return;
       }
 
@@ -398,13 +461,6 @@
       });
     }
 
-    function selectDate(day, element) {
-      currentDate = day;
-      document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('active'));
-      element.classList.add('active');
-      renderEvents();
-    }
-
     function filterTag(tag, element) {
       currentTag = tag;
       document.querySelectorAll('.tag-chip').forEach(el => el.classList.remove('active'));
@@ -424,7 +480,8 @@
 
     function closeModal() { document.getElementById('eventModal').style.display = 'none'; }
 
-    renderEvents();
+    // Initial load
+    generateCalendar();
   </script>
 </body>
 </html>
