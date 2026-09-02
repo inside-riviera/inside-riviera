@@ -23,9 +23,9 @@
 
     /* Main Hero Header using uploaded sunset background */
     header {
-      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%), 
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%), 
                   url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
-      padding: 50px 20px 80px;
+      padding: 50px 20px 100px; /* Increased bottom padding to prevent cut off */
       text-align: center;
       color: white;
       position: relative;
@@ -73,8 +73,14 @@
       margin-right: auto;
     }
 
-    /* Main Layout */
-    .container { max-width: 1000px; margin: -40px auto 40px; padding: 0 20px; }
+    /* Main Layout - Adjusted spacing to eliminate clipping */
+    .container { 
+      max-width: 1000px; 
+      margin: 0 auto 40px; 
+      padding: 0 20px; 
+      position: relative;
+      z-index: 10;
+    }
 
     /* Centered Calendar Card */
     .calendar-card {
@@ -83,7 +89,9 @@
       padding: 24px;
       box-shadow: 0 12px 35px rgba(0,0,0,0.15);
       max-width: 450px;
-      margin: 0 auto 30px;
+      margin: -60px auto 30px; /* Overlaps nicely without cutting content */
+      position: relative;
+      z-index: 20;
     }
 
     .calendar-month-header { 
@@ -91,6 +99,7 @@
       justify-content: space-between; 
       align-items: center; 
       margin-bottom: 20px; 
+      padding-top: 4px; /* Internal spacing fix */
       font-size: 1.2rem;
       font-weight: 800; 
       text-transform: uppercase;
@@ -266,6 +275,7 @@
 </head>
 <body>
 
+  <!-- Background Header -->
   <header>
     <div class="brand-logo">iR</div>
     <div class="hero-title">
@@ -277,6 +287,7 @@
 
   <div class="container">
     
+    <!-- Centered Calendar -->
     <div class="calendar-card">
       <div class="calendar-month-header">
         <span>JUNE 2025</span>
@@ -296,6 +307,7 @@
       </div>
     </div>
 
+    <!-- City Filter -->
     <div class="filter-bar">
       <select id="cityFilter" onchange="applyFilters()">
         <option value="ALL">All Cities (Sanremo to Monte-Carlo)</option>
@@ -306,6 +318,7 @@
       </select>
     </div>
 
+    <!-- Category Filter Chips -->
     <div class="tags-container">
       <button class="tag-chip active" onclick="filterTag('ALL', this)">All Events</button>
       <button class="tag-chip" onclick="filterTag('Beach Party', this)">Beach Party</button>
@@ -315,10 +328,12 @@
       <button class="tag-chip" onclick="filterTag('Market', this)">Market</button>
     </div>
 
+    <!-- Events Cards Grid -->
     <div class="events-grid" id="eventsList"></div>
 
   </div>
 
+  <!-- Detail Pop-up -->
   <div class="modal-overlay" id="eventModal">
     <div class="modal-card">
       <div class="modal-image" id="modalImg">
