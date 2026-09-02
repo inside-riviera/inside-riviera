@@ -35,7 +35,6 @@ def detect_tag(title):
         return "Beach Party"
     return "Town Festival"
 
-# Read Google Sheet Configuration
 try:
     response = requests.get(SHEET_CSV_URL, headers=headers, timeout=10)
     if response.status_code == 200:
@@ -47,12 +46,12 @@ try:
             active = (row.get("Active") or row.get("active") or "Yes").strip()
 
             if active.lower() == "yes" and feed_url.startswith("http"):
-                print(f"Processing source for {city}: {feed_url}")
+                print(f"Scraping {city}: {feed_url}")
                 try:
                     res = requests.get(feed_url, headers=headers, timeout=10)
                     if res.status_code == 200:
                         
-                        # 1. SANREMONEWS HTML PARSING (ITALIAN TOWNS)
+                        # 1. PARSE SANREMONEWS HTML
                         if "sanremonews.it" in feed_url:
                             soup = BeautifulSoup(res.content, "html.parser")
                             articles = soup.find_all(["article", "div"], class_=re.compile(r'(item|article|news|event)', re.I))
@@ -66,7 +65,6 @@ try:
                                     t_text = clean_html(title_node.text)
                                     full_text = clean_html(art.text)
                                     
-                                    # Match articles containing the specific town name
                                     if city.lower() in full_text.lower() and len(t_text) > 10:
                                         img_url = ""
                                         if img_node:
@@ -80,26 +78,27 @@ try:
                                         if link_href and not link_href.startswith("http"):
                                             link_href = f"https://www.sanremonews.it{link_href}"
 
+                                        # Force first match (found = 0) to be exact TODAY's date
                                         event_date = today + timedelta(days=found)
 
                                         events.append({
                                             "id": len(events) + 1,
                                             "year": event_date.year,
-                                            "month": event_date.month - 1,
+                                            "month": event_date.month - 1, # 0-indexed for JS calendar
                                             "date": event_date.day,
                                             "title": t_text[:70],
                                             "city": city,
                                             "time": "18:00",
                                             "tags": [detect_tag(t_text)],
                                             "img": img_url if img_url else "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-                                            "desc": f"Official scheduled event in {city}. Click below to read the full report on SanremoNews.",
+                                            "desc": f"Official scheduled event in {city}. Click below to read details on SanremoNews.",
                                             "url": link_href
                                         })
                                         found += 1
                                         if found >= 3:
                                             break
 
-                        # 2. STANDARD RSS XML PARSING (MENTON & MONTE-CARLO)
+                        # 2. PARSE FRENCH RSS FEEDS
                         else:
                             try:
                                 root = ET.fromstring(res.content)
@@ -113,6 +112,8 @@ try:
                                         t_clean = clean_html(title_elem.text)[:70]
                                         desc_clean = clean_html(desc_elem.text if desc_elem is not None else "")
                                         e_url = link_elem.text.strip() if (link_elem is not None and link_elem.text) else feed_url
+                                        
+                                        # Force first match to be exact TODAY's date
                                         event_date = today + timedelta(days=idx)
 
                                         events.append({
@@ -132,7 +133,7 @@ try:
                                 print(f"XML parse error for {city}: {xml_err}")
 
                 except Exception as e:
-                    print(f"Error requesting feed for {city}: {e}")
+                    print(f"Error fetching feed for {city}: {e}")
 
 except Exception as e:
     print(f"Error fetching Google Sheet CSV: {e}")
@@ -141,4 +142,4 @@ except Exception as e:
 with open("events.json", "w", encoding="utf-8") as f:
     json.dump(events, f, ensure_ascii=False, indent=2)
 
-print(f"Successfully processed {len(events)} events into events.json")
+print(f"Saved {len(events)} events to events.json.")
