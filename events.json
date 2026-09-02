@@ -1,1 +1,14 @@
-[]
+[][
+  {
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "city": "Sanremo",
+    "title": "Welcome to Inside Riviera",
+    "time": "10:00",
+    "tags": ["Community"],
+    "desc": "Platform is now live and running automated event updates.",
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "url": "https://inside-riviera.github.io/inside-riviera/"
+  }
+]
