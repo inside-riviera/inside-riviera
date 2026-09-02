@@ -4,167 +4,69 @@
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "PRIVACY POLICY",
-    "city": "Sanremo",
-    "time": "18:00",
+    "title": "Bordilandia Park",
+    "city": "Bordighera",
+    "time": "21:00",
     "tags": [
       "Town Festival"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "PRIVACY POLICY taking place in Sanremo. For more details and full programme visit Riviera Eventi."
+    "desc": "Visit Bordighera event: Bordilandia Park."
   },
   {
     "id": 2,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "COOKIE POLICY",
-    "city": "Sanremo",
-    "time": "18:00",
+    "title": "Un mare di eventi",
+    "city": "Bordighera",
+    "time": "21:00",
     "tags": [
       "Town Festival"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "COOKIE POLICY taking place in Sanremo. For more details and full programme visit Riviera Eventi."
+    "desc": "Visit Bordighera event: Un mare di eventi."
   },
   {
     "id": 3,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Buona cucina",
-    "city": "Sanremo",
-    "time": "18:00",
+    "title": "BEERinBÓ",
+    "city": "Bordighera",
+    "time": "21:00",
     "tags": [
-      "Food & Drinks"
+      "Town Festival"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Buona cucina taking place in Sanremo. For more details and full programme visit Riviera Eventi."
+    "desc": "Visit Bordighera event: BEERinBÓ."
   },
   {
     "id": 4,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Ospitalit√Ý",
-    "city": "Sanremo",
-    "time": "18:00",
+    "title": "RESTA IN CONTATTO CON NOI",
+    "city": "Bordighera",
+    "time": "21:00",
     "tags": [
       "Town Festival"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Ospitalit√Ý taking place in Sanremo. For more details and full programme visit Riviera Eventi."
+    "desc": "Visit Bordighera event: RESTA IN CONTATTO CON NOI."
   },
   {
     "id": 5,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Aggiungi il tuo evento",
-    "city": "Sanremo",
-    "time": "18:00",
+    "title": "RICHIEDI INFORMAZIONI",
+    "city": "Bordighera",
+    "time": "21:00",
     "tags": [
       "Town Festival"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Aggiungi il tuo evento taking place in Sanremo. For more details and full programme visit Riviera Eventi."
-  },
-  {
-    "id": 6,
-    "year": 2026,
-    "month": 8,
-    "date": 2,
-    "title": "Mercatini",
-    "city": "Sanremo",
-    "time": "18:00",
-    "tags": [
-      "Town Festival"
-    ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Mercatini taking place in Sanremo. For more details and full programme visit Riviera Eventi."
-  },
-  {
-    "id": 7,
-    "year": 2026,
-    "month": 8,
-    "date": 2,
-    "title": "Spettacolo",
-    "city": "Sanremo",
-    "time": "18:00",
-    "tags": [
-      "Town Festival"
-    ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Spettacolo taking place in Sanremo. For more details and full programme visit Riviera Eventi."
-  },
-  {
-    "id": 8,
-    "year": 2026,
-    "month": 8,
-    "date": 2,
-    "title": "Questo weekend",
-    "city": "Sanremo",
-    "time": "18:00",
-    "tags": [
-      "Town Festival"
-    ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Questo weekend taking place in Sanremo. For more details and full programme visit Riviera Eventi."
-  },
-  {
-    "id": 9,
-    "year": 2026,
-    "month": 8,
-    "date": 2,
-    "title": "Tutti gli eventi",
-    "city": "Sanremo",
-    "time": "18:00",
-    "tags": [
-      "Town Festival"
-    ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Tutti gli eventi taking place in Sanremo. For more details and full programme visit Riviera Eventi."
-  },
-  {
-    "id": 10,
-    "year": 2026,
-    "month": 8,
-    "date": 2,
-    "title": "Chi siamo",
-    "city": "Sanremo",
-    "time": "18:00",
-    "tags": [
-      "Town Festival"
-    ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Chi siamo taking place in Sanremo. For more details and full programme visit Riviera Eventi."
-  },
-  {
-    "id": 11,
-    "year": 2026,
-    "month": 8,
-    "date": 2,
-    "title": "Privacy e Cookie",
-    "city": "Sanremo",
-    "time": "18:00",
-    "tags": [
-      "Town Festival"
-    ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Privacy e Cookie taking place in Sanremo. For more details and full programme visit Riviera Eventi."
-  },
-  {
-    "id": 12,
-    "year": 2026,
-    "month": 8,
-    "date": 2,
-    "title": "MostraMercoledi 2 SettembreVentimigliaCultura",
-    "city": "Ventimiglia",
-    "time": "18:00",
-    "tags": [
-      "Town Festival"
-    ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "MostraMercoledi 2 SettembreVentimigliaCultura taking place in Ventimiglia. For more details and full programme visit Riviera Eventi."
+    "desc": "Visit Bordighera event: RICHIEDI INFORMAZIONI."
   }
 ]
