@@ -11,7 +11,8 @@
       "Food & Drinks"
     ],
     "img": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80",
-    "desc": "Featured event in Vallebona on September 02."
+    "desc": "Explore the narrow alleys of historic Vallebona followed by local Rossese wine tasting and authentic Ligurian appetizers.",
+    "url": "https://www.vallebona.info"
   },
   {
     "id": 2,
@@ -25,7 +26,8 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Featured event in Ventimiglia on September 02."
+    "desc": "Discover handcrafted items, fresh local produce, and regional specialties along the picturesque streets of Ventimiglia Alta.",
+    "url": "https://www.comune.ventimiglia.im.it"
   },
   {
     "id": 3,
@@ -39,7 +41,8 @@
       "Town Festival"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Featured event in Bordighera on September 03."
+    "desc": "An evening stroll along Argentina Promenade featuring live acoustic music, local food pop-ups, and beachside crafts.",
+    "url": "https://www.bordighera.it"
   },
   {
     "id": 4,
@@ -53,7 +56,8 @@
       "Beach Party"
     ],
     "img": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80",
-    "desc": "Featured event in Ospedaletti on September 03."
+    "desc": "Relax by the shore with chilled music, aperitivo, and panoramic sunset views over the Gulf of Ospedaletti.",
+    "url": "https://www.comune.ospedaletti.im.it"
   },
   {
     "id": 5,
@@ -67,7 +71,8 @@
       "Concert"
     ],
     "img": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80",
-    "desc": "Featured event in Vallecrosia on September 04."
+    "desc": "Live open-air performance featuring local Riviera bands and classical performances under the stars.",
+    "url": "https://www.comune.vallecrosia.im.it"
   },
   {
     "id": 6,
@@ -81,6 +86,7 @@
       "Food & Drinks"
     ],
     "img": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=600&q=80",
-    "desc": "Featured event in Monte-Carlo on September 03."
+    "desc": "Exclusive seaside lounge event overlooking Port Hercule with signature drinks and live ambient DJ sets.",
+    "url": "https://www.visitmonaco.com"
   }
 ]
