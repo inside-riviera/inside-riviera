@@ -293,42 +293,26 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.06);
       max-width: 600px;
       margin: 0 auto;
+      text-align: center;
     }
 
     .submit-section h2 {
       font-size: 1.2rem;
-      margin-bottom: 16px;
-      text-align: center;
-    }
-
-    .event-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .event-form input, .event-form select, .event-form textarea {
-      padding: 12px 16px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      outline: none;
-      font-family: inherit;
-    }
-
-    .event-form input:focus, .event-form select:focus, .event-form textarea:focus {
-      border-color: var(--accent-pink);
+      margin-bottom: 12px;
     }
 
     .submit-btn {
       background: var(--accent-pink);
       color: #ffffff;
       border: none;
-      padding: 12px;
+      padding: 14px 28px;
       border-radius: 10px;
       font-weight: bold;
       cursor: pointer;
       font-size: 0.95rem;
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -380,28 +364,15 @@
       <!-- Cards rendered dynamically -->
     </div>
 
-    <!-- Add Event Submission Form -->
+    <!-- Add Event Submission Call to Action -->
     <div class="submit-section">
       <h2>Add Your Event</h2>
-      <form class="event-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-        <input type="text" name="title" placeholder="Event Title" required>
-        <select name="city" required>
-          <option value="">Select Town / City</option>
-          <option value="Sanremo">Sanremo</option>
-          <option value="Bordighera">Bordighera</option>
-          <option value="Ventimiglia">Ventimiglia</option>
-          <option value="Vallecrosia">Vallecrosia</option>
-          <option value="Ospedaletti">Ospedaletti</option>
-          <option value="Vallebona">Vallebona</option>
-          <option value="Menton">Menton</option>
-          <option value="Monte Carlo">Monte Carlo</option>
-        </select>
-        <input type="date" name="date" required>
-        <input type="text" name="time" placeholder="Time (e.g., 18:00)" required>
-        <textarea name="desc" placeholder="Event Description" rows="3" required></textarea>
-        <input type="url" name="url" placeholder="Official Website Link" required>
-        <button type="submit" class="submit-btn">Submit Event</button>
-      </form>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
+        Got an event happening in the Riviera? Submit it via our official form and it will auto-populate on the calendar!
+      </p>
+      <a href="https://forms.gle/GTXcdJFB4TnCidsL9" target="_blank" rel="noopener" class="submit-btn">
+        Open Event Submission Form ↗
+      </a>
     </div>
   </div>
 
@@ -434,11 +405,9 @@
       const grid = document.getElementById("days-grid");
       grid.innerHTML = "";
 
-      // September 2026 starts on a Tuesday (Offset 1 for Mon-start grid)
-      const firstDayOffset = 1; 
+      const firstDayOffset = 1; // September 2026 starts on a Tuesday
       const totalDays = 30;
 
-      // Empty lead cells
       for (let i = 0; i < firstDayOffset; i++) {
         grid.appendChild(document.createElement("div"));
       }
