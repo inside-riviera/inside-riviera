@@ -4,69 +4,69 @@
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Bordighera Sea Market",
-    "city": "Bordighera",
-    "time": "19:00",
+    "title": "Vallebona Village Walk & Tasting",
+    "city": "Vallebona",
+    "time": "18:00",
     "tags": [
-      "Market"
+      "Food & Drinks"
     ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Evening market along the Bordighera promenade."
+    "img": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80",
+    "desc": "Daily featured listing for Vallebona."
   },
   {
     "id": 2,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Vallebona Historic Village Walk",
-    "city": "Vallebona",
-    "time": "18:00",
+    "title": "Ventimiglia Promenade Market",
+    "city": "Ventimiglia",
+    "time": "09:30",
     "tags": [
-      "Town Festival"
+      "Market"
     ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Cultural walk in Vallebona old town."
+    "img": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80",
+    "desc": "Daily featured listing for Ventimiglia."
   },
   {
     "id": 3,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Ventimiglia Sunset Aperitivo",
-    "city": "Ventimiglia",
-    "time": "19:30",
+    "title": "Vallecrosia Summer Music Night",
+    "city": "Vallecrosia",
+    "time": "21:00",
     "tags": [
-      "Food & Drinks"
+      "Concert"
     ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Sunset drinks at Ventimiglia marina."
+    "img": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80",
+    "desc": "Daily featured listing for Vallecrosia."
   },
   {
     "id": 4,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Ospedaletti Seaside Concert",
-    "city": "Ospedaletti",
-    "time": "21:00",
+    "title": "Bordighera Lungomare Evening Stroll",
+    "city": "Bordighera",
+    "time": "19:00",
     "tags": [
-      "Concert"
+      "Town Festival"
     ],
-    "img": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80",
-    "desc": "Live music on Ospedaletti seafront."
+    "img": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80",
+    "desc": "Daily featured listing for Bordighera."
   },
   {
     "id": 5,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Vallecrosia Summer Festival",
-    "city": "Vallecrosia",
-    "time": "20:00",
+    "title": "Ospedaletti Sunset Beach Lounge",
+    "city": "Ospedaletti",
+    "time": "18:30",
     "tags": [
-      "Town Festival"
+      "Beach Party"
     ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Local food and entertainment in Vallecrosia."
+    "img": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=600&q=80",
+    "desc": "Daily featured listing for Ospedaletti."
   }
 ]
