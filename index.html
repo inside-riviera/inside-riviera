@@ -292,7 +292,7 @@
     <div class="logo-badge">iR</div>
     <h1>WHAT'S ON</h1>
     <span class="highlight" id="hero-date-text">TODAY</span>
-    <p>Events, markets, and things to do across Vallebona, Ventimiglia, Vallecrosia, Bordighera, Ospedaletti, Sanremo, Menton & Monte Carlo.</p>
+    <p>Events, markets, and things to do across Sanremo, Bordighera, Ventimiglia, Vallecrosia al Mare, Ospedaletti, Menton, Monte Carlo, Èze sur Mer, Beaulieu sur Mer & Èze Village.</p>
   </div>
 
   <div class="main-content">
@@ -316,7 +316,17 @@
     <!-- City Filter -->
     <div class="filter-wrapper">
       <select class="city-select" id="city-filter" onchange="renderEvents()">
-        <option value="ALL">All Cities (Riviera Coastal & Inland Towns)</option>
+        <option value="ALL">All Cities (Italian & French Riviera)</option>
+        <option value="Sanremo">Sanremo</option>
+        <option value="Bordighera">Bordighera</option>
+        <option value="Ventimiglia">Ventimiglia</option>
+        <option value="Vallecrosia al Mare">Vallecrosia al Mare</option>
+        <option value="Ospedaletti">Ospedaletti</option>
+        <option value="Menton">Menton</option>
+        <option value="Monte Carlo">Monte Carlo</option>
+        <option value="Èze sur Mer">Èze sur Mer</option>
+        <option value="Beaulieu sur Mer">Beaulieu sur Mer</option>
+        <option value="Èze Village">Èze Village</option>
       </select>
     </div>
 
@@ -341,7 +351,6 @@
         if (!res.ok) throw new Error('Failed to load JSON');
         allEvents = await res.json();
 
-        populateCityFilter();
         renderCalendar();
         renderEvents();
       } catch (err) {
@@ -350,17 +359,6 @@
           <div class="no-events">Unable to load event feed. Please check <code>events.json</code>.</div>
         `;
       }
-    }
-
-    function populateCityFilter() {
-      const cities = [...new Set(allEvents.map(e => e.city))].filter(Boolean).sort();
-      const select = document.getElementById("city-filter");
-      cities.forEach(city => {
-        const opt = document.createElement("option");
-        opt.value = city;
-        opt.textContent = city;
-        select.appendChild(opt);
-      });
     }
 
     function renderCalendar() {
@@ -392,7 +390,6 @@
           document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('active'));
           cell.classList.add('active');
           
-          // Remove green dots from active cell if needed
           const dot = cell.querySelector('.event-dot');
           if (dot) dot.remove();
 
@@ -422,7 +419,7 @@
                             (Number(event.month) === selectedMonth || Number(event.raw_month) === (selectedMonth + 1)) && 
                             Number(event.date) === selectedDay;
 
-        const matchesCity = (selectedCity === "ALL" || event.city.toLowerCase() === selectedCity.toLowerCase());
+        const matchesCity = (selectedCity === "ALL" || (event.city && event.city.toLowerCase() === selectedCity.toLowerCase()));
 
         return matchesDate && matchesCity;
       });
