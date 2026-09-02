@@ -3,108 +3,197 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inside Riviera - Event Aggregator</title>
+  <title>Inside Riviera - What's On Today</title>
   <style>
     :root {
-      --primary: #84cc16;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #0f172a;
+      --accent-pink: #ff007a;
+      --accent-green: #a3e635;
+      --text-dark: #0f172a;
       --text-muted: #64748b;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      margin: 0;
-      padding: 24px;
+      background-color: #f8fafc;
+      color: var(--text-dark);
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    header {
+    /* Hero Section */
+    .hero {
+      position: relative;
+      background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), 
+                  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      padding: 40px 20px 140px 20px;
       text-align: center;
-      margin-bottom: 32px;
+      color: #ffffff;
     }
 
-    h1 {
-      font-size: 2.25rem;
+    .logo-badge {
+      display: inline-block;
+      border: 2px solid #ffffff;
+      padding: 4px 10px;
       font-weight: 800;
-      margin: 0 0 6px 0;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      border-radius: 4px;
     }
 
-    .subtitle {
-      color: var(--text-muted);
-      margin: 0;
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .hero .highlight {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--accent-green);
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
       font-size: 0.95rem;
+      max-width: 650px;
+      margin: 0 auto;
+      opacity: 0.9;
+      line-height: 1.4;
     }
 
-    /* Interactive Calendar Strip */
-    .calendar-container {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 16px 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      margin-bottom: 32px;
+    /* Main Section Container */
+    .main-content {
+      max-width: 1000px;
+      margin: -100px auto 40px auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
     }
 
-    .calendar-header {
+    /* Full Month Calendar Card */
+    .calendar-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 28px 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      max-width: 480px;
+      margin: 0 auto 24px auto;
+    }
+
+    .cal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
-      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .cal-header h2 {
       font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
-    .days-strip {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-
-    .day-card {
-      min-width: 64px;
-      padding: 12px 8px;
-      border-radius: 12px;
+    .nav-btn {
       background: #f1f5f9;
-      text-align: center;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
       cursor: pointer;
-      transition: all 0.2s ease;
+      font-weight: bold;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px 0;
+      text-align: center;
+    }
+
+    .day-cell {
+      height: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
       user-select: none;
     }
 
-    .day-card:hover {
-      background: #e2e8f0;
+    .day-number {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
 
-    .day-card.active {
-      background: var(--primary);
-      color: #000;
-      font-weight: 700;
+    .day-cell.active .day-number {
+      background-color: var(--accent-pink);
+      color: #ffffff;
+      font-weight: 800;
     }
 
-    .day-name {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      opacity: 0.8;
-      margin-bottom: 4px;
+    .event-dot {
+      width: 4px;
+      height: 4px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      position: absolute;
+      bottom: 2px;
     }
 
-    .day-num {
-      font-size: 1.25rem;
-      font-weight: 700;
+    /* Filter Bar */
+    .filter-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
     }
 
-    /* Event Grid & Cards */
+    .city-select {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* Events Grid & Cards */
     .events-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 24px;
     }
 
@@ -112,21 +201,19 @@
       background: var(--card-bg);
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s;
     }
 
     .event-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
     }
 
     .img-wrapper {
       position: relative;
-      height: 190px;
-      background-color: #cbd5e1;
+      height: 180px;
     }
 
     .img-wrapper img {
@@ -139,8 +226,8 @@
       position: absolute;
       top: 12px;
       left: 12px;
-      background: #000;
-      color: #fff;
+      background: rgba(0, 0, 0, 0.8);
+      color: #ffffff;
       padding: 4px 10px;
       border-radius: 20px;
       font-size: 0.7rem;
@@ -156,21 +243,21 @@
     }
 
     .card-body h3 {
-      margin: 0 0 10px 0;
-      font-size: 1.15rem;
-      line-height: 1.35;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      line-height: 1.3;
     }
 
     .meta-info {
       display: flex;
-      gap: 16px;
-      font-size: 0.875rem;
+      gap: 12px;
+      font-size: 0.85rem;
       color: var(--text-muted);
       margin-bottom: 12px;
     }
 
     .description {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       line-height: 1.5;
       margin-bottom: 20px;
@@ -178,147 +265,179 @@
     }
 
     .btn-link {
-      display: block;
       text-align: center;
       background-color: #f1f5f9;
-      color: var(--text);
+      color: var(--text-dark);
       text-decoration: none;
-      padding: 10px 16px;
+      padding: 10px;
       border-radius: 8px;
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       font-weight: 600;
-      transition: background-color 0.2s;
-    }
-
-    .btn-link:hover {
-      background-color: #e2e8f0;
     }
 
     .no-events {
       grid-column: 1 / -1;
       text-align: center;
-      padding: 60px 20px;
+      padding: 40px;
       color: var(--text-muted);
-      background: var(--card-bg);
+      background: #ffffff;
       border-radius: 16px;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>Inside Riviera</h1>
-      <p class="subtitle">Events & Activities across the French & Italian Riviera</p>
-    </header>
+  <!-- Hero Banner -->
+  <div class="hero">
+    <div class="logo-badge">iR</div>
+    <h1>WHAT'S ON</h1>
+    <span class="highlight" id="hero-date-text">TODAY</span>
+    <p>Events, markets, and things to do across Vallebona, Ventimiglia, Vallecrosia, Bordighera, Ospedaletti, Sanremo, Menton & Monte Carlo.</p>
+  </div>
 
-    <!-- Calendar Section -->
-    <div class="calendar-container">
-      <div class="calendar-header" id="calendar-title">
-        Events for September 2, 2026
+  <div class="main-content">
+    <!-- Full Grid Calendar -->
+    <div class="calendar-card">
+      <div class="cal-header">
+        <button class="nav-btn">&lt;</button>
+        <h2 id="calendar-month-title">SEPTEMBER 2026</h2>
+        <button class="nav-btn">&gt;</button>
       </div>
-      <div class="days-strip" id="days-strip">
-        <!-- Day buttons generated via JS -->
+
+      <div class="weekdays">
+        <div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div>
+      </div>
+
+      <div class="days-grid" id="days-grid">
+        <!-- Rendered dynamically -->
       </div>
     </div>
 
-    <!-- Events Display Grid -->
+    <!-- City Filter -->
+    <div class="filter-wrapper">
+      <select class="city-select" id="city-filter" onchange="renderEvents()">
+        <option value="ALL">All Cities (Riviera Coastal & Inland Towns)</option>
+      </select>
+    </div>
+
+    <!-- Events Cards -->
     <div class="events-grid" id="events-container">
-      <!-- Event cards generated via JS -->
+      <!-- Cards rendered dynamically -->
     </div>
   </div>
 
   <script>
     let allEvents = [];
-    let selectedDate = new Date(2026, 8, 2); // Default: September 2, 2026
+    let selectedYear = 2026;
+    let selectedMonth = 8; // September (0-indexed)
+    let selectedDay = 2;   // Default selected: 2nd
 
-    const monthNames = ["January", "February", "March", "April", "May", "June", 
-                        "July", "August", "September", "October", "November", "December"];
-    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", 
+                        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
 
     async function initApp() {
       try {
-        const response = await fetch('events.json?v=' + new Date().getTime());
-        if (!response.ok) throw new Error('Failed to load events');
-        
-        allEvents = await response.json();
-        
-        buildCalendarStrip();
+        const res = await fetch('events.json?v=' + new Date().getTime());
+        if (!res.ok) throw new Error('Failed to load JSON');
+        allEvents = await res.json();
+
+        populateCityFilter();
+        renderCalendar();
         renderEvents();
       } catch (err) {
-        console.error("Error loading events.json:", err);
+        console.error(err);
         document.getElementById("events-container").innerHTML = `
-          <div class="no-events">
-            <p>Unable to load event feed. Ensure <code>events.json</code> exists.</p>
-          </div>
+          <div class="no-events">Unable to load event feed. Please check <code>events.json</code>.</div>
         `;
       }
     }
 
-    function buildCalendarStrip() {
-      const strip = document.getElementById("days-strip");
-      strip.innerHTML = "";
+    function populateCityFilter() {
+      const cities = [...new Set(allEvents.map(e => e.city))].filter(Boolean).sort();
+      const select = document.getElementById("city-filter");
+      cities.forEach(city => {
+        const opt = document.createElement("option");
+        opt.value = city;
+        opt.textContent = city;
+        select.appendChild(opt);
+      });
+    }
 
-      // Generate 7 consecutive days starting from Sept 2
-      for (let i = 0; i < 7; i++) {
-        const dateObj = new Date(2026, 8, 2 + i);
-        const dayCard = document.createElement("div");
-        dayCard.className = `day-card ${i === 0 ? 'active' : ''}`;
+    function renderCalendar() {
+      const grid = document.getElementById("days-grid");
+      grid.innerHTML = "";
+
+      // September 2026 starts on a Tuesday (Offset 1 for Mon-start grid)
+      const firstDayOffset = 1; 
+      const totalDays = 30;
+
+      // Empty lead cells
+      for (let i = 0; i < firstDayOffset; i++) {
+        grid.appendChild(document.createElement("div"));
+      }
+
+      for (let day = 1; day <= totalDays; day++) {
+        const cell = document.createElement("div");
+        cell.className = `day-cell ${day === selectedDay ? 'active' : ''}`;
         
-        dayCard.innerHTML = `
-          <div class="day-name">${dayNames[dateObj.getDay()]}</div>
-          <div class="day-num">${dateObj.getDate()}</div>
+        let hasEvent = allEvents.some(e => Number(e.date) === day && Number(e.year) === selectedYear);
+        
+        cell.innerHTML = `
+          <div class="day-number">${day}</div>
+          ${hasEvent && day !== selectedDay ? '<div class="event-dot"></div>' : ''}
         `;
 
-        dayCard.onclick = () => {
-          document.querySelectorAll('.day-card').forEach(c => c.classList.remove('active'));
-          dayCard.classList.add('active');
+        cell.onclick = () => {
+          selectedDay = day;
+          document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('active'));
+          cell.classList.add('active');
           
-          selectedDate = dateObj;
+          // Remove green dots from active cell if needed
+          const dot = cell.querySelector('.event-dot');
+          if (dot) dot.remove();
+
+          updateHeroText();
           renderEvents();
         };
 
-        strip.appendChild(dayCard);
+        grid.appendChild(cell);
       }
+    }
+
+    function updateHeroText() {
+      const today = new Date(2026, 8, 2);
+      const isToday = (selectedDay === today.getDate() && selectedMonth === today.getMonth() && selectedYear === today.getFullYear());
+      
+      document.getElementById("hero-date-text").innerText = isToday ? "TODAY" : `${monthNames[selectedMonth]} ${selectedDay}`;
     }
 
     function renderEvents() {
       const container = document.getElementById("events-container");
       container.innerHTML = "";
 
-      const year = selectedDate.getFullYear();
-      const month = selectedDate.getMonth(); // 0-indexed
-      const dateNum = selectedDate.getDate();
+      const selectedCity = document.getElementById("city-filter").value;
 
-      document.getElementById("calendar-title").innerText = 
-        `Events for ${monthNames[month]} ${dateNum}, ${year}`;
+      const filtered = allEvents.filter(event => {
+        const matchesDate = Number(event.year) === selectedYear && 
+                            (Number(event.month) === selectedMonth || Number(event.raw_month) === (selectedMonth + 1)) && 
+                            Number(event.date) === selectedDay;
 
-      const filteredEvents = allEvents.filter(event => {
-        const matchesJSMonth = Number(event.year) === year && 
-                               Number(event.month) === month && 
-                               Number(event.date) === dateNum;
+        const matchesCity = (selectedCity === "ALL" || event.city.toLowerCase() === selectedCity.toLowerCase());
 
-        const matchesRawMonth = Number(event.year) === year && 
-                                Number(event.raw_month) === (month + 1) && 
-                                Number(event.date) === dateNum;
-
-        const formattedSelected = `${year}-${String(month + 1).padStart(2, '0')}-${String(dateNum).padStart(2, '0')}`;
-        const matchesISO = event.formatted_date === formattedSelected;
-
-        return matchesJSMonth || matchesRawMonth || matchesISO;
+        return matchesDate && matchesCity;
       });
 
-      if (filteredEvents.length === 0) {
+      if (filtered.length === 0) {
         container.innerHTML = `
           <div class="no-events">
-            <p>No events found for ${monthNames[month]} ${dateNum}, ${year}.</p>
+            <p>No events scheduled for ${monthNames[selectedMonth]} ${selectedDay}, ${selectedYear}.</p>
           </div>
         `;
         return;
       }
 
-      filteredEvents.forEach(event => {
-        const tag = (event.tags && event.tags.length > 0) ? event.tags[0] : "Market";
+      filtered.forEach(event => {
+        const tag = (event.tags && event.tags.length > 0) ? event.tags[0] : "MARKET";
         const cardHtml = `
           <div class="event-card">
             <div class="img-wrapper">
