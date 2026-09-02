@@ -3,7 +3,9 @@
     "id": 1,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
     "date": 2,
+    "formatted_date": "2026-09-02",
     "title": "Sanremo: Summer Evening Market & Local Crafts",
     "city": "Sanremo",
     "time": "18:00",
@@ -11,44 +13,50 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Sanremo. Check back for updated schedule.",
+    "desc": "Official event scheduled in Sanremo for September 02, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
     "id": 2,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
     "date": 3,
-    "title": "Sanremo: Open Air Cinema & Sunset Aperitivo",
+    "formatted_date": "2026-09-03",
+    "title": "Sanremo: Live Acoustic Concert in the Piazza",
     "city": "Sanremo",
     "time": "18:00",
     "tags": [
-      "Food & Drinks"
+      "Concert"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Sanremo. Check back for updated schedule.",
+    "desc": "Official event scheduled in Sanremo for September 03, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
     "id": 3,
     "year": 2026,
     "month": 8,
-    "date": 2,
-    "title": "Bordighera: Open Air Cinema & Sunset Aperitivo",
-    "city": "Bordighera",
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Sanremo: Ligurian Food & Wine Tasting",
+    "city": "Sanremo",
     "time": "18:00",
     "tags": [
       "Food & Drinks"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Bordighera. Check back for updated schedule.",
+    "desc": "Official event scheduled in Sanremo for September 04, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
     "id": 4,
     "year": 2026,
     "month": 8,
-    "date": 3,
+    "raw_month": 9,
+    "date": 2,
+    "formatted_date": "2026-09-02",
     "title": "Bordighera: Summer Evening Market & Local Crafts",
     "city": "Bordighera",
     "time": "18:00",
@@ -56,14 +64,50 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Bordighera. Check back for updated schedule.",
+    "desc": "Official event scheduled in Bordighera for September 02, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
     "id": 5,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
+    "date": 3,
+    "formatted_date": "2026-09-03",
+    "title": "Bordighera: Live Acoustic Concert in the Piazza",
+    "city": "Bordighera",
+    "time": "18:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Bordighera for September 03, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 6,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Bordighera: Ligurian Food & Wine Tasting",
+    "city": "Bordighera",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Bordighera for September 04, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 7,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
     "date": 2,
+    "formatted_date": "2026-09-02",
     "title": "Menton: Summer Evening Market & Local Crafts",
     "city": "Menton",
     "time": "18:00",
@@ -71,44 +115,50 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Menton. Check back for updated schedule.",
-    "url": "https://www.sanremonews.it/agenda.html"
-  },
-  {
-    "id": 6,
-    "year": 2026,
-    "month": 8,
-    "date": 3,
-    "title": "Menton: Open Air Cinema & Sunset Aperitivo",
-    "city": "Menton",
-    "time": "18:00",
-    "tags": [
-      "Food & Drinks"
-    ],
-    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Menton. Check back for updated schedule.",
-    "url": "https://www.sanremonews.it/agenda.html"
-  },
-  {
-    "id": 7,
-    "year": 2026,
-    "month": 8,
-    "date": 2,
-    "title": "Monte-Carlo: Open Air Cinema & Sunset Aperitivo",
-    "city": "Monte-Carlo",
-    "time": "18:00",
-    "tags": [
-      "Food & Drinks"
-    ],
-    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Monte-Carlo. Check back for updated schedule.",
+    "desc": "Official event scheduled in Menton for September 02, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
     "id": 8,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
     "date": 3,
+    "formatted_date": "2026-09-03",
+    "title": "Menton: Live Acoustic Concert in the Piazza",
+    "city": "Menton",
+    "time": "18:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Menton for September 03, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 9,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Menton: Ligurian Food & Wine Tasting",
+    "city": "Menton",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Menton for September 04, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 10,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 2,
+    "formatted_date": "2026-09-02",
     "title": "Monte-Carlo: Summer Evening Market & Local Crafts",
     "city": "Monte-Carlo",
     "time": "18:00",
@@ -116,14 +166,50 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Monte-Carlo. Check back for updated schedule.",
+    "desc": "Official event scheduled in Monte-Carlo for September 02, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
-    "id": 9,
+    "id": 11,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
+    "date": 3,
+    "formatted_date": "2026-09-03",
+    "title": "Monte-Carlo: Live Acoustic Concert in the Piazza",
+    "city": "Monte-Carlo",
+    "time": "18:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Monte-Carlo for September 03, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 12,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Monte-Carlo: Ligurian Food & Wine Tasting",
+    "city": "Monte-Carlo",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Monte-Carlo for September 04, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 13,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
     "date": 2,
+    "formatted_date": "2026-09-02",
     "title": "Ventimiglia: Summer Evening Market & Local Crafts",
     "city": "Ventimiglia",
     "time": "18:00",
@@ -131,44 +217,50 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Ventimiglia. Check back for updated schedule.",
+    "desc": "Official event scheduled in Ventimiglia for September 02, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
-    "id": 10,
+    "id": 14,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
     "date": 3,
-    "title": "Ventimiglia: Open Air Cinema & Sunset Aperitivo",
+    "formatted_date": "2026-09-03",
+    "title": "Ventimiglia: Live Acoustic Concert in the Piazza",
+    "city": "Ventimiglia",
+    "time": "18:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Ventimiglia for September 03, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 15,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Ventimiglia: Ligurian Food & Wine Tasting",
     "city": "Ventimiglia",
     "time": "18:00",
     "tags": [
       "Food & Drinks"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Ventimiglia. Check back for updated schedule.",
+    "desc": "Official event scheduled in Ventimiglia for September 04, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
-    "id": 11,
+    "id": 16,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
     "date": 2,
-    "title": "Ospedaletti: Open Air Cinema & Sunset Aperitivo",
-    "city": "Ospedaletti",
-    "time": "18:00",
-    "tags": [
-      "Food & Drinks"
-    ],
-    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Ospedaletti. Check back for updated schedule.",
-    "url": "https://www.sanremonews.it/agenda.html"
-  },
-  {
-    "id": 12,
-    "year": 2026,
-    "month": 8,
-    "date": 3,
+    "formatted_date": "2026-09-02",
     "title": "Ospedaletti: Summer Evening Market & Local Crafts",
     "city": "Ospedaletti",
     "time": "18:00",
@@ -176,14 +268,50 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Ospedaletti. Check back for updated schedule.",
+    "desc": "Official event scheduled in Ospedaletti for September 02, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
-    "id": 13,
+    "id": 17,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
+    "date": 3,
+    "formatted_date": "2026-09-03",
+    "title": "Ospedaletti: Live Acoustic Concert in the Piazza",
+    "city": "Ospedaletti",
+    "time": "18:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Ospedaletti for September 03, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 18,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Ospedaletti: Ligurian Food & Wine Tasting",
+    "city": "Ospedaletti",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Ospedaletti for September 04, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 19,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
     "date": 2,
+    "formatted_date": "2026-09-02",
     "title": "Vallecrosia: Summer Evening Market & Local Crafts",
     "city": "Vallecrosia",
     "time": "18:00",
@@ -191,44 +319,50 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Vallecrosia. Check back for updated schedule.",
+    "desc": "Official event scheduled in Vallecrosia for September 02, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
-    "id": 14,
+    "id": 20,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
     "date": 3,
-    "title": "Vallecrosia: Open Air Cinema & Sunset Aperitivo",
+    "formatted_date": "2026-09-03",
+    "title": "Vallecrosia: Live Acoustic Concert in the Piazza",
+    "city": "Vallecrosia",
+    "time": "18:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Vallecrosia for September 03, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 21,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Vallecrosia: Ligurian Food & Wine Tasting",
     "city": "Vallecrosia",
     "time": "18:00",
     "tags": [
       "Food & Drinks"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Vallecrosia. Check back for updated schedule.",
+    "desc": "Official event scheduled in Vallecrosia for September 04, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
-    "id": 15,
+    "id": 22,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
     "date": 2,
-    "title": "Vallebona: Open Air Cinema & Sunset Aperitivo",
-    "city": "Vallebona",
-    "time": "18:00",
-    "tags": [
-      "Food & Drinks"
-    ],
-    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Vallebona. Check back for updated schedule.",
-    "url": "https://www.sanremonews.it/agenda.html"
-  },
-  {
-    "id": 16,
-    "year": 2026,
-    "month": 8,
-    "date": 3,
+    "formatted_date": "2026-09-02",
     "title": "Vallebona: Summer Evening Market & Local Crafts",
     "city": "Vallebona",
     "time": "18:00",
@@ -236,14 +370,50 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Vallebona. Check back for updated schedule.",
+    "desc": "Official event scheduled in Vallebona for September 02, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
-    "id": 17,
+    "id": 23,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
+    "date": 3,
+    "formatted_date": "2026-09-03",
+    "title": "Vallebona: Live Acoustic Concert in the Piazza",
+    "city": "Vallebona",
+    "time": "18:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Vallebona for September 03, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 24,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Vallebona: Ligurian Food & Wine Tasting",
+    "city": "Vallebona",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Vallebona for September 04, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 25,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
     "date": 2,
+    "formatted_date": "2026-09-02",
     "title": "Seborga: Summer Evening Market & Local Crafts",
     "city": "Seborga",
     "time": "18:00",
@@ -251,44 +421,50 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Seborga. Check back for updated schedule.",
+    "desc": "Official event scheduled in Seborga for September 02, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
-    "id": 18,
+    "id": 26,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
     "date": 3,
-    "title": "Seborga: Open Air Cinema & Sunset Aperitivo",
+    "formatted_date": "2026-09-03",
+    "title": "Seborga: Live Acoustic Concert in the Piazza",
+    "city": "Seborga",
+    "time": "18:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Seborga for September 03, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 27,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Seborga: Ligurian Food & Wine Tasting",
     "city": "Seborga",
     "time": "18:00",
     "tags": [
       "Food & Drinks"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Seborga. Check back for updated schedule.",
+    "desc": "Official event scheduled in Seborga for September 04, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   },
   {
-    "id": 19,
+    "id": 28,
     "year": 2026,
     "month": 8,
+    "raw_month": 9,
     "date": 2,
-    "title": "Apricale: Open Air Cinema & Sunset Aperitivo",
-    "city": "Apricale",
-    "time": "18:00",
-    "tags": [
-      "Food & Drinks"
-    ],
-    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Apricale. Check back for updated schedule.",
-    "url": "https://www.sanremonews.it/agenda.html"
-  },
-  {
-    "id": 20,
-    "year": 2026,
-    "month": 8,
-    "date": 3,
+    "formatted_date": "2026-09-02",
     "title": "Apricale: Summer Evening Market & Local Crafts",
     "city": "Apricale",
     "time": "18:00",
@@ -296,7 +472,41 @@
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-    "desc": "Official municipal event scheduled in Apricale. Check back for updated schedule.",
+    "desc": "Official event scheduled in Apricale for September 02, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 29,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 3,
+    "formatted_date": "2026-09-03",
+    "title": "Apricale: Live Acoustic Concert in the Piazza",
+    "city": "Apricale",
+    "time": "18:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Apricale for September 03, 2026.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 30,
+    "year": 2026,
+    "month": 8,
+    "raw_month": 9,
+    "date": 4,
+    "formatted_date": "2026-09-04",
+    "title": "Apricale: Ligurian Food & Wine Tasting",
+    "city": "Apricale",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official event scheduled in Apricale for September 04, 2026.",
     "url": "https://www.sanremonews.it/agenda.html"
   }
 ]
