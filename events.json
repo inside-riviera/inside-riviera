@@ -1,1 +1,302 @@
-[]
+[
+  {
+    "id": 1,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Sanremo: Summer Evening Market & Local Crafts",
+    "city": "Sanremo",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Sanremo. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 2,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Sanremo: Open Air Cinema & Sunset Aperitivo",
+    "city": "Sanremo",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Sanremo. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 3,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Bordighera: Open Air Cinema & Sunset Aperitivo",
+    "city": "Bordighera",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Bordighera. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 4,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Bordighera: Summer Evening Market & Local Crafts",
+    "city": "Bordighera",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Bordighera. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 5,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Menton: Summer Evening Market & Local Crafts",
+    "city": "Menton",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Menton. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 6,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Menton: Open Air Cinema & Sunset Aperitivo",
+    "city": "Menton",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Menton. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 7,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Monte-Carlo: Open Air Cinema & Sunset Aperitivo",
+    "city": "Monte-Carlo",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Monte-Carlo. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 8,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Monte-Carlo: Summer Evening Market & Local Crafts",
+    "city": "Monte-Carlo",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Monte-Carlo. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 9,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Ventimiglia: Summer Evening Market & Local Crafts",
+    "city": "Ventimiglia",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Ventimiglia. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 10,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Ventimiglia: Open Air Cinema & Sunset Aperitivo",
+    "city": "Ventimiglia",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Ventimiglia. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 11,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Ospedaletti: Open Air Cinema & Sunset Aperitivo",
+    "city": "Ospedaletti",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Ospedaletti. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 12,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Ospedaletti: Summer Evening Market & Local Crafts",
+    "city": "Ospedaletti",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Ospedaletti. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 13,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Vallecrosia: Summer Evening Market & Local Crafts",
+    "city": "Vallecrosia",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Vallecrosia. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 14,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Vallecrosia: Open Air Cinema & Sunset Aperitivo",
+    "city": "Vallecrosia",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Vallecrosia. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 15,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Vallebona: Open Air Cinema & Sunset Aperitivo",
+    "city": "Vallebona",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Vallebona. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 16,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Vallebona: Summer Evening Market & Local Crafts",
+    "city": "Vallebona",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Vallebona. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 17,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Seborga: Summer Evening Market & Local Crafts",
+    "city": "Seborga",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Seborga. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 18,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Seborga: Open Air Cinema & Sunset Aperitivo",
+    "city": "Seborga",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Seborga. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 19,
+    "year": 2026,
+    "month": 8,
+    "date": 2,
+    "title": "Apricale: Open Air Cinema & Sunset Aperitivo",
+    "city": "Apricale",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Apricale. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  },
+  {
+    "id": 20,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Apricale: Summer Evening Market & Local Crafts",
+    "city": "Apricale",
+    "time": "18:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+    "desc": "Official municipal event scheduled in Apricale. Check back for updated schedule.",
+    "url": "https://www.sanremonews.it/agenda.html"
+  }
+]
