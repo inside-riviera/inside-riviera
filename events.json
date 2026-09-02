@@ -4,62 +4,76 @@
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Vallebona Village Walk & Tasting",
+    "title": "Vallebona Historic Square Music Night",
     "city": "Vallebona",
-    "time": "18:00",
+    "time": "21:00",
     "tags": [
-      "Food & Drinks"
+      "Concert"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Daily featured listing for Vallebona."
+    "desc": "Featured event in Vallebona on September 02."
   },
   {
     "id": 2,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Ventimiglia Promenade Market",
+    "title": "Ventimiglia Old Town Market",
     "city": "Ventimiglia",
-    "time": "09:30",
+    "time": "09:00",
     "tags": [
       "Market"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Daily featured listing for Ventimiglia."
+    "desc": "Featured event in Ventimiglia on September 02."
   },
   {
     "id": 3,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Vallecrosia Summer Music Night",
-    "city": "Vallecrosia",
-    "time": "21:00",
+    "title": "Menton Old Town Citrus Walk",
+    "city": "Menton",
+    "time": "11:00",
     "tags": [
-      "Concert"
+      "Food & Drinks"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Daily featured listing for Vallecrosia."
+    "desc": "Featured event in Menton on September 02."
   },
   {
     "id": 4,
     "year": 2026,
     "month": 8,
     "date": 2,
-    "title": "Bordighera Lungomare Evening Stroll",
+    "title": "Monte-Carlo Summer Showcase",
+    "city": "Monte-Carlo",
+    "time": "22:00",
+    "tags": [
+      "Beach Party"
+    ],
+    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "desc": "Featured event in Monte-Carlo on September 02."
+  },
+  {
+    "id": 5,
+    "year": 2026,
+    "month": 8,
+    "date": 3,
+    "title": "Bordighera Promenade Evening Walk",
     "city": "Bordighera",
     "time": "19:00",
     "tags": [
       "Town Festival"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Daily featured listing for Bordighera."
+    "desc": "Featured event in Bordighera on September 03."
   },
   {
-    "id": 5,
+    "id": 6,
     "year": 2026,
     "month": 8,
-    "date": 2,
+    "date": 3,
     "title": "Ospedaletti Sunset Beach Lounge",
     "city": "Ospedaletti",
     "time": "18:30",
@@ -67,48 +81,90 @@
       "Beach Party"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Daily featured listing for Ospedaletti."
+    "desc": "Featured event in Ospedaletti on September 03."
   },
   {
-    "id": 6,
+    "id": 7,
     "year": 2026,
     "month": 8,
-    "date": 2,
-    "title": "Sanremo Ariston Live Showcase",
+    "date": 3,
+    "title": "Sanremo Ariston Live Show",
     "city": "Sanremo",
     "time": "21:15",
     "tags": [
       "Concert"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Daily featured listing for Sanremo."
-  },
-  {
-    "id": 7,
-    "year": 2026,
-    "month": 8,
-    "date": 2,
-    "title": "Menton Old Town Citrus & Craft Tour",
-    "city": "Menton",
-    "time": "10:30",
-    "tags": [
-      "Market"
-    ],
-    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Daily featured listing for Menton."
+    "desc": "Featured event in Sanremo on September 03."
   },
   {
     "id": 8,
     "year": 2026,
     "month": 8,
-    "date": 2,
-    "title": "Monte-Carlo Open Air Promenade Party",
+    "date": 3,
+    "title": "Monaco Yacht Harbour Sunset Cocktail",
     "city": "Monte-Carlo",
-    "time": "22:00",
+    "time": "19:30",
     "tags": [
-      "Beach Party"
+      "Food & Drinks"
     ],
     "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
-    "desc": "Daily featured listing for Monte-Carlo."
+    "desc": "Featured event in Monte-Carlo on September 03."
+  },
+  {
+    "id": 9,
+    "year": 2026,
+    "month": 8,
+    "date": 4,
+    "title": "Vallecrosia Summer Music Night",
+    "city": "Vallecrosia",
+    "time": "21:00",
+    "tags": [
+      "Concert"
+    ],
+    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "desc": "Featured event in Vallecrosia on September 04."
+  },
+  {
+    "id": 10,
+    "year": 2026,
+    "month": 8,
+    "date": 4,
+    "title": "Menton Seaside Artisan Market",
+    "city": "Menton",
+    "time": "10:00",
+    "tags": [
+      "Market"
+    ],
+    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "desc": "Featured event in Menton on September 04."
+  },
+  {
+    "id": 11,
+    "year": 2026,
+    "month": 8,
+    "date": 4,
+    "title": "Ventimiglia Marina Sunset Drinks",
+    "city": "Ventimiglia",
+    "time": "18:00",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "desc": "Featured event in Ventimiglia on September 04."
+  },
+  {
+    "id": 12,
+    "year": 2026,
+    "month": 8,
+    "date": 4,
+    "title": "Vallebona Wine Tasting & Local Cuisine",
+    "city": "Vallebona",
+    "time": "19:30",
+    "tags": [
+      "Food & Drinks"
+    ],
+    "img": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "desc": "Featured event in Vallebona on September 04."
   }
 ]
