@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inside Riviera - What's On Today</title>
+  <style>
+    :root {
+      --gradient-bg: linear-gradient(180deg, #FF007A 0%, #FF5C00 60%, #FFB800 100%);
+      --pink-primary: #FF007A;
+      --yellow-lime: #D2FF00;
+      --dark-card: #121212;
+      --text-main: #222222;
+      --text-muted: #666666;
+      --bg-gray: #F8F9FA;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg-gray); color: var(--text-main); }
+
+    /* Header Banner */
+    header {
+      background: var(--gradient-bg);
+      padding: 40px 20px 60px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--yellow-lime);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    header h1 { font-size: 2.5rem; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; }
+    header h1 span { color: var(--yellow-lime); }
+    header p { margin-top: 8px; font-size: 1.1rem; opacity: 0.95; }
+
+    /* Main Container */
+    .container { max-width: 1100px; margin: -30px auto 40px; padding: 0 20px; }
+
+    /* Dashboard Layout */
+    .dashboard { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+    @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } }
+
+    /* Sidebar / Calendar Card */
+    .sidebar-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      height: fit-content;
+    }
+    .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: bold; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; font-size: 0.85rem; }
+    .calendar-day-head { font-weight: 600; color: var(--text-muted); padding-bottom: 5px; }
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .calendar-day:hover { background: #f0f0f0; }
+    .calendar-day.active { background: var(--pink-primary); color: white; font-weight: bold; }
+    .calendar-day.empty { cursor: default; }
+
+    /* Filters Section */
+    .filter-group { margin-top: 20px; }
+    .filter-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #E0E0E0;
+      outline: none;
+      font-size: 0.95rem;
+      background: #FFF;
+      cursor: pointer;
+    }
+
+    /* Tag Chips */
+    .tags-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .tag-chip {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: #EFEFEF;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .tag-chip.active { background: var(--pink-primary); color: white; }
+
+    /* Events List */
+    .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .event-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .event-card:hover { transform: translateY(-4px); }
+    .event-image { height: 140px; background-size: cover; background-position: center; position: relative; }
+    .event-tags-overlay { position: absolute; top: 10px; left: 10px; display: flex; gap: 4px; flex-wrap: wrap; }
+    .event-tag { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); color: white; font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; }
+    .event-content { padding: 15px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .event-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 8px; }
+    .event-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 12px; }
+
+    /* Detail Modal */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000;
+    }
+    .modal-card {
+      background: white; width: 90%; max-width: 450px; border-radius: 20px; overflow: hidden; animation: pop 0.25s ease-out;
+    }
+    @keyframes pop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .modal-image { height: 200px; background-size: cover; background-position: center; position: relative; }
+    .modal-close { position: absolute; top: 15px; right: 15px; background: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-weight: bold; }
+    .modal-body { padding: 20px; }
+    .btn-lime { display: block; width: 100%; text-align: center; background: var(--pink-primary); color: white; font-weight: bold; padding: 14px; border-radius: 12px; text-decoration: none; border: none; margin-top: 15px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">Sanremo to Monte-Carlo</div>
+    <h1>Inside <span>Riviera</span></h1>
+    <p>All the Riviera. What's on today.</p>
+  </header>
+
+  <div class="container">
+    <div class="dashboard">
+      
+      <div class="sidebar-card">
+        <div class="calendar-header">
+          <span>June 2025</span>
+        </div>
+        <div class="calendar-grid">
+          <div class="calendar-day-head">M</div><div class="calendar-day-head">T</div><div class="calendar-day-head">W</div>
+          <div class="calendar-day-head">T</div><div class="calendar-day-head">F</div><div class="calendar-day-head">S</div><div class="calendar-day-head">S</div>
+          
+          <div class="calendar-day empty"></div><div class="calendar-day empty"></div><div class="calendar-day empty"></div>
+          <div class="calendar-day empty"></div><div class="calendar-day empty"></div><div class="calendar-day empty"></div><div class="calendar-day">1</div>
+          <div class="calendar-day">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div>
+          <div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div>
+          <div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div>
+          <div class="calendar-day active" onclick="selectDate(12)">12</div>
+          <div class="calendar-day" onclick="selectDate(13)">13</div>
+          <div class="calendar-day" onclick="selectDate(14)">14</div><div class="calendar-day">15</div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Filter by City</div>
+          <select id="cityFilter" onchange="applyFilters()">
+            <option value="ALL">All Cities</option>
+            <option value="Monte-Carlo">Monte-Carlo</option>
+            <option value="Sanremo">Sanremo</option>
+            <option value="Menton">Menton</option>
+            <option value="Saint-Tropez">Saint-Tropez</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <div class="tags-container">
+          <button class="tag-chip active" onclick="filterTag('ALL', this)">All</button>
+          <button class="tag-chip" onclick="filterTag('Beach Party', this)">Beach Party</button>
+          <button class="tag-chip" onclick="filterTag('Town Festival', this)">Town Festival</button>
+          <button class="tag-chip" onclick="filterTag('Concert', this)">Concert</button>
+          <button class="tag-chip" onclick="filterTag('Food & Drinks', this)">Food & Drinks</button>
+          <button class="tag-chip" onclick="filterTag('Market', this)">Market</button>
+        </div>
+
+        <div class="events-grid" id="eventsList"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="eventModal">
+    <div class="modal-card">
+      <div class="modal-image" id="modalImg">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <h2 id="modalTitle" style="margin-bottom: 8px;"></h2>
+        <p id="modalMeta" style="color: var(--pink-primary); font-weight: bold; margin-bottom: 12px;"></p>
+        <p id="modalDesc" style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;"></p>
+        <button class="btn-lime">More Info & Tickets</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const eventsData = [
+      { id: 1, date: 12, title: "Monte-Carlo Summer Festival", city: "Monte-Carlo", time: "18:00", tags: ["Concert"], img: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80", desc: "An unforgettable evening of music and great vibes in the heart of Monte-Carlo." },
+      { id: 2, date: 12, title: "Menton Morning Market", city: "Menton", time: "08:00 - 13:00", tags: ["Market", "Food & Drinks"], img: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=600&q=80", desc: "Explore fresh local produce, artisanal cheeses, and Mediterranean flowers." },
+      { id: 3, date: 12, title: "Sunset DJ Set Plage", city: "Sanremo", time: "19:00", tags: ["Beach Party", "Food & Drinks"], img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80", desc: "Dance by the sea with sunset cocktails and deep house sets." },
+      { id: 4, date: 13, title: "Voiles de Saint-Tropez", city: "Saint-Tropez", time: "All Day", tags: ["Town Festival"], img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80", desc: "Classic yacht regatta showcasing world-class sailing along the French Riviera." }
+    ];
+
+    let currentDate = 12;
+    let currentTag = 'ALL';
+
+    function renderEvents() {
+      const selectedCity = document.getElementById('cityFilter').value;
+      const listContainer = document.getElementById('eventsList');
+      listContainer.innerHTML = '';
+
+      const filtered = eventsData.filter(e => {
+        const matchesDate = e.date === currentDate;
+        const matchesCity = selectedCity === 'ALL' || e.city === selectedCity;
+        const matchesTag = currentTag === 'ALL' || e.tags.includes(currentTag);
+        return matchesDate && matchesCity && matchesTag;
+      });
+
+      if (filtered.length === 0) {
+        listContainer.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted); text-align: center; padding: 40px 0;">No events match your selected filters for June ${currentDate}.</p>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        card.onclick = () => openModal(item);
+        card.innerHTML = `
+          <div class="event-image" style="background-image: url('${item.img}')">
+            <div class="event-tags-overlay">
+              ${item.tags.map(t => `<span class="event-tag">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="event-content">
+            <div class="event-title">${item.title}</div>
+            <div class="event-meta">
+              <span>📍 ${item.city}</span>
+              <span>🕒 ${item.time}</span>
+            </div>
+          </div>
+        `;
+        listContainer.appendChild(card);
+      });
+    }
+
+    function selectDate(day) {
+      currentDate = day;
+      document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('active'));
+      event.target.classList.add('active');
+      renderEvents();
+    }
+
+    function filterTag(tag, element) {
+      currentTag = tag;
+      document.querySelectorAll('.tag-chip').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+      renderEvents();
+    }
+
+    function applyFilters() { renderEvents(); }
+
+    function openModal(item) {
+      document.getElementById('modalTitle').innerText = item.title;
+      document.getElementById('modalMeta').innerText = `📍 ${item.city} • 🕒 ${item.time}`;
+      document.getElementById('modalDesc').innerText = item.desc;
+      document.getElementById('modalImg').style.backgroundImage = `url('${item.img}')`;
+      document.getElementById('eventModal').style.display = 'flex';
+    }
+
+    function closeModal() { document.getElementById('eventModal').style.display = 'none'; }
+
+    // Initial render
+    renderEvents();
+  </script>
+</body>
+</html>
