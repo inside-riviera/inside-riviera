@@ -15,274 +15,47 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    
-    body { 
-      background-color: var(--bg-gray); 
-      color: var(--text-main); 
-    }
+    body { background-color: var(--bg-gray); color: var(--text-main); }
 
-    /* Main Hero Header */
     header {
       background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%), 
                   url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
-      padding: 50px 20px 100px;
-      text-align: center;
-      color: white;
-      position: relative;
+      padding: 50px 20px 100px; text-align: center; color: white; position: relative;
     }
 
-    .brand-logo {
-      display: inline-block;
-      border: 2px solid white;
-      padding: 4px 10px;
-      font-weight: 900;
-      font-size: 1.2rem;
-      border-radius: 6px;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      background: rgba(0,0,0,0.2);
-      backdrop-filter: blur(4px);
-    }
+    .brand-logo { display: inline-block; border: 2px solid white; padding: 4px 10px; font-weight: 900; font-size: 1.2rem; border-radius: 6px; letter-spacing: 1px; margin-bottom: 20px; background: rgba(0,0,0,0.2); backdrop-filter: blur(4px); }
+    .hero-title { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase; line-height: 1.1; color: #FFFFFF; }
+    .hero-title .highlight { color: var(--yellow-lime); display: block; font-size: 3.2rem; margin-top: 2px; text-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .hero-subtitle { margin-top: 14px; font-size: 0.95rem; color: #FFFFFF; opacity: 0.95; font-weight: 500; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.4; }
 
-    .hero-title { 
-      font-size: 2.2rem; 
-      font-weight: 900; 
-      letter-spacing: -0.5px; 
-      text-transform: uppercase; 
-      line-height: 1.1;
-      color: #FFFFFF;
-    }
+    .container { max-width: 1000px; margin: 0 auto 40px; padding: 0 20px; position: relative; z-index: 10; }
+    .calendar-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 12px 35px rgba(0,0,0,0.15); max-width: 450px; margin: -60px auto 30px; position: relative; z-index: 20; }
+    .calendar-month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-main); }
+    .nav-btn { background: #F0F0F0; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
 
-    .hero-title .highlight { 
-      color: var(--yellow-lime); 
-      display: block;
-      font-size: 3.2rem;
-      margin-top: 2px;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; font-size: 0.9rem; }
+    .calendar-day-head { font-weight: 700; color: var(--text-muted); padding-bottom: 8px; font-size: 0.8rem; }
+    .calendar-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; font-weight: 600; }
+    .calendar-day.active { background: var(--pink-primary); color: white; font-weight: 800; box-shadow: 0 4px 10px rgba(255, 0, 122, 0.4); }
 
-    .hero-subtitle { 
-      margin-top: 14px; 
-      font-size: 0.95rem; 
-      color: #FFFFFF;
-      opacity: 0.95; 
-      font-weight: 500;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.4;
-    }
+    .filter-bar { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+    select { padding: 10px 16px; border-radius: 20px; border: 1px solid #E0E0E0; outline: none; font-size: 0.9rem; font-weight: 600; background: #FFF; cursor: pointer; }
 
-    /* Container Spacing */
-    .container { 
-      max-width: 1000px; 
-      margin: 0 auto 40px; 
-      padding: 0 20px; 
-      position: relative;
-      z-index: 10;
-    }
+    .tags-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+    .tag-chip { padding: 10px 18px; border-radius: 25px; background: #FFFFFF; font-size: 0.85rem; font-weight: 700; cursor: pointer; border: 1px solid #EAEAEA; }
+    .tag-chip.active { background: var(--yellow-lime); color: #000000; border-color: var(--yellow-lime); }
 
-    /* Dynamic Calendar Card */
-    .calendar-card {
-      background: white;
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-      max-width: 450px;
-      margin: -60px auto 30px;
-      position: relative;
-      z-index: 20;
-    }
-
-    .calendar-month-header { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      margin-bottom: 20px; 
-      font-size: 1.2rem;
-      font-weight: 800; 
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-main);
-    }
-
-    .nav-btn {
-      background: #F0F0F0;
-      border: none;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: 800;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .nav-btn:hover { background: #E0E0E0; }
-
-    .calendar-grid { 
-      display: grid; 
-      grid-template-columns: repeat(7, 1fr); 
-      gap: 8px; 
-      text-align: center; 
-      font-size: 0.9rem; 
-    }
-
-    .calendar-day-head { 
-      font-weight: 700; 
-      color: var(--text-muted); 
-      padding-bottom: 8px; 
-      font-size: 0.8rem;
-    }
-
-    .calendar-day {
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-
-    .calendar-day:hover:not(.empty) { background: #F0F0F0; }
-    
-    .calendar-day.active { 
-      background: var(--pink-primary); 
-      color: white; 
-      font-weight: 800; 
-      box-shadow: 0 4px 10px rgba(255, 0, 122, 0.4);
-    }
-
-    .calendar-day.empty { cursor: default; }
-
-    /* Filters Section */
-    .filter-bar {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    select {
-      padding: 10px 16px;
-      border-radius: 20px;
-      border: 1px solid #E0E0E0;
-      outline: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      background: #FFF;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-
-    /* Tag Chips */
-    .tags-container { 
-      display: flex; 
-      justify-content: center;
-      flex-wrap: wrap; 
-      gap: 10px; 
-      margin-bottom: 30px; 
-    }
-
-    .tag-chip {
-      padding: 10px 18px;
-      border-radius: 25px;
-      background: #FFFFFF;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      border: 1px solid #EAEAEA;
-      transition: all 0.2s;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-
-    .tag-chip.active { 
-      background: var(--yellow-lime); 
-      color: #000000; 
-      border-color: var(--yellow-lime);
-    }
-
-    /* Events Grid */
-    .events-grid { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-      gap: 20px; 
-    }
-
-    .event-card {
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-      cursor: pointer;
-      transition: transform 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .event-card:hover { transform: translateY(-4px); }
-
-    .event-image { 
-      height: 160px; 
-      background-size: cover; 
-      background-position: center; 
-      position: relative; 
-    }
-
-    .event-tags-overlay { 
-      position: absolute; 
-      top: 12px; 
-      left: 12px; 
-      display: flex; 
-      gap: 6px; 
-      flex-wrap: wrap; 
-    }
-
-    .event-tag { 
-      background: rgba(0,0,0,0.7); 
-      backdrop-filter: blur(4px); 
-      color: white; 
-      font-size: 0.68rem; 
-      font-weight: 800; 
-      padding: 4px 10px; 
-      border-radius: 12px; 
-      text-transform: uppercase; 
-    }
-
-    .event-content { 
-      padding: 18px; 
-      flex: 1; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: space-between; 
-    }
-
+    .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .event-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.06); cursor: pointer; display: flex; flex-direction: column; }
+    .event-image { height: 160px; background-size: cover; background-position: center; position: relative; }
+    .event-tags-overlay { position: absolute; top: 12px; left: 12px; display: flex; gap: 6px; }
+    .event-tag { background: rgba(0,0,0,0.7); color: white; font-size: 0.68rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; }
+    .event-content { padding: 18px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
     .event-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; }
-    
-    .event-meta { 
-      font-size: 0.85rem; 
-      color: var(--text-muted); 
-      display: flex; 
-      justify-content: space-between;
-      font-weight: 600;
-    }
+    .event-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; font-weight: 600; }
 
-    /* Modal */
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.75); display: none; justify-content: center; align-items: center; z-index: 1000;
-    }
-
-    .modal-card {
-      background: white; width: 90%; max-width: 420px; border-radius: 24px; overflow: hidden;
-    }
-
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); display: none; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-card { background: white; width: 90%; max-width: 420px; border-radius: 24px; overflow: hidden; }
     .modal-image { height: 200px; background-size: cover; background-position: center; position: relative; }
     .modal-close { position: absolute; top: 15px; right: 15px; background: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-weight: bold; }
     .modal-body { padding: 20px; }
@@ -293,15 +66,11 @@
 
   <header>
     <div class="brand-logo">iR</div>
-    <div class="hero-title">
-      WHAT'S ON 
-      <span class="highlight">TODAY</span>
-    </div>
+    <div class="hero-title">WHAT'S ON <span class="highlight">TODAY</span></div>
     <p class="hero-subtitle">The best events, markets and things to do on the French Riviera and Italian Riviera (from Sanremo to Monte-Carlo).</p>
   </header>
 
   <div class="container">
-    
     <div class="calendar-card">
       <div class="calendar-month-header">
         <button class="nav-btn" onclick="changeMonth(-1)">‹</button>
@@ -335,14 +104,11 @@
     </div>
 
     <div class="events-grid" id="eventsList"></div>
-
   </div>
 
   <div class="modal-overlay" id="eventModal">
     <div class="modal-card">
-      <div class="modal-image" id="modalImg">
-        <button class="modal-close" onclick="closeModal()">✕</button>
-      </div>
+      <div class="modal-image" id="modalImg"><button class="modal-close" onclick="closeModal()">✕</button></div>
       <div class="modal-body">
         <h2 id="modalTitle" style="margin-bottom: 8px;"></h2>
         <p id="modalMeta" style="color: var(--pink-primary); font-weight: bold; margin-bottom: 12px;"></p>
@@ -353,33 +119,32 @@
   </div>
 
   <script>
-    const todayDate = new Date();
-    const currentYearNum = todayDate.getFullYear();
-    const currentMonthNum = todayDate.getMonth();
-    const currentDayNum = todayDate.getDate();
-
-    const eventsData = [
-      { id: 1, year: currentYearNum, month: currentMonthNum, date: currentDayNum, title: "Monte-Carlo Summer Festival", city: "Monte-Carlo", time: "18:00", tags: ["Concert"], img: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80", desc: "An unforgettable evening of music and great vibes in the heart of Monte-Carlo." },
-      { id: 2, year: currentYearNum, month: currentMonthNum, date: currentDayNum, title: "Menton Morning Market", city: "Menton", time: "08:00 - 13:00", tags: ["Market", "Food & Drinks"], img: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=600&q=80", desc: "Explore fresh local produce, artisanal cheeses, and Mediterranean flowers." },
-      { id: 3, year: currentYearNum, month: currentMonthNum, date: currentDayNum, title: "Sunset DJ Set Plage", city: "Sanremo", time: "19:00", tags: ["Beach Party", "Food & Drinks"], img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80", desc: "Dance by the sea with sunset cocktails and deep house sets." },
-      { id: 4, year: currentYearNum, month: currentMonthNum, date: (currentDayNum + 1), title: "Voiles de Saint-Tropez", city: "Saint-Tropez", time: "All Day", tags: ["Town Festival"], img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80", desc: "Classic yacht regatta showcasing world-class sailing along the French Riviera." }
-    ];
-
+    let eventsData = [];
     let displayedDate = new Date();
     let selectedDay = displayedDate.getDate();
     let currentTag = 'ALL';
-
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    // Fetch scraped events from JSON file
+    async function init() {
+      try {
+        const response = await fetch('./events.json');
+        if (response.ok) {
+          eventsData = await response.json();
+        }
+      } catch (err) {
+        console.log('Using default data backup...');
+      }
+      generateCalendar();
+    }
 
     function generateCalendar() {
       const year = displayedDate.getFullYear();
       const month = displayedDate.getMonth();
-
       document.getElementById('monthYearDisplay').innerText = `${monthNames[month]} ${year}`;
 
       const firstDayOfMonth = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
-
       let startingIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
 
       const calendarDaysContainer = document.getElementById('calendarDays');
@@ -394,14 +159,11 @@
       for (let day = 1; day <= daysInMonth; day++) {
         const dayDiv = document.createElement('div');
         dayDiv.className = 'calendar-day';
-        if (day === selectedDay) {
-          dayDiv.classList.add('active');
-        }
+        if (day === selectedDay) dayDiv.classList.add('active');
         dayDiv.innerText = day;
         dayDiv.onclick = () => selectDate(day);
         calendarDaysContainer.appendChild(dayDiv);
       }
-
       renderEvents();
     }
 
@@ -426,13 +188,13 @@
 
       const filtered = eventsData.filter(e => {
         const matchesDate = e.year === viewYear && e.month === viewMonth && e.date === selectedDay;
-        const matchesCity = selectedCity === 'ALL' || e.city === selectedCity;
+        const matchesCity = selectedCity === 'ALL' || e.city.toLowerCase().includes(selectedCity.toLowerCase());
         const matchesTag = currentTag === 'ALL' || e.tags.includes(currentTag);
         return matchesDate && matchesCity && matchesTag;
       });
 
       if (filtered.length === 0) {
-        listContainer.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted); text-align: center; padding: 40px 0;">No events scheduled for ${monthNames[viewMonth]} ${selectedDay}, ${viewYear}.</p>`;
+        listContainer.innerHTML = `<p style="grid-column: 1/-1; color: var(--text-muted); text-align: center; padding: 40px 0;">No events found for ${monthNames[viewMonth]} ${selectedDay}, ${viewYear}.</p>`;
         return;
       }
 
@@ -442,16 +204,11 @@
         card.onclick = () => openModal(item);
         card.innerHTML = `
           <div class="event-image" style="background-image: url('${item.img}')">
-            <div class="event-tags-overlay">
-              ${item.tags.map(t => `<span class="event-tag">${t}</span>`).join('')}
-            </div>
+            <div class="event-tags-overlay">${item.tags.map(t => `<span class="event-tag">${t}</span>`).join('')}</div>
           </div>
           <div class="event-content">
             <div class="event-title">${item.title}</div>
-            <div class="event-meta">
-              <span>📍 ${item.city}</span>
-              <span>🕒 ${item.time}</span>
-            </div>
+            <div class="event-meta"><span>📍 ${item.city}</span><span>🕒 ${item.time}</span></div>
           </div>
         `;
         listContainer.appendChild(card);
@@ -466,7 +223,6 @@
     }
 
     function applyFilters() { renderEvents(); }
-
     function openModal(item) {
       document.getElementById('modalTitle').innerText = item.title;
       document.getElementById('modalMeta').innerText = `📍 ${item.city} • 🕒 ${item.time}`;
@@ -474,10 +230,9 @@
       document.getElementById('modalImg').style.backgroundImage = `url('${item.img}')`;
       document.getElementById('eventModal').style.display = 'flex';
     }
-
     function closeModal() { document.getElementById('eventModal').style.display = 'none'; }
 
-    generateCalendar();
+    init();
   </script>
 </body>
 </html>
