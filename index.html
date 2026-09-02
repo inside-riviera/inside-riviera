@@ -63,13 +63,14 @@
 
     .hero-subtitle { 
       margin-top: 14px; 
-      font-size: 1rem; 
+      font-size: 0.95rem; 
       color: #FFFFFF;
       opacity: 0.95; 
       font-weight: 500;
-      max-width: 320px;
+      max-width: 480px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.4;
     }
 
     /* Container Spacing */
@@ -296,7 +297,7 @@
       WHAT'S ON 
       <span class="highlight">TODAY</span>
     </div>
-    <p class="hero-subtitle">The best events, markets and things to do on the Riviera.</p>
+    <p class="hero-subtitle">The best events, markets and things to do on the French Riviera and Italian Riviera (from Sanremo to Monte-Carlo).</p>
   </header>
 
   <div class="container">
@@ -352,7 +353,6 @@
   </div>
 
   <script>
-    // Sample Events (Year, Month index 0-11, Day)
     const todayDate = new Date();
     const currentYearNum = todayDate.getFullYear();
     const currentMonthNum = todayDate.getMonth();
@@ -380,20 +380,17 @@
       const firstDayOfMonth = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-      // Convert Sunday-indexed (0) to Monday-indexed (0=Mon, 6=Sun)
       let startingIndex = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
 
       const calendarDaysContainer = document.getElementById('calendarDays');
       calendarDaysContainer.innerHTML = '';
 
-      // Empty spaces before first day
       for (let i = 0; i < startingIndex; i++) {
         const emptyDiv = document.createElement('div');
         emptyDiv.className = 'calendar-day empty';
         calendarDaysContainer.appendChild(emptyDiv);
       }
 
-      // Days of month
       for (let day = 1; day <= daysInMonth; day++) {
         const dayDiv = document.createElement('div');
         dayDiv.className = 'calendar-day';
@@ -410,7 +407,7 @@
 
     function changeMonth(direction) {
       displayedDate.setMonth(displayedDate.getMonth() + direction);
-      selectedDay = 1; // Default to 1st day when month changes
+      selectedDay = 1;
       generateCalendar();
     }
 
@@ -480,7 +477,6 @@
 
     function closeModal() { document.getElementById('eventModal').style.display = 'none'; }
 
-    // Initial load
     generateCalendar();
   </script>
 </body>
