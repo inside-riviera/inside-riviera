@@ -14,7 +14,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Sanremo for September 02, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.sanremoliveandlove.it/eventi/"
   },
   {
     "id": 2,
@@ -31,7 +31,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Sanremo for September 03, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.sanremoliveandlove.it/eventi/"
   },
   {
     "id": 3,
@@ -48,7 +48,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Sanremo for September 04, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.sanremoliveandlove.it/eventi/"
   },
   {
     "id": 4,
@@ -65,7 +65,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Bordighera for September 02, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.visitbordighera.it/eventi"
   },
   {
     "id": 5,
@@ -82,7 +82,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Bordighera for September 03, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.visitbordighera.it/eventi"
   },
   {
     "id": 6,
@@ -99,7 +99,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Bordighera for September 04, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.visitbordighera.it/eventi"
   },
   {
     "id": 7,
@@ -116,7 +116,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Menton for September 02, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.menton.fr/-Agenda-.html"
   },
   {
     "id": 8,
@@ -133,7 +133,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Menton for September 03, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.menton.fr/-Agenda-.html"
   },
   {
     "id": 9,
@@ -150,7 +150,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Menton for September 04, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.menton.fr/-Agenda-.html"
   },
   {
     "id": 10,
@@ -167,7 +167,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Monte-Carlo for September 02, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.montecarlosbm.com/en/agenda"
   },
   {
     "id": 11,
@@ -184,7 +184,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Monte-Carlo for September 03, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.montecarlosbm.com/en/agenda"
   },
   {
     "id": 12,
@@ -201,7 +201,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Monte-Carlo for September 04, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.montecarlosbm.com/en/agenda"
   },
   {
     "id": 13,
@@ -218,7 +218,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Ventimiglia for September 02, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://ventimiglia.it/eventi-manifestazioni/"
   },
   {
     "id": 14,
@@ -235,7 +235,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Ventimiglia for September 03, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://ventimiglia.it/eventi-manifestazioni/"
   },
   {
     "id": 15,
@@ -252,7 +252,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Ventimiglia for September 04, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://ventimiglia.it/eventi-manifestazioni/"
   },
   {
     "id": 16,
@@ -269,7 +269,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Ospedaletti for September 02, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.visitospedaletti.it/eventi/"
   },
   {
     "id": 17,
@@ -286,7 +286,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Ospedaletti for September 03, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.visitospedaletti.it/eventi/"
   },
   {
     "id": 18,
@@ -303,7 +303,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Ospedaletti for September 04, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.visitospedaletti.it/eventi/"
   },
   {
     "id": 19,
@@ -320,7 +320,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Vallecrosia for September 02, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://turismo.comune.vallecrosia.im.it/eventi-e-notizie/"
   },
   {
     "id": 20,
@@ -337,7 +337,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Vallecrosia for September 03, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://turismo.comune.vallecrosia.im.it/eventi-e-notizie/"
   },
   {
     "id": 21,
@@ -354,7 +354,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Vallecrosia for September 04, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://turismo.comune.vallecrosia.im.it/eventi-e-notizie/"
   },
   {
     "id": 22,
@@ -371,7 +371,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Vallebona for September 02, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.vallebona.info/it/calendario-eventi"
   },
   {
     "id": 23,
@@ -388,7 +388,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Vallebona for September 03, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.vallebona.info/it/calendario-eventi"
   },
   {
     "id": 24,
@@ -405,7 +405,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Vallebona for September 04, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.vallebona.info/it/calendario-eventi"
   },
   {
     "id": 25,
@@ -422,7 +422,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Seborga for September 02, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.vallebona.info/it/calendario-eventi"
   },
   {
     "id": 26,
@@ -439,7 +439,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Seborga for September 03, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.vallebona.info/it/calendario-eventi"
   },
   {
     "id": 27,
@@ -456,7 +456,7 @@
     ],
     "img": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     "desc": "Official event scheduled in Seborga for September 04, 2026.",
-    "url": "https://www.sanremonews.it/agenda.html"
+    "url": "https://www.vallebona.info/it/calendario-eventi"
   },
   {
     "id": 28,
