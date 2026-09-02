@@ -36,24 +36,20 @@ def detect_tag(title):
     return "Town Festival"
 
 def extract_rss_image(item, description_text):
-    # Check <enclosure> tags
     enclosure = item.find("enclosure")
     if enclosure is not None and "url" in enclosure.attrib:
         return enclosure.attrib["url"]
         
-    # Check <media:content> or <media:thumbnail>
     for elem in item:
         if "content" in elem.tag or "thumbnail" in elem.tag:
             if "url" in elem.attrib:
                 return elem.attrib["url"]
                 
-    # Extract <img> from HTML in description
     if description_text:
         img_match = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', description_text)
         if img_match:
             return img_match.group(1)
             
-    # Default fallback image
     return "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80"
 
 # 1. READ CSV FROM GOOGLE SHEETS
@@ -63,7 +59,6 @@ try:
         csv_data = csv.DictReader(io.StringIO(response.text))
         
         for row in csv_data:
-            # Flexible column header checking
             city = row.get("Town") or row.get("town") or row.get("City") or "Riviera"
             feed_url = row.get("URL") or row.get("url") or row.get("Link")
             active = row.get("Active") or row.get("active") or "Yes"
@@ -76,7 +71,8 @@ try:
                         root = ET.fromstring(feed_res.content)
                         items = root.findall(".//item")
                         
-                        for idx, item in enumerate(items[:5]):
+                        valid_count = 0
+                        for idx, item in enumerate(items[:10]):
                             title_elem = item.find("title")
                             desc_elem = item.find("description")
                             link_elem = item.find("link")
@@ -89,14 +85,16 @@ try:
                                 desc = clean_html(desc_raw)
                                 event_url = link_elem.text.strip() if (link_elem is not None and link_elem.text) else feed_url
                                 
-                                # Spread dates slightly so calendar populates
-                                event_date = today + timedelta(days=(idx % 5))
-
                                 if len(title) > 5 and not any(k in title.lower() for k in ["privacy", "cookie", "policy"]):
+                                    # Force the 1st valid event of each city to be TODAY
+                                    # Subsequent items are spread over upcoming days
+                                    event_date = today + timedelta(days=valid_count)
+                                    valid_count += 1
+
                                     events.append({
                                         "id": len(events) + 1,
                                         "year": event_date.year,
-                                        "month": event_date.month - 1,
+                                        "month": event_date.month - 1,  # 0-indexed for JavaScript
                                         "date": event_date.day,
                                         "title": title,
                                         "city": city.strip(),
@@ -114,8 +112,8 @@ try:
 except Exception as e:
     print(f"Error connecting to Google Sheets CSV: {e}")
 
-# 2. SAVE OUTPUT TO EVENTS.JSON
+# SAVE OUTPUT
 with open("events.json", "w", encoding="utf-8") as f:
     json.dump(events, f, ensure_ascii=False, indent=2)
 
-print(f"Successfully processed and generated {len(events)} events in events.json")
+print(f"Successfully generated {len(events)} events in events.json")
