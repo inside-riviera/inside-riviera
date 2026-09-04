@@ -420,16 +420,36 @@
       renderEvents();
     }
 
+    function checkEventMatch(event, targetYear, targetMonth, targetDay) {
+      const startY = Number(event.year);
+      const startM = Number(event.month);
+      const startD = Number(event.date);
+
+      // If it's a multi-day event with an end date specified
+      if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
+        const endY = Number(event.endYear);
+        const endM = Number(event.endMonth);
+        const endD = Number(event.endDate);
+
+        const targetDate = new Date(targetYear, targetMonth, targetDay);
+        const startDate = new Date(startY, startM, startD);
+        const endDate = new Date(endY, endM, endD);
+
+        return targetDate >= startDate && targetDate <= endDate;
+      }
+
+      // Single-day event check
+      return startY === targetYear && startM === targetMonth && startD === targetDay;
+    }
+
     function renderCalendar() {
       const grid = document.getElementById("days-grid");
       grid.innerHTML = "";
 
       document.getElementById("calendar-month-title").innerText = `${monthNames[selectedMonth]} ${selectedYear}`;
 
-      // Get first day of the month and total days
       const firstDayDate = new Date(selectedYear, selectedMonth, 1);
-      let startDay = firstDayDate.getDay(); // 0 is Sunday, 1 is Monday...
-      // Adjust so Monday is 0 (Mon=0, Tue=1, ..., Sun=6)
+      let startDay = firstDayDate.getDay();
       startDay = (startDay === 0) ? 6 : startDay - 1;
 
       const totalDays = new Date(selectedYear, selectedMonth + 1, 0).getDate();
@@ -442,7 +462,7 @@
         const cell = document.createElement("div");
         cell.className = `day-cell ${day === selectedDay ? 'active' : ''}`;
         
-        let hasEvent = allEvents.some(e => Number(e.date) === day && Number(e.month) === selectedMonth && Number(e.year) === selectedYear);
+        let hasEvent = allEvents.some(e => checkEventMatch(e, selectedYear, selectedMonth, day));
         
         cell.innerHTML = `
           <div class="day-number">${day}</div>
@@ -479,10 +499,7 @@
       const selectedCity = document.getElementById("city-filter").value;
 
       const filtered = allEvents.filter(event => {
-        const matchesDate = Number(event.year) === selectedYear && 
-                            Number(event.month) === selectedMonth && 
-                            Number(event.date) === selectedDay;
-
+        const matchesDate = checkEventMatch(event, selectedYear, selectedMonth, selectedDay);
         const matchesCity = (selectedCity === "ALL" || (event.city && event.city.toLowerCase() === selectedCity.toLowerCase()));
 
         return matchesDate && matchesCity;
