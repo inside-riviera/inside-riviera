@@ -254,11 +254,12 @@
     }
 
     .meta-info {
-      display: flex;
-      gap: 12px;
       font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
     .description {
@@ -425,7 +426,6 @@
       const startM = Number(event.month);
       const startD = Number(event.date);
 
-      // If it's a multi-day event with an end date specified
       if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
         const endY = Number(event.endYear);
         const endM = Number(event.endMonth);
@@ -438,7 +438,6 @@
         return targetDate >= startDate && targetDate <= endDate;
       }
 
-      // Single-day event check
       return startY === targetYear && startM === targetMonth && startD === targetDay;
     }
 
@@ -513,6 +512,8 @@
 
       filtered.forEach(event => {
         const tag = (event.tags && event.tags.length > 0) ? event.tags[0] : "EVENT";
+        const addressText = event.address ? `📍 ${event.address}, ${event.city}` : `📍 ${event.city}`;
+        
         const cardHtml = `
           <div class="event-card">
             <div class="img-wrapper">
@@ -522,7 +523,7 @@
             <div class="card-body">
               <h3>${event.title}</h3>
               <div class="meta-info">
-                <span>📍 ${event.city}</span>
+                <span>${addressText}</span>
                 <span>🕒 ${event.time}</span>
               </div>
               <div class="description">${event.desc}</div>
