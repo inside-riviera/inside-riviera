@@ -466,16 +466,13 @@
         
         cell.innerHTML = `
           <div class="day-number">${day}</div>
-          ${hasEvent && day !== selectedDay ? '<div class="event-dot"></div>' : ''}
+          ${hasEvent ? '<div class="event-dot"></div>' : ''}
         `;
 
         cell.onclick = () => {
           selectedDay = day;
           document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('active'));
           cell.classList.add('active');
-          
-          const dot = cell.querySelector('.event-dot');
-          if (dot) dot.remove();
 
           updateHeroText();
           renderEvents();
