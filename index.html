@@ -385,7 +385,7 @@
     let allEvents = [];
     let selectedYear = 2026;
     let selectedMonth = 8; // September (0-indexed)
-    let selectedDay = 2;   // Default selected day
+    let selectedDay = 1;   
 
     const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", 
                         "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
@@ -396,7 +396,14 @@
         if (!res.ok) throw new Error('Failed to load JSON');
         allEvents = await res.json();
 
+        if (allEvents.length > 0) {
+          selectedYear = Number(allEvents[0].year);
+          selectedMonth = Number(allEvents[0].month);
+          selectedDay = Number(allEvents[0].date);
+        }
+
         renderCalendar();
+        updateHeroText();
         renderEvents();
       } catch (err) {
         console.error(err);
@@ -415,7 +422,7 @@
         selectedMonth = 11;
         selectedYear--;
       }
-      selectedDay = 1; // Reset to 1st of the new month
+      selectedDay = 1; 
       renderCalendar();
       updateHeroText();
       renderEvents();
@@ -482,10 +489,7 @@
     }
 
     function updateHeroText() {
-      const today = new Date(2026, 8, 2);
-      const isToday = (selectedDay === today.getDate() && selectedMonth === today.getMonth() && selectedYear === today.getFullYear());
-      
-      document.getElementById("hero-date-text").innerText = isToday ? "TODAY" : `${monthNames[selectedMonth]} ${selectedDay}`;
+      document.getElementById("hero-date-text").innerText = `${monthNames[selectedMonth]} ${selectedDay}`;
     }
 
     function renderEvents() {
