@@ -2,15 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inside Riviera Events</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f9f9f9; color: #333; max-width: 800px; margin: 0 auto; }
+        .event-card { background: #fff; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; }
+        .event-image-container img { width: 100%; height: 200px; object-fit: cover; }
+        .event-content { padding: 20px; }
+        .event-content h3 { margin-top: 0; }
+        .btn-official-site { display: inline-block; background: #0066cc; color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 4px; margin-top: 10px; }
+    </style>
 </head>
 <body>
 
-    <!-- Your events container where the cards will appear -->
-    <div id="events-container"></div>
+    <h1>Inside Riviera Events</h1>
+    <div id="events-container">Loading events from Google Sheet...</div>
 
-    <!-- PASTE THE CODE RIGHT HERE -->
     <script>
       function getEventImage(event) {
         var imgField = event.image || event["Official Image (.png / .jpg)"] || "";
@@ -26,16 +34,16 @@
         if (title.includes("yacht") || title.includes("boat") || city.includes("monaco")) {
           return "https://images.unsplash.com/photo-1569263979104-865ab9cd8d5c?auto=format&fit=crop&w=800&q=80";
         } 
-        else if (category.includes("food") || title.includes("food") || title.includes("gourmet") || title.includes("tasting")) {
+        else if (category.includes("food") || title.includes("food") || title.includes("gourmet")) {
           return "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80";
         } 
         else if (category.includes("sport") || title.includes("sport") || title.includes("race")) {
           return "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80";
         } 
-        else if (category.includes("culture") || title.includes("patrimoine") || title.includes("exposition") || title.includes("museum")) {
+        else if (category.includes("culture") || title.includes("patrimoine") || title.includes("exposition")) {
           return "https://images.unsplash.com/photo-1565060604153-443b7bc45479?auto=format&fit=crop&w=800&q=80";
         } 
-        else if (category.includes("concert") || category.includes("music") || title.includes("live") || title.includes("jazz")) {
+        else if (category.includes("concert") || title.includes("music") || title.includes("live")) {
           return "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80";
         }
         
@@ -46,6 +54,11 @@
         var container = document.getElementById("events-container");
         if (!container) return;
         
+        if (!eventsArray || eventsArray.length === 0) {
+          container.innerHTML = "<p>No events found.</p>";
+          return;
+        }
+        
         container.innerHTML = "";
         
         eventsArray.forEach(function(event) {
@@ -54,21 +67,33 @@
           var cardHTML = `
             <div class="event-card">
               <div class="event-image-container">
-                <span class="event-category-badge">${event.category || event["Category"] || 'EVENT'}</span>
                 <img src="${eventImage}" alt="${event.title || event["Title of the Event"] || 'Event Image'}" onerror="this.src='https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80';">
               </div>
               <div class="event-content">
-                <h3>${event.title || event["Title of the Event"]}</h3>
-                <p class="event-address"><i class="fas fa-map-marker-alt"></i> ${event.address || event["Address"] || event.city || event["City"] || ''}</p>
-                <p class="event-time"><i class="fas fa-clock"></i> ${event.dates || event["Dates (including Year)"] || ''} | ${event.time || event["Time"] || ''}</p>
-                <p class="event-description">${event.description || event["Description"] || ''}</p>
-                <a href="${event.officialWebsiteLink || event["Official Website Link"]}" target="_blank" class="btn-official-site">Visit Official Website</a>
+                <h3>${event.title || event["Title of the Event"] || 'Untitled Event'}</h3>
+                <p><strong>Date:</strong> ${event.dates || event["Dates (including Year)"] || ''} | ${event.time || event["Time"] || ''}</p>
+                <p>${event.description || event["Description"] || ''}</p>
+                <a href="${event.officialWebsiteLink || event["Official Website Link"] || '#'}" target="_blank" class="btn-official-site">Visit Official Website</a>
               </div>
             </div>
           `;
           container.innerHTML += cardHTML;
         });
       }
+
+      // Fetch your data from your Google Sheet / Apps Script deployment URL
+      // Replace the URL below with your actual web app URL or JSON endpoint
+      var SHEET_API_URL = "YOUR_GOOGLE_APPS_SCRIPT_OR_JSON_URL_HERE";
+
+      fetch(SHEET_API_URL)
+        .then(response => response.json())
+        .then(data => {
+          renderEvents(data);
+        })
+        .catch(error => {
+          console.error("Error loading events:", error);
+          document.getElementById("events-container").innerHTML = "<p>Failed to load events. Check console for details.</p>";
+        });
     </script>
 </body>
 </html>
