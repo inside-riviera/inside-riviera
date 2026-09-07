@@ -2,38 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Riviera Events</title>
+    <title>Inside Riviera Events</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Your event cards container -->
+    <!-- Your events container where the cards will appear -->
     <div id="events-container"></div>
 
-    <!-- PASTE THE JAVASCRIPT CODE HERE -->
+    <!-- PASTE THE CODE RIGHT HERE -->
     <script>
       function getEventImage(event) {
-        if (event.image && event.image.trim() !== "" && event.image !== "default.png") {
-          return event.image.startsWith("http") ? event.image : "images/" + event.image;
+        var imgField = event.image || event["Official Image (.png / .jpg)"] || "";
+        
+        if (imgField.trim() !== "" && imgField !== "default.png") {
+          return imgField.startsWith("http") ? imgField : "images/" + imgField;
         }
         
-        var category = (event.category || "").toLowerCase();
-        var title = (event.title || "").toLowerCase();
+        var title = (event.title || event["Title of the Event"] || "").toLowerCase();
+        var category = (event.category || event["Category"] || "").toLowerCase();
+        var city = (event.city || event["City"] || "").toLowerCase();
         
-        if (category.includes("food") || category.includes("gourmet") || title.includes("food")) {
-          return "images/category-food.jpg";
+        if (title.includes("yacht") || title.includes("boat") || city.includes("monaco")) {
+          return "https://images.unsplash.com/photo-1569263979104-865ab9cd8d5c?auto=format&fit=crop&w=800&q=80";
         } 
-        else if (category.includes("culture") || category.includes("art") || title.includes("exposition")) {
-          return "images/category-culture.jpg";
+        else if (category.includes("food") || title.includes("food") || title.includes("gourmet") || title.includes("tasting")) {
+          return "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80";
         } 
-        else if (category.includes("sport") || title.includes("grand prix")) {
-          return "images/category-sports.jpg";
+        else if (category.includes("sport") || title.includes("sport") || title.includes("race")) {
+          return "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80";
         } 
-        else if (category.includes("festival") || title.includes("halloween")) {
-          return "images/category-festival.jpg";
+        else if (category.includes("culture") || title.includes("patrimoine") || title.includes("exposition") || title.includes("museum")) {
+          return "https://images.unsplash.com/photo-1565060604153-443b7bc45479?auto=format&fit=crop&w=800&q=80";
+        } 
+        else if (category.includes("concert") || category.includes("music") || title.includes("live") || title.includes("jazz")) {
+          return "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80";
         }
         
-        return "images/default-card.jpg";
+        return "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80";
       }
 
       function renderEvents(eventsArray) {
@@ -43,18 +49,20 @@
         container.innerHTML = "";
         
         eventsArray.forEach(function(event) {
-          var resolvedImage = getEventImage(event);
+          var eventImage = getEventImage(event);
           
           var cardHTML = `
             <div class="event-card">
               <div class="event-image-container">
-                <span class="event-category-badge">${event.category || 'EVENT'}</span>
-                <img src="${resolvedImage}" alt="${event.title || 'Event Image'}" onerror="this.src='images/default-card.jpg';">
+                <span class="event-category-badge">${event.category || event["Category"] || 'EVENT'}</span>
+                <img src="${eventImage}" alt="${event.title || event["Title of the Event"] || 'Event Image'}" onerror="this.src='https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80';">
               </div>
               <div class="event-content">
-                <h3>${event.title}</h3>
-                <p>${event.dates} | ${event.time || ''}</p>
-                <a href="${event.officialWebsiteLink}" target="_blank">Visit Official Website</a>
+                <h3>${event.title || event["Title of the Event"]}</h3>
+                <p class="event-address"><i class="fas fa-map-marker-alt"></i> ${event.address || event["Address"] || event.city || event["City"] || ''}</p>
+                <p class="event-time"><i class="fas fa-clock"></i> ${event.dates || event["Dates (including Year)"] || ''} | ${event.time || event["Time"] || ''}</p>
+                <p class="event-description">${event.description || event["Description"] || ''}</p>
+                <a href="${event.officialWebsiteLink || event["Official Website Link"]}" target="_blank" class="btn-official-site">Visit Official Website</a>
               </div>
             </div>
           `;
