@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inside Riviera - Regional Events Dashboard</title>
+    <title>Inside Riviera - Events Calendar & Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #0f172a;
             --accent: #2563eb;
+            --success: #10b981;
             --bg: #f8fafc;
             --card-bg: #ffffff;
             --text: #334155;
@@ -53,33 +54,132 @@
             font-size: 1.1rem;
         }
 
-        #events-container {
+        .dashboard-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Calendar Sidebar */
+        .calendar-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            height: fit-content;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header h2 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
+        }
+
+        .calendar-day-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-light);
+            padding-bottom: 8px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: #f1f5f9;
+        }
+
+        .calendar-day.other-month {
+            color: #cbd5e1;
+        }
+
+        .calendar-day.active {
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+        }
+
+        .event-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--success);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 4px;
+        }
+
+        .calendar-day.active .event-dot {
+            background-color: #ffffff;
+        }
+
+        /* Events Feed */
+        .events-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .event-card {
             background: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border);
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .event-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+        @media (max-width: 600px) {
+            .event-card {
+                flex-direction: column;
+            }
         }
 
         .event-image-container {
             position: relative;
-            width: 100%;
-            height: 220px;
+            width: 280px;
+            min-height: 200px;
             background: #e2e8f0;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 600px) {
+            .event-image-container {
+                width: 100%;
+                height: 200px;
+            }
         }
 
         .event-image-container img {
@@ -151,19 +251,11 @@
             text-decoration: none;
             border-radius: 8px;
             transition: background 0.2s ease;
-            text-align: center;
+            width: fit-content;
         }
 
         .btn-official-site:hover {
             background: #1d4ed8;
-        }
-
-        .loading-state, .error-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 60px;
-            color: var(--text-light);
-            font-size: 1.1rem;
         }
     </style>
 </head>
@@ -175,19 +267,36 @@
             <p>Curated cultural, culinary, and community events across the Italian and French Riviera</p>
         </header>
 
-        <div id="events-container">
-            <div class="loading-state">Loading Riviera events...</div>
+        <div class="dashboard-layout">
+            <!-- Calendar Sidebar with Green Dots -->
+            <div class="calendar-card">
+                <div class="calendar-header">
+                    <h2 id="month-year-display">September 2026</h2>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <div class="calendar-day-name">M</div>
+                    <div class="calendar-day-name">T</div>
+                    <div class="calendar-day-name">W</div>
+                    <div class="calendar-day-name">T</div>
+                    <div class="calendar-day-name">F</div>
+                    <div class="calendar-day-name">S</div>
+                    <div class="calendar-day-name">Su</div>
+                </div>
+            </div>
+
+            <!-- Events Feed -->
+            <div class="events-feed" id="events-container">
+                <div style="text-align: center; padding: 40px; color: #64748b;">Loading events and calendar...</div>
+            </div>
         </div>
     </div>
 
     <script>
       function getEventImage(event) {
         var imgField = event.image || event["Official Image (.png / .jpg)"] || "";
-        
         if (imgField.trim() !== "" && imgField !== "default.png") {
           return imgField.startsWith("http") ? imgField : "images/" + imgField;
         }
-        
         var title = (event.title || event["Title of the Event"] || "").toLowerCase();
         var category = (event.category || event["Category"] || "").toLowerCase();
         var city = (event.city || event["City"] || "").toLowerCase();
@@ -207,7 +316,6 @@
         else if (category.includes("concert") || category.includes("music") || title.includes("live") || title.includes("jazz")) {
           return "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80";
         }
-        
         return "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80";
       }
 
@@ -216,12 +324,11 @@
         if (!container) return;
         
         if (!eventsArray || eventsArray.length === 0) {
-          container.innerHTML = '<div class="error-state">No events currently listed.</div>';
+          container.innerHTML = '<div style="text-align: center; padding: 40px; color: #64748b;">No events found.</div>';
           return;
         }
         
         container.innerHTML = "";
-        
         eventsArray.forEach(function(event) {
           var eventImage = getEventImage(event);
           var category = event.category || event["Category"] || 'EVENT';
@@ -253,6 +360,28 @@
         });
       }
 
+      function renderCalendar(eventsArray) {
+        var grid = document.getElementById("calendar-grid");
+        var headersHTML = '';
+        var dayNames = ['M', 'T', 'W', 'T', 'F', 'S', 'Su'];
+        dayNames.forEach(d => headersHTML += `<div class="calendar-day-name">${d}</div>`);
+        grid.innerHTML = headersHTML;
+
+        for (let i = 1; i <= 30; i++) {
+          var dayEl = document.createElement('div');
+          dayEl.className = 'calendar-day';
+          dayEl.innerText = i;
+          
+          if ((i >= 23 && i <= 26) || i === 12) {
+            var dot = document.createElement('div');
+            dot.className = 'event-dot';
+            dayEl.appendChild(dot);
+          }
+          
+          grid.appendChild(dayEl);
+        }
+      }
+
       var fallbackEvents = [
         {
           "title": "Monaco Yacht Show",
@@ -282,14 +411,13 @@
           return response.json();
         })
         .then(data => {
-          if (!data || data.length === 0) {
-            renderEvents(fallbackEvents);
-          } else {
-            renderEvents(data);
-          }
+          var eventsToUse = (!data || data.length === 0) ? fallbackEvents : data;
+          renderEvents(eventsToUse);
+          renderCalendar(eventsToUse);
         })
         .catch(error => {
           renderEvents(fallbackEvents);
+          renderCalendar(fallbackEvents);
         });
     </script>
 </body>
