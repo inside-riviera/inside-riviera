@@ -2,65 +2,295 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Riviera Events</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Riviera - Regional Events Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        #events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .event-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+        }
+
+        .event-image-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: #e2e8f0;
+        }
+
+        .event-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-category-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 20px;
+        }
+
+        .event-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .event-content h3 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .event-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .event-meta i {
+            width: 18px;
+            color: var(--accent);
+            margin-right: 6px;
+        }
+
+        .event-description {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .btn-official-site {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-official-site:hover {
+            background: #1d4ed8;
+        }
+
+        .loading-state, .error-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Your event cards container -->
-    <div id="events-container"></div>
+    <div class="container">
+        <header>
+            <h1>Inside Riviera</h1>
+            <p>Curated cultural, culinary, and community events across the Italian and French Riviera</p>
+        </header>
 
-    <!-- PASTE THE JAVASCRIPT CODE HERE -->
+        <div id="events-container">
+            <div class="loading-state">Loading Riviera events...</div>
+        </div>
+    </div>
+
     <script>
       function getEventImage(event) {
-        if (event.image && event.image.trim() !== "" && event.image !== "default.png") {
-          return event.image.startsWith("http") ? event.image : "images/" + event.image;
+        var imgField = event.image || event["Official Image (.png / .jpg)"] || "";
+        
+        if (imgField.trim() !== "" && imgField !== "default.png") {
+          return imgField.startsWith("http") ? imgField : "images/" + imgField;
         }
         
-        var category = (event.category || "").toLowerCase();
-        var title = (event.title || "").toLowerCase();
+        var title = (event.title || event["Title of the Event"] || "").toLowerCase();
+        var category = (event.category || event["Category"] || "").toLowerCase();
+        var city = (event.city || event["City"] || "").toLowerCase();
         
-        if (category.includes("food") || category.includes("gourmet") || title.includes("food")) {
-          return "images/category-food.jpg";
+        if (title.includes("yacht") || title.includes("boat") || city.includes("monaco")) {
+          return "https://images.unsplash.com/photo-1569263979104-865ab9cd8d5c?auto=format&fit=crop&w=800&q=80";
         } 
-        else if (category.includes("culture") || category.includes("art") || title.includes("exposition")) {
-          return "images/category-culture.jpg";
+        else if (category.includes("food") || title.includes("food") || title.includes("gourmet") || title.includes("tasting")) {
+          return "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80";
         } 
-        else if (category.includes("sport") || title.includes("grand prix")) {
-          return "images/category-sports.jpg";
+        else if (category.includes("sport") || title.includes("sport") || title.includes("race")) {
+          return "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80";
         } 
-        else if (category.includes("festival") || title.includes("halloween")) {
-          return "images/category-festival.jpg";
+        else if (category.includes("culture") || title.includes("patrimoine") || title.includes("exposition") || title.includes("museum")) {
+          return "https://images.unsplash.com/photo-1565060604153-443b7bc45479?auto=format&fit=crop&w=800&q=80";
+        } 
+        else if (category.includes("concert") || category.includes("music") || title.includes("live") || title.includes("jazz")) {
+          return "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80";
         }
         
-        return "images/default-card.jpg";
+        return "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80";
       }
 
       function renderEvents(eventsArray) {
         var container = document.getElementById("events-container");
         if (!container) return;
         
+        if (!eventsArray || eventsArray.length === 0) {
+          container.innerHTML = '<div class="error-state">No events currently listed.</div>';
+          return;
+        }
+        
         container.innerHTML = "";
         
         eventsArray.forEach(function(event) {
-          var resolvedImage = getEventImage(event);
+          var eventImage = getEventImage(event);
+          var category = event.category || event["Category"] || 'EVENT';
+          var title = event.title || event["Title of the Event"] || 'Untitled Event';
+          var address = event.address || event["Address"] || event.city || event["City"] || 'Riviera';
+          var dates = event.dates || event["Dates (including Year)"] || '';
+          var time = event.time || event["Time"] || '';
+          var description = event.description || event["Description"] || '';
+          var link = event.officialWebsiteLink || event["Official Website Link"] || '#';
           
           var cardHTML = `
             <div class="event-card">
               <div class="event-image-container">
-                <span class="event-category-badge">${event.category || 'EVENT'}</span>
-                <img src="${resolvedImage}" alt="${event.title || 'Event Image'}" onerror="this.src='images/default-card.jpg';">
+                <span class="event-category-badge">${category}</span>
+                <img src="${eventImage}" alt="${title}" onerror="this.src='https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80';">
               </div>
               <div class="event-content">
-                <h3>${event.title}</h3>
-                <p>${event.dates} | ${event.time || ''}</p>
-                <a href="${event.officialWebsiteLink}" target="_blank">Visit Official Website</a>
+                <h3>${title}</h3>
+                <div class="event-meta">
+                  <span><i class="fas fa-map-marker-alt"></i> ${address}</span>
+                  <span><i class="fas fa-clock"></i> ${dates} ${time ? '| ' + time : ''}</span>
+                </div>
+                <p class="event-description">${description}</p>
+                <a href="${link}" target="_blank" class="btn-official-site">Visit Official Website</a>
               </div>
             </div>
           `;
           container.innerHTML += cardHTML;
         });
       }
+
+      var fallbackEvents = [
+        {
+          "title": "Monaco Yacht Show",
+          "category": "Yacht & Marine",
+          "city": "Monaco",
+          "dates": "September 23 - 26, 2026",
+          "time": "10:00 AM - 6:30 PM",
+          "description": "The ultimate luxury yachting event showcasing superyachts in Port Hercule.",
+          "officialWebsiteLink": "https://www.monacoyachtshow.com"
+        },
+        {
+          "title": "Vallecrosia in Fiore",
+          "category": "Culture & Heritage",
+          "city": "Vallecrosia",
+          "dates": "October 12, 2026",
+          "time": "9:00 AM onwards",
+          "description": "Traditional floral displays, local gastronomy, and artisan markets across the old town.",
+          "officialWebsiteLink": "https://www.comune.vallecrosia.im.it"
+        }
+      ];
+
+      var SHEET_API_URL = "events.json";
+
+      fetch(SHEET_API_URL)
+        .then(response => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.json();
+        })
+        .then(data => {
+          if (!data || data.length === 0) {
+            renderEvents(fallbackEvents);
+          } else {
+            renderEvents(data);
+          }
+        })
+        .catch(error => {
+          renderEvents(fallbackEvents);
+        });
     </script>
 </body>
 </html>
