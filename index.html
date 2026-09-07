@@ -433,13 +433,13 @@
       const startM = Number(event.month);
       const startD = Number(event.date);
 
+      const targetDate = new Date(targetYear, targetMonth, targetDay);
+      const startDate = new Date(startY, startM, startD);
+
       if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
         const endY = Number(event.endYear);
         const endM = Number(event.endMonth);
         const endD = Number(event.endDate);
-
-        const targetDate = new Date(targetYear, targetMonth, targetDay);
-        const startDate = new Date(startY, startM, startD);
         const endDate = new Date(endY, endM, endD);
 
         return targetDate >= startDate && targetDate <= endDate;
