@@ -2,123 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inside Riviera Events</title>
+    <title>Riviera Events</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        body { font-family: sans-serif; padding: 20px; background: #f9f9f9; color: #333; max-width: 800px; margin: 0 auto; }
-        .event-card { background: #fff; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; }
-        .event-image-container img { width: 100%; height: 200px; object-fit: cover; }
-        .event-content { padding: 20px; }
-        .event-content h3 { margin-top: 0; }
-        .btn-official-site { display: inline-block; background: #0066cc; color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 4px; margin-top: 10px; }
-    </style>
 </head>
 <body>
 
-    <h1>Inside Riviera Events</h1>
-    <div id="events-container">Loading events...</div>
+    <!-- Your event cards container -->
+    <div id="events-container"></div>
 
+    <!-- PASTE THE JAVASCRIPT CODE HERE -->
     <script>
       function getEventImage(event) {
-        var imgField = event.image || event["Official Image (.png / .jpg)"] || "";
-        
-        if (imgField.trim() !== "" && imgField !== "default.png") {
-          return imgField.startsWith("http") ? imgField : "images/" + imgField;
+        if (event.image && event.image.trim() !== "" && event.image !== "default.png") {
+          return event.image.startsWith("http") ? event.image : "images/" + event.image;
         }
         
-        var title = (event.title || event["Title of the Event"] || "").toLowerCase();
-        var category = (event.category || event["Category"] || "").toLowerCase();
-        var city = (event.city || event["City"] || "").toLowerCase();
+        var category = (event.category || "").toLowerCase();
+        var title = (event.title || "").toLowerCase();
         
-        if (title.includes("yacht") || title.includes("boat") || city.includes("monaco")) {
-          return "https://images.unsplash.com/photo-1569263979104-865ab9cd8d5c?auto=format&fit=crop&w=800&q=80";
+        if (category.includes("food") || category.includes("gourmet") || title.includes("food")) {
+          return "images/category-food.jpg";
         } 
-        else if (category.includes("food") || title.includes("food") || title.includes("gourmet")) {
-          return "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80";
+        else if (category.includes("culture") || category.includes("art") || title.includes("exposition")) {
+          return "images/category-culture.jpg";
         } 
-        else if (category.includes("sport") || title.includes("sport") || title.includes("race")) {
-          return "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80";
+        else if (category.includes("sport") || title.includes("grand prix")) {
+          return "images/category-sports.jpg";
         } 
-        else if (category.includes("culture") || title.includes("patrimoine") || title.includes("exposition")) {
-          return "https://images.unsplash.com/photo-1565060604153-443b7bc45479?auto=format&fit=crop&w=800&q=80";
-        } 
-        else if (category.includes("concert") || title.includes("music") || title.includes("live")) {
-          return "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80";
+        else if (category.includes("festival") || title.includes("halloween")) {
+          return "images/category-festival.jpg";
         }
         
-        return "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80";
+        return "images/default-card.jpg";
       }
 
       function renderEvents(eventsArray) {
         var container = document.getElementById("events-container");
         if (!container) return;
         
-        if (!eventsArray || eventsArray.length === 0) {
-          container.innerHTML = "<p>No events found.</p>";
-          return;
-        }
-        
         container.innerHTML = "";
         
         eventsArray.forEach(function(event) {
-          var eventImage = getEventImage(event);
+          var resolvedImage = getEventImage(event);
           
           var cardHTML = `
             <div class="event-card">
               <div class="event-image-container">
-                <img src="${eventImage}" alt="${event.title || event["Title of the Event"] || 'Event Image'}" onerror="this.src='https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80';">
+                <span class="event-category-badge">${event.category || 'EVENT'}</span>
+                <img src="${resolvedImage}" alt="${event.title || 'Event Image'}" onerror="this.src='images/default-card.jpg';">
               </div>
               <div class="event-content">
-                <h3>${event.title || event["Title of the Event"] || 'Untitled Event'}</h3>
-                <p><strong>Date:</strong> ${event.dates || event["Dates (including Year)"] || ''} | ${event.time || event["Time"] || ''}</p>
-                <p>${event.description || event["Description"] || ''}</p>
-                <a href="${event.officialWebsiteLink || event["Official Website Link"] || '#'}" target="_blank" class="btn-official-site">Visit Official Website</a>
+                <h3>${event.title}</h3>
+                <p>${event.dates} | ${event.time || ''}</p>
+                <a href="${event.officialWebsiteLink}" target="_blank">Visit Official Website</a>
               </div>
             </div>
           `;
           container.innerHTML += cardHTML;
         });
       }
-
-      var fallbackEvents = [
-        {
-          "title": "Monaco Yacht Show",
-          "category": "Yacht & Marine",
-          "city": "Monaco",
-          "dates": "September 23 - 26, 2026",
-          "time": "10:00 AM - 6:30 PM",
-          "description": "The ultimate luxury yachting event showcasing superyachts in Port Hercule.",
-          "officialWebsiteLink": "https://www.monacoyachtshow.com"
-        },
-        {
-          "title": "Vallecrosia in Fiore",
-          "category": "Culture & Heritage",
-          "city": "Vallecrosia",
-          "dates": "October 12, 2026",
-          "time": "9:00 AM onwards",
-          "description": "Traditional floral displays, local gastronomy, and artisan markets across the old town.",
-          "officialWebsiteLink": "https://www.comune.vallecrosia.im.it"
-        }
-      ];
-
-      var SHEET_API_URL = "events.json";
-
-      fetch(SHEET_API_URL)
-        .then(response => {
-          if (!response.ok) throw new Error("Network response was not ok");
-          return response.json();
-        })
-        .then(data => {
-          if (!data || data.length === 0) {
-            renderEvents(fallbackEvents);
-          } else {
-            renderEvents(data);
-          }
-        })
-        .catch(error => {
-          renderEvents(fallbackEvents);
-        });
     </script>
 </body>
 </html>
