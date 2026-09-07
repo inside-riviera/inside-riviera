@@ -17,7 +17,7 @@
 <body>
 
     <h1>Inside Riviera Events</h1>
-    <div id="events-container">Loading events from Google Sheet...</div>
+    <div id="events-container">Loading events...</div>
 
     <script>
       function getEventImage(event) {
@@ -81,18 +81,43 @@
         });
       }
 
-      // Fetch your data from your Google Sheet / Apps Script deployment URL
-      // Replace the URL below with your actual web app URL or JSON endpoint
-      var SHEET_API_URL = "YOUR_GOOGLE_APPS_SCRIPT_OR_JSON_URL_HERE";
+      var fallbackEvents = [
+        {
+          "title": "Monaco Yacht Show",
+          "category": "Yacht & Marine",
+          "city": "Monaco",
+          "dates": "September 23 - 26, 2026",
+          "time": "10:00 AM - 6:30 PM",
+          "description": "The ultimate luxury yachting event showcasing superyachts in Port Hercule.",
+          "officialWebsiteLink": "https://www.monacoyachtshow.com"
+        },
+        {
+          "title": "Vallecrosia in Fiore",
+          "category": "Culture & Heritage",
+          "city": "Vallecrosia",
+          "dates": "October 12, 2026",
+          "time": "9:00 AM onwards",
+          "description": "Traditional floral displays, local gastronomy, and artisan markets across the old town.",
+          "officialWebsiteLink": "https://www.comune.vallecrosia.im.it"
+        }
+      ];
+
+      var SHEET_API_URL = "events.json";
 
       fetch(SHEET_API_URL)
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.json();
+        })
         .then(data => {
-          renderEvents(data);
+          if (!data || data.length === 0) {
+            renderEvents(fallbackEvents);
+          } else {
+            renderEvents(data);
+          }
         })
         .catch(error => {
-          console.error("Error loading events:", error);
-          document.getElementById("events-container").innerHTML = "<p>Failed to load events. Check console for details.</p>";
+          renderEvents(fallbackEvents);
         });
     </script>
 </body>
