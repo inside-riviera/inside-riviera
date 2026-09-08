@@ -475,7 +475,6 @@
 
       const totalDays = new Date(selectedYear, selectedMonth + 1, 0).getDate();
       
-      // Get today's date stripped of time for accurate past-date comparison
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
@@ -550,6 +549,12 @@
         const tag = (event.tags && event.tags.length > 0) ? event.tags[0] : "EVENT";
         const addressText = event.address ? `📍 ${event.address}, ${event.city}` : `📍 ${event.city}`;
         
+        // Format explicit event date display text
+        let dateText = `📅 ${monthNames[event.month]} ${event.date}, ${event.year}`;
+        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
+          dateText = `📅 ${monthNames[event.month]} ${event.date} – ${monthNames[event.endMonth]} ${event.endDate}, ${event.endYear}`;
+        }
+
         const cardClass = isSelectedPast ? 'event-card past-event' : 'event-card';
 
         const cardHtml = `
@@ -561,6 +566,7 @@
             <div class="card-body">
               <h3>${event.title}</h3>
               <div class="meta-info">
+                <span>${dateText}</span>
                 <span>${addressText}</span>
                 <span>🕒 ${event.time}</span>
               </div>
