@@ -166,6 +166,15 @@
       font-weight: 800;
     }
 
+    /* Past Dates Styling (Blanked Out / Dimmed) */
+    .day-cell.past {
+      color: #cbd5e1;
+    }
+    .day-cell.past .event-dot {
+      background-color: #cbd5e1;
+      opacity: 0.4;
+    }
+
     .event-dot {
       width: 4px;
       height: 4px;
@@ -214,6 +223,12 @@
 
     .event-card:hover {
       transform: translateY(-4px);
+    }
+
+    /* Past Event Card Styling (Blanked out / Dimmed) */
+    .event-card.past-event {
+      opacity: 0.45;
+      filter: grayscale(40%);
     }
 
     .img-wrapper {
@@ -459,6 +474,10 @@
       startDay = (startDay === 0) ? 6 : startDay - 1;
 
       const totalDays = new Date(selectedYear, selectedMonth + 1, 0).getDate();
+      
+      // Get today's date stripped of time for accurate past-date comparison
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
 
       for (let i = 0; i < startDay; i++) {
         grid.appendChild(document.createElement("div"));
@@ -466,7 +485,15 @@
 
       for (let day = 1; day <= totalDays; day++) {
         const cell = document.createElement("div");
-        cell.className = `day-cell ${day === selectedDay ? 'active' : ''}`;
+        
+        const cellDate = new Date(selectedYear, selectedMonth, day);
+        const isPast = cellDate < today;
+
+        let cellClasses = ['day-cell'];
+        if (day === selectedDay) cellClasses.push('active');
+        if (isPast) cellClasses.push('past');
+        
+        cell.className = cellClasses.join(' ');
         
         let hasEvent = allEvents.some(e => checkEventMatch(e, selectedYear, selectedMonth, day));
         
@@ -514,12 +541,19 @@
         return;
       }
 
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const selectedDateObj = new Date(selectedYear, selectedMonth, selectedDay);
+      const isSelectedPast = selectedDateObj < today;
+
       filtered.forEach(event => {
         const tag = (event.tags && event.tags.length > 0) ? event.tags[0] : "EVENT";
         const addressText = event.address ? `📍 ${event.address}, ${event.city}` : `📍 ${event.city}`;
         
+        const cardClass = isSelectedPast ? 'event-card past-event' : 'event-card';
+
         const cardHtml = `
-          <div class="event-card">
+          <div class="${cardClass}">
             <div class="img-wrapper">
               <img src="${event.img}" alt="${event.title}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
               <span class="tag-badge">${tag}</span>
