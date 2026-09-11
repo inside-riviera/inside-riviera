@@ -407,8 +407,8 @@
 
     async function initApp() {
       try {
-        const res = await fetch('events.json?v=' + new Date().getTime());
-        if (!res.ok) throw new Error('Failed to load JSON');
+        const res = await fetch('https://script.google.com/macros/u/1/s/AKfycbyHvavD6ioP-824i6doczbjWi10GpxIYtvjWtDRQ9vUDsy1EBETOFWHdSlVfO_PH0As/exec');
+        if (!res.ok) throw new Error('Failed to load sheet data');
         allEvents = await res.json();
 
         if (allEvents.length > 0) {
@@ -423,7 +423,7 @@
       } catch (err) {
         console.error(err);
         document.getElementById("events-container").innerHTML = `
-          <div class="no-events">Unable to load event feed. Please check <code>events.json</code>.</div>
+          <div class="no-events">Unable to load event feed from Google Sheet API.</div>
         `;
       }
     }
@@ -451,7 +451,7 @@
       const targetDate = new Date(targetYear, targetMonth, targetDay);
       const startDate = new Date(startY, startM, startD);
 
-      if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
+      if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined && event.endYear !== "" && event.endMonth !== "" && event.endDate !== "") {
         const endY = Number(event.endYear);
         const endM = Number(event.endMonth);
         const endD = Number(event.endDate);
@@ -546,13 +546,12 @@
       const isSelectedPast = selectedDateObj < today;
 
       filtered.forEach(event => {
-        const tag = (event.tags && event.tags.length > 0) ? event.tags[0] : "EVENT";
+        const tag = (event.tags && event.tags.length > 0) ? event.tags : "EVENT";
         const addressText = event.address ? `📍 ${event.address}, ${event.city}` : `📍 ${event.city}`;
         
-        // Format explicit event date display text
-        let dateText = `📅 ${monthNames[event.month]} ${event.date}, ${event.year}`;
-        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
-          dateText = `📅 ${monthNames[event.month]} ${event.date} – ${monthNames[event.endMonth]} ${event.endDate}, ${event.endYear}`;
+        let dateText = `📅 ${monthNames[Number(event.month)]} ${event.date}, ${event.year}`;
+        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined && event.endYear !== "" && event.endMonth !== "" && event.endDate !== "") {
+          dateText = `📅 ${monthNames[Number(event.month)]} ${event.date} – ${monthNames[Number(event.endMonth)]} ${event.endDate}, ${event.endYear}`;
         }
 
         const cardClass = isSelectedPast ? 'event-card past-event' : 'event-card';
