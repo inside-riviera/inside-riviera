@@ -396,7 +396,6 @@
   <script>
     let allEvents = [];
     
-    // Default safely to current real date to prevent 'undefined' text
     let selectedYear = new Date().getFullYear();
     let selectedMonth = new Date().getMonth();
     let selectedDay = new Date().getDate();
@@ -404,7 +403,6 @@
     const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", 
                         "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
 
-    // Helper to extract fields looking at multiple possible column names (English or Italian)
     function getField(obj, keys) {
       for (let k of keys) {
         if (obj[k] !== undefined && obj[k] !== null && obj[k] !== '') {
@@ -414,34 +412,56 @@
       return '';
     }
 
+    function parseNum(val) {
+      if (val === undefined || val === null || val === '') return NaN;
+      // Remove commas if Google Sheets formatted numbers with them (e.g. "2,026" -> "2026")
+      const cleanStr = String(val).replace(/,/g, '').trim();
+      const num = Number(cleanStr);
+      return isNaN(num) ? NaN : num;
+    }
+
+    function parseBoolean(val) {
+      if (typeof val === 'boolean') return val;
+      if (!val) return false;
+      const str = String(val).trim().toUpperCase();
+      return str === 'TRUE' || str === '1' || str === 'YES';
+    }
+
     async function initApp() {
       try {
-        const res = await fetch('https://sheetdb.io/api/v1/nxxtx0pb2uuw7'); // Replace with your actual SheetDB endpoint if different
+        const res = await fetch('https://sheetdb.io/api/v1/nxxtx0pb2uuw7');
         if (!res.ok) throw new Error('Failed to load sheet data');
         const rawData = await res.json();
 
-        // Standardize keys to lowercase
         const standardizedData = rawData.map(row => {
           const cleanRow = {};
           for (let key in row) {
-            cleanRow[key.toLowerCase().trim()] = row[key];
+            cleanRow[key.toLowerCase().replace(/[\s_-]/g, '')] = row[key];
           }
           return cleanRow;
         });
 
-        // Map data with fallback keys for flexibility
         allEvents = standardizedData.map(e => {
-          const y = Number(getField(e, ['year', 'anno', 'yr']));
-          const m = Number(getField(e, ['month', 'mese', 'mo']));
-          const d = Number(getField(e, ['date', 'day', 'giorno', 'data']));
+          // Look up numeric start/end keys flexibly (supports startyear, start_year, year, etc.)
+          const y = parseNum(getField(e, ['startyear', 'year', 'anno', 'yr']));
+          // Months in Google Sheets are likely stored as 1-12, convert to 0-11 index for JS
+          const mInput = parseNum(getField(e, ['startmonth', 'month', 'mese', 'mo']));
+          const d = parseNum(getField(e, ['startdate', 'day', 'giorno', 'data']));
+
+          const endY = parseNum(getField(e, ['endyear', 'endanno']));
+          const endMInput = parseNum(getField(e, ['endmonth', 'endmese']));
+          const endD = parseNum(getField(e, ['enddate', 'endgiorno']));
+
+          const isDaily = parseBoolean(getField(e, ['daily', 'isdaily', 'ogni']));
 
           return {
             year: y,
-            month: !isNaN(m) ? m - 1 : NaN, // Fix 1-month offset
+            month: !isNaN(mInput) ? mInput - 1 : NaN,
             date: d,
-            endYear: Number(getField(e, ['endyear', 'endanno'])) || undefined,
-            endMonth: (Number(getField(e, ['endmonth', 'endmese'])) ? Number(getField(e, ['endmonth', 'endmese'])) - 1 : undefined),
-            endDate: Number(getField(e, ['enddate', 'endgiorno'])) || undefined,
+            endYear: !isNaN(endY) ? endY : undefined,
+            endMonth: !isNaN(endMInput) ? endMInput - 1 : undefined,
+            endDate: !isNaN(endD) ? endD : undefined,
+            isDaily: isDaily,
             city: getField(e, ['city', 'città', 'citta', 'town']) || '',
             address: getField(e, ['address', 'indirizzo', 'location']) || '',
             title: getField(e, ['title', 'titolo', 'name', 'event']) || 'Untitled Event',
@@ -453,8 +473,13 @@
           };
         }).filter(e => !isNaN(e.year) && !isNaN(e.month) && !isNaN(e.date));
 
-        // If events exist, jump to the date of the first valid event
-        if (allEvents.length > 0) {
+        // Jump to September 2026 if available, or first event
+        const targetEvent = allEvents.find(e => e.month === 8 && e.year === 2026);
+        if (targetEvent) {
+          selectedYear = targetEvent.year;
+          selectedMonth = targetEvent.month;
+          selectedDay = targetEvent.date;
+        } else if (allEvents.length > 0) {
           selectedYear = allEvents[0].year;
           selectedMonth = allEvents[0].month;
           selectedDay = allEvents[0].date;
@@ -489,6 +514,15 @@
     function checkEventMatch(event, targetYear, targetMonth, targetDay) {
       const targetDate = new Date(targetYear, targetMonth, targetDay);
       const startDate = new Date(event.year, event.month, event.date);
+
+      if (event.isDaily) {
+        // If marked as daily, check if target date falls between start and end date bounds
+        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
+          const endDate = new Date(event.endYear, event.endMonth, event.endDate);
+          return targetDate >= startDate && targetDate <= endDate;
+        }
+        return targetDate >= startDate;
+      }
 
       if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
         const endDate = new Date(event.endYear, event.endMonth, event.endDate);
