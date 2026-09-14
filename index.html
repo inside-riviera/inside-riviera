@@ -407,14 +407,24 @@
 
     async function initApp() {
       try {
-        const res = await fetch('https://sheetdb.io/api/v1/YOUR_SHEETDB_ID_HERE');
+        const res = await fetch('https://script.google.com/macros/s/AKfycbyHvavD6ioP-824i6doczbjWi10GpxIYtvjWtDRQ9vUDsy1EBETOFWHdSlVfO_PH0As/exec');
         if (!res.ok) throw new Error('Failed to load sheet data');
-        allEvents = await res.json();
+        const rawData = await res.json();
+
+        allEvents = rawData.map(e => ({
+          ...e,
+          year: Number(e.year),
+          month: Number(e.month) - 1,
+          date: Number(e.date),
+          endYear: e.endYear ? Number(e.endYear) : undefined,
+          endMonth: e.endMonth !== "" && e.endMonth !== undefined ? Number(e.endMonth) - 1 : undefined,
+          endDate: e.endDate !== "" && e.endDate !== undefined ? Number(e.endDate) : undefined
+        }));
 
         if (allEvents.length > 0) {
-          selectedYear = Number(allEvents[0].year);
-          selectedMonth = Number(allEvents[0].month);
-          selectedDay = Number(allEvents[0].date);
+          selectedYear = allEvents[0].year;
+          selectedMonth = allEvents[0].month;
+          selectedDay = allEvents[0].date;
         }
 
         renderCalendar();
@@ -423,7 +433,7 @@
       } catch (err) {
         console.error(err);
         document.getElementById("events-container").innerHTML = `
-          <div class="no-events">Unable to load event feed from SheetDB API.</div>
+          <div class="no-events">Unable to load event feed from Google Sheet API.</div>
         `;
       }
     }
@@ -451,7 +461,7 @@
       const targetDate = new Date(targetYear, targetMonth, targetDay);
       const startDate = new Date(startY, startM, startD);
 
-      if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined && event.endYear !== "" && event.endMonth !== "" && event.endDate !== "") {
+      if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined && !isNaN(event.endYear) && !isNaN(event.endMonth) && !isNaN(event.endDate)) {
         const endY = Number(event.endYear);
         const endM = Number(event.endMonth);
         const endD = Number(event.endDate);
@@ -550,7 +560,7 @@
         const addressText = event.address ? `📍 ${event.address}, ${event.city}` : `📍 ${event.city}`;
         
         let dateText = `📅 ${monthNames[Number(event.month)]} ${event.date}, ${event.year}`;
-        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined && event.endYear !== "" && event.endMonth !== "" && event.endDate !== "") {
+        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined && !isNaN(event.endYear) && !isNaN(event.endMonth) && !isNaN(event.endDate)) {
           dateText = `📅 ${monthNames[Number(event.month)]} ${event.date} – ${monthNames[Number(event.endMonth)]} ${event.endDate}, ${event.endYear}`;
         }
 
