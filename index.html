@@ -407,7 +407,7 @@
 
     async function initApp() {
       try {
-        const res = await fetch('https://script.google.com/macros/u/1/s/AKfycbyHvavD6ioP-824i6doczbjWi10GpxIYtvjWtDRQ9vUDsy1EBETOFWHdSlVfO_PH0As/exec');
+        const res = await fetch('https://sheetdb.io/api/v1/YOUR_SHEETDB_ID_HERE');
         if (!res.ok) throw new Error('Failed to load sheet data');
         allEvents = await res.json();
 
@@ -423,7 +423,7 @@
       } catch (err) {
         console.error(err);
         document.getElementById("events-container").innerHTML = `
-          <div class="no-events">Unable to load event feed from Google Sheet API.</div>
+          <div class="no-events">Unable to load event feed from SheetDB API.</div>
         `;
       }
     }
