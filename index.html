@@ -166,7 +166,6 @@
       font-weight: 800;
     }
 
-    /* Past Dates Styling (Blanked Out / Dimmed) */
     .day-cell.past {
       color: #cbd5e1;
     }
@@ -225,7 +224,6 @@
       transform: translateY(-4px);
     }
 
-    /* Past Event Card Styling (Blanked out / Dimmed) */
     .event-card.past-event {
       opacity: 0.45;
       filter: grayscale(40%);
@@ -305,7 +303,6 @@
       border-radius: 16px;
     }
 
-    /* Submission Form Styling */
     .submit-section {
       background: #ffffff;
       border-radius: 20px;
@@ -398,6 +395,8 @@
 
   <script>
     let allEvents = [];
+    
+    // Default safely to current real date to prevent 'undefined' text
     let selectedYear = new Date().getFullYear();
     let selectedMonth = new Date().getMonth();
     let selectedDay = new Date().getDate();
@@ -405,13 +404,23 @@
     const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", 
                         "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
 
+    // Helper to extract fields looking at multiple possible column names (English or Italian)
+    function getField(obj, keys) {
+      for (let k of keys) {
+        if (obj[k] !== undefined && obj[k] !== null && obj[k] !== '') {
+          return obj[k];
+        }
+      }
+      return '';
+    }
+
     async function initApp() {
       try {
-        const res = await fetch('https://sheetdb.io/api/v1/nxxtx0pb2uuw7');
+        const res = await fetch('https://sheetdb.io/api/v1/7d3635a9t94c7'); // Replace with your actual SheetDB endpoint if different
         if (!res.ok) throw new Error('Failed to load sheet data');
         const rawData = await res.json();
 
-        // 1. Force all headers to lowercase so "Year", "Month", "Date" match perfectly
+        // Standardize keys to lowercase
         const standardizedData = rawData.map(row => {
           const cleanRow = {};
           for (let key in row) {
@@ -420,27 +429,31 @@
           return cleanRow;
         });
 
-        // 2. Map data and filter out completely empty rows
-        allEvents = standardizedData
-          .filter(e => e.year && e.month && e.date)
-          .map(e => ({
-            year: Number(e.year),
-            month: Number(e.month) - 1, // Fixes the 1-month offset automatically
-            date: Number(e.date),
-            endYear: e.endyear ? Number(e.endyear) : undefined,
-            endMonth: e.endmonth ? Number(e.endmonth) - 1 : undefined,
-            endDate: e.enddate ? Number(e.enddate) : undefined,
-            city: e.city || '',
-            address: e.address || '',
-            title: e.title || 'Untitled Event',
-            time: e.time || 'All Day',
-            tags: e.tags ? [e.tags] : [],
-            desc: e.desc || e.description || '',
-            img: e.img || e.image || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
-            url: e.url || e.link || '#'
-          }));
+        // Map data with fallback keys for flexibility
+        allEvents = standardizedData.map(e => {
+          const y = Number(getField(e, ['year', 'anno', 'yr']));
+          const m = Number(getField(e, ['month', 'mese', 'mo']));
+          const d = Number(getField(e, ['date', 'day', 'giorno', 'data']));
 
-        // 3. Set default date to the first valid event
+          return {
+            year: y,
+            month: !isNaN(m) ? m - 1 : NaN, // Fix 1-month offset
+            date: d,
+            endYear: Number(getField(e, ['endyear', 'endanno'])) || undefined,
+            endMonth: (Number(getField(e, ['endmonth', 'endmese'])) ? Number(getField(e, ['endmonth', 'endmese'])) - 1 : undefined),
+            endDate: Number(getField(e, ['enddate', 'endgiorno'])) || undefined,
+            city: getField(e, ['city', 'città', 'citta', 'town']) || '',
+            address: getField(e, ['address', 'indirizzo', 'location']) || '',
+            title: getField(e, ['title', 'titolo', 'name', 'event']) || 'Untitled Event',
+            time: getField(e, ['time', 'orario', 'ora']) || 'All Day',
+            tags: [getField(e, ['tags', 'tag', 'category', 'categoria']) || 'EVENT'],
+            desc: getField(e, ['desc', 'description', 'descrizione', 'details']) || '',
+            img: getField(e, ['img', 'image', 'photo', 'picture', 'foto']) || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+            url: getField(e, ['url', 'link', 'website', 'sito']) || '#'
+          };
+        }).filter(e => !isNaN(e.year) && !isNaN(e.month) && !isNaN(e.date));
+
+        // If events exist, jump to the date of the first valid event
         if (allEvents.length > 0) {
           selectedYear = allEvents[0].year;
           selectedMonth = allEvents[0].month;
@@ -453,7 +466,7 @@
       } catch (err) {
         console.error(err);
         document.getElementById("events-container").innerHTML = `
-          <div class="no-events">Unable to load event feed from Google Sheet. Check API connection.</div>
+          <div class="no-events">Unable to load event feed from Google Sheet. Check your SheetDB API link in the code.</div>
         `;
       }
     }
@@ -488,7 +501,8 @@
       const grid = document.getElementById("days-grid");
       grid.innerHTML = "";
 
-      document.getElementById("calendar-month-title").innerText = `${monthNames[selectedMonth]} ${selectedYear}`;
+      const currentMonthName = monthNames[selectedMonth] || "MONTH";
+      document.getElementById("calendar-month-title").innerText = `${currentMonthName} ${selectedYear}`;
 
       const firstDayDate = new Date(selectedYear, selectedMonth, 1);
       let startDay = firstDayDate.getDay();
@@ -533,7 +547,8 @@
     }
 
     function updateHeroText() {
-      document.getElementById("hero-date-text").innerText = `${monthNames[selectedMonth]} ${selectedDay}`;
+      const currentMonthName = monthNames[selectedMonth] || "";
+      document.getElementById("hero-date-text").innerText = `${currentMonthName} ${selectedDay}`;
     }
 
     function renderEvents() {
@@ -548,9 +563,10 @@
       });
 
       if (filtered.length === 0) {
+        const currentMonthName = monthNames[selectedMonth] || "";
         container.innerHTML = `
           <div class="no-events">
-            <p>No events scheduled for ${monthNames[selectedMonth]} ${selectedDay}, ${selectedYear}.</p>
+            <p>No events scheduled for ${currentMonthName} ${selectedDay}, ${selectedYear}.</p>
           </div>
         `;
         return;
@@ -565,9 +581,11 @@
         const tagText = event.tags.length > 0 ? event.tags[0] : "EVENT";
         const addressText = event.address ? `📍 ${event.address}, ${event.city}` : `📍 ${event.city}`;
         
-        let dateText = `📅 ${monthNames[event.month]} ${event.date}, ${event.year}`;
+        const startMonthName = monthNames[event.month] || "";
+        let dateText = `📅 ${startMonthName} ${event.date}, ${event.year}`;
         if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
-          dateText = `📅 ${monthNames[event.month]} ${event.date} – ${monthNames[event.endMonth]} ${event.endDate}, ${event.endYear}`;
+          const endMonthName = monthNames[event.endMonth] || "";
+          dateText = `📅 ${startMonthName} ${event.date} – ${endMonthName} ${event.endDate}, ${event.endYear}`;
         }
 
         const cardClass = isSelectedPast ? 'event-card past-event' : 'event-card';
