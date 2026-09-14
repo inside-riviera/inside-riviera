@@ -351,7 +351,7 @@
     <div class="calendar-card">
       <div class="cal-header">
         <button class="nav-btn" onclick="changeMonth(-1)">&lt;</button>
-        <h2 id="calendar-month-title">SEPTEMBER 2026</h2>
+        <h2 id="calendar-month-title">Loading...</h2>
         <button class="nav-btn" onclick="changeMonth(1)">&gt;</button>
       </div>
 
@@ -398,9 +398,9 @@
 
   <script>
     let allEvents = [];
-    let selectedYear = 2026;
-    let selectedMonth = 8; // September (0-indexed)
-    let selectedDay = 1;   
+    let selectedYear = new Date().getFullYear();
+    let selectedMonth = new Date().getMonth();
+    let selectedDay = new Date().getDate();
 
     const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", 
                         "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
@@ -411,16 +411,36 @@
         if (!res.ok) throw new Error('Failed to load sheet data');
         const rawData = await res.json();
 
-        allEvents = rawData.map(e => ({
-          ...e,
-          year: Number(e.year),
-          month: Number(e.month) - 1,
-          date: Number(e.date),
-          endYear: e.endYear ? Number(e.endYear) : undefined,
-          endMonth: e.endMonth !== "" && e.endMonth !== undefined ? Number(e.endMonth) - 1 : undefined,
-          endDate: e.endDate !== "" && e.endDate !== undefined ? Number(e.endDate) : undefined
-        }));
+        // 1. Force all headers to lowercase so "Year", "Month", "Date" match perfectly
+        const standardizedData = rawData.map(row => {
+          const cleanRow = {};
+          for (let key in row) {
+            cleanRow[key.toLowerCase().trim()] = row[key];
+          }
+          return cleanRow;
+        });
 
+        // 2. Map data and filter out completely empty rows
+        allEvents = standardizedData
+          .filter(e => e.year && e.month && e.date)
+          .map(e => ({
+            year: Number(e.year),
+            month: Number(e.month) - 1, // Fixes the 1-month offset automatically
+            date: Number(e.date),
+            endYear: e.endyear ? Number(e.endyear) : undefined,
+            endMonth: e.endmonth ? Number(e.endmonth) - 1 : undefined,
+            endDate: e.enddate ? Number(e.enddate) : undefined,
+            city: e.city || '',
+            address: e.address || '',
+            title: e.title || 'Untitled Event',
+            time: e.time || 'All Day',
+            tags: e.tags ? [e.tags] : [],
+            desc: e.desc || e.description || '',
+            img: e.img || e.image || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+            url: e.url || e.link || '#'
+          }));
+
+        // 3. Set default date to the first valid event
         if (allEvents.length > 0) {
           selectedYear = allEvents[0].year;
           selectedMonth = allEvents[0].month;
@@ -433,7 +453,7 @@
       } catch (err) {
         console.error(err);
         document.getElementById("events-container").innerHTML = `
-          <div class="no-events">Unable to load event feed from Google Sheet API.</div>
+          <div class="no-events">Unable to load event feed from Google Sheet. Check API connection.</div>
         `;
       }
     }
@@ -454,23 +474,14 @@
     }
 
     function checkEventMatch(event, targetYear, targetMonth, targetDay) {
-      const startY = Number(event.year);
-      const startM = Number(event.month);
-      const startD = Number(event.date);
-
       const targetDate = new Date(targetYear, targetMonth, targetDay);
-      const startDate = new Date(startY, startM, startD);
+      const startDate = new Date(event.year, event.month, event.date);
 
-      if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined && !isNaN(event.endYear) && !isNaN(event.endMonth) && !isNaN(event.endDate)) {
-        const endY = Number(event.endYear);
-        const endM = Number(event.endMonth);
-        const endD = Number(event.endDate);
-        const endDate = new Date(endY, endM, endD);
-
+      if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
+        const endDate = new Date(event.endYear, event.endMonth, event.endDate);
         return targetDate >= startDate && targetDate <= endDate;
       }
-
-      return startY === targetYear && startM === targetMonth && startD === targetDay;
+      return event.year === targetYear && event.month === targetMonth && event.date === targetDay;
     }
 
     function renderCalendar() {
@@ -484,7 +495,6 @@
       startDay = (startDay === 0) ? 6 : startDay - 1;
 
       const totalDays = new Date(selectedYear, selectedMonth + 1, 0).getDate();
-      
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
@@ -494,7 +504,6 @@
 
       for (let day = 1; day <= totalDays; day++) {
         const cell = document.createElement("div");
-        
         const cellDate = new Date(selectedYear, selectedMonth, day);
         const isPast = cellDate < today;
 
@@ -515,7 +524,6 @@
           selectedDay = day;
           document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('active'));
           cell.classList.add('active');
-
           updateHeroText();
           renderEvents();
         };
@@ -531,13 +539,11 @@
     function renderEvents() {
       const container = document.getElementById("events-container");
       container.innerHTML = "";
-
       const selectedCity = document.getElementById("city-filter").value;
 
       const filtered = allEvents.filter(event => {
         const matchesDate = checkEventMatch(event, selectedYear, selectedMonth, selectedDay);
-        const matchesCity = (selectedCity === "ALL" || (event.city && event.city.toLowerCase() === selectedCity.toLowerCase()));
-
+        const matchesCity = (selectedCity === "ALL" || (event.city.toLowerCase() === selectedCity.toLowerCase()));
         return matchesDate && matchesCity;
       });
 
@@ -556,12 +562,12 @@
       const isSelectedPast = selectedDateObj < today;
 
       filtered.forEach(event => {
-        const tag = (event.tags && event.tags.length > 0) ? event.tags : "EVENT";
+        const tagText = event.tags.length > 0 ? event.tags[0] : "EVENT";
         const addressText = event.address ? `📍 ${event.address}, ${event.city}` : `📍 ${event.city}`;
         
-        let dateText = `📅 ${monthNames[Number(event.month)]} ${event.date}, ${event.year}`;
-        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined && !isNaN(event.endYear) && !isNaN(event.endMonth) && !isNaN(event.endDate)) {
-          dateText = `📅 ${monthNames[Number(event.month)]} ${event.date} – ${monthNames[Number(event.endMonth)]} ${event.endDate}, ${event.endYear}`;
+        let dateText = `📅 ${monthNames[event.month]} ${event.date}, ${event.year}`;
+        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
+          dateText = `📅 ${monthNames[event.month]} ${event.date} – ${monthNames[event.endMonth]} ${event.endDate}, ${event.endYear}`;
         }
 
         const cardClass = isSelectedPast ? 'event-card past-event' : 'event-card';
@@ -570,7 +576,7 @@
           <div class="${cardClass}">
             <div class="img-wrapper">
               <img src="${event.img}" alt="${event.title}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
-              <span class="tag-badge">${tag}</span>
+              <span class="tag-badge">${tagText}</span>
             </div>
             <div class="card-body">
               <h3>${event.title}</h3>
