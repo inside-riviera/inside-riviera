@@ -451,10 +451,8 @@
 
           const isDaily = parseBoolean(getField(e, ['daily', 'isdaily', 'ogni']));
 
-          // Explicitly grab the 'img' column from the sheet
-          const rawImg = getField(e, ['img']);
-          // If your sheet has filenames (e.g., photo.jpg), prepend the folder path. 
-          // If it has full URLs (http...), it uses them as-is.
+          // Explicitly target the 'img' column (with fallbacks if needed)
+          const rawImg = getField(e, ['img', 'image', 'photo', 'picture', 'foto']);
           const finalImg = rawImg ? (rawImg.startsWith('http') ? rawImg : `images/${rawImg}`) : '';
 
           return {
