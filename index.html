@@ -451,9 +451,8 @@
 
           const isDaily = parseBoolean(getField(e, ['daily', 'isdaily', 'ogni']));
 
-          // Explicitly target the 'img' column (with fallbacks if needed)
-          const rawImg = getField(e, ['img', 'image', 'photo', 'picture', 'foto']);
-          const finalImg = rawImg ? (rawImg.startsWith('http') ? rawImg : `images/${rawImg}`) : '';
+          // Strictly read from the exact 'img' column first before checking other variations
+          const rawImg = e['img'] || getField(e, ['image', 'photo', 'picture', 'foto']);
 
           return {
             year: y,
@@ -469,7 +468,7 @@
             time: getField(e, ['time', 'orario', 'ora']) || 'All Day',
             tags: [getField(e, ['tags', 'tag', 'category', 'categoria']) || 'EVENT'],
             desc: getField(e, ['desc', 'description', 'descrizione', 'details']) || '',
-            img: finalImg || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+            img: rawImg || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
             url: getField(e, ['url', 'link', 'website', 'sito']) || '#'
           };
         }).filter(e => !isNaN(e.year) && !isNaN(e.month) && !isNaN(e.date));
