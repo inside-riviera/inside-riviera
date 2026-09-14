@@ -414,7 +414,6 @@
 
     function parseNum(val) {
       if (val === undefined || val === null || val === '') return NaN;
-      // Remove commas if Google Sheets formatted numbers with them (e.g. "2,026" -> "2026")
       const cleanStr = String(val).replace(/,/g, '').trim();
       const num = Number(cleanStr);
       return isNaN(num) ? NaN : num;
@@ -442,9 +441,7 @@
         });
 
         allEvents = standardizedData.map(e => {
-          // Look up numeric start/end keys flexibly (supports startyear, start_year, year, etc.)
           const y = parseNum(getField(e, ['startyear', 'year', 'anno', 'yr']));
-          // Months in Google Sheets are likely stored as 1-12, convert to 0-11 index for JS
           const mInput = parseNum(getField(e, ['startmonth', 'month', 'mese', 'mo']));
           const d = parseNum(getField(e, ['startdate', 'day', 'giorno', 'data']));
 
@@ -453,6 +450,12 @@
           const endD = parseNum(getField(e, ['enddate', 'endgiorno']));
 
           const isDaily = parseBoolean(getField(e, ['daily', 'isdaily', 'ogni']));
+
+          // Explicitly grab the 'img' column from the sheet
+          const rawImg = getField(e, ['img']);
+          // If your sheet has filenames (e.g., photo.jpg), prepend the folder path. 
+          // If it has full URLs (http...), it uses them as-is.
+          const finalImg = rawImg ? (rawImg.startsWith('http') ? rawImg : `images/${rawImg}`) : '';
 
           return {
             year: y,
@@ -468,12 +471,11 @@
             time: getField(e, ['time', 'orario', 'ora']) || 'All Day',
             tags: [getField(e, ['tags', 'tag', 'category', 'categoria']) || 'EVENT'],
             desc: getField(e, ['desc', 'description', 'descrizione', 'details']) || '',
-            img: getField(e, ['img', 'image', 'photo', 'picture', 'foto']) || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+            img: finalImg || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
             url: getField(e, ['url', 'link', 'website', 'sito']) || '#'
           };
         }).filter(e => !isNaN(e.year) && !isNaN(e.month) && !isNaN(e.date));
 
-        // Jump to September 2026 if available, or first event
         const targetEvent = allEvents.find(e => e.month === 8 && e.year === 2026);
         if (targetEvent) {
           selectedYear = targetEvent.year;
@@ -516,7 +518,6 @@
       const startDate = new Date(event.year, event.month, event.date);
 
       if (event.isDaily) {
-        // If marked as daily, check if target date falls between start and end date bounds
         if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
           const endDate = new Date(event.endYear, event.endMonth, event.endDate);
           return targetDate >= startDate && targetDate <= endDate;
