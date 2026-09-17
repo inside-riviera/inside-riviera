@@ -452,11 +452,18 @@
           const isDaily = parseBoolean(getField(e, ['daily', 'isdaily', 'ogni']));
 
           // Strictly read from the exact 'img' column first before checking other variations
-         const rawImg = e['img'] || getField(e, ['image', 'photo', 'picture', 'foto']);
+let rawImg = e['img'] || getField(e, ['image', 'photo', 'picture', 'foto']);
+
+if (rawImg) {
+    const markdownMatch = rawImg.match(/\((https?:\/\/[^)\s]+)\)/);
+    if (markdownMatch) {
+        rawImg = markdownMatch[1];
+    }
+}
 
 console.log('IMAGE DEBUG:', {
     title: e.title,
-    img: e['img'],
+    img: rawImg,
     keys: Object.keys(e)
 });
 
