@@ -428,7 +428,7 @@
 
     async function initApp() {
       try {
-        const res = await fetch('https://sheetdb.io/api/v1/nxxtx0pb2uuw7');
+        const res = await fetch('https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=' + new Date().getTime());;
         if (!res.ok) throw new Error('Failed to load sheet data');
         const rawData = await res.json();
 
