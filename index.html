@@ -452,7 +452,7 @@
           const isDaily = parseBoolean(getField(e, ['daily', 'isdaily', 'ogni']));
 
           // Strictly read from the exact 'img' column first before checking other variations
-          const rawImg = e['img'] || getField(e, ['image', 'photo', 'picture', 'foto']);
+          const rawImg = 'https://placehold.co/600x400.jpg';
 
           return {
             year: y,
