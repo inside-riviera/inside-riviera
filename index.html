@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inside Riviera - What's On Today</title>
+
   <style>
     :root {
       --accent-pink: #ff007a;
@@ -25,11 +26,17 @@
       color: var(--text-dark);
     }
 
-    /* Hero Section */
+    /* =========================
+       HERO SECTION
+       ========================= */
+
     .hero {
       position: relative;
-      background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), 
-                  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80')
+        center/cover no-repeat;
+
       padding: 40px 20px 140px 20px;
       text-align: center;
       color: #ffffff;
@@ -71,7 +78,10 @@
       line-height: 1.4;
     }
 
-    /* Main Section Container */
+    /* =========================
+       MAIN CONTENT
+       ========================= */
+
     .main-content {
       max-width: 1000px;
       margin: -100px auto 40px auto;
@@ -80,7 +90,10 @@
       z-index: 10;
     }
 
-    /* Full Month Calendar Card */
+    /* =========================
+       CALENDAR
+       ========================= */
+
     .calendar-card {
       background: #ffffff;
       border-radius: 24px;
@@ -169,6 +182,7 @@
     .day-cell.past {
       color: #cbd5e1;
     }
+
     .day-cell.past .event-dot {
       background-color: #cbd5e1;
       opacity: 0.4;
@@ -183,7 +197,10 @@
       bottom: 2px;
     }
 
-    /* Filter Bar */
+    /* =========================
+       CITY FILTER
+       ========================= */
+
     .filter-wrapper {
       display: flex;
       justify-content: center;
@@ -197,12 +214,15 @@
       border-radius: 30px;
       font-weight: 600;
       font-size: 0.9rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       cursor: pointer;
       outline: none;
     }
 
-    /* Events Grid & Cards */
+    /* =========================
+       EVENTS GRID
+       ========================= */
+
     .events-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -214,7 +234,7 @@
       background: var(--card-bg);
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
       display: flex;
       flex-direction: column;
       transition: transform 0.2s;
@@ -229,29 +249,62 @@
       filter: grayscale(40%);
     }
 
+    /* =========================
+       EVENT IMAGE
+       ========================= */
+
     .img-wrapper {
       position: relative;
       height: 180px;
+      overflow: hidden;
     }
 
     .img-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
-    .tag-badge {
+    /* =========================
+       CATEGORY TAGS
+       ========================= */
+
+    .category-tags {
       position: absolute;
       top: 12px;
       left: 12px;
+      right: 12px;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      z-index: 2;
+    }
+
+    .tag-badge {
+      position: static;
+
+      display: inline-block;
+
       background: rgba(0, 0, 0, 0.8);
       color: #ffffff;
+
       padding: 4px 10px;
       border-radius: 20px;
+
       font-size: 0.7rem;
       font-weight: 700;
+
       text-transform: uppercase;
+
+      white-space: nowrap;
     }
+
+    /* =========================
+       CARD BODY
+       ========================= */
 
     .card-body {
       padding: 20px;
@@ -270,6 +323,7 @@
       font-size: 0.85rem;
       color: var(--text-muted);
       margin-bottom: 10px;
+
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -287,29 +341,50 @@
       text-align: center;
       background-color: #f1f5f9;
       color: var(--text-dark);
+
       text-decoration: none;
+
       padding: 10px;
       border-radius: 8px;
+
       font-size: 0.85rem;
       font-weight: 600;
     }
 
+    /* =========================
+       NO EVENTS
+       ========================= */
+
     .no-events {
       grid-column: 1 / -1;
+
       text-align: center;
+
       padding: 40px;
+
       color: var(--text-muted);
+
       background: #ffffff;
+
       border-radius: 16px;
     }
+
+    /* =========================
+       SUBMIT SECTION
+       ========================= */
 
     .submit-section {
       background: #ffffff;
       border-radius: 20px;
+
       padding: 32px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+
       max-width: 600px;
+
       margin: 0 auto;
+
       text-align: center;
     }
 
@@ -321,338 +396,1470 @@
     .submit-btn {
       background: var(--accent-pink);
       color: #ffffff;
+
       border: none;
+
       padding: 14px 28px;
+
       border-radius: 10px;
+
       font-weight: bold;
+
       cursor: pointer;
+
       font-size: 0.95rem;
+
       display: inline-block;
+
       text-decoration: none;
+
       margin-top: 10px;
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 600px) {
+
+      .hero {
+        padding: 30px 20px 120px 20px;
+      }
+
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+
+      .hero .highlight {
+        font-size: 2.4rem;
+      }
+
+      .calendar-card {
+        padding: 22px 18px;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .category-tags {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+      }
+
+      .tag-badge {
+        font-size: 0.65rem;
+        padding: 4px 8px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- Hero Banner -->
+  <!-- =========================
+       HERO
+       ========================= -->
+
   <div class="hero">
-    <div class="logo-badge">iR</div>
-    <h1>WHAT'S ON</h1>
-    <span class="highlight" id="hero-date-text">TODAY</span>
-    <p>Events, markets, and things to do across Sanremo, Bordighera, Ventimiglia, Vallecrosia, Ospedaletti, Vallebona, Menton, and Monte Carlo.</p>
+
+    <div class="logo-badge">
+      iR
+    </div>
+
+    <h1>
+      WHAT'S ON
+    </h1>
+
+    <span class="highlight" id="hero-date-text">
+      TODAY
+    </span>
+
+    <p>
+      Events, markets, and things to do across Sanremo, Bordighera,
+      Ventimiglia, Vallecrosia, Ospedaletti, Vallebona, Menton,
+      and Monte Carlo.
+    </p>
+
   </div>
 
+
   <div class="main-content">
-    <!-- Full Grid Calendar -->
+
+    <!-- =========================
+         CALENDAR
+         ========================= -->
+
     <div class="calendar-card">
+
       <div class="cal-header">
-        <button class="nav-btn" onclick="changeMonth(-1)">&lt;</button>
-        <h2 id="calendar-month-title">Loading...</h2>
-        <button class="nav-btn" onclick="changeMonth(1)">&gt;</button>
+
+        <button
+          class="nav-btn"
+          onclick="changeMonth(-1)"
+        >
+          &lt;
+        </button>
+
+        <h2 id="calendar-month-title">
+          Loading...
+        </h2>
+
+        <button
+          class="nav-btn"
+          onclick="changeMonth(1)"
+        >
+          &gt;
+        </button>
+
       </div>
+
 
       <div class="weekdays">
-        <div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div>
+
+        <div>MON</div>
+        <div>TUE</div>
+        <div>WED</div>
+        <div>THU</div>
+        <div>FRI</div>
+        <div>SAT</div>
+        <div>SUN</div>
+
       </div>
 
-      <div class="days-grid" id="days-grid">
+
+      <div
+        class="days-grid"
+        id="days-grid"
+      >
         <!-- Rendered dynamically -->
+
       </div>
+
     </div>
 
-    <!-- City Filter -->
+
+    <!-- =========================
+         CITY FILTER
+         ========================= -->
+
     <div class="filter-wrapper">
-      <select class="city-select" id="city-filter" onchange="renderEvents()">
-        <option value="ALL">All Cities (Italian & French Riviera)</option>
-        <option value="Sanremo">Sanremo</option>
-        <option value="Bordighera">Bordighera</option>
-        <option value="Ventimiglia">Ventimiglia</option>
-        <option value="Vallecrosia">Vallecrosia</option>
-        <option value="Ospedaletti">Ospedaletti</option>
-        <option value="Vallebona">Vallebona</option>
-        <option value="Menton">Menton</option>
-        <option value="Monte Carlo">Monte Carlo</option>
+
+      <select
+        class="city-select"
+        id="city-filter"
+        onchange="renderEvents()"
+      >
+
+        <option value="ALL">
+          All Cities (Italian & French Riviera)
+        </option>
+
+        <option value="Sanremo">
+          Sanremo
+        </option>
+
+        <option value="Bordighera">
+          Bordighera
+        </option>
+
+        <option value="Ventimiglia">
+          Ventimiglia
+        </option>
+
+        <option value="Vallecrosia">
+          Vallecrosia
+        </option>
+
+        <option value="Ospedaletti">
+          Ospedaletti
+        </option>
+
+        <option value="Vallebona">
+          Vallebona
+        </option>
+
+        <option value="Menton">
+          Menton
+        </option>
+
+        <option value="Monte Carlo">
+          Monte Carlo
+        </option>
+
       </select>
+
     </div>
 
-    <!-- Events Cards -->
-    <div class="events-grid" id="events-container">
+
+    <!-- =========================
+         EVENTS
+         ========================= -->
+
+    <div
+      class="events-grid"
+      id="events-container"
+    >
       <!-- Cards rendered dynamically -->
     </div>
 
-    <!-- Add Event Submission Call to Action -->
+
+    <!-- =========================
+         SUBMIT EVENT
+         ========================= -->
+
     <div class="submit-section">
-      <h2>Add Your Event</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
-        Got an event happening in the Riviera? Submit it via our official form and it will auto-populate on the calendar!
+
+      <h2>
+        Add Your Event
+      </h2>
+
+      <p
+        style="
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          margin-bottom: 16px;
+        "
+      >
+        Got an event happening in the Riviera?
+        Submit it via our official form and it will
+        auto-populate on the calendar!
       </p>
-      <a href="https://forms.gle/GTXcdJFB4TnCidsL9" target="_blank" rel="noopener" class="submit-btn">
+
+      <a
+        href="https://forms.gle/GTXcdJFB4TnCidsL9"
+        target="_blank"
+        rel="noopener"
+        class="submit-btn"
+      >
         Open Event Submission Form ↗
       </a>
+
     </div>
+
   </div>
 
+
+  <!-- =========================
+       JAVASCRIPT
+       ========================= -->
+
   <script>
+
     let allEvents = [];
-    
+
+
+    /* =========================
+       CURRENT DATE
+       ========================= */
+
     let selectedYear = new Date().getFullYear();
+
     let selectedMonth = new Date().getMonth();
+
     let selectedDay = new Date().getDate();
 
-    const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", 
-                        "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+
+    /* =========================
+       MONTH NAMES
+       ========================= */
+
+    const monthNames = [
+      "JANUARY",
+      "FEBRUARY",
+      "MARCH",
+      "APRIL",
+      "MAY",
+      "JUNE",
+      "JULY",
+      "AUGUST",
+      "SEPTEMBER",
+      "OCTOBER",
+      "NOVEMBER",
+      "DECEMBER"
+    ];
+
+
+    /* =========================
+       GET FIELD
+       ========================= */
 
     function getField(obj, keys) {
+
       for (let k of keys) {
-        if (obj[k] !== undefined && obj[k] !== null && obj[k] !== '') {
+
+        if (
+          obj[k] !== undefined &&
+          obj[k] !== null &&
+          obj[k] !== ''
+        ) {
+
           return obj[k];
+
         }
+
       }
+
       return '';
+
     }
+
+
+    /* =========================
+       PARSE NUMBER
+       ========================= */
 
     function parseNum(val) {
-      if (val === undefined || val === null || val === '') return NaN;
-      const cleanStr = String(val).replace(/,/g, '').trim();
+
+      if (
+        val === undefined ||
+        val === null ||
+        val === ''
+      ) {
+
+        return NaN;
+
+      }
+
+      const cleanStr = String(val)
+        .replace(/,/g, '')
+        .trim();
+
       const num = Number(cleanStr);
-      return isNaN(num) ? NaN : num;
+
+      return isNaN(num)
+        ? NaN
+        : num;
+
     }
+
+
+    /* =========================
+       PARSE BOOLEAN
+       ========================= */
 
     function parseBoolean(val) {
-      if (typeof val === 'boolean') return val;
-      if (!val) return false;
-      const str = String(val).trim().toUpperCase();
-      return str === 'TRUE' || str === '1' || str === 'YES';
+
+      if (typeof val === 'boolean') {
+
+        return val;
+
+      }
+
+      if (!val) {
+
+        return false;
+
+      }
+
+      const str = String(val)
+        .trim()
+        .toUpperCase();
+
+      return (
+        str === 'TRUE' ||
+        str === '1' ||
+        str === 'YES'
+      );
+
     }
+
+
+    /* =========================
+       CATEGORY TAG RENDERER
+       ========================= */
+
+    function renderCategoryTags(category) {
+
+      if (!category) {
+
+        return '<span class="tag-badge">EVENT</span>';
+
+      }
+
+
+      /*
+       * The Google Sheet can contain:
+       *
+       * Exhibition
+       *
+       * OR
+       *
+       * Exhibition, Free, Public Event
+       *
+       * We split the value at commas.
+       */
+
+      const categories = String(category)
+        .split(',')
+        .map(tag => tag.trim())
+        .filter(tag => tag.length > 0);
+
+
+      if (categories.length === 0) {
+
+        return '<span class="tag-badge">EVENT</span>';
+
+      }
+
+
+      return categories
+        .map(tag => {
+
+          return `
+            <span class="tag-badge">
+              ${tag}
+            </span>
+          `;
+
+        })
+        .join('');
+
+    }
+
+
+    /* =========================
+       INITIALISE APP
+       ========================= */
 
     async function initApp() {
+
       try {
-        const res = await fetch('https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=' + new Date().getTime());;
-        if (!res.ok) throw new Error('Failed to load sheet data');
+
+        const res = await fetch(
+          'https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=' +
+          new Date().getTime()
+        );
+
+
+        if (!res.ok) {
+
+          throw new Error(
+            'Failed to load sheet data'
+          );
+
+        }
+
+
         const rawData = await res.json();
 
+
+        /* =========================
+           STANDARDIZE SHEET HEADERS
+           ========================= */
+
         const standardizedData = rawData.map(row => {
+
           const cleanRow = {};
+
           for (let key in row) {
-            cleanRow[key.toLowerCase().replace(/[\s_-]/g, '')] = row[key];
+
+            cleanRow[
+              key
+                .toLowerCase()
+                .replace(/[\s_-]/g, '')
+            ] = row[key];
+
           }
+
           return cleanRow;
+
         });
 
-        allEvents = standardizedData.map(e => {
-          const y = parseNum(getField(e, ['startyear', 'year', 'anno', 'yr']));
-          const mInput = parseNum(getField(e, ['startmonth', 'month', 'mese', 'mo']));
-          const d = parseNum(getField(e, ['startdate', 'day', 'giorno', 'data']));
 
-          const endY = parseNum(getField(e, ['endyear', 'endanno']));
-          const endMInput = parseNum(getField(e, ['endmonth', 'endmese']));
-          const endD = parseNum(getField(e, ['enddate', 'endgiorno']));
+        /* =========================
+           CREATE EVENT OBJECTS
+           ========================= */
 
-          const isDaily = parseBoolean(getField(e, ['daily', 'isdaily', 'ogni']));
+        allEvents = standardizedData
 
-// Check all common variations of the image column and clean whitespace
-        let rawImg = getField(e, ['img', 'image', 'photo', 'picture', 'foto', 'imgurl', 'imageurl']);
-        
-        if (rawImg) {
-            rawImg = String(rawImg).trim();
-            const markdownMatch = rawImg.match(/\((https?:\/\/[^)\s]+)\)/);
-            if (markdownMatch) {
-                rawImg = markdownMatch[1];
+          .map(e => {
+
+            /* =========================
+               DATES
+               ========================= */
+
+            const y = parseNum(
+              getField(e, [
+                'startyear',
+                'year',
+                'anno',
+                'yr'
+              ])
+            );
+
+
+            const mInput = parseNum(
+              getField(e, [
+                'startmonth',
+                'month',
+                'mese',
+                'mo'
+              ])
+            );
+
+
+            const d = parseNum(
+              getField(e, [
+                'startdate',
+                'day',
+                'giorno',
+                'data'
+              ])
+            );
+
+
+            /* =========================
+               END DATES
+               ========================= */
+
+            const endY = parseNum(
+              getField(e, [
+                'endyear',
+                'endanno'
+              ])
+            );
+
+
+            const endMInput = parseNum(
+              getField(e, [
+                'endmonth',
+                'endmese'
+              ])
+            );
+
+
+            const endD = parseNum(
+              getField(e, [
+                'enddate',
+                'endgiorno'
+              ])
+            );
+
+
+            /* =========================
+               DAILY EVENT
+               ========================= */
+
+            const isDaily = parseBoolean(
+              getField(e, [
+                'daily',
+                'isdaily',
+                'ogni'
+              ])
+            );
+
+
+            /* =========================
+               IMAGE
+               ========================= */
+
+            let rawImg = getField(e, [
+              'img',
+              'image',
+              'photo',
+              'picture',
+              'foto',
+              'imgurl',
+              'imageurl'
+            ]);
+
+
+            if (rawImg) {
+
+              rawImg = String(rawImg).trim();
+
+
+              /*
+               * If the Sheet contains Markdown such as:
+               *
+               * [Image](https://example.com/image.jpg)
+               *
+               * extract the actual URL.
+               */
+
+              const markdownMatch =
+                rawImg.match(
+                  /\((https?:\/\/[^)\s]+)\)/
+                );
+
+
+              if (markdownMatch) {
+
+                rawImg =
+                  markdownMatch[1];
+
+              }
+
             }
-        }
 
-          return {
-            year: y,
-            month: !isNaN(mInput) ? mInput - 1 : NaN,
-            date: d,
-            endYear: !isNaN(endY) ? endY : undefined,
-            endMonth: !isNaN(endMInput) ? endMInput - 1 : undefined,
-            endDate: !isNaN(endD) ? endD : undefined,
-            isDaily: isDaily,
-            city: getField(e, ['city', 'città', 'citta', 'town']) || '',
-            address: getField(e, ['address', 'indirizzo', 'location']) || '',
-            title: getField(e, ['title', 'titolo', 'name', 'event']) || 'Untitled Event',
-            time: getField(e, ['time', 'orario', 'ora']) || 'All Day',
-            tags: [getField(e, ['tags', 'tag', 'category', 'categoria']) || 'EVENT'],
-            desc: getField(e, ['desc', 'description', 'descrizione', 'details']) || '',
-            img: rawImg || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
-            url: getField(e, ['url', 'link', 'website', 'sito']) || '#'
-          };
-        }).filter(e => !isNaN(e.year) && !isNaN(e.month) && !isNaN(e.date));
 
-        const targetEvent = allEvents.find(e => e.month === 8 && e.year === 2026);
+            /* =========================
+               DEBUG IMAGE + CATEGORY
+               ========================= */
+
+            console.log(
+              'EVENT DEBUG:',
+              {
+                title: e.title,
+                image: rawImg,
+                category: e.category,
+                keys: Object.keys(e)
+              }
+            );
+
+
+            /* =========================
+               RETURN EVENT
+               ========================= */
+
+            return {
+
+              year: y,
+
+              month:
+                !isNaN(mInput)
+                  ? mInput - 1
+                  : NaN,
+
+              date: d,
+
+
+              endYear:
+                !isNaN(endY)
+                  ? endY
+                  : undefined,
+
+
+              endMonth:
+                !isNaN(endMInput)
+                  ? endMInput - 1
+                  : undefined,
+
+
+              endDate:
+                !isNaN(endD)
+                  ? endD
+                  : undefined,
+
+
+              isDaily: isDaily,
+
+
+              city:
+                getField(e, [
+                  'city',
+                  'città',
+                  'citta',
+                  'town'
+                ]) || '',
+
+
+              address:
+                getField(e, [
+                  'address',
+                  'indirizzo',
+                  'location'
+                ]) || '',
+
+
+              title:
+                getField(e, [
+                  'title',
+                  'titolo',
+                  'name',
+                  'event'
+                ]) || 'Untitled Event',
+
+
+              time:
+                getField(e, [
+                  'time',
+                  'orario',
+                  'ora'
+                ]) || 'All Day',
+
+
+              /*
+               * IMPORTANT:
+               *
+               * This reads the new CATEGORY
+               * column from Google Sheets.
+               *
+               * It can contain one or multiple
+               * comma-separated categories.
+               */
+
+              category:
+                getField(e, [
+                  'category',
+                  'categoria',
+                  'tags',
+                  'tag'
+                ]) || 'EVENT',
+
+
+              desc:
+                getField(e, [
+                  'desc',
+                  'description',
+                  'descrizione',
+                  'details'
+                ]) || '',
+
+
+              img:
+                rawImg ||
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+
+
+              url:
+                getField(e, [
+                  'url',
+                  'link',
+                  'website',
+                  'sito'
+                ]) || '#'
+
+            };
+
+          })
+
+
+          /*
+           * Only keep events with valid dates.
+           */
+
+          .filter(e =>
+            !isNaN(e.year) &&
+            !isNaN(e.month) &&
+            !isNaN(e.date)
+          );
+
+
+        /* =========================
+           SELECT INITIAL DATE
+           ========================= */
+
+        const targetEvent = allEvents.find(
+          e =>
+            e.month === 8 &&
+            e.year === 2026
+        );
+
+
         if (targetEvent) {
-          selectedYear = targetEvent.year;
-          selectedMonth = targetEvent.month;
-          selectedDay = targetEvent.date;
-        } else if (allEvents.length > 0) {
-          selectedYear = allEvents[0].year;
-          selectedMonth = allEvents[0].month;
-          selectedDay = allEvents[0].date;
+
+          selectedYear =
+            targetEvent.year;
+
+          selectedMonth =
+            targetEvent.month;
+
+          selectedDay =
+            targetEvent.date;
+
         }
+
+        else if (allEvents.length > 0) {
+
+          selectedYear =
+            allEvents[0].year;
+
+          selectedMonth =
+            allEvents[0].month;
+
+          selectedDay =
+            allEvents[0].date;
+
+        }
+
+
+        /* =========================
+           RENDER
+           ========================= */
 
         renderCalendar();
+
         updateHeroText();
+
         renderEvents();
-      } catch (err) {
-        console.error(err);
-        document.getElementById("events-container").innerHTML = `
-          <div class="no-events">Unable to load event feed from Google Sheet. Check your SheetDB API link in the code.</div>
-        `;
+
       }
+
+
+      catch (err) {
+
+        console.error(err);
+
+
+        document.getElementById(
+          "events-container"
+        ).innerHTML = `
+
+          <div class="no-events">
+
+            Unable to load event feed
+            from Google Sheet.
+
+            Check your SheetDB API link
+            in the code.
+
+          </div>
+
+        `;
+
+      }
+
     }
+
+
+    /* =========================
+       CHANGE MONTH
+       ========================= */
 
     function changeMonth(direction) {
+
       selectedMonth += direction;
+
+
       if (selectedMonth > 11) {
+
         selectedMonth = 0;
+
         selectedYear++;
-      } else if (selectedMonth < 0) {
-        selectedMonth = 11;
-        selectedYear--;
+
       }
-      selectedDay = 1; 
+
+
+      else if (selectedMonth < 0) {
+
+        selectedMonth = 11;
+
+        selectedYear--;
+
+      }
+
+
+      selectedDay = 1;
+
+
       renderCalendar();
+
       updateHeroText();
+
       renderEvents();
+
     }
 
-    function checkEventMatch(event, targetYear, targetMonth, targetDay) {
-      const targetDate = new Date(targetYear, targetMonth, targetDay);
-      const startDate = new Date(event.year, event.month, event.date);
+
+    /* =========================
+       CHECK EVENT DATE
+       ========================= */
+
+    function checkEventMatch(
+      event,
+      targetYear,
+      targetMonth,
+      targetDay
+    ) {
+
+      const targetDate =
+        new Date(
+          targetYear,
+          targetMonth,
+          targetDay
+        );
+
+
+      const startDate =
+        new Date(
+          event.year,
+          event.month,
+          event.date
+        );
+
+
+      /* =========================
+         DAILY EVENT
+         ========================= */
 
       if (event.isDaily) {
-        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
-          const endDate = new Date(event.endYear, event.endMonth, event.endDate);
-          return targetDate >= startDate && targetDate <= endDate;
+
+        if (
+          event.endYear !== undefined &&
+          event.endMonth !== undefined &&
+          event.endDate !== undefined
+        ) {
+
+          const endDate =
+            new Date(
+              event.endYear,
+              event.endMonth,
+              event.endDate
+            );
+
+
+          return (
+            targetDate >= startDate &&
+            targetDate <= endDate
+          );
+
         }
+
+
         return targetDate >= startDate;
+
       }
 
-      if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
-        const endDate = new Date(event.endYear, event.endMonth, event.endDate);
-        return targetDate >= startDate && targetDate <= endDate;
+
+      /* =========================
+         MULTI-DAY EVENT
+         ========================= */
+
+      if (
+        event.endYear !== undefined &&
+        event.endMonth !== undefined &&
+        event.endDate !== undefined
+      ) {
+
+        const endDate =
+          new Date(
+            event.endYear,
+            event.endMonth,
+            event.endDate
+          );
+
+
+        return (
+          targetDate >= startDate &&
+          targetDate <= endDate
+        );
+
       }
-      return event.year === targetYear && event.month === targetMonth && event.date === targetDay;
+
+
+      /* =========================
+         SINGLE DAY EVENT
+         ========================= */
+
+      return (
+        event.year === targetYear &&
+        event.month === targetMonth &&
+        event.date === targetDay
+      );
+
     }
+
+
+    /* =========================
+       RENDER CALENDAR
+       ========================= */
 
     function renderCalendar() {
-      const grid = document.getElementById("days-grid");
+
+      const grid =
+        document.getElementById(
+          "days-grid"
+        );
+
+
       grid.innerHTML = "";
 
-      const currentMonthName = monthNames[selectedMonth] || "MONTH";
-      document.getElementById("calendar-month-title").innerText = `${currentMonthName} ${selectedYear}`;
 
-      const firstDayDate = new Date(selectedYear, selectedMonth, 1);
-      let startDay = firstDayDate.getDay();
-      startDay = (startDay === 0) ? 6 : startDay - 1;
+      const currentMonthName =
+        monthNames[selectedMonth] ||
+        "MONTH";
 
-      const totalDays = new Date(selectedYear, selectedMonth + 1, 0).getDate();
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
 
-      for (let i = 0; i < startDay; i++) {
-        grid.appendChild(document.createElement("div"));
+      document.getElementById(
+        "calendar-month-title"
+      ).innerText =
+        `${currentMonthName} ${selectedYear}`;
+
+
+      const firstDayDate =
+        new Date(
+          selectedYear,
+          selectedMonth,
+          1
+        );
+
+
+      let startDay =
+        firstDayDate.getDay();
+
+
+      /*
+       * Convert Sunday-first JavaScript
+       * numbering to Monday-first.
+       */
+
+      startDay =
+        (startDay === 0)
+          ? 6
+          : startDay - 1;
+
+
+      const totalDays =
+        new Date(
+          selectedYear,
+          selectedMonth + 1,
+          0
+        ).getDate();
+
+
+      const today =
+        new Date();
+
+
+      today.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+
+      /* =========================
+         EMPTY CELLS
+         ========================= */
+
+      for (
+        let i = 0;
+        i < startDay;
+        i++
+      ) {
+
+        grid.appendChild(
+          document.createElement("div")
+        );
+
       }
 
-      for (let day = 1; day <= totalDays; day++) {
-        const cell = document.createElement("div");
-        const cellDate = new Date(selectedYear, selectedMonth, day);
-        const isPast = cellDate < today;
 
-        let cellClasses = ['day-cell'];
-        if (day === selectedDay) cellClasses.push('active');
-        if (isPast) cellClasses.push('past');
-        
-        cell.className = cellClasses.join(' ');
-        
-        let hasEvent = allEvents.some(e => checkEventMatch(e, selectedYear, selectedMonth, day));
-        
-        cell.innerHTML = `
-          <div class="day-number">${day}</div>
-          ${hasEvent ? '<div class="event-dot"></div>' : ''}
-        `;
+      /* =========================
+         DAYS
+         ========================= */
 
-        cell.onclick = () => {
-          selectedDay = day;
-          document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('active'));
-          cell.classList.add('active');
-          updateHeroText();
-          renderEvents();
-        };
+      for (
+        let day = 1;
+        day <= totalDays;
+        day++
+      ) {
 
-        grid.appendChild(cell);
-      }
-    }
+        const cell =
+          document.createElement("div");
 
-    function updateHeroText() {
-      const currentMonthName = monthNames[selectedMonth] || "";
-      document.getElementById("hero-date-text").innerText = `${currentMonthName} ${selectedDay}`;
-    }
 
-    function renderEvents() {
-      const container = document.getElementById("events-container");
-      container.innerHTML = "";
-      const selectedCity = document.getElementById("city-filter").value;
+        const cellDate =
+          new Date(
+            selectedYear,
+            selectedMonth,
+            day
+          );
 
-      const filtered = allEvents.filter(event => {
-        const matchesDate = checkEventMatch(event, selectedYear, selectedMonth, selectedDay);
-        const matchesCity = (selectedCity === "ALL" || (event.city.toLowerCase() === selectedCity.toLowerCase()));
-        return matchesDate && matchesCity;
-      });
 
-      if (filtered.length === 0) {
-        const currentMonthName = monthNames[selectedMonth] || "";
-        container.innerHTML = `
-          <div class="no-events">
-            <p>No events scheduled for ${currentMonthName} ${selectedDay}, ${selectedYear}.</p>
-          </div>
-        `;
-        return;
-      }
+        const isPast =
+          cellDate < today;
 
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const selectedDateObj = new Date(selectedYear, selectedMonth, selectedDay);
-      const isSelectedPast = selectedDateObj < today;
 
-      filtered.forEach(event => {
-        const tagText = event.tags.length > 0 ? event.tags[0] : "EVENT";
-        const addressText = event.address ? `📍 ${event.address}, ${event.city}` : `📍 ${event.city}`;
-        
-        const startMonthName = monthNames[event.month] || "";
-        let dateText = `📅 ${startMonthName} ${event.date}, ${event.year}`;
-        if (event.endYear !== undefined && event.endMonth !== undefined && event.endDate !== undefined) {
-          const endMonthName = monthNames[event.endMonth] || "";
-          dateText = `📅 ${startMonthName} ${event.date} – ${endMonthName} ${event.endDate}, ${event.endYear}`;
+        let cellClasses =
+          ['day-cell'];
+
+
+        if (day === selectedDay) {
+
+          cellClasses.push(
+            'active'
+          );
+
         }
 
-        const cardClass = isSelectedPast ? 'event-card past-event' : 'event-card';
 
-        const cardHtml = `
-          <div class="${cardClass}">
-            <div class="img-wrapper">
-              <img src="${event.img}" alt="${event.title}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
-              <span class="tag-badge">${tagText}</span>
-            </div>
-            <div class="card-body">
-              <h3>${event.title}</h3>
-              <div class="meta-info">
-                <span>${dateText}</span>
-                <span>${addressText}</span>
-                <span>🕒 ${event.time}</span>
-              </div>
-              <div class="description">${event.desc}</div>
-              <a href="${event.url}" target="_blank" rel="noopener" class="btn-link">Visit Official Website</a>
-            </div>
+        if (isPast) {
+
+          cellClasses.push(
+            'past'
+          );
+
+        }
+
+
+        cell.className =
+          cellClasses.join(' ');
+
+
+        const hasEvent =
+          allEvents.some(e =>
+            checkEventMatch(
+              e,
+              selectedYear,
+              selectedMonth,
+              day
+            )
+          );
+
+
+        cell.innerHTML = `
+
+          <div class="day-number">
+            ${day}
           </div>
+
+          ${
+            hasEvent
+              ? '<div class="event-dot"></div>'
+              : ''
+          }
+
         `;
-        container.insertAdjacentHTML("beforeend", cardHtml);
-      });
+
+
+        /* =========================
+           DAY CLICK
+           ========================= */
+
+        cell.onclick = () => {
+
+          selectedDay = day;
+
+
+          document
+            .querySelectorAll(
+              '.day-cell'
+            )
+            .forEach(c =>
+              c.classList.remove(
+                'active'
+              )
+            );
+
+
+          cell.classList.add(
+            'active'
+          );
+
+
+          updateHeroText();
+
+          renderEvents();
+
+        };
+
+
+        grid.appendChild(cell);
+
+      }
+
     }
 
-    document.addEventListener("DOMContentLoaded", initApp);
+
+    /* =========================
+       UPDATE HERO DATE
+       ========================= */
+
+    function updateHeroText() {
+
+      const currentMonthName =
+        monthNames[selectedMonth] ||
+        "";
+
+
+      document.getElementById(
+        "hero-date-text"
+      ).innerText =
+        `${currentMonthName} ${selectedDay}`;
+
+    }
+
+
+    /* =========================
+       RENDER EVENTS
+       ========================= */
+
+    function renderEvents() {
+
+      const container =
+        document.getElementById(
+          "events-container"
+        );
+
+
+      container.innerHTML = "";
+
+
+      const selectedCity =
+        document.getElementById(
+          "city-filter"
+        ).value;
+
+
+      /* =========================
+         FILTER EVENTS
+         ========================= */
+
+      const filtered =
+        allEvents.filter(event => {
+
+          const matchesDate =
+            checkEventMatch(
+              event,
+              selectedYear,
+              selectedMonth,
+              selectedDay
+            );
+
+
+          const matchesCity =
+            (
+              selectedCity === "ALL" ||
+              event.city.toLowerCase() ===
+              selectedCity.toLowerCase()
+            );
+
+
+          return (
+            matchesDate &&
+            matchesCity
+          );
+
+        });
+
+
+      /* =========================
+         NO EVENTS
+         ========================= */
+
+      if (filtered.length === 0) {
+
+        const currentMonthName =
+          monthNames[selectedMonth] ||
+          "";
+
+
+        container.innerHTML = `
+
+          <div class="no-events">
+
+            <p>
+              No events scheduled for
+              ${currentMonthName}
+              ${selectedDay},
+              ${selectedYear}.
+            </p>
+
+          </div>
+
+        `;
+
+
+        return;
+
+      }
+
+
+      /* =========================
+         CHECK PAST DATE
+         ========================= */
+
+      const today =
+        new Date();
+
+
+      today.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+
+      const selectedDateObj =
+        new Date(
+          selectedYear,
+          selectedMonth,
+          selectedDay
+        );
+
+
+      const isSelectedPast =
+        selectedDateObj < today;
+
+
+      /* =========================
+         CREATE EVENT CARDS
+         ========================= */
+
+      filtered.forEach(event => {
+
+
+        /* =========================
+           CATEGORY TAGS
+           ========================= */
+
+        const tagHtml =
+          renderCategoryTags(
+            event.category
+          );
+
+
+        /* =========================
+           ADDRESS
+           ========================= */
+
+        const addressText =
+          event.address
+            ? `📍 ${event.address}, ${event.city}`
+            : `📍 ${event.city}`;
+
+
+        /* =========================
+           DATE TEXT
+           ========================= */
+
+        const startMonthName =
+          monthNames[event.month] ||
+          "";
+
+
+        let dateText =
+          `📅 ${startMonthName} ${event.date}, ${event.year}`;
+
+
+        if (
+          event.endYear !== undefined &&
+          event.endMonth !== undefined &&
+          event.endDate !== undefined
+        ) {
+
+          const endMonthName =
+            monthNames[event.endMonth] ||
+            "";
+
+
+          dateText =
+            `📅 ${startMonthName} ${event.date} – ${endMonthName} ${event.endDate}, ${event.endYear}`;
+
+        }
+
+
+        /* =========================
+           CARD CLASS
+           ========================= */
+
+        const cardClass =
+          isSelectedPast
+            ? 'event-card past-event'
+            : 'event-card';
+
+
+        /* =========================
+           CARD HTML
+           ========================= */
+
+        const cardHtml = `
+
+          <div class="${cardClass}">
+
+            <div class="img-wrapper">
+
+              <img
+                src="${event.img}"
+                alt="${event.title}"
+                loading="lazy"
+
+                onerror="
+                  console.error(
+                    'IMAGE FAILED:',
+                    this.src
+                  );
+
+                  this.src =
+                    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80';
+                "
+              >
+
+
+              <!-- CATEGORY TAGS -->
+
+              <div class="category-tags">
+
+                ${tagHtml}
+
+              </div>
+
+            </div>
+
+
+            <div class="card-body">
+
+              <h3>
+                ${event.title}
+              </h3>
+
+
+              <div class="meta-info">
+
+                <span>
+                  ${dateText}
+                </span>
+
+                <span>
+                  ${addressText}
+                </span>
+
+                <span>
+                  🕒 ${event.time}
+                </span>
+
+              </div>
+
+
+              <div class="description">
+
+                ${event.desc}
+
+              </div>
+
+
+              <a
+                href="${event.url}"
+                target="_blank"
+                rel="noopener"
+                class="btn-link"
+              >
+                Visit Official Website
+              </a>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        container.insertAdjacentHTML(
+          "beforeend",
+          cardHtml
+        );
+
+      });
+
+    }
+
+
+    /* =========================
+       START APPLICATION
+       ========================= */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initApp
+    );
+
   </script>
+
 </body>
 </html>
