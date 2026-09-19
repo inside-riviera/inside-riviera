@@ -601,9 +601,7 @@
     <span class="highlight" id="hero-date-text">TODAY</span>
 
     <p>
-      Events, markets, and things to do across Sanremo,
-      Bordighera, Ventimiglia, Vallecrosia, Ospedaletti,
-      Vallebona, Menton, and Monte Carlo.
+      From Sanremo to Monte Carlo.
     </p>
   </div>
 
@@ -848,7 +846,15 @@
           cell.classList.add('active');
         }
 
-        const hasEvents = allEvents.some(e => e.year === selectedYear && e.month === selectedMonth && e.date === d);
+        const currentDateObj = new Date(selectedYear, selectedMonth, d);
+        const hasEvents = allEvents.some(e => {
+          const startDateObj = new Date(e.year, e.month, e.date);
+          const endDateObj = (!isNaN(e.endYear) && !isNaN(e.endMonth) && !isNaN(e.endDate))
+            ? new Date(e.endYear, e.endMonth, e.endDate)
+            : startDateObj;
+          return currentDateObj >= startDateObj && currentDateObj <= endDateObj;
+        });
+
         let html = `<div class="day-number">${d}</div>`;
         if (hasEvents) html += `<div class="event-dot"></div>`;
 
@@ -881,8 +887,15 @@
       const cityFilter = document.getElementById('city-filter').value;
       container.innerHTML = '';
 
+      const selectedDateObj = new Date(selectedYear, selectedMonth, selectedDay);
+
       const filteredEvents = allEvents.filter(e => {
-        const matchesDate = (e.year === selectedYear && e.month === selectedMonth && e.date === selectedDay);
+        const startDateObj = new Date(e.year, e.month, e.date);
+        const endDateObj = (!isNaN(e.endYear) && !isNaN(e.endMonth) && !isNaN(e.endDate))
+          ? new Date(e.endYear, e.endMonth, e.endDate)
+          : startDateObj;
+
+        const matchesDate = (selectedDateObj >= startDateObj && selectedDateObj <= endDateObj);
         const matchesCity = (cityFilter === 'ALL' || e.city.toLowerCase() === cityFilter.toLowerCase());
         return matchesDate && matchesCity;
       });
