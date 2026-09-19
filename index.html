@@ -276,7 +276,7 @@
       background: rgba(255,255,255,0.96);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 10px;
+      padding: 12px;
       margin-bottom: 28px;
       box-shadow: var(--shadow);
       position: sticky;
@@ -297,22 +297,35 @@
     }
 
     .category-nav-btn {
-      border: none;
-      background: #f1f5f9;
-      color: var(--text-dark);
-      padding: 9px 14px;
+      border: 1px solid transparent;
+      padding: 8px 14px;
       border-radius: 999px;
       font-size: 0.78rem;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       white-space: nowrap;
-      transition: 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
     .category-nav-btn:hover {
-      transform: translateY(-1px);
-      background: var(--soft-green);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      opacity: 0.9;
     }
+
+    /* Distinct Brand Palette Button Styling */
+    .nav-free { background: var(--soft-green); color: var(--text-dark); border-color: rgba(163, 230, 53, 0.4); }
+    .nav-market { background: var(--soft-pink); color: var(--accent-pink); border-color: rgba(255, 0, 122, 0.3); }
+    .nav-public-event { background: var(--text-dark); color: #ffffff; }
+    .nav-exhibition { background: var(--accent-pink); color: #ffffff; }
+    .nav-festival { background: var(--soft-dark); color: var(--text-dark); border-color: var(--border); }
+    .nav-concert { background: var(--soft-purple); color: var(--text-dark); border-color: rgba(238, 232, 255, 0.8); }
+    .nav-family { background: var(--accent-green); color: var(--text-dark); }
+    .nav-private-tour { background: #e0f2fe; color: #0369a1; border-color: rgba(3, 105, 161, 0.2); }
+    .nav-live-music { background: #1e293b; color: var(--accent-green); }
+    .nav-sport { background: #fff1f2; color: #e11d48; border-color: rgba(225, 29, 72, 0.2); }
+    .nav-default { background: var(--soft-dark); color: var(--text-dark); }
 
     /* =========================================================
        CATEGORY SECTION
@@ -696,6 +709,13 @@
       "private tour": "tag-private-tour", "live music": "tag-live-music", "sport": "tag-sport"
     };
 
+    const navButtonStyles = {
+      "free": "nav-free", "free event": "nav-free", "market": "nav-market",
+      "public event": "nav-public-event", "exhibition": "nav-exhibition", 
+      "festival": "nav-festival", "concert": "nav-concert", "family": "nav-family",
+      "private tour": "nav-private-tour", "live music": "nav-live-music", "sport": "nav-sport"
+    };
+
     const categoryDotColours = {
       "free": "var(--accent-green)", "free event": "var(--accent-green)", "market": "var(--accent-pink)",
       "public event": "var(--text-dark)", "exhibition": "var(--accent-pink)", 
@@ -741,6 +761,10 @@
 
     function getCategoryClass(category) {
       return categoryStyles[categoryKey(category)] || 'tag-default';
+    }
+
+    function getNavButtonClass(category) {
+      return navButtonStyles[categoryKey(category)] || 'nav-default';
     }
 
     function escapeHtml(value) {
@@ -980,7 +1004,7 @@
       navInner.innerHTML = '';
       categoryOrder.forEach(catName => {
         const btn = document.createElement('button');
-        btn.className = 'category-nav-btn';
+        btn.className = `category-nav-btn ${getNavButtonClass(catName)}`;
         btn.innerText = catName;
         btn.onclick = () => {
           const target = document.getElementById(`cat-${categoryKey(catName)}`);
