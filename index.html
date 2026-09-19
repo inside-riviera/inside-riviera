@@ -43,7 +43,7 @@
     }
 
     /* =========================================================
-       HERO (MATCHING YOUR LOGO VIBE)
+       HERO
        ========================================================= */
     .hero {
       position: relative;
@@ -58,14 +58,17 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      justify-content: center;
+      gap: 10px;
       margin-bottom: 20px;
     }
 
-    /* Parasol & Waves Logo Graphic */
+    /* Scaled-down Parasol & Waves Logo Graphic */
     .logo-graphic {
-      width: 64px;
-      height: 52px;
+      display: block;
+      margin: 0 auto;
+      width: 44px;
+      height: 36px;
       fill: var(--accent-green);
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     }
@@ -76,6 +79,7 @@
       letter-spacing: 3px;
       margin: 0;
       text-transform: uppercase;
+      color: var(--accent-pink);
       text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
@@ -572,19 +576,21 @@
 <body>
 
   <!-- =========================================================
-       HERO WITH NEW LOGO
+       HERO WITH CENTERED, SCALED LOGO & PINK TITLE
        ========================================================= -->
   <div class="hero">
     <div class="brand-container">
-      <!-- Parasol & Wave SVG Graphic -->
+      <!-- Scaled-down & Centered Parasol & Wave SVG Graphic -->
       <svg class="logo-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C9.5 2 7.2 2.9 5.4 4.3C7 5.2 8.7 5.7 12 5.7C15.3 5.7 17 5.2 18.6 4.3C16.8 2.9 14.5 2 12 2Z"/>
-        <path d="M4.3 5.5C2.5 7.2 1.5 9.5 1.5 12H5C5 9.8 5.7 7.5 7 5.5H4.3Z"/>
-        <path d="M19.7 5.5C21 7.5 21.7 9.8 21.7 12H25.2C25.2 9.5 24.2 7.2 22.4 5.5H19.7Z"/>
-        <path d="M12 6C8.5 6 5.5 7 3.5 8.3C3.2 8.9 3 9.4 3 10H21C21 9.4 20.8 8.9 20.5 8.3C18.5 7 15.5 6 12 6Z"/>
-        <path d="M11 10.5V19.3C10.4 19.4 9.9 19.6 9.4 19.8C9.8 20.5 10.8 21 12 21C13.2 21 14.2 20.5 14.6 19.8C14.1 19.6 13.6 19.4 13 19.3V10.5H11Z"/>
-        <path d="M2.5 22C4.5 22 5.5 21 7.5 22C9.5 23 10.5 22 12.5 22C14.5 22 15.5 23 17.5 22C19.5 21 20.5 22 22.5 22" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-        <path d="M2.5 24C4.5 24 5.5 23 7.5 24C9.5 25 10.5 24 12.5 24C14.5 24 15.5 25 17.5 24C19.5 23 20.5 24 22.5 24" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <g transform="translate(0, 0)">
+          <path d="M12 2C9.5 2 7.2 2.9 5.4 4.3C7 5.2 8.7 5.7 12 5.7C15.3 5.7 17 5.2 18.6 4.3C16.8 2.9 14.5 2 12 2Z"/>
+          <path d="M4.3 5.5C2.5 7.2 1.5 9.5 1.5 12H5C5 9.8 5.7 7.5 7 5.5H4.3Z"/>
+          <path d="M19.7 5.5C21 7.5 21.7 9.8 21.7 12H25.2C25.2 9.5 24.2 7.2 22.4 5.5H19.7Z"/>
+          <path d="M12 6C8.5 6 5.5 7 3.5 8.3C3.2 8.9 3 9.4 3 10H21C21 9.4 20.8 8.9 20.5 8.3C18.5 7 15.5 6 12 6Z"/>
+          <path d="M11 10.5V19.3C10.4 19.4 9.9 19.6 9.4 19.8C9.8 20.5 10.8 21 12 21C13.2 21 14.2 20.5 14.6 19.8C14.1 19.6 13.6 19.4 13 19.3V10.5H11Z"/>
+          <path d="M2.5 22C4.5 22 5.5 21 7.5 22C9.5 23 10.5 22 12.5 22C14.5 22 15.5 23 17.5 22C19.5 21 20.5 22 22.5 22" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+          <path d="M2.5 24C4.5 24 5.5 23 7.5 24C9.5 25 10.5 24 12.5 24C14.5 24 15.5 25 17.5 24C19.5 23 20.5 24 22.5 24" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        </g>
       </svg>
       
       <h1>Inside Riviera</h1>
