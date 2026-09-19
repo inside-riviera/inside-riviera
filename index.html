@@ -294,6 +294,7 @@
       display: flex;
       gap: 8px;
       min-width: max-content;
+      justify-content: center;
     }
 
     .category-nav-btn {
@@ -314,17 +315,14 @@
       opacity: 0.9;
     }
 
-    /* Distinct Brand Palette Button Styling */
-    .nav-free { background: var(--soft-green); color: var(--text-dark); border-color: rgba(163, 230, 53, 0.4); }
-    .nav-market { background: var(--soft-pink); color: var(--accent-pink); border-color: rgba(255, 0, 122, 0.3); }
-    .nav-public-event { background: var(--text-dark); color: #ffffff; }
-    .nav-exhibition { background: var(--accent-pink); color: #ffffff; }
-    .nav-festival { background: var(--soft-dark); color: var(--text-dark); border-color: var(--border); }
+    /* Distinct Brand Palette Button Styling for the 7 Categories */
     .nav-concert { background: var(--soft-purple); color: var(--text-dark); border-color: rgba(238, 232, 255, 0.8); }
-    .nav-family { background: var(--accent-green); color: var(--text-dark); }
-    .nav-private-tour { background: #e0f2fe; color: #0369a1; border-color: rgba(3, 105, 161, 0.2); }
+    .nav-exhibition { background: var(--accent-pink); color: #ffffff; }
+    .nav-public-event { background: var(--text-dark); color: #ffffff; }
     .nav-live-music { background: #1e293b; color: var(--accent-green); }
+    .nav-private-tour { background: #e0f2fe; color: #0369a1; border-color: rgba(3, 105, 161, 0.2); }
     .nav-sport { background: #fff1f2; color: #e11d48; border-color: rgba(225, 29, 72, 0.2); }
+    .nav-market { background: var(--soft-pink); color: var(--accent-pink); border-color: rgba(255, 0, 122, 0.3); }
     .nav-default { background: var(--soft-dark); color: var(--text-dark); }
 
     /* =========================================================
@@ -434,17 +432,14 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.12);
     }
 
-    /* Tag Colours */
-    .tag-free, .tag-free-event { background: var(--accent-green); color: var(--text-dark); }
-    .tag-market { background: var(--accent-pink); color: #ffffff; }
-    .tag-public-event { background: var(--text-dark); color: #ffffff; }
-    .tag-exhibition { background: var(--accent-pink); color: #ffffff; }
-    .tag-festival { background: var(--text-dark); color: var(--accent-green); }
+    /* Tag Colours matching the 7 categories */
     .tag-concert { background: var(--soft-purple); color: var(--text-dark); }
-    .tag-family { background: var(--accent-green); color: var(--text-dark); }
-    .tag-private-tour { background: var(--soft-green); color: var(--text-dark); }
+    .tag-exhibition { background: var(--accent-pink); color: #ffffff; }
+    .tag-public-event { background: var(--text-dark); color: #ffffff; }
     .tag-live-music { background: var(--text-dark); color: var(--accent-green); }
+    .tag-private-tour { background: var(--soft-green); color: var(--text-dark); }
     .tag-sport { background: var(--soft-pink); color: var(--accent-pink); }
+    .tag-market { background: var(--accent-pink); color: #ffffff; }
     .tag-default { background: var(--soft-dark); color: var(--text-dark); }
 
     .card-body {
@@ -698,29 +693,25 @@
     ];
 
     const categoryOrder = [
-      "Free", "Market", "Public Event", "Exhibition", "Festival", 
-      "Concert", "Family", "Private Tour", "Live Music", "Sport"
+      "Concert", "Exhibition", "Public Event", "Live Music", "Private Tour", "Sport", "Market"
     ];
 
     const categoryStyles = {
-      "free": "tag-free", "free event": "tag-free-event", "market": "tag-market",
-      "public event": "tag-public-event", "exhibition": "tag-exhibition", 
-      "festival": "tag-festival", "concert": "tag-concert", "family": "tag-family",
-      "private tour": "tag-private-tour", "live music": "tag-live-music", "sport": "tag-sport"
+      "concert": "tag-concert", "exhibition": "tag-exhibition", 
+      "public event": "tag-public-event", "live music": "tag-live-music", 
+      "private tour": "tag-private-tour", "sport": "tag-sport", "market": "tag-market"
     };
 
     const navButtonStyles = {
-      "free": "nav-free", "free event": "nav-free", "market": "nav-market",
-      "public event": "nav-public-event", "exhibition": "nav-exhibition", 
-      "festival": "nav-festival", "concert": "nav-concert", "family": "nav-family",
-      "private tour": "nav-private-tour", "live music": "nav-live-music", "sport": "nav-sport"
+      "concert": "nav-concert", "exhibition": "nav-exhibition", 
+      "public event": "nav-public-event", "live music": "nav-live-music", 
+      "private tour": "nav-private-tour", "sport": "nav-sport", "market": "nav-market"
     };
 
     const categoryDotColours = {
-      "free": "var(--accent-green)", "free event": "var(--accent-green)", "market": "var(--accent-pink)",
-      "public event": "var(--text-dark)", "exhibition": "var(--accent-pink)", 
-      "festival": "var(--text-dark)", "concert": "var(--soft-purple)", "family": "var(--accent-green)",
-      "private tour": "var(--accent-green)", "live music": "var(--text-dark)", "sport": "var(--accent-pink)"
+      "concert": "var(--soft-purple)", "exhibition": "var(--accent-pink)", 
+      "public event": "var(--text-dark)", "live music": "var(--accent-green)", 
+      "private tour": "var(--accent-green)", "sport": "var(--accent-pink)", "market": "var(--accent-pink)"
     };
 
     function getField(obj, keys) {
@@ -750,9 +741,9 @@
     }
 
     function parseCategories(value) {
-      if (value === undefined || value === null || value === '') return ['Event'];
+      if (value === undefined || value === null || value === '') return ['Public Event'];
       const categories = String(value).split(',').map(c => cleanCategoryName(c)).filter(c => c !== '');
-      return categories.length ? categories : ['Event'];
+      return categories.length ? categories : ['Public Event'];
     }
 
     function categoryKey(category) {
