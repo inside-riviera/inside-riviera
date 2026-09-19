@@ -236,24 +236,37 @@
     }
 
     /* =========================================================
-       CITY FILTER
+       FILTERS & SEARCH
        ========================================================= */
     .filter-wrapper {
       display: flex;
       justify-content: center;
+      gap: 12px;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
-    .city-select {
+    .city-select, .search-input {
       background: #ffffff;
       border: 1px solid var(--border);
-      padding: 12px 24px;
+      padding: 12px 20px;
       border-radius: 30px;
       font-weight: 600;
       font-size: 0.9rem;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      cursor: pointer;
       outline: none;
+    }
+
+    .city-select {
+      cursor: pointer;
+    }
+
+    .search-input {
+      width: 260px;
+    }
+
+    .search-input:focus, .city-select:focus {
+      border-color: var(--accent-pink);
     }
 
     /* =========================================================
@@ -542,9 +555,12 @@
         border-radius: 18px;
         max-width: 100%;
       }
-      .city-select {
+      .filter-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .city-select, .search-input {
         width: 100%;
-        max-width: 400px;
       }
       .category-navigation {
         margin-left: -12px;
@@ -624,6 +640,7 @@
       <div class="days-grid" id="days-grid"></div>
     </div>
 
+    <!-- FILTERS & SEARCH BAR -->
     <div class="filter-wrapper">
       <select class="city-select" id="city-filter" onchange="renderEvents()">
         <option value="ALL">All Cities (Italian & French Riviera)</option>
@@ -636,6 +653,7 @@
         <option value="Menton">Menton</option>
         <option value="Monte Carlo">Monte Carlo</option>
       </select>
+      <input type="text" class="search-input" id="search-input" placeholder="🔍 Search specific event..." oninput="renderEvents()">
     </div>
 
     <div class="category-navigation" id="category-navigation">
@@ -811,7 +829,6 @@
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      // Render padding days from previous month (always past)
       for (let i = adjustedFirstDay - 1; i >= 0; i--) {
         const dayNum = prevTotalDays - i;
         const cell = document.createElement('div');
@@ -820,7 +837,6 @@
         gridEl.appendChild(cell);
       }
 
-      // Render days of the current month
       for (let d = 1; d <= totalDays; d++) {
         const cell = document.createElement('div');
         cell.className = 'day-cell';
@@ -828,7 +844,6 @@
         const cellDate = new Date(selectedYear, selectedMonth, d);
         cellDate.setHours(0, 0, 0, 0);
 
-        // Grey out if it's before today
         if (cellDate < today) {
           cell.classList.add('past');
         }
@@ -877,6 +892,7 @@
     function renderEvents() {
       const container = document.getElementById('events-container');
       const cityFilter = document.getElementById('city-filter').value;
+      const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
       container.innerHTML = '';
 
       const selectedDateObj = new Date(selectedYear, selectedMonth, selectedDay);
@@ -887,16 +903,25 @@
           ? new Date(e.endYear, e.endMonth, e.endDate)
           : startDateObj;
 
-        const matchesDate = (selectedDateObj >= startDateObj && selectedDateObj <= endDateObj);
         const matchesCity = (cityFilter === 'ALL' || e.city.toLowerCase() === cityFilter.toLowerCase());
-        return matchesDate && matchesCity;
+
+        if (searchQuery !== '') {
+          const matchesSearch = e.title.toLowerCase().includes(searchQuery) ||
+                                e.description.toLowerCase().includes(searchQuery) ||
+                                e.city.toLowerCase().includes(searchQuery) ||
+                                e.location.toLowerCase().includes(searchQuery);
+          return matchesCity && matchesSearch;
+        } else {
+          const matchesDate = (selectedDateObj >= startDateObj && selectedDateObj <= endDateObj);
+          return matchesCity && matchesDate;
+        }
       });
 
       if (filteredEvents.length === 0) {
         container.innerHTML = `
           <div class="no-events">
-            <h3>No events found for this day.</h3>
-            <p>Try selecting a different date or clearing the city filter.</p>
+            <h3>No events found.</h3>
+            <p>Try adjusting your search query, date, or city filter.</p>
           </div>
         `;
         return;
