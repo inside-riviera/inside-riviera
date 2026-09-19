@@ -410,15 +410,16 @@
     }
 
     /* Tag Colours */
-    .tag-exhibition { background: var(--accent-pink); color: #ffffff; }
-    .tag-free, .tag-free-event, .tag-family { background: var(--accent-green); color: var(--text-dark); }
-    .tag-public-event { background: var(--text-dark); color: #ffffff; }
-    .tag-ticketed, .tag-ticket { background: var(--soft-pink); color: var(--accent-pink); }
-    .tag-private-tour { background: var(--soft-green); color: var(--text-dark); }
-    .tag-concert { background: var(--soft-purple); color: var(--text-dark); }
-    .tag-live-music { background: var(--text-dark); color: var(--accent-green); }
+    .tag-free, .tag-free-event { background: var(--accent-green); color: var(--text-dark); }
     .tag-market { background: var(--accent-pink); color: #ffffff; }
+    .tag-public-event { background: var(--text-dark); color: #ffffff; }
+    .tag-exhibition { background: var(--accent-pink); color: #ffffff; }
     .tag-festival { background: var(--text-dark); color: var(--accent-green); }
+    .tag-concert { background: var(--soft-purple); color: var(--text-dark); }
+    .tag-family { background: var(--accent-green); color: var(--text-dark); }
+    .tag-private-tour { background: var(--soft-green); color: var(--text-dark); }
+    .tag-live-music { background: var(--text-dark); color: var(--accent-green); }
+    .tag-sport { background: var(--soft-pink); color: var(--accent-pink); }
     .tag-default { background: var(--soft-dark); color: var(--text-dark); }
 
     .card-body {
@@ -601,7 +602,9 @@
     <span class="highlight" id="hero-date-text">TODAY</span>
 
     <p>
-      From Sanremo to Monte Carlo.
+      Events, markets, and things to do across Sanremo,
+      Bordighera, Ventimiglia, Vallecrosia, Ospedaletti,
+      Vallebona, Menton, and Monte Carlo.
     </p>
   </div>
 
@@ -683,23 +686,24 @@
       "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
     ];
 
+    // Requested order: Free, Market, Public events on top; Private tour, Live Music, Sport at the end
     const categoryOrder = [
-      "Exhibition", "Concert", "Live Music", "Festival", "Market",
-      "Private Tour", "Public Event", "Family", "Free", "Ticket", "Ticketed"
+      "Free", "Market", "Public Event", "Exhibition", "Festival", 
+      "Concert", "Family", "Private Tour", "Live Music", "Sport"
     ];
 
     const categoryStyles = {
-      "exhibition": "tag-exhibition", "free": "tag-free", "public event": "tag-public-event",
-      "ticketed": "tag-ticketed", "ticket": "tag-ticket", "private tour": "tag-private-tour",
-      "concert": "tag-concert", "live music": "tag-live-music", "family": "tag-family",
-      "market": "tag-market", "festival": "tag-festival", "free event": "tag-free-event"
+      "free": "tag-free", "free event": "tag-free-event", "market": "tag-market",
+      "public event": "tag-public-event", "exhibition": "tag-exhibition", 
+      "festival": "tag-festival", "concert": "tag-concert", "family": "tag-family",
+      "private tour": "tag-private-tour", "live music": "tag-live-music", "sport": "tag-sport"
     };
 
     const categoryDotColours = {
-      "exhibition": "var(--accent-pink)", "free": "var(--accent-green)", "public event": "var(--text-dark)",
-      "ticketed": "var(--accent-pink)", "ticket": "var(--accent-pink)", "private tour": "var(--accent-green)",
-      "concert": "var(--soft-purple)", "live music": "var(--text-dark)", "family": "var(--accent-green)",
-      "market": "var(--accent-pink)", "festival": "var(--text-dark)", "free event": "var(--accent-green)"
+      "free": "var(--accent-green)", "free event": "var(--accent-green)", "market": "var(--accent-pink)",
+      "public event": "var(--text-dark)", "exhibition": "var(--accent-pink)", 
+      "festival": "var(--text-dark)", "concert": "var(--soft-purple)", "family": "var(--accent-green)",
+      "private tour": "var(--accent-green)", "live music": "var(--text-dark)", "sport": "var(--accent-pink)"
     };
 
     function getField(obj, keys) {
