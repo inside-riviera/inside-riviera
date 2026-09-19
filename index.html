@@ -930,12 +930,6 @@
         gap: 12px;
       }
 
-      /*
-        On mobile the cards become horizontal.
-        This lets users see much more information
-        without endlessly scrolling vertically.
-      */
-
       .event-card {
         display: grid;
 
@@ -1273,8 +1267,6 @@
 
     /* =========================================================
        CATEGORY ORDER
-       
-       This controls the order in which sections appear.
        ========================================================= */
 
     const categoryOrder = [
@@ -1298,31 +1290,18 @@
        ========================================================= */
 
     const categoryStyles = {
-
       "exhibition": "tag-exhibition",
-
       "free": "tag-free",
-
       "public event": "tag-public-event",
-
       "ticketed": "tag-ticketed",
-
       "ticket": "tag-ticket",
-
       "private tour": "tag-private-tour",
-
       "concert": "tag-concert",
-
       "live music": "tag-live-music",
-
       "family": "tag-family",
-
       "market": "tag-market",
-
       "festival": "tag-festival",
-
       "free event": "tag-free-event"
-
     };
 
 
@@ -1332,31 +1311,18 @@
        ========================================================= */
 
     const categoryDotColours = {
-
       "exhibition": "var(--accent-pink)",
-
       "free": "var(--accent-green)",
-
       "public event": "var(--text-dark)",
-
       "ticketed": "var(--accent-pink)",
-
       "ticket": "var(--accent-pink)",
-
       "private tour": "var(--accent-green)",
-
       "concert": "var(--soft-purple)",
-
       "live music": "var(--text-dark)",
-
       "family": "var(--accent-green)",
-
       "market": "var(--accent-pink)",
-
       "festival": "var(--text-dark)",
-
       "free event": "var(--accent-green)"
-
     };
 
 
@@ -1366,23 +1332,16 @@
        ========================================================= */
 
     function getField(obj, keys) {
-
       for (let k of keys) {
-
         if (
           obj[k] !== undefined &&
           obj[k] !== null &&
           obj[k] !== ''
         ) {
-
           return obj[k];
-
         }
-
       }
-
       return '';
-
     }
 
 
@@ -1392,26 +1351,19 @@
        ========================================================= */
 
     function parseNum(val) {
-
       if (
         val === undefined ||
         val === null ||
         val === ''
       ) {
-
         return NaN;
-
       }
-
       const cleanStr =
         String(val)
           .replace(/,/g, '')
           .trim();
-
       const num = Number(cleanStr);
-
       return isNaN(num) ? NaN : num;
-
     }
 
 
@@ -1421,30 +1373,21 @@
        ========================================================= */
 
     function parseBoolean(val) {
-
       if (typeof val === 'boolean') {
-
         return val;
-
       }
-
       if (!val) {
-
         return false;
-
       }
-
       const str =
         String(val)
           .trim()
           .toUpperCase();
-
       return (
         str === 'TRUE' ||
         str === '1' ||
         str === 'YES'
       );
-
     }
 
 
@@ -1454,43 +1397,25 @@
        ========================================================= */
 
     function cleanCategoryName(category) {
-
       return String(category || '')
         .trim()
         .replace(/\s+/g, ' ');
-
     }
 
 
 
     /* =========================================================
        PARSE MULTIPLE CATEGORIES
-       
-       Sheet example:
-       
-       Exhibition, Free, Public Event
-       
-       becomes:
-       
-       [
-         "Exhibition",
-         "Free",
-         "Public Event"
-       ]
        ========================================================= */
 
     function parseCategories(value) {
-
       if (
         value === undefined ||
         value === null ||
         value === ''
       ) {
-
         return ['Event'];
-
       }
-
       const categories =
         String(value)
           .split(',')
@@ -1500,23 +1425,18 @@
       return categories.length
         ? categories
         : ['Event'];
-
     }
 
 
 
     /* =========================================================
        CATEGORY KEY
-       
-       Used to match categories regardless of capitalisation.
        ========================================================= */
 
     function categoryKey(category) {
-
       return String(category || '')
         .trim()
         .toLowerCase();
-
     }
 
 
@@ -1526,31 +1446,23 @@
        ========================================================= */
 
     function getCategoryClass(category) {
-
       const key = categoryKey(category);
-
       return categoryStyles[key] || 'tag-default';
-
     }
 
 
 
     /* =========================================================
        ESCAPE HTML
-       
-       Protects the page if text in the Sheet contains
-       special HTML characters.
        ========================================================= */
 
     function escapeHtml(value) {
-
       return String(value ?? '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
-
     }
 
 
@@ -1560,42 +1472,23 @@
        ========================================================= */
 
     function cleanImageUrl(value) {
-
       if (!value) {
-
         return '';
-
       }
-
       let url = String(value).trim();
-
-
-      /*
-        Handles Markdown-style image links:
-        [image](https://...)
-      */
 
       const markdownMatch =
         url.match(/\((https?:\/\/[^)\s]+)\)/);
 
       if (markdownMatch) {
-
         url = markdownMatch[1];
-
       }
-
-
-      /*
-        Remove accidental quotation marks.
-      */
 
       url = url
         .replace(/^["']|["']$/g, '')
         .trim();
 
-
       return url;
-
     }
 
 
@@ -1615,11 +1508,9 @@
 
 
         if (!res.ok) {
-
           throw new Error(
             'Failed to load sheet data'
           );
-
         }
 
 
@@ -1632,21 +1523,15 @@
 
         const standardizedData =
           rawData.map(row => {
-
             const cleanRow = {};
-
             for (let key in row) {
-
               cleanRow[
                 key
                   .toLowerCase()
                   .replace(/[\s_-]/g, '')
               ] = row[key];
-
             }
-
             return cleanRow;
-
           });
 
 
@@ -1658,7 +1543,6 @@
         allEvents =
           standardizedData
             .map(e => {
-
 
               const y =
                 parseNum(
@@ -1751,11 +1635,6 @@
                 );
 
 
-
-              /* =================================================
-                 IMAGE
-                 ================================================= */
-
               const rawImg =
                 cleanImageUrl(
                   getField(
@@ -1772,11 +1651,6 @@
                   )
                 );
 
-
-
-              /* =================================================
-                 CATEGORY
-                 ================================================= */
 
               const rawCategory =
                 getField(
@@ -1796,1261 +1670,222 @@
                 parseCategories(rawCategory);
 
 
-
               return {
-
                 year: y,
-
-                month:
-                  !isNaN(mInput)
-                    ? mInput - 1
-                    : NaN,
-
+                month: !isNaN(mInput) ? mInput - 1 : NaN,
                 date: d,
-
-                endYear:
-                  !isNaN(endY)
-                    ? endY
-                    : undefined,
-
-                endMonth:
-                  !isNaN(endMInput)
-                    ? endMInput - 1
-                    : undefined,
-
-                endDate:
-                  !isNaN(endD)
-                    ? endD
-                    : undefined,
-
+                endYear: endY,
+                endMonth: !isNaN(endMInput) ? endMInput - 1 : NaN,
+                endDate: endD,
                 isDaily: isDaily,
-
-
-                city:
-                  getField(
-                    e,
-                    [
-                      'city',
-                      'città',
-                      'citta',
-                      'town'
-                    ]
-                  ) || '',
-
-
-                address:
-                  getField(
-                    e,
-                    [
-                      'address',
-                      'indirizzo',
-                      'location'
-                    ]
-                  ) || '',
-
-
-                title:
-                  getField(
-                    e,
-                    [
-                      'title',
-                      'titolo',
-                      'name',
-                      'event'
-                    ]
-                  ) || 'Untitled Event',
-
-
-                time:
-                  getField(
-                    e,
-                    [
-                      'time',
-                      'orario',
-                      'ora'
-                    ]
-                  ) || 'All Day',
-
-
+                title: getField(e, ['title', 'titolo', 'name', 'event']),
+                city: getField(e, ['city', 'citta', 'town', 'location']),
+                time: getField(e, ['time', 'orario', 'hours', 'ora']),
+                location: getField(e, ['venue', 'location', 'luogo', 'address', 'place']),
+                description: getField(e, ['description', 'descrizione', 'details', 'info']),
+                link: getField(e, ['link', 'url', 'website', 'sito', 'ticketlink']),
+                img: rawImg || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
                 categories: categories,
-
-
-                desc:
-                  getField(
-                    e,
-                    [
-                      'desc',
-                      'description',
-                      'descrizione',
-                      'details'
-                    ]
-                  ) || '',
-
-
-                img:
-                  rawImg ||
-                  'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
-
-
-                url:
-                  getField(
-                    e,
-                    [
-                      'url',
-                      'link',
-                      'website',
-                      'sito'
-                    ]
-                  ) || '#'
-
+                raw: e
               };
 
             })
+            .filter(e => !isNaN(e.year) && !isNaN(e.month) && !isNaN(e.date));
 
 
-            .filter(
-              e =>
-                !isNaN(e.year) &&
-                !isNaN(e.month) &&
-                !isNaN(e.date)
-            );
+        // Today's initialization will now stay intact as set by new Date()!
 
-
-
-        console.log(
-          'Loaded events:',
-          allEvents
-        );
-
-
-
-        /* =====================================================
-           INITIAL DATE
-           
-           First look for September 2026.
-           Otherwise use the first event.
-           ===================================================== */
-
-const targetEvent = allEvents.find(e => e.month === 8 && e.year === 2026);
-if (targetEvent) {
-  selectedYear = targetEvent.year;
-  selectedMonth = targetEvent.month;
-  selectedDay = targetEvent.date;
-}
-
-
-
-        renderCalendar();
-
-        updateHeroText();
-
+        buildCalendar();
         renderEvents();
-
+        buildCategoryNav();
 
       } catch (err) {
-
         console.error(err);
-
-        document.getElementById(
-          "events-container"
-        ).innerHTML = `
-
+        document.getElementById('events-container').innerHTML = `
           <div class="no-events">
-
-            Unable to load event feed
-            from Google Sheet.
-
-            <br><br>
-
-            Check your SheetDB API link.
-
+            <h3>Unable to load events at the moment.</h3>
+            <p>Please check your connection or try again later.</p>
           </div>
-
         `;
-
       }
 
     }
 
 
-
     /* =========================================================
-       CHANGE MONTH
+       CALENDAR BUILDER & NAVIGATION
        ========================================================= */
 
-    function changeMonth(direction) {
+    function buildCalendar() {
+      const titleEl = document.getElementById('calendar-month-title');
+      const gridEl = document.getElementById('days-grid');
 
-      selectedMonth += direction;
+      titleEl.innerText = `${monthNames[selectedMonth]} ${selectedYear}`;
+      gridEl.innerHTML = '';
 
+      const firstDayIndex = new Date(selectedYear, selectedMonth, 1).getDay();
+      // Adjust for Monday start (Mon = 0, Sun = 6)
+      const adjustedFirstDay = (firstDayIndex === 0) ? 6 : firstDayIndex - 1;
+      
+      const totalDays = new Date(selectedYear, selectedMonth + 1, 0).getDate();
+      const prevTotalDays = new Date(selectedYear, selectedMonth, 0).getDate();
 
-      if (selectedMonth > 11) {
+      const today = new Date();
+      const isCurrentMonth = today.getFullYear() === selectedYear && today.getMonth() === selectedMonth;
 
-        selectedMonth = 0;
-
-        selectedYear++;
-
+      // Padding days from previous month
+      for (let i = adjustedFirstDay - 1; i >= 0; i--) {
+        const dayNum = prevTotalDays - i;
+        const cell = document.createElement('div');
+        cell.className = 'day-cell past';
+        cell.innerHTML = `<div class="day-number">${dayNum}</div>`;
+        gridEl.appendChild(cell);
       }
 
+      // Current month days
+      for (let d = 1; d <= totalDays; d++) {
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
 
-      else if (selectedMonth < 0) {
-
-        selectedMonth = 11;
-
-        selectedYear--;
-
-      }
-
-
-      selectedDay = 1;
-
-
-      renderCalendar();
-
-      updateHeroText();
-
-      renderEvents();
-
-    }
-
-
-
-    /* =========================================================
-       CHECK EVENT DATE
-       ========================================================= */
-
-    function checkEventMatch(
-      event,
-      targetYear,
-      targetMonth,
-      targetDay
-    ) {
-
-      const targetDate =
-        new Date(
-          targetYear,
-          targetMonth,
-          targetDay
-        );
-
-
-      const startDate =
-        new Date(
-          event.year,
-          event.month,
-          event.date
-        );
-
-
-
-      if (event.isDaily) {
-
-        if (
-          event.endYear !== undefined &&
-          event.endMonth !== undefined &&
-          event.endDate !== undefined
-        ) {
-
-          const endDate =
-            new Date(
-              event.endYear,
-              event.endMonth,
-              event.endDate
-            );
-
-          return (
-            targetDate >= startDate &&
-            targetDate <= endDate
-          );
-
+        if (isCurrentMonth && d === today.getDate() && selectedDay === today.getDate()) {
+          cell.classList.add('active');
+        } else if (d === selectedDay) {
+          cell.classList.add('active');
         }
 
-
-        return targetDate >= startDate;
-
-      }
-
-
-
-      if (
-        event.endYear !== undefined &&
-        event.endMonth !== undefined &&
-        event.endDate !== undefined
-      ) {
-
-        const endDate =
-          new Date(
-            event.endYear,
-            event.endMonth,
-            event.endDate
-          );
-
-        return (
-          targetDate >= startDate &&
-          targetDate <= endDate
-        );
-
-      }
-
-
-
-      return (
-        event.year === targetYear &&
-        event.month === targetMonth &&
-        event.date === targetDay
-      );
-
-    }
-
-
-
-    /* =========================================================
-       CALENDAR
-       ========================================================= */
-
-    function renderCalendar() {
-
-      const grid =
-        document.getElementById(
-          "days-grid"
-        );
-
-
-      grid.innerHTML = "";
-
-
-      const currentMonthName =
-        monthNames[selectedMonth] ||
-        "MONTH";
-
-
-      document.getElementById(
-        "calendar-month-title"
-      ).innerText =
-        `${currentMonthName} ${selectedYear}`;
-
-
-
-      const firstDayDate =
-        new Date(
-          selectedYear,
-          selectedMonth,
-          1
-        );
-
-
-      let startDay =
-        firstDayDate.getDay();
-
-
-      startDay =
-        startDay === 0
-          ? 6
-          : startDay - 1;
-
-
-
-      const totalDays =
-        new Date(
-          selectedYear,
-          selectedMonth + 1,
-          0
-        ).getDate();
-
-
-
-      const today =
-        new Date();
-
-
-      today.setHours(
-        0,
-        0,
-        0,
-        0
-      );
-
-
-
-      for (
-        let i = 0;
-        i < startDay;
-        i++
-      ) {
-
-        grid.appendChild(
-          document.createElement("div")
-        );
-
-      }
-
-
-
-      for (
-        let day = 1;
-        day <= totalDays;
-        day++
-      ) {
-
-        const cell =
-          document.createElement("div");
-
-
-        const cellDate =
-          new Date(
-            selectedYear,
-            selectedMonth,
-            day
-          );
-
-
-        const isPast =
-          cellDate < today;
-
-
-
-        let cellClasses =
-          ['day-cell'];
-
-
-        if (
-          day === selectedDay
-        ) {
-
-          cellClasses.push(
-            'active'
-          );
-
+        // Check if there are events on this day
+        const hasEvents = allEvents.some(e => e.year === selectedYear && e.month === selectedMonth && e.date === d);
+        
+        let html = `<div class="day-number">${d}</div>`;
+        if (hasEvents) {
+          html += `<div class="event-dot"></div>`;
         }
 
-
-        if (isPast) {
-
-          cellClasses.push(
-            'past'
-          );
-
-        }
-
-
-        cell.className =
-          cellClasses.join(' ');
-
-
-
-        const hasEvent =
-          allEvents.some(
-            e =>
-              checkEventMatch(
-                e,
-                selectedYear,
-                selectedMonth,
-                day
-              )
-          );
-
-
-
-        cell.innerHTML = `
-
-          <div class="day-number">
-            ${day}
-          </div>
-
-          ${
-            hasEvent
-              ? '<div class="event-dot"></div>'
-              : ''
-          }
-
-        `;
-
-
-
+        cell.innerHTML = html;
         cell.onclick = () => {
-
-          selectedDay = day;
-
-
-          document
-            .querySelectorAll(
-              '.day-cell'
-            )
-            .forEach(
-              c =>
-                c.classList.remove(
-                  'active'
-                )
-            );
-
-
-          cell.classList.add(
-            'active'
-          );
-
-
-          updateHeroText();
-
+          selectedDay = d;
+          buildCalendar();
           renderEvents();
-
         };
 
-
-
-        grid.appendChild(cell);
-
+        gridEl.appendChild(cell);
       }
-
     }
 
-
-
-    /* =========================================================
-       HERO DATE
-       ========================================================= */
-
-    function updateHeroText() {
-
-      const currentMonthName =
-        monthNames[selectedMonth] ||
-        "";
-
-
-      document.getElementById(
-        "hero-date-text"
-      ).innerText =
-        `${currentMonthName} ${selectedDay}`;
-
-    }
-
-
-
-    /* =========================================================
-       CREATE TAG HTML
-       ========================================================= */
-
-    function createTag(category) {
-
-      const cssClass =
-        getCategoryClass(category);
-
-
-      return `
-
-        <span class="tag-badge ${cssClass}">
-
-          ${escapeHtml(category)}
-
-        </span>
-
-      `;
-
-    }
-
-
-
-    /* =========================================================
-       CATEGORY SORTING
-       ========================================================= */
-
-    function sortCategories(categories) {
-
-      return categories.sort(
-        (a, b) => {
-
-          const indexA =
-            categoryOrder.findIndex(
-              category =>
-                categoryKey(category) ===
-                categoryKey(a)
-            );
-
-
-          const indexB =
-            categoryOrder.findIndex(
-              category =>
-                categoryKey(category) ===
-                categoryKey(b)
-            );
-
-
-          /*
-            Categories not in the predefined
-            list go to the end.
-          */
-
-          const safeA =
-            indexA === -1
-              ? 999
-              : indexA;
-
-
-          const safeB =
-            indexB === -1
-              ? 999
-              : indexB;
-
-
-          if (safeA !== safeB) {
-
-            return safeA - safeB;
-
-          }
-
-
-          return a.localeCompare(b);
-
-        }
-      );
-
-    }
-
-
-
-    /* =========================================================
-       GET PRIMARY CATEGORY
-       
-       An event with:
-       
-       Exhibition, Free, Public Event
-       
-       will appear under Exhibition.
-       
-       But all three tags remain visible.
-       
-       This prevents duplicate event cards.
-       ========================================================= */
-
-    function getPrimaryCategory(event) {
-
-      if (
-        !event.categories ||
-        event.categories.length === 0
-      ) {
-
-        return 'Event';
-
+    function changeMonth(direction) {
+      selectedMonth += direction;
+      if (selectedMonth > 11) {
+        selectedMonth = 0;
+        selectedYear++;
+      } else if (selectedMonth < 0) {
+        selectedMonth = 11;
+        selectedYear--;
       }
-
-
-      const sorted =
-        sortCategories(
-          [...event.categories]
-        );
-
-
-      return sorted[0] || 'Event';
-
+      selectedDay = 1; // Reset to 1st of new month or keep if valid
+      buildCalendar();
+      renderEvents();
     }
 
 
-
     /* =========================================================
-       RENDER CATEGORY NAVIGATION
-       ========================================================= */
-
-    function renderCategoryNavigation(
-      categoryGroups
-    ) {
-
-      const nav =
-        document.getElementById(
-          "category-nav-inner"
-        );
-
-
-      nav.innerHTML = "";
-
-
-      const categories =
-        sortCategories(
-          Object.keys(categoryGroups)
-        );
-
-
-      categories.forEach(
-        category => {
-
-          const count =
-            categoryGroups[category].length;
-
-
-          const button =
-            document.createElement(
-              "button"
-            );
-
-
-          button.className =
-            "category-nav-btn";
-
-
-          button.innerHTML =
-            `${escapeHtml(category)} · ${count}`;
-
-
-          button.onclick = () => {
-
-            const section =
-              document.getElementById(
-                `category-${slugify(category)}`
-              );
-
-
-            if (section) {
-
-              section.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-              });
-
-            }
-
-          };
-
-
-          nav.appendChild(button);
-
-        }
-      );
-
-
-      /*
-        Hide navigation if there is
-        only one category.
-      */
-
-      const navigation =
-        document.getElementById(
-          "category-navigation"
-        );
-
-
-      navigation.style.display =
-        categories.length > 1
-          ? "block"
-          : "none";
-
-    }
-
-
-
-    /* =========================================================
-       SLUGIFY
-       ========================================================= */
-
-    function slugify(text) {
-
-      return String(text)
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '');
-
-    }
-
-
-
-    /* =========================================================
-       RENDER EVENTS
+       RENDER EVENTS & CATEGORY NAV
        ========================================================= */
 
     function renderEvents() {
+      const container = document.getElementById('events-container');
+      const cityFilter = document.getElementById('city-filter').value;
 
-      const container =
-        document.getElementById(
-          "events-container"
-        );
+      container.innerHTML = '';
 
+      // Filter events matching selected date and city
+      const filteredEvents = allEvents.filter(e => {
+        const matchesDate = (e.year === selectedYear && e.month === selectedMonth && e.date === selectedDay);
+        const matchesCity = (cityFilter === 'ALL' || e.city.toLowerCase() === cityFilter.toLowerCase());
+        return matchesDate && matchesCity;
+      });
 
-      container.innerHTML = "";
-
-
-      const selectedCity =
-        document.getElementById(
-          "city-filter"
-        ).value;
-
-
-
-      /* =====================================================
-         FILTER EVENTS BY DATE + CITY
-         ===================================================== */
-
-      const filtered =
-        allEvents.filter(
-          event => {
-
-            const matchesDate =
-              checkEventMatch(
-                event,
-                selectedYear,
-                selectedMonth,
-                selectedDay
-              );
-
-
-            const matchesCity =
-              selectedCity === "ALL" ||
-              (
-                event.city &&
-                event.city
-                  .toLowerCase()
-                  ===
-                selectedCity
-                  .toLowerCase()
-              );
-
-
-            return (
-              matchesDate &&
-              matchesCity
-            );
-
-          }
-        );
-
-
-
-      /* =====================================================
-         NO EVENTS
-         ===================================================== */
-
-      if (
-        filtered.length === 0
-      ) {
-
-        const currentMonthName =
-          monthNames[selectedMonth] ||
-          "";
-
-
+      if (filteredEvents.length === 0) {
         container.innerHTML = `
-
           <div class="no-events">
-
-            <p>
-              No events scheduled for
-              ${currentMonthName}
-              ${selectedDay},
-              ${selectedYear}.
-            </p>
-
+            <h3>No events found for this day.</h3>
+            <p>Try selecting a different date or clearing the city filter.</p>
           </div>
-
         `;
-
-
-        document.getElementById(
-          "category-navigation"
-        ).style.display = "none";
-
-
         return;
-
       }
 
-
-
-      /* =====================================================
-         GROUP EVENTS BY PRIMARY CATEGORY
-         ===================================================== */
-
-      const categoryGroups = {};
-
-
-      filtered.forEach(
-        event => {
-
-          const primaryCategory =
-            getPrimaryCategory(event);
-
-
-          if (
-            !categoryGroups[
-              primaryCategory
-            ]
-          ) {
-
-            categoryGroups[
-              primaryCategory
-            ] = [];
-
-          }
-
-
-          categoryGroups[
-            primaryCategory
-          ].push(event);
-
-        }
-      );
-
-
-
-      /* =====================================================
-         CATEGORY NAVIGATION
-         ===================================================== */
-
-      renderCategoryNavigation(
-        categoryGroups
-      );
-
-
-
-      /* =====================================================
-         SORT CATEGORY GROUPS
-         ===================================================== */
-
-      const sortedCategories =
-        sortCategories(
-          Object.keys(
-            categoryGroups
-          )
+      // Group by category order
+      categoryOrder.forEach(catName => {
+        const matchingCatEvents = filteredEvents.filter(e => 
+          e.categories.some(c => categoryKey(c) === categoryKey(catName))
         );
 
+        if (matchingCatEvents.length > 0) {
+          const section = document.createElement('div');
+          section.className = 'category-section';
+          section.id = `cat-${categoryKey(catName)}`;
 
+          let eventsHtml = `<div class="events-grid">`;
+          matchingCatEvents.forEach(evt => {
+            const dotColor = categoryDotColours[categoryKey(catName)] || 'var(--accent-pink)';
+            const tagsHtml = evt.categories.map(c => `<span class="tag-badge ${getCategoryClass(c)}">${escapeHtml(c)}</span>`).join('');
 
-      /* =====================================================
-         TODAY / PAST
-         ===================================================== */
+            eventsHtml += `
+              <div class="event-card">
+                <div class="img-wrapper">
+                  <div class="tag-container">${tagsHtml}</div>
+                  <img src="${escapeHtml(evt.img)}" alt="${escapeHtml(evt.title)}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
+                </div>
+                <div class="card-body">
+                  <h3>${escapeHtml(evt.title)}</h3>
+                  <div class="meta-info">
+                    <div class="meta-row">📍 <strong>${escapeHtml(evt.city)}</strong> ${evt.location ? '- ' + escapeHtml(evt.location) : ''}</div>
+                    ${evt.time ? `<div class="meta-row">🕒 ${escapeHtml(evt.time)}</div>` : ''}
+                  </div>
+                  <div class="description">${escapeHtml(evt.description)}</div>
+                  ${evt.link ? `<a href="${escapeHtml(evt.link)}" target="_blank" rel="noopener" class="btn-link">More Info & Tickets ↗</a>` : ''}
+                </div>
+              </div>
+            `;
+          });
+          eventsHtml += `</div>`;
 
-      const today =
-        new Date();
-
-
-      today.setHours(
-        0,
-        0,
-        0,
-        0
-      );
-
-
-      const selectedDateObj =
-        new Date(
-          selectedYear,
-          selectedMonth,
-          selectedDay
-        );
-
-
-      const isSelectedPast =
-        selectedDateObj < today;
-
-
-
-      /* =====================================================
-         RENDER EACH CATEGORY
-         ===================================================== */
-
-      sortedCategories.forEach(
-        category => {
-
-          const events =
-            categoryGroups[
-              category
-            ];
-
-
-          const section =
-            document.createElement(
-              "section"
-            );
-
-
-          section.className =
-            "category-section";
-
-
-          section.id =
-            `category-${slugify(category)}`;
-
-
-
-          const categoryDot =
-            categoryDotColours[
-              categoryKey(category)
-            ] ||
-            "var(--text-muted)";
-
-
-
-          /* =================================================
-             CATEGORY HEADER
-             ================================================= */
-
-          const header =
-            document.createElement(
-              "div"
-            );
-
-
-          header.className =
-            "category-header";
-
-
-          header.innerHTML = `
-
-            <div class="category-title-wrapper">
-
-              <span
-                class="category-colour-dot"
-                style="
-                  background:${categoryDot};
-                ">
-              </span>
-
-              <h2 class="category-title">
-                ${escapeHtml(category)}
-              </h2>
-
-              <span class="category-count">
-                ${events.length}
-              </span>
-
+          section.innerHTML = `
+            <div class="category-header">
+              <div class="category-title-wrapper">
+                <div class="category-colour-dot" style="background: ${categoryDotColours[categoryKey(catName)] || 'var(--accent-pink)'}"></div>
+                <h2 class="category-title">${escapeHtml(catName)}</h2>
+              </div>
+              <span class="category-count">${matchingCatEvents.length}</span>
             </div>
-
+            ${eventsHtml}
           `;
 
-
-          section.appendChild(
-            header
-          );
-
-
-
-          /* =================================================
-             EVENT GRID
-             ================================================= */
-
-          const grid =
-            document.createElement(
-              "div"
-            );
-
-
-          grid.className =
-            "events-grid";
-
-
-
-          events.forEach(
-            event => {
-
-
-              const tagHtml =
-                event.categories
-                  .map(
-                    category =>
-                      createTag(
-                        category
-                      )
-                  )
-                  .join('');
-
-
-
-              const addressText =
-                event.address
-                  ? `${event.address}, ${event.city}`
-                  : event.city;
-
-
-
-              const startMonthName =
-                monthNames[
-                  event.month
-                ] || "";
-
-
-
-              let dateText =
-                `${startMonthName} ${event.date}, ${event.year}`;
-
-
-
-              if (
-                event.endYear !== undefined &&
-                event.endMonth !== undefined &&
-                event.endDate !== undefined
-              ) {
-
-                const endMonthName =
-                  monthNames[
-                    event.endMonth
-                  ] || "";
-
-
-                dateText =
-                  `${startMonthName} ${event.date} – ${endMonthName} ${event.endDate}, ${event.endYear}`;
-
-              }
-
-
-
-              const cardClass =
-                isSelectedPast
-                  ? 'event-card past-event'
-                  : 'event-card';
-
-
-
-              const card =
-                document.createElement(
-                  "article"
-                );
-
-
-              card.className =
-                cardClass;
-
-
-
-              card.innerHTML = `
-
-                <div class="img-wrapper">
-
-                  <img
-                    src="${escapeHtml(event.img)}"
-                    alt="${escapeHtml(event.title)}"
-
-                    onerror="
-                      this.onerror=null;
-                      this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80';
-                    "
-                  >
-
-
-                  <div class="tag-container">
-
-                    ${tagHtml}
-
-                  </div>
-
-                </div>
-
-
-
-                <div class="card-body">
-
-                  <h3>
-                    ${escapeHtml(event.title)}
-                  </h3>
-
-
-                  <div class="meta-info">
-
-                    ${
-                      dateText
-                        ? `
-                          <span class="meta-row">
-                            📅
-                            <span>
-                              ${escapeHtml(dateText)}
-                            </span>
-                          </span>
-                        `
-                        : ''
-                    }
-
-
-                    ${
-                      addressText
-                        ? `
-                          <span class="meta-row">
-                            📍
-                            <span>
-                              ${escapeHtml(addressText)}
-                            </span>
-                          </span>
-                        `
-                        : ''
-                    }
-
-
-                    ${
-                      event.time
-                        ? `
-                          <span class="meta-row">
-                            🕒
-                            <span>
-                              ${escapeHtml(event.time)}
-                            </span>
-                          </span>
-                        `
-                        : ''
-                    }
-
-                  </div>
-
-
-                  ${
-                    event.desc
-                      ? `
-                        <div class="description">
-                          ${escapeHtml(event.desc)}
-                        </div>
-                      `
-                      : ''
-                  }
-
-
-                  ${
-                    event.url &&
-                    event.url !== '#'
-                      ? `
-                        <a
-                          href="${escapeHtml(event.url)}"
-                          target="_blank"
-                          rel="noopener"
-                          class="btn-link">
-
-                          Visit Official Website
-
-                        </a>
-                      `
-                      : ''
-                  }
-
-                </div>
-
-              `;
-
-
-              grid.appendChild(
-                card
-              );
-
-            }
-          );
-
-
-
-          section.appendChild(
-            grid
-          );
-
-
-          container.appendChild(
-            section
-          );
-
+          container.appendChild(section);
         }
-      );
-
+      });
     }
 
+    function buildCategoryNav() {
+      const navInner = document.getElementById('category-nav-inner');
+      navInner.innerHTML = '';
 
+      categoryOrder.forEach(catName => {
+        const btn = document.createElement('button');
+        btn.className = 'category-nav-btn';
+        btn.innerText = catName;
+        btn.onclick = () => {
+          const target = document.getElementById(`cat-${categoryKey(catName)}`);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        };
+        navInner.appendChild(btn);
+      });
+    }
 
-    /* =========================================================
-       START APP
-       ========================================================= */
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      initApp
-    );
-
+    // Run initialization on page load
+    window.onload = initApp;
 
   </script>
 
