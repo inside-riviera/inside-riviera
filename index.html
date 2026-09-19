@@ -1931,39 +1931,12 @@
            Otherwise use the first event.
            ===================================================== */
 
-        const targetEvent =
-          allEvents.find(
-            e =>
-              e.month === 8 &&
-              e.year === 2026
-          );
-
-
-        if (targetEvent) {
-
-          selectedYear =
-            targetEvent.year;
-
-          selectedMonth =
-            targetEvent.month;
-
-          selectedDay =
-            targetEvent.date;
-
-        } else if (
-          allEvents.length > 0
-        ) {
-
-          selectedYear =
-            allEvents[0].year;
-
-          selectedMonth =
-            allEvents[0].month;
-
-          selectedDay =
-            allEvents[0].date;
-
-        }
+const targetEvent = allEvents.find(e => e.month === 8 && e.year === 2026);
+if (targetEvent) {
+  selectedYear = targetEvent.year;
+  selectedMonth = targetEvent.month;
+  selectedDay = targetEvent.date;
+}
 
 
 
