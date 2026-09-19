@@ -63,7 +63,6 @@
       margin-bottom: 20px;
     }
 
-    /* Scaled-down Parasol & Waves Logo Graphic */
     .logo-graphic {
       display: block;
       margin: 0 auto;
@@ -576,12 +575,8 @@
 
 <body>
 
-  <!-- =========================================================
-       HERO WITH CENTERED, SMALLER WHITE LOGO & SUB-TAGLINE
-       ========================================================= -->
   <div class="hero">
     <div class="brand-container">
-      <!-- Scaled-down & Centered Parasol & Wave SVG Graphic -->
       <svg class="logo-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <g transform="translate(0, 0)">
           <path d="M12 2C9.5 2 7.2 2.9 5.4 4.3C7 5.2 8.7 5.7 12 5.7C15.3 5.7 17 5.2 18.6 4.3C16.8 2.9 14.5 2 12 2Z"/>
@@ -609,9 +604,6 @@
   </div>
 
   <div class="main-content">
-    <!-- =======================================================
-         CALENDAR
-         ======================================================= -->
     <div class="calendar-card">
       <div class="cal-header">
         <button class="nav-btn" onclick="changeMonth(-1)">&lt;</button>
@@ -632,9 +624,6 @@
       <div class="days-grid" id="days-grid"></div>
     </div>
 
-    <!-- =======================================================
-         CITY FILTER
-         ======================================================= -->
     <div class="filter-wrapper">
       <select class="city-select" id="city-filter" onchange="renderEvents()">
         <option value="ALL">All Cities (Italian & French Riviera)</option>
@@ -649,21 +638,12 @@
       </select>
     </div>
 
-    <!-- =======================================================
-         CATEGORY NAVIGATION
-         ======================================================= -->
     <div class="category-navigation" id="category-navigation">
       <div class="category-nav-inner" id="category-nav-inner"></div>
     </div>
 
-    <!-- =======================================================
-         EVENTS
-         ======================================================= -->
     <div id="events-container"></div>
 
-    <!-- =======================================================
-         SUBMIT EVENT
-         ======================================================= -->
     <div class="submit-section">
       <h2>Add Your Event</h2>
       <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
@@ -686,7 +666,6 @@
       "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
     ];
 
-    // Requested order: Free, Market, Public events on top; Private tour, Live Music, Sport at the end
     const categoryOrder = [
       "Free", "Market", "Public Event", "Exhibition", "Festival", 
       "Concert", "Family", "Private Tour", "Live Music", "Sport"
@@ -830,8 +809,9 @@
       const prevTotalDays = new Date(selectedYear, selectedMonth, 0).getDate();
 
       const today = new Date();
-      const isCurrentMonth = today.getFullYear() === selectedYear && today.getMonth() === selectedMonth;
+      today.setHours(0, 0, 0, 0);
 
+      // Render padding days from previous month (always past)
       for (let i = adjustedFirstDay - 1; i >= 0; i--) {
         const dayNum = prevTotalDays - i;
         const cell = document.createElement('div');
@@ -840,23 +820,31 @@
         gridEl.appendChild(cell);
       }
 
+      // Render days of the current month
       for (let d = 1; d <= totalDays; d++) {
         const cell = document.createElement('div');
         cell.className = 'day-cell';
 
-        if (isCurrentMonth && d === today.getDate() && selectedDay === today.getDate()) {
+        const cellDate = new Date(selectedYear, selectedMonth, d);
+        cellDate.setHours(0, 0, 0, 0);
+
+        // Grey out if it's before today
+        if (cellDate < today) {
+          cell.classList.add('past');
+        }
+
+        if (selectedYear === today.getFullYear() && selectedMonth === today.getMonth() && d === today.getDate() && selectedDay === today.getDate()) {
           cell.classList.add('active');
         } else if (d === selectedDay) {
           cell.classList.add('active');
         }
 
-        const currentDateObj = new Date(selectedYear, selectedMonth, d);
         const hasEvents = allEvents.some(e => {
           const startDateObj = new Date(e.year, e.month, e.date);
           const endDateObj = (!isNaN(e.endYear) && !isNaN(e.endMonth) && !isNaN(e.endDate))
             ? new Date(e.endYear, e.endMonth, e.endDate)
             : startDateObj;
-          return currentDateObj >= startDateObj && currentDateObj <= endDateObj;
+          return cellDate >= startDateObj && cellDate <= endDateObj;
         });
 
         let html = `<div class="day-number">${d}</div>`;
