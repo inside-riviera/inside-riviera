@@ -315,7 +315,6 @@
       opacity: 0.9;
     }
 
-    /* Distinct Brand Palette Button Styling for the 7 Categories */
     .nav-concert { background: var(--soft-purple); color: var(--text-dark); border-color: rgba(238, 232, 255, 0.8); }
     .nav-exhibition { background: var(--accent-pink); color: #ffffff; }
     .nav-public-event { background: var(--text-dark); color: #ffffff; }
@@ -432,7 +431,6 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.12);
     }
 
-    /* Tag Colours matching the 7 categories */
     .tag-concert { background: var(--soft-purple); color: var(--text-dark); }
     .tag-exhibition { background: var(--accent-pink); color: #ffffff; }
     .tag-public-event { background: var(--text-dark); color: #ffffff; }
@@ -770,6 +768,75 @@
       return url.replace(/^["']|["']$/g, '').trim();
     }
 
+    // Helper to check if a given date matches an event's frequency and recurrence rules
+    function isEventActiveOnDate(e, targetDate) {
+      const startDate = new Date(e.year, e.month, e.date);
+      startDate.setHours(0, 0, 0, 0);
+
+      const endDate = (!isNaN(e.endYear) && !isNaN(e.endMonth) && !isNaN(e.endDate))
+        ? new Date(e.endYear, e.endMonth, e.endDate)
+        : startDate;
+      endDate.setHours(0, 0, 0, 0);
+
+      if (targetDate < startDate || targetDate > endDate) {
+        return false;
+      }
+
+      const freq = e.frequency.toLowerCase();
+      const rec = e.recurrence.toLowerCase();
+
+      // 1. One-off
+      if (freq === 'one-off' || freq === 'one off' || freq === '') {
+        // Active strictly between start and end date (or exact start date if no range)
+        return targetDate >= startDate && targetDate <= endDate;
+      }
+
+      // 2. Daily
+      if (freq === 'daily') {
+        return true; // Any day within the start/end range
+      }
+
+      // 3. Weekly & Biweekly recurrence parsing
+      const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      const targetDayName = dayNames[targetDate.getDay()];
+
+      // Check specific day-of-week matching (e.g. "Monday, Wednesday", "Monday Tuesday Wednesday...")
+      const matchesDayOfWeek = rec.includes(targetDayName);
+
+      if (!matchesDayOfWeek && rec !== '') {
+        return false;
+      }
+
+      // Check ordinal week occurrences (e.g., "1st and 3rd Sunday")
+      if (rec.includes('1st') || rec.includes('2nd') || rec.includes('3rd') || rec.includes('4th') || rec.includes('last')) {
+        const weekNum = Math.ceil(targetDate.getDate() / 7);
+        let matchesOrdinal = false;
+        if (rec.includes('1st') && weekNum === 1) matchesOrdinal = true;
+        if (rec.includes('2nd') && weekNum === 2) matchesOrdinal = true;
+        if (rec.includes('3rd') && weekNum === 3) matchesOrdinal = true;
+        if (rec.includes('4th') && weekNum === 4) matchesOrdinal = true;
+        if (rec.includes('last')) {
+          const nextWeek = new Date(targetDate);
+          nextWeek.setDate(targetDate.getDate() + 7);
+          if (nextWeek.getMonth() !== targetDate.getMonth()) matchesOrdinal = true;
+        }
+        if (!matchesOrdinal) return false;
+      }
+
+      // 4. Biweekly / Every other week check
+      if (freq === 'biweekly' || rec.includes('every other')) {
+        const diffTime = targetDate.getTime() - startDate.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const diffWeeks = Math.floor(diffDays / 7);
+        // Ensure it aligns on alternating weeks (even week differences from start)
+        if (diffWeeks % 2 !== 0) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
     async function initApp() {
       try {
         const res = await fetch('https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=' + new Date().getTime());
@@ -791,9 +858,10 @@
           const endY = parseNum(getField(e, ['endyear', 'endanno']));
           const endMInput = parseNum(getField(e, ['endmonth', 'endmese']));
           const endD = parseNum(getField(e, ['enddate', 'endgiorno']));
-          const isDaily = parseBoolean(getField(e, ['daily', 'isdaily', 'ogni']));
           const rawImg = cleanImageUrl(getField(e, ['img', 'image', 'photo', 'picture', 'foto', 'imgurl', 'imageurl']));
           const categories = parseCategories(getField(e, ['category', 'categories', 'categoria', 'categorie', 'tags', 'tag']));
+          const frequency = getField(e, ['frequency', 'freq', 'frequenza']);
+          const recurrence = getField(e, ['recurrence', 'ricorrenza', 'days', 'schedule']);
 
           return {
             year: y,
@@ -802,7 +870,6 @@
             endYear: endY,
             endMonth: !isNaN(endMInput) ? endMInput - 1 : NaN,
             endDate: endD,
-            isDaily: isDaily,
             title: getField(e, ['title', 'titolo', 'name', 'event']),
             city: getField(e, ['city', 'citta', 'town', 'location']),
             time: getField(e, ['time', 'orario', 'hours', 'ora']),
@@ -811,6 +878,8 @@
             link: getField(e, ['link', 'url', 'website', 'sito', 'ticketlink']),
             img: rawImg || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
             categories: categories,
+            frequency: frequency,
+            recurrence: recurrence,
             raw: e
           };
         }).filter(e => !isNaN(e.year) && !isNaN(e.month) && !isNaN(e.date));
@@ -869,13 +938,7 @@
           cell.classList.add('active');
         }
 
-        const hasEvents = allEvents.some(e => {
-          const startDateObj = new Date(e.year, e.month, e.date);
-          const endDateObj = (!isNaN(e.endYear) && !isNaN(e.endMonth) && !isNaN(e.endDate))
-            ? new Date(e.endYear, e.endMonth, e.endDate)
-            : startDateObj;
-          return cellDate >= startDateObj && cellDate <= endDateObj;
-        });
+        const hasEvents = allEvents.some(e => isEventActiveOnDate(e, cellDate));
 
         let html = `<div class="day-number">${d}</div>`;
         if (hasEvents) html += `<div class="event-dot"></div>`;
@@ -911,13 +974,9 @@
       container.innerHTML = '';
 
       const selectedDateObj = new Date(selectedYear, selectedMonth, selectedDay);
+      selectedDateObj.setHours(0, 0, 0, 0);
 
       const filteredEvents = allEvents.filter(e => {
-        const startDateObj = new Date(e.year, e.month, e.date);
-        const endDateObj = (!isNaN(e.endYear) && !isNaN(e.endMonth) && !isNaN(e.endDate))
-          ? new Date(e.endYear, e.endMonth, e.endDate)
-          : startDateObj;
-
         const matchesCity = (cityFilter === 'ALL' || e.city.toLowerCase() === cityFilter.toLowerCase());
 
         if (searchQuery !== '') {
@@ -927,8 +986,8 @@
                                 e.location.toLowerCase().includes(searchQuery);
           return matchesCity && matchesSearch;
         } else {
-          const matchesDate = (selectedDateObj >= startDateObj && selectedDateObj <= endDateObj);
-          return matchesCity && matchesDate;
+          const matchesFrequency = isEventActiveOnDate(e, selectedDateObj);
+          return matchesCity && matchesFrequency;
         }
       });
 
