@@ -270,7 +270,7 @@
     }
 
     /* =========================================================
-       CATEGORY NAVIGATION
+       CATEGORY & MENU NAVIGATION
        ========================================================= */
     .category-navigation {
       background: rgba(255,255,255,0.96);
@@ -315,14 +315,16 @@
       opacity: 0.9;
     }
 
+    .nav-market { background: var(--soft-pink); color: var(--accent-pink); border-color: rgba(255, 0, 122, 0.3); }
+    .nav-public-event { background: var(--text-dark); color: #ffffff; }
     .nav-concert { background: var(--soft-purple); color: var(--text-dark); border-color: rgba(238, 232, 255, 0.8); }
     .nav-exhibition { background: var(--accent-pink); color: #ffffff; }
-    .nav-public-event { background: var(--text-dark); color: #ffffff; }
     .nav-live-music { background: #1e293b; color: var(--accent-green); }
     .nav-private-tour { background: #e0f2fe; color: #0369a1; border-color: rgba(3, 105, 161, 0.2); }
     .nav-sport { background: #fff1f2; color: #e11d48; border-color: rgba(225, 29, 72, 0.2); }
-    .nav-market { background: var(--soft-pink); color: var(--accent-pink); border-color: rgba(255, 0, 122, 0.3); }
-    .nav-default { background: var(--soft-dark); color: var(--text-dark); }
+    
+    /* Special styling for top menu pages */
+    .nav-menu-link { background: #f1f5f9; color: var(--text-dark); border: 1px solid var(--border); }
 
     /* =========================================================
        CATEGORY SECTION
@@ -368,6 +370,77 @@
       height: 12px;
       border-radius: 50%;
       flex-shrink: 0;
+    }
+
+    /* =========================================================
+       INFO / STATIC PAGES SECTIONS (Who are we & Contact Us)
+       ========================================================= */
+    .info-section {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 38px;
+      scroll-margin-top: 80px;
+    }
+
+    .info-section h2 {
+      font-size: 1.3rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+      color: var(--text-dark);
+    }
+
+    .info-section p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 20px;
+      max-width: 500px;
+    }
+
+    .contact-form input, .contact-form textarea {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      background: var(--page-bg);
+    }
+
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: var(--accent-pink);
+      background: #ffffff;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit-btn {
+      background: var(--accent-pink);
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+      align-self: flex-start;
+      transition: opacity 0.2s ease;
+    }
+
+    .form-submit-btn:hover {
+      opacity: 0.9;
     }
 
     /* =========================================================
@@ -662,11 +735,53 @@
       </select>
     </div>
 
+    <!-- TOP MENU & CATEGORY NAVIGATION BAR -->
     <div class="category-navigation" id="category-navigation">
-      <div class="category-nav-inner" id="category-nav-inner"></div>
+      <div class="category-nav-inner" id="category-nav-inner">
+        <!-- Event Categories -->
+        <button class="category-nav-btn nav-market" onclick="scrollToSection('cat-market')">Market</button>
+        <button class="category-nav-btn nav-public-event" onclick="scrollToSection('cat-public-event')">Public Event</button>
+        <button class="category-nav-btn nav-concert" onclick="scrollToSection('cat-concert')">Concert</button>
+        <button class="category-nav-btn nav-exhibition" onclick="scrollToSection('cat-exhibition')">Exhibition</button>
+        <button class="category-nav-btn nav-live-music" onclick="scrollToSection('cat-live-music')">Live Music</button>
+        <button class="category-nav-btn nav-private-tour" onclick="scrollToSection('cat-private-tour')">Private Tour</button>
+        <button class="category-nav-btn nav-sport" onclick="scrollToSection('cat-sport')">Sport</button>
+        <!-- Who Are We & Contact Us Menu Options -->
+        <button class="category-nav-btn nav-menu-link" onclick="scrollToSection('who-are-we')">Who Are We?</button>
+        <button class="category-nav-btn nav-menu-link" onclick="scrollToSection('contact-us')">Contact Us</button>
+      </div>
     </div>
 
+    <!-- EVENTS RENDER CONTAINER -->
     <div id="events-container"></div>
+
+    <!-- WHO ARE WE? SECTION -->
+    <div class="info-section" id="who-are-we">
+      <h2>Who Are We?</h2>
+      <p>
+        We noticed that there isn't a unique site collecting events from both the Italian and French Riviera. 
+        That's why we made this site for locals and tourists who like to visit both sides, experience different cultures, 
+        spend a weekend in France and the week in Italy, or vice versa.
+      </p>
+      <p>
+        We want to keep things dynamic! We invite users to add and suggest their own events so that everyone can 
+        discover the hidden gems and vibrant happenings across the entire coastline.
+      </p>
+    </div>
+
+    <!-- CONTACT US SECTION -->
+    <div class="info-section" id="contact-us">
+      <h2>Contact Us</h2>
+      <p>Have a question, feedback, or want to get in touch? Send us a message below and it will go straight to our personal email.</p>
+      
+      <!-- Integrated Formspree Endpoint -->
+      <form class="contact-form" action="https://formspree.io/f/xeaokrqw" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email Address" required>
+        <textarea name="message" placeholder="Your Message..." required></textarea>
+        <button type="submit" class="form-submit-btn">Send Message ↗</button>
+      </form>
+    </div>
 
     <div class="submit-section">
       <h2>Add Your Event</h2>
@@ -690,7 +805,6 @@
       "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
     ];
 
-    // Market and Public Event placed at the top
     const categoryOrder = [
       "Market", "Public Event", "Concert", "Exhibition", "Live Music", "Private Tour", "Sport"
     ];
@@ -699,12 +813,6 @@
       "concert": "tag-concert", "exhibition": "tag-exhibition", 
       "public event": "tag-public-event", "live music": "tag-live-music", 
       "private tour": "tag-private-tour", "sport": "tag-sport", "market": "tag-market"
-    };
-
-    const navButtonStyles = {
-      "concert": "nav-concert", "exhibition": "nav-exhibition", 
-      "public event": "nav-public-event", "live music": "nav-live-music", 
-      "private tour": "nav-private-tour", "sport": "nav-sport", "market": "nav-market"
     };
 
     const categoryDotColours = {
@@ -746,10 +854,6 @@
       return categoryStyles[categoryKey(category)] || 'tag-default';
     }
 
-    function getNavButtonClass(category) {
-      return navButtonStyles[categoryKey(category)] || 'nav-default';
-    }
-
     function escapeHtml(value) {
       return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
@@ -760,6 +864,11 @@
       const markdownMatch = url.match(/\((https?:\/\/[^)\s]+)\)/);
       if (markdownMatch) url = markdownMatch[1];
       return url.replace(/^["']|["']$/g, '').trim();
+    }
+
+    function scrollToSection(id) {
+      const target = document.getElementById(id);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
     }
 
     function isEventActiveOnDate(e, targetDate) {
@@ -870,7 +979,6 @@
 
         buildCalendar();
         renderEvents();
-        buildCategoryNav();
       } catch (err) {
         console.error(err);
         document.getElementById('events-container').innerHTML = `
@@ -1030,21 +1138,6 @@
           `;
           container.appendChild(section);
         }
-      });
-    }
-
-    function buildCategoryNav() {
-      const navInner = document.getElementById('category-nav-inner');
-      navInner.innerHTML = '';
-      categoryOrder.forEach(catName => {
-        const btn = document.createElement('button');
-        btn.className = `category-nav-btn ${getNavButtonClass(catName)}`;
-        btn.innerText = catName;
-        btn.onclick = () => {
-          const target = document.getElementById(`cat-${categoryKey(catName)}`);
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        };
-        navInner.appendChild(btn);
       });
     }
 
