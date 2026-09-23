@@ -690,8 +690,9 @@
       "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
     ];
 
+    // Market and Public Event placed at the top
     const categoryOrder = [
-      "Concert", "Exhibition", "Public Event", "Live Music", "Private Tour", "Sport", "Market"
+      "Market", "Public Event", "Concert", "Exhibition", "Live Music", "Private Tour", "Sport"
     ];
 
     const categoryStyles = {
@@ -725,13 +726,6 @@
       if (val === undefined || val === null || val === '') return NaN;
       const num = Number(String(val).replace(/,/g, '').trim());
       return isNaN(num) ? NaN : num;
-    }
-
-    function parseBoolean(val) {
-      if (typeof val === 'boolean') return val;
-      if (!val) return false;
-      const str = String(val).trim().toUpperCase();
-      return str === 'TRUE' || str === '1' || str === 'YES';
     }
 
     function cleanCategoryName(category) {
@@ -768,7 +762,6 @@
       return url.replace(/^["']|["']$/g, '').trim();
     }
 
-    // Helper to check if a given date matches an event's frequency and recurrence rules
     function isEventActiveOnDate(e, targetDate) {
       const startDate = new Date(e.year, e.month, e.date);
       startDate.setHours(0, 0, 0, 0);
@@ -785,29 +778,22 @@
       const freq = e.frequency.toLowerCase();
       const rec = e.recurrence.toLowerCase();
 
-      // 1. One-off
       if (freq === 'one-off' || freq === 'one off' || freq === '') {
-        // Active strictly between start and end date (or exact start date if no range)
         return targetDate >= startDate && targetDate <= endDate;
       }
 
-      // 2. Daily
       if (freq === 'daily') {
-        return true; // Any day within the start/end range
+        return true;
       }
 
-      // 3. Weekly & Biweekly recurrence parsing
       const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
       const targetDayName = dayNames[targetDate.getDay()];
 
-      // Check specific day-of-week matching (e.g. "Monday, Wednesday", "Monday Tuesday Wednesday...")
       const matchesDayOfWeek = rec.includes(targetDayName);
-
       if (!matchesDayOfWeek && rec !== '') {
         return false;
       }
 
-      // Check ordinal week occurrences (e.g., "1st and 3rd Sunday")
       if (rec.includes('1st') || rec.includes('2nd') || rec.includes('3rd') || rec.includes('4th') || rec.includes('last')) {
         const weekNum = Math.ceil(targetDate.getDate() / 7);
         let matchesOrdinal = false;
@@ -823,12 +809,10 @@
         if (!matchesOrdinal) return false;
       }
 
-      // 4. Biweekly / Every other week check
       if (freq === 'biweekly' || rec.includes('every other')) {
         const diffTime = targetDate.getTime() - startDate.getTime();
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
         const diffWeeks = Math.floor(diffDays / 7);
-        // Ensure it aligns on alternating weeks (even week differences from start)
         if (diffWeeks % 2 !== 0) {
           return false;
         }
