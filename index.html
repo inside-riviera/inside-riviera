@@ -43,43 +43,75 @@
     }
 
     /* =========================================================
-       HERO
+       HERO & TOP NAVIGATION BAR
        ========================================================= */
     .hero {
       position: relative;
       background: linear-gradient(rgba(15, 23, 42, 0.25), rgba(15, 23, 42, 0.35)),
                   url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center / cover no-repeat;
-      padding: 50px 20px 140px 20px;
-      text-align: center;
+      padding: 30px 20px 140px 20px;
       color: #ffffff;
     }
 
-    .brand-container {
+    .top-nav-bar {
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 20px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
     }
 
     .logo-graphic {
-      display: block;
-      margin: 0 auto;
-      width: 36px;
-      height: 30px;
+      width: 32px;
+      height: 28px;
       fill: var(--accent-green);
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      flex-shrink: 0;
     }
 
-    .hero h1 {
-      font-size: 1.8rem;
+    .brand-title {
+      font-size: 1.4rem;
       font-weight: 900;
-      letter-spacing: 2.5px;
-      margin: 0;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: #ffffff;
       text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .top-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .top-link-btn {
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+      transition: opacity 0.2s ease;
+    }
+
+    .top-link-btn:hover {
+      opacity: 0.8;
+    }
+
+    .hero-inner-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .brand-tagline {
@@ -89,7 +121,7 @@
       color: #ffffff;
       text-transform: uppercase;
       opacity: 0.85;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .hero-title-main {
@@ -270,7 +302,7 @@
     }
 
     /* =========================================================
-       CATEGORY & MENU NAVIGATION
+       CATEGORY NAVIGATION BAR
        ========================================================= */
     .category-navigation {
       background: rgba(255,255,255,0.96);
@@ -322,9 +354,6 @@
     .nav-live-music { background: #1e293b; color: var(--accent-green); }
     .nav-private-tour { background: #e0f2fe; color: #0369a1; border-color: rgba(3, 105, 161, 0.2); }
     .nav-sport { background: #fff1f2; color: #e11d48; border-color: rgba(225, 29, 72, 0.2); }
-    
-    /* Special styling for top menu pages */
-    .nav-menu-link { background: #f1f5f9; color: var(--text-dark); border: 1px solid var(--border); }
 
     /* =========================================================
        CATEGORY SECTION
@@ -617,10 +646,19 @@
        ========================================================= */
     @media (max-width: 700px) {
       .hero {
-        padding: 30px 18px 120px 18px;
+        padding: 20px 15px 120px 15px;
       }
-      .hero h1 {
-        font-size: 1.5rem;
+      .top-nav-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+      }
+      .brand-title {
+        font-size: 1.2rem;
+      }
+      .top-links {
+        gap: 16px;
       }
       .hero .highlight {
         font-size: 2.5rem;
@@ -671,31 +709,39 @@
 <body>
 
   <div class="hero">
-    <div class="brand-container">
-      <svg class="logo-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <g transform="translate(0, 0)">
-          <path d="M12 2C9.5 2 7.2 2.9 5.4 4.3C7 5.2 8.7 5.7 12 5.7C15.3 5.7 17 5.2 18.6 4.3C16.8 2.9 14.5 2 12 2Z"/>
-          <path d="M4.3 5.5C2.5 7.2 1.5 9.5 1.5 12H5C5 9.8 5.7 7.5 7 5.5H4.3Z"/>
-          <path d="M19.7 5.5C21 7.5 21.7 9.8 21.7 12H25.2C25.2 9.5 24.2 7.2 22.4 5.5H19.7Z"/>
-          <path d="M12 6C8.5 6 5.5 7 3.5 8.3C3.2 8.9 3 9.4 3 10H21C21 9.4 20.8 8.9 20.5 8.3C18.5 7 15.5 6 12 6Z"/>
-          <path d="M11 10.5V19.3C10.4 19.4 9.9 19.6 9.4 19.8C9.8 20.5 10.8 21 12 21C13.2 21 14.2 20.5 14.6 19.8C14.1 19.6 13.6 19.4 13 19.3V10.5H11Z"/>
-          <path d="M2.5 22C4.5 22 5.5 21 7.5 22C9.5 23 10.5 22 12.5 22C14.5 22 15.5 23 17.5 22C19.5 21 20.5 22 22.5 22" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-          <path d="M2.5 24C4.5 24 5.5 23 7.5 24C9.5 25 10.5 24 12.5 24C14.5 24 15.5 25 17.5 24C19.5 23 20.5 24 22.5 24" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-        </g>
-      </svg>
-      
-      <h1>Inside Riviera</h1>
-      <div class="brand-tagline">Events / Places / Lifestyle</div>
+    <!-- TOP HEADER BAR WITH LOGO & NAVIGATION LINKS -->
+    <div class="top-nav-bar">
+      <div class="brand-group">
+        <svg class="logo-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(0, 0)">
+            <path d="M12 2C9.5 2 7.2 2.9 5.4 4.3C7 5.2 8.7 5.7 12 5.7C15.3 5.7 17 5.2 18.6 4.3C16.8 2.9 14.5 2 12 2Z"/>
+            <path d="M4.3 5.5C2.5 7.2 1.5 9.5 1.5 12H5C5 9.8 5.7 7.5 7 5.5H4.3Z"/>
+            <path d="M19.7 5.5C21 7.5 21.7 9.8 21.7 12H25.2C25.2 9.5 24.2 7.2 22.4 5.5H19.7Z"/>
+            <path d="M12 6C8.5 6 5.5 7 3.5 8.3C3.2 8.9 3 9.4 3 10H21C21 9.4 20.8 8.9 20.5 8.3C18.5 7 15.5 6 12 6Z"/>
+            <path d="M11 10.5V19.3C10.4 19.4 9.9 19.6 9.4 19.8C9.8 20.5 10.8 21 12 21C13.2 21 14.2 20.5 14.6 19.8C14.1 19.6 13.6 19.4 13 19.3V10.5H11Z"/>
+            <path d="M2.5 22C4.5 22 5.5 21 7.5 22C9.5 23 10.5 22 12.5 22C14.5 22 15.5 23 17.5 22C19.5 21 20.5 22 22.5 22" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <path d="M2.5 24C4.5 24 5.5 23 7.5 24C9.5 25 10.5 24 12.5 24C14.5 24 15.5 25 17.5 24C19.5 23 20.5 24 22.5 24" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+          </g>
+        </svg>
+        <span class="brand-title">Inside Riviera</span>
+      </div>
+      <div class="top-links">
+        <button class="top-link-btn" onclick="scrollToSection('who-are-we')">Who Are We?</button>
+        <button class="top-link-btn" onclick="scrollToSection('contact-us')">Contact Us</button>
+      </div>
     </div>
 
-    <div class="hero-title-main">What's on</div>
-    <span class="highlight" id="hero-date-text">TODAY</span>
-
-    <p>
-      Events, markets, and things to do across Sanremo,
-      Bordighera, Ventimiglia, Vallecrosia, Ospedaletti,
-      Vallebona, Menton, and Monte Carlo.
-    </p>
+    <!-- HERO MAIN TEXT -->
+    <div class="hero-inner-content">
+      <div class="brand-tagline">Events / Places / Lifestyle</div>
+      <div class="hero-title-main">What's on</div>
+      <span class="highlight" id="hero-date-text">TODAY</span>
+      <p>
+        Events, markets, and things to do across Sanremo,
+        Bordighera, Ventimiglia, Vallecrosia, Ospedaletti,
+        Vallebona, Menton, and Monte Carlo.
+      </p>
+    </div>
   </div>
 
   <div class="main-content">
@@ -735,10 +781,9 @@
       </select>
     </div>
 
-    <!-- TOP MENU & CATEGORY NAVIGATION BAR -->
+    <!-- CATEGORY NAVIGATION BAR -->
     <div class="category-navigation" id="category-navigation">
       <div class="category-nav-inner" id="category-nav-inner">
-        <!-- Event Categories -->
         <button class="category-nav-btn nav-market" onclick="scrollToSection('cat-market')">Market</button>
         <button class="category-nav-btn nav-public-event" onclick="scrollToSection('cat-public-event')">Public Event</button>
         <button class="category-nav-btn nav-concert" onclick="scrollToSection('cat-concert')">Concert</button>
@@ -746,9 +791,6 @@
         <button class="category-nav-btn nav-live-music" onclick="scrollToSection('cat-live-music')">Live Music</button>
         <button class="category-nav-btn nav-private-tour" onclick="scrollToSection('cat-private-tour')">Private Tour</button>
         <button class="category-nav-btn nav-sport" onclick="scrollToSection('cat-sport')">Sport</button>
-        <!-- Who Are We & Contact Us Menu Options -->
-        <button class="category-nav-btn nav-menu-link" onclick="scrollToSection('who-are-we')">Who Are We?</button>
-        <button class="category-nav-btn nav-menu-link" onclick="scrollToSection('contact-us')">Contact Us</button>
       </div>
     </div>
 
@@ -759,13 +801,13 @@
     <div class="info-section" id="who-are-we">
       <h2>Who Are We?</h2>
       <p>
-        We noticed that there isn't a unique site collecting events from both the Italian and French Riviera. 
-        That's why we made this site for locals and tourists who like to visit both sides, experience different cultures, 
-        spend a weekend in France and the week in Italy, or vice versa.
+        We noticed that there isn't a single site collecting events from both the Italian and French Riviera. 
+        That's why we built Inside Riviera—created specifically for locals and tourists who love exploring both sides of the coast, 
+        experiencing different cultures, and seamlessly transitioning from a weekend in France to a week in Italy (or vice versa!).
       </p>
       <p>
-        We want to keep things dynamic! We invite users to add and suggest their own events so that everyone can 
-        discover the hidden gems and vibrant happenings across the entire coastline.
+        We want to keep this platform dynamic and community-driven. We warmly invite locals, venues, and organizers to 
+        suggest their own events so everyone can discover hidden gems and vibrant happenings across the entire coastline.
       </p>
     </div>
 
@@ -774,7 +816,7 @@
       <h2>Contact Us</h2>
       <p>Have a question, feedback, or want to get in touch? Send us a message below and it will go straight to our personal email.</p>
       
-      <!-- Integrated Formspree Endpoint -->
+      <!-- Formspree Endpoint -->
       <form class="contact-form" action="https://formspree.io/f/xeaokrqw" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email Address" required>
