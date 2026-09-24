@@ -47,14 +47,14 @@
        ========================================================= */
     .hero {
       position: relative;
-      background: linear-gradient(rgba(15, 23, 42, 0.25), rgba(15, 23, 42, 0.35)),
+      background: linear-gradient(rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.3)),
                   url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center / cover no-repeat;
-      padding: 30px 20px 140px 20px;
+      padding: 25px 30px 140px 30px;
       color: #ffffff;
     }
 
     .top-nav-bar {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto 40px auto;
       display: flex;
       align-items: center;
@@ -66,20 +66,20 @@
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
     }
 
     .logo-graphic {
-      width: 32px;
-      height: 28px;
+      width: 28px;
+      height: 24px;
       fill: var(--accent-green);
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
       flex-shrink: 0;
     }
 
     .brand-title {
-      font-size: 1.4rem;
+      font-size: 1.15rem;
       font-weight: 900;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -87,31 +87,51 @@
       text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
-    .top-links {
+    .top-center-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 28px;
     }
 
-    .top-link-btn {
+    .top-center-links button {
       background: none;
       border: none;
       color: #ffffff;
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 0.9rem;
+      font-weight: 500;
       cursor: pointer;
+      opacity: 0.9;
       text-shadow: 0 1px 4px rgba(0,0,0,0.4);
       transition: opacity 0.2s ease;
     }
 
-    .top-link-btn:hover {
-      opacity: 0.8;
+    .top-center-links button:hover {
+      opacity: 1;
+    }
+
+    .top-right-icons {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .hero-inner-content {
-      text-align: center;
+      position: relative;
       max-width: 800px;
       margin: 0 auto;
+      padding-left: 20px;
     }
 
     .brand-tagline {
@@ -121,33 +141,43 @@
       color: #ffffff;
       text-transform: uppercase;
       opacity: 0.85;
-      margin-bottom: 12px;
-    }
-
-    .hero-title-main {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      opacity: 0.85;
-      text-transform: uppercase;
+      margin-bottom: 8px;
     }
 
     .hero .highlight {
       display: block;
-      font-size: 3.2rem;
+      font-size: 3.6rem;
       font-weight: 900;
-      color: var(--accent-green);
+      color: #ffffff;
       letter-spacing: 2px;
       margin-bottom: 12px;
       text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
     .hero p {
-      font-size: 0.95rem;
-      max-width: 650px;
-      margin: 0 auto;
+      font-size: 0.9rem;
+      max-width: 540px;
       opacity: 0.9;
       line-height: 1.4;
+    }
+
+    .hero-script-watermark {
+      position: absolute;
+      right: 10px;
+      bottom: -30px;
+      font-family: "Brush Script MT", cursive, sans-serif;
+      font-size: 2.2rem;
+      color: #ffffff;
+      opacity: 0.85;
+      transform: rotate(-6deg);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
+
+    .hero-script-watermark span {
+      display: block;
+      font-size: 1.2rem;
+      text-align: right;
     }
 
     /* =========================================================
@@ -155,7 +185,7 @@
        ========================================================= */
     .main-content {
       max-width: 1100px;
-      margin: -100px auto 40px auto;
+      margin: -90px auto 40px auto;
       padding: 0 20px;
       position: relative;
       z-index: 10;
@@ -166,8 +196,8 @@
        ========================================================= */
     .calendar-card {
       background: #ffffff;
-      border-radius: 24px;
-      padding: 28px 32px;
+      border-radius: 20px;
+      padding: 24px 28px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
       max-width: 480px;
       margin: 0 auto 24px auto;
@@ -177,11 +207,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .cal-header h2 {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 800;
       letter-spacing: 1px;
     }
@@ -189,8 +219,8 @@
     .nav-btn {
       background: #f1f5f9;
       border: none;
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       cursor: pointer;
       font-weight: bold;
@@ -208,26 +238,26 @@
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
       color: var(--text-muted);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .days-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 8px 0;
+      gap: 6px 0;
       text-align: center;
     }
 
     .day-cell {
-      height: 40px;
+      height: 38px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
       position: relative;
@@ -235,8 +265,8 @@
     }
 
     .day-number {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -281,11 +311,11 @@
     .city-select, .search-input {
       background: #ffffff;
       border: 1px solid var(--border);
-      padding: 12px 20px;
+      padding: 11px 18px;
       border-radius: 30px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      font-weight: 500;
+      font-size: 0.88rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       outline: none;
     }
 
@@ -294,7 +324,7 @@
     }
 
     .search-input {
-      width: 260px;
+      width: 250px;
     }
 
     .search-input:focus, .city-select:focus {
@@ -308,7 +338,7 @@
       background: rgba(255,255,255,0.96);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 12px;
+      padding: 10px 14px;
       margin-bottom: 28px;
       box-shadow: var(--shadow);
       position: sticky;
@@ -327,33 +357,38 @@
       gap: 8px;
       min-width: max-content;
       justify-content: center;
+      align-items: center;
     }
 
     .category-nav-btn {
       border: 1px solid transparent;
-      padding: 8px 14px;
+      padding: 7px 13px;
       border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 800;
+      font-size: 0.75rem;
+      font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .category-nav-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
       opacity: 0.9;
     }
 
-    .nav-market { background: var(--soft-pink); color: var(--accent-pink); border-color: rgba(255, 0, 122, 0.3); }
+    .nav-market { background: var(--soft-pink); color: var(--accent-pink); border-color: rgba(255, 0, 122, 0.2); }
     .nav-public-event { background: var(--text-dark); color: #ffffff; }
     .nav-concert { background: var(--soft-purple); color: var(--text-dark); border-color: rgba(238, 232, 255, 0.8); }
     .nav-exhibition { background: var(--accent-pink); color: #ffffff; }
-    .nav-live-music { background: #1e293b; color: var(--accent-green); }
+    .nav-live-music { background: #f1f5f9; color: var(--text-dark); }
     .nav-private-tour { background: #e0f2fe; color: #0369a1; border-color: rgba(3, 105, 161, 0.2); }
     .nav-sport { background: #fff1f2; color: #e11d48; border-color: rgba(225, 29, 72, 0.2); }
+    .nav-info { background: #f8fafc; color: var(--text-muted); border-color: var(--border); }
 
     /* =========================================================
        CATEGORY SECTION
@@ -369,8 +404,8 @@
       justify-content: space-between;
       gap: 15px;
       margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
     }
 
     .category-title-wrapper {
@@ -380,23 +415,23 @@
     }
 
     .category-title {
-      font-size: 1.25rem;
-      font-weight: 900;
+      font-size: 1.15rem;
+      font-weight: 800;
       letter-spacing: -0.2px;
     }
 
     .category-count {
-      background: var(--soft-dark);
+      background: #f1f5f9;
       color: var(--text-muted);
-      font-size: 0.72rem;
-      font-weight: 800;
-      padding: 4px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
       border-radius: 999px;
     }
 
     .category-colour-dot {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -414,14 +449,14 @@
     }
 
     .info-section h2 {
-      font-size: 1.3rem;
-      font-weight: 900;
-      margin-bottom: 14px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
       color: var(--text-dark);
     }
 
     .info-section p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.6;
       margin-bottom: 12px;
@@ -431,16 +466,16 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      margin-top: 20px;
+      margin-top: 18px;
       max-width: 500px;
     }
 
     .contact-form input, .contact-form textarea {
-      padding: 12px 16px;
+      padding: 11px 16px;
       border: 1px solid var(--border);
       border-radius: 10px;
       font-family: inherit;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       outline: none;
       background: var(--page-bg);
     }
@@ -452,18 +487,18 @@
 
     .contact-form textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 110px;
     }
 
     .form-submit-btn {
       background: var(--accent-pink);
       color: #ffffff;
       border: none;
-      padding: 12px 20px;
+      padding: 11px 20px;
       border-radius: 10px;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       align-self: flex-start;
       transition: opacity 0.2s ease;
     }
@@ -477,7 +512,7 @@
        ========================================================= */
     .events-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 16px;
     }
 
@@ -493,12 +528,12 @@
 
     .event-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
     }
 
     .img-wrapper {
       position: relative;
-      height: 145px;
+      height: 140px;
       overflow: hidden;
     }
 
@@ -523,14 +558,14 @@
     .tag-badge {
       display: inline-flex;
       align-items: center;
-      padding: 5px 9px;
+      padding: 4px 8px;
       border-radius: 999px;
-      font-size: 0.67rem;
+      font-size: 0.65rem;
       font-weight: 800;
       line-height: 1;
       text-transform: uppercase;
       letter-spacing: 0.3px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .tag-concert { background: var(--soft-purple); color: var(--text-dark); }
@@ -543,26 +578,26 @@
     .tag-default { background: var(--soft-dark); color: var(--text-dark); }
 
     .card-body {
-      padding: 15px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
     }
 
     .card-body h3 {
-      font-size: 1rem;
-      margin-bottom: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
       line-height: 1.3;
       font-weight: 800;
     }
 
     .meta-info {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
-      margin-bottom: 9px;
+      margin-bottom: 8px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 3px;
     }
 
     .meta-row {
@@ -572,10 +607,10 @@
     }
 
     .description {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
-      line-height: 1.45;
-      margin-bottom: 14px;
+      line-height: 1.4;
+      margin-bottom: 12px;
       flex-grow: 1;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -588,9 +623,9 @@
       background-color: #f1f5f9;
       color: var(--text-dark);
       text-decoration: none;
-      padding: 9px;
+      padding: 8px;
       border-radius: 8px;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 700;
       transition: 0.2s ease;
     }
@@ -623,28 +658,28 @@
     }
 
     .submit-section h2 {
-      font-size: 1.2rem;
-      margin-bottom: 12px;
+      font-size: 1.15rem;
+      margin-bottom: 10px;
     }
 
     .submit-btn {
       background: var(--accent-pink);
       color: #ffffff;
       border: none;
-      padding: 14px 28px;
+      padding: 12px 26px;
       border-radius: 10px;
-      font-weight: bold;
+      font-weight: 700;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       display: inline-block;
       text-decoration: none;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     /* =========================================================
        MOBILE RESPONSIVE
        ========================================================= */
-    @media (max-width: 700px) {
+    @media (max-width: 768px) {
       .hero {
         padding: 20px 15px 120px 15px;
       }
@@ -652,16 +687,17 @@
         flex-direction: column;
         align-items: center;
         gap: 12px;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
       }
-      .brand-title {
-        font-size: 1.2rem;
-      }
-      .top-links {
+      .top-center-links {
         gap: 16px;
       }
       .hero .highlight {
-        font-size: 2.5rem;
+        font-size: 2.6rem;
+      }
+      .hero-script-watermark {
+        font-size: 1.6rem;
+        bottom: -20px;
       }
       .main-content {
         margin-top: -80px;
@@ -692,15 +728,15 @@
       }
       .event-card {
         display: grid;
-        grid-template-columns: 120px 1fr;
-        min-height: 150px;
+        grid-template-columns: 110px 1fr;
+        min-height: 140px;
       }
       .img-wrapper {
         height: 100%;
-        min-height: 150px;
+        min-height: 140px;
       }
       .card-body {
-        padding: 12px;
+        padding: 10px;
       }
     }
   </style>
@@ -709,7 +745,7 @@
 <body>
 
   <div class="hero">
-    <!-- TOP HEADER BAR WITH LOGO & NAVIGATION LINKS -->
+    <!-- TOP HEADER BAR MATCHING REFERENCE -->
     <div class="top-nav-bar">
       <div class="brand-group">
         <svg class="logo-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -725,22 +761,33 @@
         </svg>
         <span class="brand-title">Inside Riviera</span>
       </div>
-      <div class="top-links">
-        <button class="top-link-btn" onclick="scrollToSection('who-are-we')">Who Are We?</button>
-        <button class="top-link-btn" onclick="scrollToSection('contact-us')">Contact Us</button>
+
+      <div class="top-center-links">
+        <button onclick="scrollToSection('events-container')">Events</button>
+        <button onclick="scrollToSection('who-are-we')">Places</button>
+        <button onclick="scrollToSection('who-are-we')">Lifestyle</button>
+      </div>
+
+      <div class="top-right-icons">
+        <button class="icon-btn" onclick="document.getElementById('search-input').focus()">🔍</button>
+        <button class="icon-btn" onclick="scrollToSection('category-navigation')">☰</button>
       </div>
     </div>
 
-    <!-- HERO MAIN TEXT -->
+    <!-- HERO MAIN TEXT & SCRIPT WATERMARK -->
     <div class="hero-inner-content">
       <div class="brand-tagline">Events / Places / Lifestyle</div>
-      <div class="hero-title-main">What's on</div>
+      <div class="hero-title-main" style="font-size: 0.9rem; font-weight: 600; opacity: 0.9; text-transform: uppercase;">What's on</div>
       <span class="highlight" id="hero-date-text">TODAY</span>
       <p>
         Events, markets, and things to do across Sanremo,
         Bordighera, Ventimiglia, Vallecrosia, Ospedaletti,
         Vallebona, Menton, and Monte Carlo.
       </p>
+      <div class="hero-script-watermark">
+        Live the Riviera
+        <span>♥</span>
+      </div>
     </div>
   </div>
 
@@ -784,13 +831,15 @@
     <!-- CATEGORY NAVIGATION BAR -->
     <div class="category-navigation" id="category-navigation">
       <div class="category-nav-inner" id="category-nav-inner">
-        <button class="category-nav-btn nav-market" onclick="scrollToSection('cat-market')">Market</button>
-        <button class="category-nav-btn nav-public-event" onclick="scrollToSection('cat-public-event')">Public Event</button>
-        <button class="category-nav-btn nav-concert" onclick="scrollToSection('cat-concert')">Concert</button>
-        <button class="category-nav-btn nav-exhibition" onclick="scrollToSection('cat-exhibition')">Exhibition</button>
-        <button class="category-nav-btn nav-live-music" onclick="scrollToSection('cat-live-music')">Live Music</button>
-        <button class="category-nav-btn nav-private-tour" onclick="scrollToSection('cat-private-tour')">Private Tour</button>
-        <button class="category-nav-btn nav-sport" onclick="scrollToSection('cat-sport')">Sport</button>
+        <button class="category-nav-btn nav-market" onclick="scrollToSection('cat-market')">🛍️ Market</button>
+        <button class="category-nav-btn nav-public-event" onclick="scrollToSection('cat-public-event')">🎉 Public Event</button>
+        <button class="category-nav-btn nav-concert" onclick="scrollToSection('cat-concert')">🎵 Concert</button>
+        <button class="category-nav-btn nav-exhibition" onclick="scrollToSection('cat-exhibition')">🖼️ Exhibition</button>
+        <button class="category-nav-btn nav-live-music" onclick="scrollToSection('cat-live-music')">🎸 Live Music</button>
+        <button class="category-nav-btn nav-private-tour" onclick="scrollToSection('cat-private-tour')">🗺️ Private Tour</button>
+        <button class="category-nav-btn nav-sport" onclick="scrollToSection('cat-sport')">⚽ Sport</button>
+        <button class="category-nav-btn nav-info" onclick="scrollToSection('who-are-we')">👥 Who Are We?</button>
+        <button class="category-nav-btn nav-info" onclick="scrollToSection('contact-us')">✉️ Contact Us</button>
       </div>
     </div>
 
@@ -816,7 +865,6 @@
       <h2>Contact Us</h2>
       <p>Have a question, feedback, or want to get in touch? Send us a message below and it will go straight to our personal email.</p>
       
-      <!-- Formspree Endpoint -->
       <form class="contact-form" action="https://formspree.io/f/xeaokrqw" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email Address" required>
@@ -827,12 +875,17 @@
 
     <div class="submit-section">
       <h2>Add Your Event</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 14px;">
         Got an event happening in the Riviera? Submit it via our official form and it will auto-populate on the calendar!
       </p>
       <a href="https://forms.gle/GTXcdJFB4TnCidsL9" target="_blank" rel="noopener" class="submit-btn">
         Open Event Submission Form ↗
       </a>
+      
+      <!-- Affiliate Disclaimer -->
+      <p style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 24px; line-height: 1.4;">
+        <em>Disclaimer: Inside Riviera contains affiliate links (such as GetYourGuide). If you book through these links, we may earn a small commission at no extra cost to you.</em>
+      </p>
     </div>
   </div>
 
