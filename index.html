@@ -1,1189 +1,1054 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inside Riviera - What's On Today</title>
-<style>
-/* =========================================================
-COLOUR PALETTE
-#ERROR!
-:root {
---accent-pink: #ff007a;
---accent-green: #a3e635;
---text-dark: #0f172a;
---text-muted: #64748b;
---card-bg: #ffffff;
---page-bg: #f8fafc;
---border: #e2e8f0;
---soft-pink: #ffe4f1;
---soft-green: #eef9d2;
---soft-dark: #e2e8f0;
---soft-purple: #eee8ff;
---shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
-}
-
-/* =========================================================
-RESET
-#ERROR!
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-}
-
-html {
-scroll-behavior: smooth;
-}
-
-body {
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-background: var(--page-bg);
-color: var(--text-dark);
-}
-
-/* =========================================================
-HERO & TOP NAVIGATION BAR
-#ERROR!
-.hero {
-position: relative;
-background: linear-gradient(rgba(15, 23, 42, 0.25), rgba(15, 23, 42, 0.35)),
-url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center / cover no-repeat;
-padding: 30px 20px 140px 20px;
-color: #ffffff;
-}
-
-.top-nav-bar {
-max-width: 1100px;
-margin: 0 auto 40px auto;
-display: flex;
-align-items: center;
-justify-content: space-between;
-flex-wrap: wrap;
-gap: 15px;
-}
-
-.brand-group {
-display: flex;
-align-items: center;
-gap: 12px;
-text-decoration: none;
-}
-
-.logo-graphic {
-width: 32px;
-height: 28px;
-fill: var(--accent-green);
-filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-flex-shrink: 0;
-}
-
-.brand-title {
-font-size: 1.4rem;
-font-weight: 900;
-letter-spacing: 2px;
-text-transform: uppercase;
-color: #ffffff;
-text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.top-links {
-display: flex;
-align-items: center;
-gap: 24px;
-}
-
-.top-link-btn {
-background: none;
-border: none;
-color: #ffffff;
-font-size: 0.95rem;
-font-weight: 600;
-cursor: pointer;
-text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-transition: opacity 0.2s ease;
-}
-
-.top-link-btn:hover {
-opacity: 0.8;
-}
-
-.hero-inner-content {
-text-align: center;
-max-width: 800px;
-margin: 0 auto;
-}
-
-.brand-tagline {
-font-size: 0.65rem;
-font-weight: 700;
-letter-spacing: 3px;
-color: #ffffff;
-text-transform: uppercase;
-opacity: 0.85;
-margin-bottom: 12px;
-}
-
-.hero-title-main {
-font-size: 1.1rem;
-font-weight: 700;
-letter-spacing: 1px;
-opacity: 0.85;
-text-transform: uppercase;
-}
-
-.hero .highlight {
-display: block;
-font-size: 3.2rem;
-font-weight: 900;
-color: var(--accent-green);
-letter-spacing: 2px;
-margin-bottom: 12px;
-text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
-
-.hero p {
-font-size: 0.95rem;
-max-width: 650px;
-margin: 0 auto;
-opacity: 0.9;
-line-height: 1.4;
-}
-
-/* =========================================================
-MAIN CONTAINER
-#ERROR!
-.main-content {
-max-width: 1100px;
-margin: -100px auto 40px auto;
-padding: 0 20px;
-position: relative;
-z-index: 10;
-}
-
-/* =========================================================
-CALENDAR
-#ERROR!
-.calendar-card {
-background: #ffffff;
-border-radius: 24px;
-padding: 28px 32px;
-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-max-width: 480px;
-margin: 0 auto 24px auto;
-}
-
-.cal-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 24px;
-}
-
-.cal-header h2 {
-font-size: 1.1rem;
-font-weight: 800;
-letter-spacing: 1px;
-}
-
-.nav-btn {
-background: #f1f5f9;
-border: none;
-width: 32px;
-height: 32px;
-border-radius: 50%;
-cursor: pointer;
-font-weight: bold;
-color: var(--text-muted);
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-.nav-btn:hover {
-background: #e2e8f0;
-}
-
-.weekdays {
-display: grid;
-grid-template-columns: repeat(7, 1fr);
-text-align: center;
-font-size: 0.75rem;
-font-weight: 700;
-color: var(--text-muted);
-margin-bottom: 12px;
-}
-
-.days-grid {
-display: grid;
-grid-template-columns: repeat(7, 1fr);
-gap: 8px 0;
-text-align: center;
-}
-
-.day-cell {
-height: 40px;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-font-size: 0.9rem;
-font-weight: 600;
-cursor: pointer;
-position: relative;
-user-select: none;
-}
-
-.day-number {
-width: 32px;
-height: 32px;
-display: flex;
-align-items: center;
-justify-content: center;
-border-radius: 50%;
-}
-
-.day-cell.active .day-number {
-background-color: var(--accent-pink);
-color: #ffffff;
-font-weight: 800;
-}
-
-.day-cell.past {
-color: #cbd5e1;
-}
-
-.day-cell.past .event-dot {
-background-color: #cbd5e1;
-opacity: 0.4;
-}
-
-.event-dot {
-width: 4px;
-height: 4px;
-background-color: var(--accent-green);
-border-radius: 50%;
-position: absolute;
-bottom: 2px;
-}
-
-/* =========================================================
-FILTERS & SEARCH
-#ERROR!
-.filter-wrapper {
-display: flex;
-justify-content: center;
-gap: 12px;
-margin-bottom: 20px;
-flex-wrap: wrap;
-}
-
-.city-select, .search-input {
-background: #ffffff;
-border: 1px solid var(--border);
-padding: 12px 20px;
-border-radius: 30px;
-font-weight: 600;
-font-size: 0.9rem;
-box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-outline: none;
-}
-
-.city-select {
-cursor: pointer;
-}
-
-.search-input {
-width: 260px;
-}
-
-.search-input:focus, .city-select:focus {
-border-color: var(--accent-pink);
-}
-
-/* =========================================================
-CATEGORY NAVIGATION BAR
-#ERROR!
-.category-navigation {
-background: rgba(255,255,255,0.96);
-border: 1px solid var(--border);
-border-radius: 16px;
-padding: 12px;
-margin-bottom: 28px;
-box-shadow: var(--shadow);
-position: sticky;
-top: 10px;
-z-index: 20;
-overflow-x: auto;
-scrollbar-width: none;
-}
-
-.category-navigation::-webkit-scrollbar {
-display: none;
-}
-
-.category-nav-inner {
-display: flex;
-gap: 8px;
-min-width: max-content;
-justify-content: center;
-}
-
-.category-nav-btn {
-border: 1px solid transparent;
-padding: 8px 14px;
-border-radius: 999px;
-font-size: 0.78rem;
-font-weight: 800;
-cursor: pointer;
-white-space: nowrap;
-transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-}
-
-.category-nav-btn:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-opacity: 0.9;
-}
-
-.nav-market { background: var(--soft-pink); color: var(--accent-pink); border-color: rgba(255, 0, 122, 0.3); }
-.nav-public-event { background: var(--text-dark); color: #ffffff; }
-.nav-concert { background: var(--soft-purple); color: var(--text-dark); border-color: rgba(238, 232, 255, 0.8); }
-.nav-exhibition { background: var(--accent-pink); color: #ffffff; }
-.nav-live-music { background: #1e293b; color: var(--accent-green); }
-.nav-private-tour { background: #e0f2fe; color: #0369a1; border-color: rgba(3, 105, 161, 0.2); }
-.nav-sport { background: #fff1f2; color: #e11d48; border-color: rgba(225, 29, 72, 0.2); }
-
-/* =========================================================
-CATEGORY SECTION
-#ERROR!
-.category-section {
-margin-bottom: 38px;
-scroll-margin-top: 80px;
-}
-
-.category-header {
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 15px;
-margin-bottom: 14px;
-padding-bottom: 10px;
-border-bottom: 2px solid var(--border);
-}
-
-.category-title-wrapper {
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-.category-title {
-font-size: 1.25rem;
-font-weight: 900;
-letter-spacing: -0.2px;
-}
-
-.category-count {
-background: var(--soft-dark);
-color: var(--text-muted);
-font-size: 0.72rem;
-font-weight: 800;
-padding: 4px 8px;
-border-radius: 999px;
-}
-
-.category-colour-dot {
-width: 12px;
-height: 12px;
-border-radius: 50%;
-flex-shrink: 0;
-}
-
-/* =========================================================
-INFO / STATIC PAGES SECTIONS (Who are we & Contact Us)
-#ERROR!
-.info-section {
-background: #ffffff;
-border-radius: 20px;
-padding: 32px;
-box-shadow: var(--shadow);
-margin-bottom: 38px;
-scroll-margin-top: 80px;
-}
-
-.info-section h2 {
-font-size: 1.3rem;
-font-weight: 900;
-margin-bottom: 14px;
-color: var(--text-dark);
-}
-
-.info-section p {
-font-size: 0.95rem;
-color: var(--text-muted);
-line-height: 1.6;
-margin-bottom: 12px;
-}
-
-.contact-form {
-display: flex;
-flex-direction: column;
-gap: 14px;
-margin-top: 20px;
-max-width: 500px;
-}
-
-.contact-form input, .contact-form textarea {
-padding: 12px 16px;
-border: 1px solid var(--border);
-border-radius: 10px;
-font-family: inherit;
-font-size: 0.9rem;
-outline: none;
-background: var(--page-bg);
-}
-
-.contact-form input:focus, .contact-form textarea:focus {
-border-color: var(--accent-pink);
-background: #ffffff;
-}
-
-.contact-form textarea {
-resize: vertical;
-min-height: 120px;
-}
-
-.form-submit-btn {
-background: var(--accent-pink);
-color: #ffffff;
-border: none;
-padding: 12px 20px;
-border-radius: 10px;
-font-weight: bold;
-cursor: pointer;
-font-size: 0.95rem;
-align-self: flex-start;
-transition: opacity 0.2s ease;
-}
-
-.form-submit-btn:hover {
-opacity: 0.9;
-}
-
-/* =========================================================
-EVENTS GRID & CARDS
-#ERROR!
-.events-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-gap: 16px;
-}
-
-.event-card {
-background: var(--card-bg);
-border-radius: 14px;
-overflow: hidden;
-box-shadow: var(--shadow);
-display: flex;
-flex-direction: column;
-transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.event-card:hover {
-transform: translateY(-3px);
-box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
-}
-
-.img-wrapper {
-position: relative;
-height: 145px;
-overflow: hidden;
-}
-
-.img-wrapper img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block;
-}
-
-.tag-container {
-position: absolute;
-top: 10px;
-left: 10px;
-right: 10px;
-display: flex;
-flex-wrap: wrap;
-gap: 5px;
-z-index: 2;
-}
-
-.tag-badge {
-display: inline-flex;
-align-items: center;
-padding: 5px 9px;
-border-radius: 999px;
-font-size: 0.67rem;
-font-weight: 800;
-line-height: 1;
-text-transform: uppercase;
-letter-spacing: 0.3px;
-box-shadow: 0 2px 5px rgba(0,0,0,0.12);
-}
-
-.tag-concert { background: var(--soft-purple); color: var(--text-dark); }
-.tag-exhibition { background: var(--accent-pink); color: #ffffff; }
-.tag-public-event { background: var(--text-dark); color: #ffffff; }
-.tag-live-music { background: var(--text-dark); color: var(--accent-green); }
-.tag-private-tour { background: var(--soft-green); color: var(--text-dark); }
-.tag-sport { background: var(--soft-pink); color: var(--accent-pink); }
-.tag-market { background: var(--accent-pink); color: #ffffff; }
-.tag-default { background: var(--soft-dark); color: var(--text-dark); }
-
-.card-body {
-padding: 15px;
-display: flex;
-flex-direction: column;
-flex-grow: 1;
-}
-
-.card-body h3 {
-font-size: 1rem;
-margin-bottom: 8px;
-line-height: 1.3;
-font-weight: 800;
-}
-
-.meta-info {
-font-size: 0.78rem;
-color: var(--text-muted);
-margin-bottom: 9px;
-display: flex;
-flex-direction: column;
-gap: 4px;
-}
-
-.meta-row {
-display: flex;
-align-items: flex-start;
-gap: 5px;
-}
-
-.description {
-font-size: 0.8rem;
-color: var(--text-muted);
-line-height: 1.45;
-margin-bottom: 14px;
-flex-grow: 1;
-display: -webkit-box;
--webkit-line-clamp: 3;
--webkit-box-orient: vertical;
-overflow: hidden;
-}
-
-.btn-link {
-text-align: center;
-background-color: #f1f5f9;
-color: var(--text-dark);
-text-decoration: none;
-padding: 9px;
-border-radius: 8px;
-font-size: 0.78rem;
-font-weight: 700;
-transition: 0.2s ease;
-}
-
-.btn-link:hover {
-background: var(--accent-pink);
-color: #ffffff;
-}
-
-.no-events {
-text-align: center;
-padding: 40px;
-color: var(--text-muted);
-background: #ffffff;
-border-radius: 16px;
-box-shadow: var(--shadow);
-}
-
-/* =========================================================
-SUBMIT SECTION
-#ERROR!
-.submit-section {
-background: #ffffff;
-border-radius: 20px;
-padding: 32px;
-box-shadow: var(--shadow);
-max-width: 600px;
-margin: 0 auto;
-text-align: center;
-}
-
-.submit-section h2 {
-font-size: 1.2rem;
-margin-bottom: 12px;
-}
-
-.submit-btn {
-background: var(--accent-pink);
-color: #ffffff;
-border: none;
-padding: 14px 28px;
-border-radius: 10px;
-font-weight: bold;
-cursor: pointer;
-font-size: 0.95rem;
-display: inline-block;
-text-decoration: none;
-margin-top: 10px;
-}
-
-/* =========================================================
-MOBILE RESPONSIVE
-#ERROR!
-@media (max-width: 700px) {
-.hero {
-padding: 20px 15px 120px 15px;
-}
-.top-nav-bar {
-flex-direction: column;
-align-items: center;
-gap: 12px;
-margin-bottom: 30px;
-}
-.brand-title {
-font-size: 1.2rem;
-}
-.top-links {
-gap: 16px;
-}
-.hero .highlight {
-font-size: 2.5rem;
-}
-.main-content {
-margin-top: -80px;
-padding: 0 12px;
-}
-.calendar-card {
-padding: 20px 15px;
-border-radius: 18px;
-max-width: 100%;
-}
-.filter-wrapper {
-flex-direction: column;
-align-items: stretch;
-}
-.city-select, .search-input {
-width: 100%;
-}
-.category-navigation {
-margin-left: -12px;
-margin-right: -12px;
-border-radius: 0;
-top: 0;
-padding: 9px 12px;
-}
-.events-grid {
-grid-template-columns: 1fr;
-gap: 12px;
-}
-.event-card {
-display: grid;
-grid-template-columns: 120px 1fr;
-min-height: 150px;
-}
-.img-wrapper {
-height: 100%;
-min-height: 150px;
-}
-.card-body {
-padding: 12px;
-}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inside Riviera - What's On Today</title>
+  <style>
+    /* =========================================================
+       COLOUR PALETTE
+       ========================================================= */
+    :root {
+      --accent-pink: #ff007a;
+      --accent-green: #a3e635;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --page-bg: #f8fafc;
+      --border: #e2e8f0;
+      --soft-pink: #ffe4f1;
+      --soft-green: #eef9d2;
+      --soft-dark: #e2e8f0;
+      --soft-purple: #eee8ff;
+      --shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
+    }
+
+    /* =========================================================
+       RESET
+       ========================================================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--page-bg);
+      color: var(--text-dark);
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .hero {
+      position: relative;
+      background: linear-gradient(rgba(15, 23, 42, 0.25), rgba(15, 23, 42, 0.35)),
+                  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center / cover no-repeat;
+      padding: 50px 20px 140px 20px;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .brand-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .logo-graphic {
+      display: block;
+      margin: 0 auto;
+      width: 36px;
+      height: 30px;
+      fill: var(--accent-green);
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+
+    .hero h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 2.5px;
+      margin: 0;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .brand-tagline {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 16px;
+    }
+
+    .hero-title-main {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      opacity: 0.85;
+      text-transform: uppercase;
+    }
+
+    .hero .highlight {
+      display: block;
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--accent-green);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 0.95rem;
+      max-width: 650px;
+      margin: 0 auto;
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+
+    /* =========================================================
+       MAIN CONTAINER
+       ========================================================= */
+    .main-content {
+      max-width: 1100px;
+      margin: -100px auto 40px auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* =========================================================
+       CALENDAR
+       ========================================================= */
+    .calendar-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 28px 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      max-width: 480px;
+      margin: 0 auto 24px auto;
+    }
+
+    .cal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .cal-header h2 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .nav-btn {
+      background: #f1f5f9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px 0;
+      text-align: center;
+    }
+
+    .day-cell {
+      height: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+    }
+
+    .day-number {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .day-cell.active .day-number {
+      background-color: var(--accent-pink);
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .day-cell.past {
+      color: #cbd5e1;
+    }
+
+    .day-cell.past .event-dot {
+      background-color: #cbd5e1;
+      opacity: 0.4;
+    }
+
+    .event-dot {
+      width: 4px;
+      height: 4px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      position: absolute;
+      bottom: 2px;
+    }
+
+    /* =========================================================
+       FILTERS & SEARCH
+       ========================================================= */
+    .filter-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .city-select, .search-input {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      outline: none;
+    }
+
+    .city-select {
+      cursor: pointer;
+    }
+
+    .search-input {
+      width: 260px;
+    }
+
+    .search-input:focus, .city-select:focus {
+      border-color: var(--accent-pink);
+    }
+
+    /* =========================================================
+       CATEGORY NAVIGATION
+       ========================================================= */
+    .category-navigation {
+      background: rgba(255,255,255,0.96);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .category-navigation::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-nav-inner {
+      display: flex;
+      gap: 8px;
+      min-width: max-content;
+      justify-content: center;
+    }
+
+    .category-nav-btn {
+      border: 1px solid transparent;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .category-nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      opacity: 0.9;
+    }
+
+    .nav-concert { background: var(--soft-purple); color: var(--text-dark); border-color: rgba(238, 232, 255, 0.8); }
+    .nav-exhibition { background: var(--accent-pink); color: #ffffff; }
+    .nav-public-event { background: var(--text-dark); color: #ffffff; }
+    .nav-live-music { background: #1e293b; color: var(--accent-green); }
+    .nav-private-tour { background: #e0f2fe; color: #0369a1; border-color: rgba(3, 105, 161, 0.2); }
+    .nav-sport { background: #fff1f2; color: #e11d48; border-color: rgba(225, 29, 72, 0.2); }
+    .nav-market { background: var(--soft-pink); color: var(--accent-pink); border-color: rgba(255, 0, 122, 0.3); }
+    .nav-default { background: var(--soft-dark); color: var(--text-dark); }
+
+    /* =========================================================
+       CATEGORY SECTION
+       ========================================================= */
+    .category-section {
+      margin-bottom: 38px;
+      scroll-margin-top: 80px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .category-title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+    }
+
+    .category-count {
+      background: var(--soft-dark);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    .category-colour-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* =========================================================
+       EVENTS GRID & CARDS
+       ========================================================= */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+
+    .event-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
+    }
+
+    .img-wrapper {
+      position: relative;
+      height: 145px;
+      overflow: hidden;
+    }
+
+    .img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tag-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      z-index: 2;
+    }
+
+    .tag-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 0.67rem;
+      font-weight: 800;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+    }
+
+    .tag-concert { background: var(--soft-purple); color: var(--text-dark); }
+    .tag-exhibition { background: var(--accent-pink); color: #ffffff; }
+    .tag-public-event { background: var(--text-dark); color: #ffffff; }
+    .tag-live-music { background: var(--text-dark); color: var(--accent-green); }
+    .tag-private-tour { background: var(--soft-green); color: var(--text-dark); }
+    .tag-sport { background: var(--soft-pink); color: var(--accent-pink); }
+    .tag-market { background: var(--accent-pink); color: #ffffff; }
+    .tag-default { background: var(--soft-dark); color: var(--text-dark); }
+
+    .card-body {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-body h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    .meta-info {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .description {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 14px;
+      flex-grow: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .btn-link {
+      text-align: center;
+      background-color: #f1f5f9;
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 9px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-link:hover {
+      background: var(--accent-pink);
+      color: #ffffff;
+    }
+
+    .no-events {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    /* =========================================================
+       SUBMIT SECTION
+       ========================================================= */
+    .submit-section {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .submit-section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .submit-btn {
+      background: var(--accent-pink);
+      color: #ffffff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    /* =========================================================
+       MOBILE RESPONSIVE
+       ========================================================= */
+    @media (max-width: 700px) {
+      .hero {
+        padding: 30px 18px 120px 18px;
+      }
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+      .hero .highlight {
+        font-size: 2.5rem;
+      }
+      .main-content {
+        margin-top: -80px;
+        padding: 0 12px;
+      }
+      .calendar-card {
+        padding: 20px 15px;
+        border-radius: 18px;
+        max-width: 100%;
+      }
+      .filter-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .city-select, .search-input {
+        width: 100%;
+      }
+      .category-navigation {
+        margin-left: -12px;
+        margin-right: -12px;
+        border-radius: 0;
+        top: 0;
+        padding: 9px 12px;
+      }
+      .events-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .event-card {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        min-height: 150px;
+      }
+      .img-wrapper {
+        height: 100%;
+        min-height: 150px;
+      }
+      .card-body {
+        padding: 12px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="hero">
-<!-- TOP HEADER BAR WITH LOGO & NAVIGATION LINKS -->
-<div class="top-nav-bar">
-<div class="brand-group">
-<svg class="logo-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<g transform="translate(0, 0)">
-<path d="M12 2C9.5 2 7.2 2.9 5.4 4.3C7 5.2 8.7 5.7 12 5.7C15.3 5.7 17 5.2 18.6 4.3C16.8 2.9 14.5 2 12 2Z"/>
-<path d="M4.3 5.5C2.5 7.2 1.5 9.5 1.5 12H5C5 9.8 5.7 7.5 7 5.5H4.3Z"/>
-<path d="M19.7 5.5C21 7.5 21.7 9.8 21.7 12H25.2C25.2 9.5 24.2 7.2 22.4 5.5H19.7Z"/>
-<path d="M12 6C8.5 6 5.5 7 3.5 8.3C3.2 8.9 3 9.4 3 10H21C21 9.4 20.8 8.9 20.5 8.3C18.5 7 15.5 6 12 6Z"/>
-<path d="M11 10.5V19.3C10.4 19.4 9.9 19.6 9.4 19.8C9.8 20.5 10.8 21 12 21C13.2 21 14.2 20.5 14.6 19.8C14.1 19.6 13.6 19.4 13 19.3V10.5H11Z"/>
-<path d="M2.5 22C4.5 22 5.5 21 7.5 22C9.5 23 10.5 22 12.5 22C14.5 22 15.5 23 17.5 22C19.5 21 20.5 22 22.5 22" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-<path d="M2.5 24C4.5 24 5.5 23 7.5 24C9.5 25 10.5 24 12.5 24C14.5 24 15.5 25 17.5 24C19.5 23 20.5 24 22.5 24" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-</g>
-</svg>
-<span class="brand-title">Inside Riviera</span>
-</div>
-<div class="top-links">
-<button class="top-link-btn" onclick="scrollToSection('who-are-we')">Who Are We?</button>
-<button class="top-link-btn" onclick="scrollToSection('contact-us')">Contact Us</button>
-</div>
-</div>
-
-<!-- HERO MAIN TEXT -->
-<div class="hero-inner-content">
-<div class="brand-tagline">Events / Places / Lifestyle</div>
-<div class="hero-title-main">What's on</div>
-<span class="highlight" id="hero-date-text">TODAY</span>
-<p>
-Events, markets, and things to do across Sanremo,
-Bordighera, Ventimiglia, Vallecrosia, Ospedaletti,
-Vallebona, Menton, and Monte Carlo.
-</p>
-</div>
-</div>
-
-<div class="main-content">
-<div class="calendar-card">
-<div class="cal-header">
-<button class="nav-btn" onclick="changeMonth(-1)">&lt;</button>
-<h2 id="calendar-month-title">Loading...</h2>
-<button class="nav-btn" onclick="changeMonth(1)">&gt;</button>
-</div>
-
-<div class="weekdays">
-<div>MON</div>
-<div>TUE</div>
-<div>WED</div>
-<div>THU</div>
-<div>FRI</div>
-<div>SAT</div>
-<div>SUN</div>
-</div>
-
-<div class="days-grid" id="days-grid"></div>
-</div>
-
-<!-- SEARCH BAR (LEFT) & CITY FILTER (RIGHT) -->
-<div class="filter-wrapper">
-<input type="text" class="search-input" id="search-input" placeholder="🔍 Search specific event..." oninput="renderEvents()">
-<select class="city-select" id="city-filter" onchange="renderEvents()">
-<option value="ALL">All Cities (Italian & French Riviera)</option>
-<option value="Sanremo">Sanremo</option>
-<option value="Bordighera">Bordighera</option>
-<option value="Ventimiglia">Ventimiglia</option>
-<option value="Vallecrosia">Vallecrosia</option>
-<option value="Ospedaletti">Ospedaletti</option>
-<option value="Vallebona">Vallebona</option>
-<option value="Menton">Menton</option>
-<option value="Monte Carlo">Monte Carlo</option>
-</select>
-</div>
-
-<!-- CATEGORY NAVIGATION BAR -->
-<div class="category-navigation" id="category-navigation">
-<div class="category-nav-inner" id="category-nav-inner">
-<button class="category-nav-btn nav-market" onclick="scrollToSection('cat-market')">Market</button>
-<button class="category-nav-btn nav-public-event" onclick="scrollToSection('cat-public-event')">Public Event</button>
-<button class="category-nav-btn nav-concert" onclick="scrollToSection('cat-concert')">Concert</button>
-<button class="category-nav-btn nav-exhibition" onclick="scrollToSection('cat-exhibition')">Exhibition</button>
-<button class="category-nav-btn nav-live-music" onclick="scrollToSection('cat-live-music')">Live Music</button>
-<button class="category-nav-btn nav-private-tour" onclick="scrollToSection('cat-private-tour')">Private Tour</button>
-<button class="category-nav-btn nav-sport" onclick="scrollToSection('cat-sport')">Sport</button>
-</div>
-</div>
-
-<!-- EVENTS RENDER CONTAINER -->
-<div id="events-container"></div>
-
-<!-- WHO ARE WE? SECTION -->
-<div class="info-section" id="who-are-we">
-<h2>Who Are We?</h2>
-<p>
-We noticed that there isn't a single site collecting events from both the Italian and French Riviera.
-That's why we built Inside Riviera—created specifically for locals and tourists who love exploring both sides of the coast,
-experiencing different cultures, and seamlessly transitioning from a weekend in France to a week in Italy (or vice versa!).
-</p>
-<p>
-We want to keep this platform dynamic and community-driven. We warmly invite locals, venues, and organizers to
-suggest their own events so everyone can discover hidden gems and vibrant happenings across the entire coastline.
-</p>
-</div>
-
-<!-- CONTACT US SECTION -->
-<div class="info-section" id="contact-us">
-<h2>Contact Us</h2>
-<p>Have a question, feedback, or want to get in touch? Send us a message below and it will go straight to our personal email.</p>
-
-<!-- Formspree Endpoint -->
-<form class="contact-form" action="https://formspree.io/f/xeaokrqw" method="POST">
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="email" name="email" placeholder="Your Email Address" required>
-<textarea name="message" placeholder="Your Message..." required></textarea>
-<button type="submit" class="form-submit-btn">Send Message ↗</button>
-</form>
-</div>
-
-<div class="submit-section">
-<h2>Add Your Event</h2>
-<p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
-Got an event happening in the Riviera? Submit it via our official form and it will auto-populate on the calendar!
-</p>
-<a href="https://forms.gle/GTXcdJFB4TnCidsL9" target="_blank" rel="noopener" class="submit-btn">
-Open Event Submission Form ↗
-</a>
-</div>
-</div>
-
-<script>
-let allEvents = [];
-let selectedYear = new Date().getFullYear();
-let selectedMonth = new Date().getMonth();
-let selectedDay = new Date().getDate();
-
-const monthNames = [
-JANUARY, "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
-JULY, "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
-];
-
-const categoryOrder = [
-Market, "Public Event", "Concert", "Exhibition", "Live Music", "Private Tour", "Sport"
-];
-
-const categoryStyles = {
-concert: "tag-concert", "exhibition": "tag-exhibition",
-public event: "tag-public-event", "live music": "tag-live-music",
-private tour: "tag-private-tour", "sport": "tag-sport", "market": "tag-market"
-};
-
-const categoryDotColours = {
-concert: "var(--soft-purple)", "exhibition": "var(--accent-pink)",
-public event: "var(--text-dark)", "live music": "var(--accent-green)",
-private tour: "var(--accent-green)", "sport": "var(--accent-pink)", "market": "var(--accent-pink)"
-};
-
-function getField(obj, keys) {
-for (let k of keys) {
-if (obj[k] !== undefined && obj[k] !== null && obj[k] !== '') {
-return obj[k];
-}
-}
-return '';
-}
-
-function parseNum(val) {
-if (val === undefined || val === null || val === '') return NaN;
-const num = Number(String(val).replace(/,/g, '').trim());
-return isNaN(num) ? NaN : num;
-}
-
-function cleanCategoryName(category) {
-return String(category || '').trim().replace(/\s+/g, ' ');
-}
-
-function parseCategories(value) {
-if (value === undefined || value === null || value === '') return ['Public Event'];
-const categories = String(value).split(',').map(c => cleanCategoryName(c)).filter(c => c !== '');
-return categories.length ? categories : ['Public Event'];
-}
-
-function categoryKey(category) {
-return String(category || '').trim().toLowerCase();
-}
-
-function getCategoryClass(category) {
-return categoryStyles[categoryKey(category)] || 'tag-default';
-}
-
-function escapeHtml(value) {
-return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-}
-
-function cleanImageUrl(value) {
-if (!value) return '';
-let url = String(value).trim();
-const markdownMatch = url.match(/\((https?:\/\/[^)\s]+)\)/);
-if (markdownMatch) url = markdownMatch[1];
-return url.replace(/^["']|["']$/g, '').trim();
-}
-
-function scrollToSection(id) {
-const target = document.getElementById(id);
-if (target) target.scrollIntoView({ behavior: 'smooth' });
-}
-
-function isEventActiveOnDate(e, targetDate) {
-const startDate = new Date(e.year, e.month, e.date);
-startDate.setHours(0, 0, 0, 0);
-
-const endDate = (!isNaN(e.endYear) && !isNaN(e.endMonth) && !isNaN(e.endDate))
-? new Date(e.endYear, e.endMonth, e.endDate)
-: startDate;
-endDate.setHours(0, 0, 0, 0);
-
-if (targetDate < startDate || targetDate > endDate) {
-return false;
-}
-
-const freq = e.frequency.toLowerCase();
-const rec = e.recurrence.toLowerCase();
-
-if (freq === 'one-off' || freq === 'one off' || freq === '') {
-return targetDate >= startDate && targetDate <= endDate;
-}
-
-if (freq === 'daily') {
-return true;
-}
-
-const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-const targetDayName = dayNames[targetDate.getDay()];
-
-const matchesDayOfWeek = rec.includes(targetDayName);
-if (!matchesDayOfWeek && rec !== '') {
-return false;
-}
-
-if (rec.includes('1st') || rec.includes('2nd') || rec.includes('3rd') || rec.includes('4th') || rec.includes('last')) {
-const weekNum = Math.ceil(targetDate.getDate() / 7);
-let matchesOrdinal = false;
-if (rec.includes('1st') && weekNum === 1) matchesOrdinal = true;
-if (rec.includes('2nd') && weekNum === 2) matchesOrdinal = true;
-if (rec.includes('3rd') && weekNum === 3) matchesOrdinal = true;
-if (rec.includes('4th') && weekNum === 4) matchesOrdinal = true;
-if (rec.includes('last')) {
-const nextWeek = new Date(targetDate);
-nextWeek.setDate(targetDate.getDate() + 7);
-if (nextWeek.getMonth() !== targetDate.getMonth()) matchesOrdinal = true;
-}
-if (!matchesOrdinal) return false;
-}
-
-if (freq === 'biweekly' || rec.includes('every other')) {
-const diffTime = targetDate.getTime() - startDate.getTime();
-const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-const diffWeeks = Math.floor(diffDays / 7);
-if (diffWeeks % 2 !== 0) {
-return false;
-}
-}
-
-return true;
-}
-
-async function initApp() {
-try {
-const res = await fetch('https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=' + new Date().getTime());
-if (!res.ok) throw new Error('Failed to load sheet data');
-const rawData = await res.json();
-
-const standardizedData = rawData.map(row => {
-const cleanRow = {};
-for (let key in row) {
-cleanRow[key.toLowerCase().replace(/[\s_-]/g, '')] = row[key];
-}
-return cleanRow;
-});
-
-allEvents = standardizedData.map(e => {
-const y = parseNum(getField(e, ['startyear', 'year', 'anno', 'yr']));
-const mInput = parseNum(getField(e, ['startmonth', 'month', 'mese', 'mo']));
-const d = parseNum(getField(e, ['startdate', 'day', 'giorno', 'data']));
-const endY = parseNum(getField(e, ['endyear', 'endanno']));
-const endMInput = parseNum(getField(e, ['endmonth', 'endmese']));
-const endD = parseNum(getField(e, ['enddate', 'endgiorno']));
-const rawImg = cleanImageUrl(getField(e, ['img', 'image', 'photo', 'picture', 'foto', 'imgurl', 'imageurl']));
-const categories = parseCategories(getField(e, ['category', 'categories', 'categoria', 'categorie', 'tags', 'tag']));
-const frequency = getField(e, ['frequency', 'freq', 'frequenza']);
-const recurrence = getField(e, ['recurrence', 'ricorrenza', 'days', 'schedule']);
-
-return {
-year: y,
-month: !isNaN(mInput) ? mInput - 1 : NaN,
-date: d,
-endYear: endY,
-endMonth: !isNaN(endMInput) ? endMInput - 1 : NaN,
-endDate: endD,
-title: getField(e, ['title', 'titolo', 'name', 'event']),
-city: getField(e, ['city', 'citta', 'town', 'location']),
-time: getField(e, ['time', 'orario', 'hours', 'ora']),
-location: getField(e, ['venue', 'location', 'luogo', 'address', 'place']),
-description: getField(e, ['description', 'descrizione', 'details', 'info']),
-link: getField(e, ['link', 'url', 'website', 'sito', 'ticketlink']),
-img: rawImg || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
-categories: categories,
-frequency: frequency,
-recurrence: recurrence,
-raw: e
-};
-}).filter(e => !isNaN(e.year) && !isNaN(e.month) && !isNaN(e.date));
-
-buildCalendar();
-renderEvents();
-} catch (err) {
-console.error(err);
-document.getElementById('events-container').innerHTML = `
-<div class="no-events">
-<h3>Unable to load events at the moment.</h3>
-<p>Please check your connection or try again later.</p>
-</div>
-`;
-}
-}
-
-function buildCalendar() {
-const titleEl = document.getElementById('calendar-month-title');
-const gridEl = document.getElementById('days-grid');
-
-titleEl.innerText = `${monthNames[selectedMonth]} ${selectedYear}`;
-gridEl.innerHTML = '';
-
-const firstDayIndex = new Date(selectedYear, selectedMonth, 1).getDay();
-const adjustedFirstDay = (firstDayIndex === 0) ? 6 : firstDayIndex - 1;
-const totalDays = new Date(selectedYear, selectedMonth + 1, 0).getDate();
-const prevTotalDays = new Date(selectedYear, selectedMonth, 0).getDate();
-
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-
-for (let i = adjustedFirstDay - 1; i >= 0; i--) {
-const dayNum = prevTotalDays - i;
-const cell = document.createElement('div');
-cell.className = 'day-cell past';
-cell.innerHTML = `<div class="day-number">${dayNum}</div>`;
-gridEl.appendChild(cell);
-}
-
-for (let d = 1; d <= totalDays; d++) {
-const cell = document.createElement('div');
-cell.className = 'day-cell';
-
-const cellDate = new Date(selectedYear, selectedMonth, d);
-cellDate.setHours(0, 0, 0, 0);
-
-if (cellDate < today) {
-cell.classList.add('past');
-}
-
-if (selectedYear === today.getFullYear() && selectedMonth === today.getMonth() && d === today.getDate() && selectedDay === today.getDate()) {
-cell.classList.add('active');
-} else if (d === selectedDay) {
-cell.classList.add('active');
-}
-
-const hasEvents = allEvents.some(e => isEventActiveOnDate(e, cellDate));
-
-let html = `<div class="day-number">${d}</div>`;
-if (hasEvents) html += `<div class="event-dot"></div>`;
-
-cell.innerHTML = html;
-cell.onclick = () => {
-selectedDay = d;
-buildCalendar();
-renderEvents();
-};
-gridEl.appendChild(cell);
-}
-}
-
-function changeMonth(direction) {
-selectedMonth += direction;
-if (selectedMonth > 11) {
-selectedMonth = 0;
-selectedYear++;
-} else if (selectedMonth < 0) {
-selectedMonth = 11;
-selectedYear--;
-}
-selectedDay = 1;
-buildCalendar();
-renderEvents();
-}
-
-function renderEvents() {
-const container = document.getElementById('events-container');
-const cityFilter = document.getElementById('city-filter').value;
-const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
-container.innerHTML = '';
-
-const selectedDateObj = new Date(selectedYear, selectedMonth, selectedDay);
-selectedDateObj.setHours(0, 0, 0, 0);
-
-const filteredEvents = allEvents.filter(e => {
-const matchesCity = (cityFilter === 'ALL' || e.city.toLowerCase() === cityFilter.toLowerCase());
-
-if (searchQuery !== '') {
-const matchesSearch = e.title.toLowerCase().includes(searchQuery) ||
-e.description.toLowerCase().includes(searchQuery) ||
-e.city.toLowerCase().includes(searchQuery) ||
-e.location.toLowerCase().includes(searchQuery);
-return matchesCity && matchesSearch;
-} else {
-const matchesFrequency = isEventActiveOnDate(e, selectedDateObj);
-return matchesCity && matchesFrequency;
-}
-});
-
-if (filteredEvents.length === 0) {
-container.innerHTML = `
-<div class="no-events">
-<h3>No events found.</h3>
-<p>Try adjusting your search query, date, or city filter.</p>
-</div>
-`;
-return;
-}
-
-categoryOrder.forEach(catName => {
-const matchingCatEvents = filteredEvents.filter(e =>
-e.categories.some(c => categoryKey(c) === categoryKey(catName))
-);
-
-if (matchingCatEvents.length > 0) {
-const section = document.createElement('div');
-section.className = 'category-section';
-section.id = `cat-${categoryKey(catName)}`;
-
-let eventsHtml = `<div class="events-grid">`;
-matchingCatEvents.forEach(evt => {
-const tagsHtml = evt.categories.map(c => `<span class="tag-badge ${getCategoryClass(c)}">${escapeHtml(c)}</span>`).join('');
-eventsHtml += `
-<div class="event-card">
-<div class="img-wrapper">
-<div class="tag-container">${tagsHtml}</div>
-<img src="${escapeHtml(evt.img)}" alt="${escapeHtml(evt.title)}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
-</div>
-<div class="card-body">
-<h3>${escapeHtml(evt.title)}</h3>
-<div class="meta-info">
-<div class="meta-row">📍 <strong>${escapeHtml(evt.city)}</strong> ${evt.location ? '- ' + escapeHtml(evt.location) : ''}</div>
-${evt.time ? `<div class="meta-row">🕒 ${escapeHtml(evt.time)}</div>` : ''}
-</div>
-<div class="description">${escapeHtml(evt.description)}</div>
-${evt.link ? `<a href="${escapeHtml(evt.link)}" target="_blank" rel="noopener" class="btn-link">More Info & Tickets ↗</a>` : ''}
-</div>
-</div>
-`;
-});
-eventsHtml += `</div>`;
-
-section.innerHTML = `
-<div class="category-header">
-<div class="category-title-wrapper">
-<div class="category-colour-dot" style="background: ${categoryDotColours[categoryKey(catName)] || 'var(--accent-pink)'}"></div>
-<h2 class="category-title">${escapeHtml(catName)}</h2>
-</div>
-<span class="category-count">${matchingCatEvents.length}</span>
-</div>
-${eventsHtml}
-`;
-container.appendChild(section);
-}
-});
-}
-
-window.onload = initApp;
-</script>
+  <div class="hero">
+    <div class="brand-container">
+      <svg class="logo-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(0, 0)">
+          <path d="M12 2C9.5 2 7.2 2.9 5.4 4.3C7 5.2 8.7 5.7 12 5.7C15.3 5.7 17 5.2 18.6 4.3C16.8 2.9 14.5 2 12 2Z"/>
+          <path d="M4.3 5.5C2.5 7.2 1.5 9.5 1.5 12H5C5 9.8 5.7 7.5 7 5.5H4.3Z"/>
+          <path d="M19.7 5.5C21 7.5 21.7 9.8 21.7 12H25.2C25.2 9.5 24.2 7.2 22.4 5.5H19.7Z"/>
+          <path d="M12 6C8.5 6 5.5 7 3.5 8.3C3.2 8.9 3 9.4 3 10H21C21 9.4 20.8 8.9 20.5 8.3C18.5 7 15.5 6 12 6Z"/>
+          <path d="M11 10.5V19.3C10.4 19.4 9.9 19.6 9.4 19.8C9.8 20.5 10.8 21 12 21C13.2 21 14.2 20.5 14.6 19.8C14.1 19.6 13.6 19.4 13 19.3V10.5H11Z"/>
+          <path d="M2.5 22C4.5 22 5.5 21 7.5 22C9.5 23 10.5 22 12.5 22C14.5 22 15.5 23 17.5 22C19.5 21 20.5 22 22.5 22" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+          <path d="M2.5 24C4.5 24 5.5 23 7.5 24C9.5 25 10.5 24 12.5 24C14.5 24 15.5 25 17.5 24C19.5 23 20.5 24 22.5 24" stroke="var(--accent-green)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        </g>
+      </svg>
+      
+      <h1>Inside Riviera</h1>
+      <div class="brand-tagline">Events / Places / Lifestyle</div>
+    </div>
+
+    <div class="hero-title-main">What's on</div>
+    <span class="highlight" id="hero-date-text">TODAY</span>
+
+    <p>
+      Events, markets, and things to do across Sanremo,
+      Bordighera, Ventimiglia, Vallecrosia, Ospedaletti,
+      Vallebona, Menton, and Monte Carlo.
+    </p>
+  </div>
+
+  <div class="main-content">
+    <div class="calendar-card">
+      <div class="cal-header">
+        <button class="nav-btn" onclick="changeMonth(-1)">&lt;</button>
+        <h2 id="calendar-month-title">Loading...</h2>
+        <button class="nav-btn" onclick="changeMonth(1)">&gt;</button>
+      </div>
+
+      <div class="weekdays">
+        <div>MON</div>
+        <div>TUE</div>
+        <div>WED</div>
+        <div>THU</div>
+        <div>FRI</div>
+        <div>SAT</div>
+        <div>SUN</div>
+      </div>
+
+      <div class="days-grid" id="days-grid"></div>
+    </div>
+
+    <!-- SEARCH BAR (LEFT) & CITY FILTER (RIGHT) -->
+    <div class="filter-wrapper">
+      <input type="text" class="search-input" id="search-input" placeholder="🔍 Search specific event..." oninput="renderEvents()">
+      <select class="city-select" id="city-filter" onchange="renderEvents()">
+        <option value="ALL">All Cities (Italian & French Riviera)</option>
+        <option value="Sanremo">Sanremo</option>
+        <option value="Bordighera">Bordighera</option>
+        <option value="Ventimiglia">Ventimiglia</option>
+        <option value="Vallecrosia">Vallecrosia</option>
+        <option value="Ospedaletti">Ospedaletti</option>
+        <option value="Vallebona">Vallebona</option>
+        <option value="Menton">Menton</option>
+        <option value="Monte Carlo">Monte Carlo</option>
+      </select>
+    </div>
+
+    <div class="category-navigation" id="category-navigation">
+      <div class="category-nav-inner" id="category-nav-inner"></div>
+    </div>
+
+    <div id="events-container"></div>
+
+    <div class="submit-section">
+      <h2>Add Your Event</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
+        Got an event happening in the Riviera? Submit it via our official form and it will auto-populate on the calendar!
+      </p>
+      <a href="https://forms.gle/GTXcdJFB4TnCidsL9" target="_blank" rel="noopener" class="submit-btn">
+        Open Event Submission Form ↗
+      </a>
+    </div>
+  </div>
+
+  <script>
+    let allEvents = [];
+    let selectedYear = new Date().getFullYear();
+    let selectedMonth = new Date().getMonth();
+    let selectedDay = new Date().getDate();
+
+    const monthNames = [
+      "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+      "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    ];
+
+    // Market and Public Event placed at the top
+    const categoryOrder = [
+      "Market", "Public Event", "Concert", "Exhibition", "Live Music", "Private Tour", "Sport"
+    ];
+
+    const categoryStyles = {
+      "concert": "tag-concert", "exhibition": "tag-exhibition", 
+      "public event": "tag-public-event", "live music": "tag-live-music", 
+      "private tour": "tag-private-tour", "sport": "tag-sport", "market": "tag-market"
+    };
+
+    const navButtonStyles = {
+      "concert": "nav-concert", "exhibition": "nav-exhibition", 
+      "public event": "nav-public-event", "live music": "nav-live-music", 
+      "private tour": "nav-private-tour", "sport": "nav-sport", "market": "nav-market"
+    };
+
+    const categoryDotColours = {
+      "concert": "var(--soft-purple)", "exhibition": "var(--accent-pink)", 
+      "public event": "var(--text-dark)", "live music": "var(--accent-green)", 
+      "private tour": "var(--accent-green)", "sport": "var(--accent-pink)", "market": "var(--accent-pink)"
+    };
+
+    function getField(obj, keys) {
+      for (let k of keys) {
+        if (obj[k] !== undefined && obj[k] !== null && obj[k] !== '') {
+          return obj[k];
+        }
+      }
+      return '';
+    }
+
+    function parseNum(val) {
+      if (val === undefined || val === null || val === '') return NaN;
+      const num = Number(String(val).replace(/,/g, '').trim());
+      return isNaN(num) ? NaN : num;
+    }
+
+    function cleanCategoryName(category) {
+      return String(category || '').trim().replace(/\s+/g, ' ');
+    }
+
+    function parseCategories(value) {
+      if (value === undefined || value === null || value === '') return ['Public Event'];
+      const categories = String(value).split(',').map(c => cleanCategoryName(c)).filter(c => c !== '');
+      return categories.length ? categories : ['Public Event'];
+    }
+
+    function categoryKey(category) {
+      return String(category || '').trim().toLowerCase();
+    }
+
+    function getCategoryClass(category) {
+      return categoryStyles[categoryKey(category)] || 'tag-default';
+    }
+
+    function getNavButtonClass(category) {
+      return navButtonStyles[categoryKey(category)] || 'nav-default';
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    function cleanImageUrl(value) {
+      if (!value) return '';
+      let url = String(value).trim();
+      const markdownMatch = url.match(/\((https?:\/\/[^)\s]+)\)/);
+      if (markdownMatch) url = markdownMatch[1];
+      return url.replace(/^["']|["']$/g, '').trim();
+    }
+
+    function isEventActiveOnDate(e, targetDate) {
+      const startDate = new Date(e.year, e.month, e.date);
+      startDate.setHours(0, 0, 0, 0);
+
+      const endDate = (!isNaN(e.endYear) && !isNaN(e.endMonth) && !isNaN(e.endDate))
+        ? new Date(e.endYear, e.endMonth, e.endDate)
+        : startDate;
+      endDate.setHours(0, 0, 0, 0);
+
+      if (targetDate < startDate || targetDate > endDate) {
+        return false;
+      }
+
+      const freq = e.frequency.toLowerCase();
+      const rec = e.recurrence.toLowerCase();
+
+      if (freq === 'one-off' || freq === 'one off' || freq === '') {
+        return targetDate >= startDate && targetDate <= endDate;
+      }
+
+      if (freq === 'daily') {
+        return true;
+      }
+
+      const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      const targetDayName = dayNames[targetDate.getDay()];
+
+      const matchesDayOfWeek = rec.includes(targetDayName);
+      if (!matchesDayOfWeek && rec !== '') {
+        return false;
+      }
+
+      if (rec.includes('1st') || rec.includes('2nd') || rec.includes('3rd') || rec.includes('4th') || rec.includes('last')) {
+        const weekNum = Math.ceil(targetDate.getDate() / 7);
+        let matchesOrdinal = false;
+        if (rec.includes('1st') && weekNum === 1) matchesOrdinal = true;
+        if (rec.includes('2nd') && weekNum === 2) matchesOrdinal = true;
+        if (rec.includes('3rd') && weekNum === 3) matchesOrdinal = true;
+        if (rec.includes('4th') && weekNum === 4) matchesOrdinal = true;
+        if (rec.includes('last')) {
+          const nextWeek = new Date(targetDate);
+          nextWeek.setDate(targetDate.getDate() + 7);
+          if (nextWeek.getMonth() !== targetDate.getMonth()) matchesOrdinal = true;
+        }
+        if (!matchesOrdinal) return false;
+      }
+
+      if (freq === 'biweekly' || rec.includes('every other')) {
+        const diffTime = targetDate.getTime() - startDate.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const diffWeeks = Math.floor(diffDays / 7);
+        if (diffWeeks % 2 !== 0) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    async function initApp() {
+      try {
+        const res = await fetch('https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=' + new Date().getTime());
+        if (!res.ok) throw new Error('Failed to load sheet data');
+        const rawData = await res.json();
+
+        const standardizedData = rawData.map(row => {
+          const cleanRow = {};
+          for (let key in row) {
+            cleanRow[key.toLowerCase().replace(/[\s_-]/g, '')] = row[key];
+          }
+          return cleanRow;
+        });
+
+        allEvents = standardizedData.map(e => {
+          const y = parseNum(getField(e, ['startyear', 'year', 'anno', 'yr']));
+          const mInput = parseNum(getField(e, ['startmonth', 'month', 'mese', 'mo']));
+          const d = parseNum(getField(e, ['startdate', 'day', 'giorno', 'data']));
+          const endY = parseNum(getField(e, ['endyear', 'endanno']));
+          const endMInput = parseNum(getField(e, ['endmonth', 'endmese']));
+          const endD = parseNum(getField(e, ['enddate', 'endgiorno']));
+          const rawImg = cleanImageUrl(getField(e, ['img', 'image', 'photo', 'picture', 'foto', 'imgurl', 'imageurl']));
+          const categories = parseCategories(getField(e, ['category', 'categories', 'categoria', 'categorie', 'tags', 'tag']));
+          const frequency = getField(e, ['frequency', 'freq', 'frequenza']);
+          const recurrence = getField(e, ['recurrence', 'ricorrenza', 'days', 'schedule']);
+
+          return {
+            year: y,
+            month: !isNaN(mInput) ? mInput - 1 : NaN,
+            date: d,
+            endYear: endY,
+            endMonth: !isNaN(endMInput) ? endMInput - 1 : NaN,
+            endDate: endD,
+            title: getField(e, ['title', 'titolo', 'name', 'event']),
+            city: getField(e, ['city', 'citta', 'town', 'location']),
+            time: getField(e, ['time', 'orario', 'hours', 'ora']),
+            location: getField(e, ['venue', 'location', 'luogo', 'address', 'place']),
+            description: getField(e, ['description', 'descrizione', 'details', 'info']),
+            link: getField(e, ['link', 'url', 'website', 'sito', 'ticketlink']),
+            img: rawImg || 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+            categories: categories,
+            frequency: frequency,
+            recurrence: recurrence,
+            raw: e
+          };
+        }).filter(e => !isNaN(e.year) && !isNaN(e.month) && !isNaN(e.date));
+
+        buildCalendar();
+        renderEvents();
+        buildCategoryNav();
+      } catch (err) {
+        console.error(err);
+        document.getElementById('events-container').innerHTML = `
+          <div class="no-events">
+            <h3>Unable to load events at the moment.</h3>
+            <p>Please check your connection or try again later.</p>
+          </div>
+        `;
+      }
+    }
+
+    function buildCalendar() {
+      const titleEl = document.getElementById('calendar-month-title');
+      const gridEl = document.getElementById('days-grid');
+
+      titleEl.innerText = `${monthNames[selectedMonth]} ${selectedYear}`;
+      gridEl.innerHTML = '';
+
+      const firstDayIndex = new Date(selectedYear, selectedMonth, 1).getDay();
+      const adjustedFirstDay = (firstDayIndex === 0) ? 6 : firstDayIndex - 1;
+      const totalDays = new Date(selectedYear, selectedMonth + 1, 0).getDate();
+      const prevTotalDays = new Date(selectedYear, selectedMonth, 0).getDate();
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      for (let i = adjustedFirstDay - 1; i >= 0; i--) {
+        const dayNum = prevTotalDays - i;
+        const cell = document.createElement('div');
+        cell.className = 'day-cell past';
+        cell.innerHTML = `<div class="day-number">${dayNum}</div>`;
+        gridEl.appendChild(cell);
+      }
+
+      for (let d = 1; d <= totalDays; d++) {
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
+
+        const cellDate = new Date(selectedYear, selectedMonth, d);
+        cellDate.setHours(0, 0, 0, 0);
+
+        if (cellDate < today) {
+          cell.classList.add('past');
+        }
+
+        if (selectedYear === today.getFullYear() && selectedMonth === today.getMonth() && d === today.getDate() && selectedDay === today.getDate()) {
+          cell.classList.add('active');
+        } else if (d === selectedDay) {
+          cell.classList.add('active');
+        }
+
+        const hasEvents = allEvents.some(e => isEventActiveOnDate(e, cellDate));
+
+        let html = `<div class="day-number">${d}</div>`;
+        if (hasEvents) html += `<div class="event-dot"></div>`;
+
+        cell.innerHTML = html;
+        cell.onclick = () => {
+          selectedDay = d;
+          buildCalendar();
+          renderEvents();
+        };
+        gridEl.appendChild(cell);
+      }
+    }
+
+    function changeMonth(direction) {
+      selectedMonth += direction;
+      if (selectedMonth > 11) {
+        selectedMonth = 0;
+        selectedYear++;
+      } else if (selectedMonth < 0) {
+        selectedMonth = 11;
+        selectedYear--;
+      }
+      selectedDay = 1;
+      buildCalendar();
+      renderEvents();
+    }
+
+    function renderEvents() {
+      const container = document.getElementById('events-container');
+      const cityFilter = document.getElementById('city-filter').value;
+      const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+      container.innerHTML = '';
+
+      const selectedDateObj = new Date(selectedYear, selectedMonth, selectedDay);
+      selectedDateObj.setHours(0, 0, 0, 0);
+
+      const filteredEvents = allEvents.filter(e => {
+        const matchesCity = (cityFilter === 'ALL' || e.city.toLowerCase() === cityFilter.toLowerCase());
+
+        if (searchQuery !== '') {
+          const matchesSearch = e.title.toLowerCase().includes(searchQuery) ||
+                                e.description.toLowerCase().includes(searchQuery) ||
+                                e.city.toLowerCase().includes(searchQuery) ||
+                                e.location.toLowerCase().includes(searchQuery);
+          return matchesCity && matchesSearch;
+        } else {
+          const matchesFrequency = isEventActiveOnDate(e, selectedDateObj);
+          return matchesCity && matchesFrequency;
+        }
+      });
+
+      if (filteredEvents.length === 0) {
+        container.innerHTML = `
+          <div class="no-events">
+            <h3>No events found.</h3>
+            <p>Try adjusting your search query, date, or city filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      categoryOrder.forEach(catName => {
+        const matchingCatEvents = filteredEvents.filter(e => 
+          e.categories.some(c => categoryKey(c) === categoryKey(catName))
+        );
+
+        if (matchingCatEvents.length > 0) {
+          const section = document.createElement('div');
+          section.className = 'category-section';
+          section.id = `cat-${categoryKey(catName)}`;
+
+          let eventsHtml = `<div class="events-grid">`;
+          matchingCatEvents.forEach(evt => {
+            const tagsHtml = evt.categories.map(c => `<span class="tag-badge ${getCategoryClass(c)}">${escapeHtml(c)}</span>`).join('');
+            eventsHtml += `
+              <div class="event-card">
+                <div class="img-wrapper">
+                  <div class="tag-container">${tagsHtml}</div>
+                  <img src="${escapeHtml(evt.img)}" alt="${escapeHtml(evt.title)}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
+                </div>
+                <div class="card-body">
+                  <h3>${escapeHtml(evt.title)}</h3>
+                  <div class="meta-info">
+                    <div class="meta-row">📍 <strong>${escapeHtml(evt.city)}</strong> ${evt.location ? '- ' + escapeHtml(evt.location) : ''}</div>
+                    ${evt.time ? `<div class="meta-row">🕒 ${escapeHtml(evt.time)}</div>` : ''}
+                  </div>
+                  <div class="description">${escapeHtml(evt.description)}</div>
+                  ${evt.link ? `<a href="${escapeHtml(evt.link)}" target="_blank" rel="noopener" class="btn-link">More Info & Tickets ↗</a>` : ''}
+                </div>
+              </div>
+            `;
+          });
+          eventsHtml += `</div>`;
+
+          section.innerHTML = `
+            <div class="category-header">
+              <div class="category-title-wrapper">
+                <div class="category-colour-dot" style="background: ${categoryDotColours[categoryKey(catName)] || 'var(--accent-pink)'}"></div>
+                <h2 class="category-title">${escapeHtml(catName)}</h2>
+              </div>
+              <span class="category-count">${matchingCatEvents.length}</span>
+            </div>
+            ${eventsHtml}
+          `;
+          container.appendChild(section);
+        }
+      });
+    }
+
+    function buildCategoryNav() {
+      const navInner = document.getElementById('category-nav-inner');
+      navInner.innerHTML = '';
+      categoryOrder.forEach(catName => {
+        const btn = document.createElement('button');
+        btn.className = `category-nav-btn ${getNavButtonClass(catName)}`;
+        btn.innerText = catName;
+        btn.onclick = () => {
+          const target = document.getElementById(`cat-${categoryKey(catName)}`);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        };
+        navInner.appendChild(btn);
+      });
+    }
+
+    window.onload = initApp;
+  </script>
 </body>
 </html>
