@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Inside Riviera - What's On Today</title>
 
-  <!-- GetYourGuide Analytics -->
+  <!-- =========================================================
+       GETYOURGUIDE PARTNER SCRIPT
+       ========================================================= -->
   <script
     async
     defer
@@ -14,28 +17,39 @@
     data-gyg-partner-id="LNHKRSN">
   </script>
 
+
   <style>
+
     /* =========================================================
        COLOUR PALETTE
        ========================================================= */
+
     :root {
       --accent-pink: #ff007a;
       --accent-green: #a3e635;
+
       --text-dark: #0f172a;
       --text-muted: #64748b;
+
       --card-bg: #ffffff;
       --page-bg: #f8fafc;
+
       --border: #e2e8f0;
+
       --soft-pink: #ffe4f1;
       --soft-green: #eef9d2;
       --soft-dark: #e2e8f0;
       --soft-purple: #eee8ff;
-      --shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
+
+      --shadow:
+        0 4px 14px rgba(15, 23, 42, 0.07);
     }
+
 
     /* =========================================================
        RESET
        ========================================================= */
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -47,671 +61,1267 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Helvetica, Arial, sans-serif;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
       background: var(--page-bg);
       color: var(--text-dark);
     }
 
+
     /* =========================================================
        HERO
        ========================================================= */
+
     .hero {
       position: relative;
+
       background:
         linear-gradient(
           rgba(15, 23, 42, 0.25),
           rgba(15, 23, 42, 0.35)
         ),
-        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80')
+        url(
+          'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80'
+        )
         center / cover no-repeat;
 
       padding: 50px 20px 140px 20px;
+
       text-align: center;
       color: #ffffff;
     }
+
 
     .brand-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       gap: 8px;
       margin-bottom: 20px;
     }
 
+
     .logo-graphic {
       display: block;
+
       margin: 0 auto;
+
       width: 36px;
       height: 30px;
+
       fill: var(--accent-green);
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+
+      filter:
+        drop-shadow(
+          0 2px 4px rgba(0,0,0,0.2)
+        );
     }
+
 
     .hero h1 {
       font-size: 1.8rem;
       font-weight: 900;
+
       letter-spacing: 2.5px;
+
       margin: 0;
+
       text-transform: uppercase;
+
       color: #ffffff;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+
+      text-shadow:
+        0 2px 8px rgba(0,0,0,0.3);
     }
+
 
     .brand-tagline {
       font-size: 0.65rem;
       font-weight: 700;
+
       letter-spacing: 3px;
+
       color: #ffffff;
+
       text-transform: uppercase;
+
       opacity: 0.85;
+
       margin-bottom: 16px;
     }
+
 
     .hero-title-main {
       font-size: 1.1rem;
       font-weight: 700;
+
       letter-spacing: 1px;
+
       opacity: 0.85;
+
       text-transform: uppercase;
     }
 
+
     .hero .highlight {
       display: block;
+
       font-size: 3.2rem;
       font-weight: 900;
+
       color: var(--accent-green);
+
       letter-spacing: 2px;
+
       margin-bottom: 12px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+
+      text-shadow:
+        0 2px 10px rgba(0,0,0,0.3);
     }
+
 
     .hero p {
       font-size: 0.95rem;
+
       max-width: 650px;
+
       margin: 0 auto;
+
       opacity: 0.9;
+
       line-height: 1.4;
     }
+
 
     /* =========================================================
        MAIN CONTAINER
        ========================================================= */
+
     .main-content {
       max-width: 1100px;
-      margin: -100px auto 40px auto;
+
+      margin:
+        -100px auto
+        40px auto;
+
       padding: 0 20px;
+
       position: relative;
+
       z-index: 10;
     }
+
 
     /* =========================================================
        CALENDAR
        ========================================================= */
+
     .calendar-card {
       background: #ffffff;
+
       border-radius: 24px;
+
       padding: 28px 32px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.12);
+
       max-width: 480px;
-      margin: 0 auto 24px auto;
+
+      margin:
+        0 auto
+        24px auto;
     }
+
 
     .cal-header {
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
+
       margin-bottom: 24px;
     }
+
 
     .cal-header h2 {
       font-size: 1.1rem;
       font-weight: 800;
+
       letter-spacing: 1px;
     }
 
+
     .nav-btn {
       background: #f1f5f9;
+
       border: none;
+
       width: 32px;
       height: 32px;
+
       border-radius: 50%;
+
       cursor: pointer;
+
       font-weight: bold;
+
       color: var(--text-muted);
+
       display: flex;
+
       align-items: center;
       justify-content: center;
     }
+
 
     .nav-btn:hover {
       background: #e2e8f0;
     }
 
+
     .weekdays {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+
+      grid-template-columns:
+        repeat(7, 1fr);
+
       text-align: center;
+
       font-size: 0.75rem;
+
       font-weight: 700;
+
       color: var(--text-muted);
+
       margin-bottom: 12px;
     }
 
+
     .days-grid {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+
+      grid-template-columns:
+        repeat(7, 1fr);
+
       gap: 8px 0;
+
       text-align: center;
     }
 
+
     .day-cell {
       height: 40px;
+
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
       justify-content: center;
+
       font-size: 0.9rem;
+
       font-weight: 600;
+
       cursor: pointer;
+
       position: relative;
+
       user-select: none;
     }
+
 
     .day-number {
       width: 32px;
       height: 32px;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       border-radius: 50%;
     }
 
+
     .day-cell.active .day-number {
-      background-color: var(--accent-pink);
+      background-color:
+        var(--accent-pink);
+
       color: #ffffff;
+
       font-weight: 800;
     }
+
 
     .day-cell.past {
       color: #cbd5e1;
     }
 
+
     .day-cell.past .event-dot {
       background-color: #cbd5e1;
+
       opacity: 0.4;
     }
+
 
     .event-dot {
       width: 4px;
       height: 4px;
-      background-color: var(--accent-green);
+
+      background-color:
+        var(--accent-green);
+
       border-radius: 50%;
+
       position: absolute;
+
       bottom: 2px;
     }
+
 
     /* =========================================================
        FILTERS & SEARCH
        ========================================================= */
+
     .filter-wrapper {
       display: flex;
+
       justify-content: center;
+
       gap: 12px;
+
       margin-bottom: 20px;
+
       flex-wrap: wrap;
     }
+
 
     .city-select,
     .search-input {
       background: #ffffff;
-      border: 1px solid var(--border);
+
+      border:
+        1px solid var(--border);
+
       padding: 12px 20px;
+
       border-radius: 30px;
+
       font-weight: 600;
+
       font-size: 0.9rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+      box-shadow:
+        0 2px 8px rgba(0,0,0,0.05);
+
       outline: none;
     }
+
 
     .city-select {
       cursor: pointer;
     }
 
+
     .search-input {
       width: 260px;
     }
 
+
     .search-input:focus,
     .city-select:focus {
-      border-color: var(--accent-pink);
+      border-color:
+        var(--accent-pink);
     }
+
 
     /* =========================================================
        CATEGORY NAVIGATION
        ========================================================= */
+
     .category-navigation {
-      background: rgba(255,255,255,0.96);
-      border: 1px solid var(--border);
+      background:
+        rgba(255,255,255,0.96);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 16px;
+
       padding: 12px;
+
       margin-bottom: 28px;
+
       box-shadow: var(--shadow);
+
       position: sticky;
+
       top: 10px;
+
       z-index: 20;
+
       overflow-x: auto;
+
       scrollbar-width: none;
     }
+
 
     .category-navigation::-webkit-scrollbar {
       display: none;
     }
 
+
     .category-nav-inner {
       display: flex;
+
       gap: 8px;
+
       min-width: max-content;
+
       justify-content: center;
     }
 
+
     .category-nav-btn {
-      border: 1px solid transparent;
+      border:
+        1px solid transparent;
+
       padding: 8px 14px;
+
       border-radius: 999px;
+
       font-size: 0.78rem;
+
       font-weight: 800;
+
       cursor: pointer;
+
       white-space: nowrap;
+
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
         opacity 0.2s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+
+      box-shadow:
+        0 2px 6px rgba(0,0,0,0.04);
     }
 
+
     .category-nav-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 4px 10px rgba(0,0,0,0.1);
+
       opacity: 0.9;
     }
 
+
     .nav-concert {
-      background: var(--soft-purple);
-      color: var(--text-dark);
-      border-color: rgba(238, 232, 255, 0.8);
+      background:
+        var(--soft-purple);
+
+      color:
+        var(--text-dark);
+
+      border-color:
+        rgba(238, 232, 255, 0.8);
     }
+
 
     .nav-exhibition {
-      background: var(--accent-pink);
+      background:
+        var(--accent-pink);
+
       color: #ffffff;
     }
+
 
     .nav-public-event {
-      background: var(--text-dark);
+      background:
+        var(--text-dark);
+
       color: #ffffff;
     }
 
+
     .nav-live-music {
-      background: #1e293b;
-      color: var(--accent-green);
+      background:
+        #1e293b;
+
+      color:
+        var(--accent-green);
     }
+
 
     .nav-private-tour {
-      background: #e0f2fe;
-      color: #0369a1;
-      border-color: rgba(3, 105, 161, 0.2);
+      background:
+        #e0f2fe;
+
+      color:
+        #0369a1;
+
+      border-color:
+        rgba(3, 105, 161, 0.2);
     }
+
 
     .nav-sport {
-      background: #fff1f2;
-      color: #e11d48;
-      border-color: rgba(225, 29, 72, 0.2);
+      background:
+        #fff1f2;
+
+      color:
+        #e11d48;
+
+      border-color:
+        rgba(225, 29, 72, 0.2);
     }
+
 
     .nav-market {
-      background: var(--soft-pink);
-      color: var(--accent-pink);
-      border-color: rgba(255, 0, 122, 0.3);
+      background:
+        var(--soft-pink);
+
+      color:
+        var(--accent-pink);
+
+      border-color:
+        rgba(255, 0, 122, 0.3);
     }
 
+
     .nav-default {
-      background: var(--soft-dark);
-      color: var(--text-dark);
+      background:
+        var(--soft-dark);
+
+      color:
+        var(--text-dark);
     }
+
 
     /* =========================================================
        CATEGORY SECTION
        ========================================================= */
+
     .category-section {
       margin-bottom: 38px;
+
       scroll-margin-top: 80px;
     }
 
+
     .category-header {
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       gap: 15px;
+
       margin-bottom: 14px;
+
       padding-bottom: 10px;
-      border-bottom: 2px solid var(--border);
+
+      border-bottom:
+        2px solid var(--border);
     }
+
 
     .category-title-wrapper {
       display: flex;
+
       align-items: center;
+
       gap: 10px;
     }
 
+
     .category-title {
       font-size: 1.25rem;
+
       font-weight: 900;
+
       letter-spacing: -0.2px;
     }
 
+
     .category-count {
-      background: var(--soft-dark);
-      color: var(--text-muted);
+      background:
+        var(--soft-dark);
+
+      color:
+        var(--text-muted);
+
       font-size: 0.72rem;
+
       font-weight: 800;
+
       padding: 4px 8px;
+
       border-radius: 999px;
     }
+
 
     .category-colour-dot {
       width: 12px;
       height: 12px;
+
       border-radius: 50%;
+
       flex-shrink: 0;
     }
 
+
     /* =========================================================
-       GETYOURGUIDE
+       GETYOURGUIDE - RIVIERA
        ========================================================= */
+
     .gyg-private-tour-widget {
-      margin: 0 0 28px 0;
       width: 100%;
+
+      margin:
+        0 0 28px 0;
     }
+
+
+    .gyg-riviera-intro {
+      margin-bottom: 18px;
+
+      color:
+        var(--text-muted);
+
+      font-size: 0.88rem;
+
+      line-height: 1.5;
+    }
+
+
+    .gyg-riviera-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 14px;
+
+      margin-bottom: 10px;
+    }
+
+
+    .gyg-riviera-card {
+      background: #ffffff;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 16px;
+
+      padding: 18px;
+
+      box-shadow:
+        var(--shadow);
+
+      display: flex;
+
+      flex-direction: column;
+
+      min-height: 205px;
+    }
+
+
+    .gyg-riviera-card h3 {
+      font-size: 1rem;
+
+      font-weight: 900;
+
+      margin-bottom: 7px;
+
+      line-height: 1.3;
+    }
+
+
+    .gyg-riviera-card p {
+      color:
+        var(--text-muted);
+
+      font-size: 0.78rem;
+
+      line-height: 1.45;
+
+      margin-bottom: 16px;
+
+      flex-grow: 1;
+    }
+
+
+    .gyg-riviera-card a {
+      display: block;
+
+      text-align: center;
+
+      background:
+        #f1f5f9;
+
+      color:
+        var(--text-dark);
+
+      text-decoration: none;
+
+      padding: 10px 12px;
+
+      border-radius: 9px;
+
+      font-size: 0.78rem;
+
+      font-weight: 800;
+
+      transition:
+        0.2s ease;
+    }
+
+
+    .gyg-riviera-card a:hover {
+      background:
+        var(--accent-pink);
+
+      color: #ffffff;
+    }
+
+
+    .gyg-riviera-label {
+      display: inline-block;
+
+      align-self: flex-start;
+
+      margin-bottom: 10px;
+
+      padding: 5px 9px;
+
+      border-radius: 999px;
+
+      background:
+        var(--soft-green);
+
+      color:
+        var(--text-dark);
+
+      font-size: 0.65rem;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.4px;
+    }
+
+
+    .gyg-riviera-note {
+      font-size: 0.7rem;
+
+      color:
+        var(--text-muted);
+
+      text-align: center;
+
+      margin-top: 10px;
+    }
+
 
     /* =========================================================
        EVENTS GRID & CARDS
        ========================================================= */
+
     .events-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+
+      grid-template-columns:
+        repeat(
+          auto-fill,
+          minmax(290px, 1fr)
+        );
+
       gap: 16px;
     }
 
+
     .event-card {
-      background: var(--card-bg);
+      background:
+        var(--card-bg);
+
       border-radius: 14px;
+
       overflow: hidden;
-      box-shadow: var(--shadow);
+
+      box-shadow:
+        var(--shadow);
+
       display: flex;
+
       flex-direction: column;
+
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
     }
 
+
     .event-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
+      transform:
+        translateY(-3px);
+
+      box-shadow:
+        0 10px 24px
+        rgba(15, 23, 42, 0.10);
     }
+
 
     .img-wrapper {
       position: relative;
+
       height: 145px;
+
       overflow: hidden;
     }
+
 
     .img-wrapper img {
       width: 100%;
       height: 100%;
+
       object-fit: cover;
+
       display: block;
     }
 
+
     .tag-container {
       position: absolute;
+
       top: 10px;
       left: 10px;
       right: 10px;
+
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 5px;
+
       z-index: 2;
     }
 
+
     .tag-badge {
       display: inline-flex;
+
       align-items: center;
+
       padding: 5px 9px;
+
       border-radius: 999px;
+
       font-size: 0.67rem;
+
       font-weight: 800;
+
       line-height: 1;
+
       text-transform: uppercase;
+
       letter-spacing: 0.3px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+
+      box-shadow:
+        0 2px 5px rgba(0,0,0,0.12);
     }
+
 
     .tag-concert {
-      background: var(--soft-purple);
-      color: var(--text-dark);
+      background:
+        var(--soft-purple);
+
+      color:
+        var(--text-dark);
     }
+
 
     .tag-exhibition {
-      background: var(--accent-pink);
-      color: #ffffff;
+      background:
+        var(--accent-pink);
+
+      color:
+        #ffffff;
     }
+
 
     .tag-public-event {
-      background: var(--text-dark);
-      color: #ffffff;
+      background:
+        var(--text-dark);
+
+      color:
+        #ffffff;
     }
+
 
     .tag-live-music {
-      background: var(--text-dark);
-      color: var(--accent-green);
+      background:
+        var(--text-dark);
+
+      color:
+        var(--accent-green);
     }
+
 
     .tag-private-tour {
-      background: var(--soft-green);
-      color: var(--text-dark);
+      background:
+        var(--soft-green);
+
+      color:
+        var(--text-dark);
     }
+
 
     .tag-sport {
-      background: var(--soft-pink);
-      color: var(--accent-pink);
+      background:
+        var(--soft-pink);
+
+      color:
+        var(--accent-pink);
     }
+
 
     .tag-market {
-      background: var(--accent-pink);
-      color: #ffffff;
+      background:
+        var(--accent-pink);
+
+      color:
+        #ffffff;
     }
 
+
     .tag-default {
-      background: var(--soft-dark);
-      color: var(--text-dark);
+      background:
+        var(--soft-dark);
+
+      color:
+        var(--text-dark);
     }
+
 
     .card-body {
       padding: 15px;
+
       display: flex;
+
       flex-direction: column;
+
       flex-grow: 1;
     }
+
 
     .card-body h3 {
       font-size: 1rem;
+
       margin-bottom: 8px;
+
       line-height: 1.3;
+
       font-weight: 800;
     }
 
+
     .meta-info {
       font-size: 0.78rem;
-      color: var(--text-muted);
+
+      color:
+        var(--text-muted);
+
       margin-bottom: 9px;
+
       display: flex;
+
       flex-direction: column;
+
       gap: 4px;
     }
 
+
     .meta-row {
       display: flex;
+
       align-items: flex-start;
+
       gap: 5px;
     }
 
+
     .description {
       font-size: 0.8rem;
-      color: var(--text-muted);
+
+      color:
+        var(--text-muted);
+
       line-height: 1.45;
+
       margin-bottom: 14px;
+
       flex-grow: 1;
+
       display: -webkit-box;
+
       -webkit-line-clamp: 3;
+
       -webkit-box-orient: vertical;
+
       overflow: hidden;
     }
 
+
     .btn-link {
       text-align: center;
-      background-color: #f1f5f9;
-      color: var(--text-dark);
+
+      background-color:
+        #f1f5f9;
+
+      color:
+        var(--text-dark);
+
       text-decoration: none;
+
       padding: 9px;
+
       border-radius: 8px;
+
       font-size: 0.78rem;
+
       font-weight: 700;
-      transition: 0.2s ease;
+
+      transition:
+        0.2s ease;
     }
 
+
     .btn-link:hover {
-      background: var(--accent-pink);
-      color: #ffffff;
+      background:
+        var(--accent-pink);
+
+      color:
+        #ffffff;
     }
+
 
     .no-events {
       text-align: center;
+
       padding: 40px;
-      color: var(--text-muted);
-      background: #ffffff;
+
+      color:
+        var(--text-muted);
+
+      background:
+        #ffffff;
+
       border-radius: 16px;
-      box-shadow: var(--shadow);
+
+      box-shadow:
+        var(--shadow);
+
       margin-bottom: 30px;
     }
+
 
     /* =========================================================
        SUBMIT SECTION
        ========================================================= */
+
     .submit-section {
-      background: #ffffff;
+      background:
+        #ffffff;
+
       border-radius: 20px;
+
       padding: 32px;
-      box-shadow: var(--shadow);
+
+      box-shadow:
+        var(--shadow);
+
       max-width: 600px;
-      margin: 0 auto;
+
+      margin:
+        0 auto;
+
       text-align: center;
     }
 
+
     .submit-section h2 {
       font-size: 1.2rem;
+
       margin-bottom: 12px;
     }
 
+
     .submit-btn {
-      background: var(--accent-pink);
-      color: #ffffff;
+      background:
+        var(--accent-pink);
+
+      color:
+        #ffffff;
+
       border: none;
+
       padding: 14px 28px;
+
       border-radius: 10px;
+
       font-weight: bold;
+
       cursor: pointer;
+
       font-size: 0.95rem;
+
       display: inline-block;
+
       text-decoration: none;
+
       margin-top: 10px;
     }
+
 
     /* =========================================================
        MOBILE RESPONSIVE
        ========================================================= */
+
+    @media (max-width: 800px) {
+
+      .gyg-riviera-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+
     @media (max-width: 700px) {
 
       .hero {
-        padding: 30px 18px 120px 18px;
+        padding:
+          30px 18px
+          120px 18px;
       }
+
 
       .hero h1 {
         font-size: 1.5rem;
       }
 
+
       .hero .highlight {
         font-size: 2.5rem;
       }
 
+
       .main-content {
         margin-top: -80px;
-        padding: 0 12px;
+
+        padding:
+          0 12px;
       }
 
+
       .calendar-card {
-        padding: 20px 15px;
+        padding:
+          20px 15px;
+
         border-radius: 18px;
+
         max-width: 100%;
       }
 
+
       .filter-wrapper {
         flex-direction: column;
+
         align-items: stretch;
       }
+
 
       .city-select,
       .search-input {
         width: 100%;
       }
 
+
       .category-navigation {
         margin-left: -12px;
+
         margin-right: -12px;
+
         border-radius: 0;
+
         top: 0;
-        padding: 9px 12px;
+
+        padding:
+          9px 12px;
       }
+
 
       .events-grid {
         grid-template-columns: 1fr;
+
         gap: 12px;
       }
 
+
       .event-card {
         display: grid;
-        grid-template-columns: 120px 1fr;
+
+        grid-template-columns:
+          120px 1fr;
+
         min-height: 150px;
       }
 
+
       .img-wrapper {
         height: 100%;
+
         min-height: 150px;
       }
+
 
       .card-body {
         padding: 12px;
       }
+
     }
+
   </style>
+
 </head>
 
+
 <body>
+
 
   <!-- =========================================================
        HERO
        ========================================================= -->
+
   <div class="hero">
 
     <div class="brand-container">
@@ -721,20 +1331,64 @@
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
       >
+
         <g transform="translate(0, 0)">
 
-          <path d="M12 2C9.5 2 7.2 2.9 5.4 4.3C7 5.2 8.7 5.7 12 5.7C15.3 5.7 17 5.2 18.6 4.3C16.8 2.9 14.5 2 12 2Z"/>
-
-          <path d="M4.3 5.5C2.5 7.2 1.5 9.5 1.5 12H5C5 9.8 5.7 7.5 7 5.5H4.3Z"/>
-
-          <path d="M19.7 5.5C21 7.5 21.7 9.8 21.7 12H25.2C25.2 9.5 24.2 7.2 22.4 5.5H19.7Z"/>
-
-          <path d="M12 6C8.5 6 5.5 7 3.5 8.3C3.2 8.9 3 9.4 3 10H21C21 9.4 20.8 8.9 20.5 8.3C18.5 7 15.5 6 12 6Z"/>
-
-          <path d="M11 10.5V19.3C10.4 19.4 9.9 19.6 9.4 19.8C9.8 20.5 10.8 21 12 21C13.2 21 14.2 20.5 14.6 19.8C14.1 19.6 13.6 19.4 13 19.3V10.5H11Z"/>
+          <path
+            d="
+              M12 2
+              C9.5 2 7.2 2.9 5.4 4.3
+              C7 5.2 8.7 5.7 12 5.7
+              C15.3 5.7 17 5.2 18.6 4.3
+              C16.8 2.9 14.5 2 12 2Z
+            "
+          />
 
           <path
-            d="M2.5 22C4.5 22 5.5 21 7.5 22C9.5 23 10.5 22 12.5 22C14.5 22 15.5 23 17.5 22C19.5 21 20.5 22 22.5 22"
+            d="
+              M4.3 5.5
+              C2.5 7.2 1.5 9.5 1.5 12H5
+              C5 9.8 5.7 7.5 7 5.5H4.3Z
+            "
+          />
+
+          <path
+            d="
+              M19.7 5.5
+              C21 7.5 21.7 9.8 21.7 12H25.2
+              C25.2 9.5 24.2 7.2 22.4 5.5H19.7Z
+            "
+          />
+
+          <path
+            d="
+              M12 6
+              C8.5 6 5.5 7 3.5 8.3
+              C3.2 8.9 3 9.4 3 10H21
+              C21 9.4 20.8 8.9 20.5 8.3
+              C18.5 7 15.5 6 12 6Z
+            "
+          />
+
+          <path
+            d="
+              M11 10.5V19.3
+              C10.4 19.4 9.9 19.6 9.4 19.8
+              C9.8 20.5 10.8 21 12 21
+              C13.2 21 14.2 20.5 14.6 19.8
+              C14.1 19.6 13.6 19.4 13 19.3
+              V10.5H11Z
+            "
+          />
+
+          <path
+            d="
+              M2.5 22
+              C4.5 22 5.5 21 7.5 22
+              C9.5 23 10.5 22 12.5 22
+              C14.5 22 15.5 23 17.5 22
+              C19.5 21 20.5 22 22.5 22
+            "
             stroke="var(--accent-green)"
             stroke-width="1.2"
             stroke-linecap="round"
@@ -742,7 +1396,13 @@
           />
 
           <path
-            d="M2.5 24C4.5 24 5.5 23 7.5 24C9.5 25 10.5 24 12.5 24C14.5 24 15.5 25 17.5 24C19.5 23 20.5 24 22.5 24"
+            d="
+              M2.5 24
+              C4.5 24 5.5 23 7.5 24
+              C9.5 25 10.5 24 12.5 24
+              C14.5 24 15.5 25 17.5 24
+              C19.5 23 20.5 24 22.5 24
+            "
             stroke="var(--accent-green)"
             stroke-width="1.2"
             stroke-linecap="round"
@@ -750,9 +1410,14 @@
           />
 
         </g>
+
       </svg>
 
-      <h1>Inside Riviera</h1>
+
+      <h1>
+        Inside Riviera
+      </h1>
+
 
       <div class="brand-tagline">
         Events / Places / Lifestyle
@@ -760,13 +1425,19 @@
 
     </div>
 
+
     <div class="hero-title-main">
       What's on
     </div>
 
-    <span class="highlight" id="hero-date-text">
+
+    <span
+      class="highlight"
+      id="hero-date-text"
+    >
       TODAY
     </span>
+
 
     <p>
       Events, markets, and things to do across Sanremo,
@@ -780,9 +1451,14 @@
   <!-- =========================================================
        MAIN CONTENT
        ========================================================= -->
+
   <div class="main-content">
 
-    <!-- CALENDAR -->
+
+    <!-- =======================================================
+         CALENDAR
+         ======================================================= -->
+
     <div class="calendar-card">
 
       <div class="cal-header">
@@ -790,24 +1466,30 @@
         <button
           class="nav-btn"
           onclick="changeMonth(-1)"
+          aria-label="Previous month"
         >
           &lt;
         </button>
+
 
         <h2 id="calendar-month-title">
           Loading...
         </h2>
 
+
         <button
           class="nav-btn"
           onclick="changeMonth(1)"
+          aria-label="Next month"
         >
           &gt;
         </button>
 
       </div>
 
+
       <div class="weekdays">
+
         <div>MON</div>
         <div>TUE</div>
         <div>WED</div>
@@ -815,7 +1497,9 @@
         <div>FRI</div>
         <div>SAT</div>
         <div>SUN</div>
+
       </div>
+
 
       <div
         class="days-grid"
@@ -825,7 +1509,10 @@
     </div>
 
 
-    <!-- SEARCH + CITY FILTER -->
+    <!-- =======================================================
+         SEARCH + CITY FILTER
+         ======================================================= -->
+
     <div class="filter-wrapper">
 
       <input
@@ -836,50 +1523,88 @@
         oninput="renderEvents()"
       >
 
+
       <select
         class="city-select"
         id="city-filter"
         onchange="renderEvents()"
       >
+
         <option value="ALL">
           All Cities (Italian & French Riviera)
         </option>
 
-        <option value="Sanremo">Sanremo</option>
-        <option value="Bordighera">Bordighera</option>
-        <option value="Ventimiglia">Ventimiglia</option>
-        <option value="Vallecrosia">Vallecrosia</option>
-        <option value="Ospedaletti">Ospedaletti</option>
-        <option value="Vallebona">Vallebona</option>
-        <option value="Menton">Menton</option>
-        <option value="Monte Carlo">Monte Carlo</option>
+        <option value="Sanremo">
+          Sanremo
+        </option>
+
+        <option value="Bordighera">
+          Bordighera
+        </option>
+
+        <option value="Ventimiglia">
+          Ventimiglia
+        </option>
+
+        <option value="Vallecrosia">
+          Vallecrosia
+        </option>
+
+        <option value="Ospedaletti">
+          Ospedaletti
+        </option>
+
+        <option value="Vallebona">
+          Vallebona
+        </option>
+
+        <option value="Menton">
+          Menton
+        </option>
+
+        <option value="Monte Carlo">
+          Monte Carlo
+        </option>
+
       </select>
 
     </div>
 
 
-    <!-- CATEGORY NAVIGATION -->
+    <!-- =======================================================
+         CATEGORY NAVIGATION
+         ======================================================= -->
+
     <div
       class="category-navigation"
       id="category-navigation"
     >
+
       <div
         class="category-nav-inner"
         id="category-nav-inner"
       ></div>
+
     </div>
 
 
-    <!-- EVENTS ARE INSERTED HERE -->
+    <!-- =======================================================
+         EVENTS
+         ======================================================= -->
+
     <div id="events-container"></div>
 
 
-    <!-- SUBMIT EVENT -->
+    <!-- =======================================================
+         SUBMIT EVENT
+         ======================================================= -->
+
     <div class="submit-section">
 
       <h2>
         Add Your Event
       </h2>
+
 
       <p
         style="
@@ -892,6 +1617,7 @@
         Submit it via our official form and it will
         auto-populate on the calendar!
       </p>
+
 
       <a
         href="https://forms.gle/GTXcdJFB4TnCidsL9"
@@ -910,16 +1636,31 @@
   <!-- =========================================================
        JAVASCRIPT
        ========================================================= -->
+
   <script>
+
+
+    /* =========================================================
+       GLOBAL STATE
+       ========================================================= */
 
     let allEvents = [];
 
-    let selectedYear = new Date().getFullYear();
-    let selectedMonth = new Date().getMonth();
-    let selectedDay = new Date().getDate();
+
+    let selectedYear =
+      new Date().getFullYear();
+
+
+    let selectedMonth =
+      new Date().getMonth();
+
+
+    let selectedDay =
+      new Date().getDate();
 
 
     const monthNames = [
+
       "JANUARY",
       "FEBRUARY",
       "MARCH",
@@ -932,6 +1673,7 @@
       "OCTOBER",
       "NOVEMBER",
       "DECEMBER"
+
     ];
 
 
@@ -940,6 +1682,7 @@
        ========================================================= */
 
     const categoryOrder = [
+
       "Market",
       "Public Event",
       "Concert",
@@ -947,6 +1690,7 @@
       "Live Music",
       "Sport",
       "Private Tour"
+
     ];
 
 
@@ -1064,13 +1808,18 @@
         return NaN;
       }
 
-      const num = Number(
-        String(val)
-          .replace(/,/g, '')
-          .trim()
-      );
 
-      return isNaN(num) ? NaN : num;
+      const num =
+        Number(
+          String(val)
+            .replace(/,/g, '')
+            .trim()
+        );
+
+
+      return isNaN(num)
+        ? NaN
+        : num;
     }
 
 
@@ -1092,10 +1841,15 @@
         return ['Public Event'];
       }
 
-      const categories = String(value)
-        .split(',')
-        .map(c => cleanCategoryName(c))
-        .filter(c => c !== '');
+
+      const categories =
+        String(value)
+          .split(',')
+          .map(c =>
+            cleanCategoryName(c)
+          )
+          .filter(c => c !== '');
+
 
       return categories.length
         ? categories
@@ -1114,7 +1868,9 @@
     function getCategoryClass(category) {
 
       return (
-        categoryStyles[categoryKey(category)] ||
+        categoryStyles[
+          categoryKey(category)
+        ] ||
         'tag-default'
       );
     }
@@ -1123,7 +1879,9 @@
     function getNavButtonClass(category) {
 
       return (
-        navButtonStyles[categoryKey(category)] ||
+        navButtonStyles[
+          categoryKey(category)
+        ] ||
         'nav-default'
       );
     }
@@ -1146,14 +1904,22 @@
         return '';
       }
 
-      let url = String(value).trim();
+
+      let url =
+        String(value).trim();
+
 
       const markdownMatch =
-        url.match(/\((https?:\/\/[^)\s]+)\)/);
+        url.match(
+          /\((https?:\/\/[^)\s]+)\)/
+        );
+
 
       if (markdownMatch) {
-        url = markdownMatch[1];
+        url =
+          markdownMatch[1];
       }
+
 
       return url
         .replace(/^["']|["']$/g, '')
@@ -1165,18 +1931,30 @@
        DATE / RECURRENCE LOGIC
        ========================================================= */
 
-    function isEventActiveOnDate(e, targetDate) {
+    function isEventActiveOnDate(
+      e,
+      targetDate
+    ) {
 
       const startDate =
-        new Date(e.year, e.month, e.date);
+        new Date(
+          e.year,
+          e.month,
+          e.date
+        );
 
-      startDate.setHours(0, 0, 0, 0);
+
+      startDate.setHours(
+        0, 0, 0, 0
+      );
 
 
       const endDate =
-        (!isNaN(e.endYear) &&
-         !isNaN(e.endMonth) &&
-         !isNaN(e.endDate))
+        (
+          !isNaN(e.endYear) &&
+          !isNaN(e.endMonth) &&
+          !isNaN(e.endDate)
+        )
 
           ? new Date(
               e.endYear,
@@ -1184,10 +1962,14 @@
               e.endDate
             )
 
-          : startDate;
+          : new Date(
+              startDate
+            );
 
 
-      endDate.setHours(0, 0, 0, 0);
+      endDate.setHours(
+        0, 0, 0, 0
+      );
 
 
       if (
@@ -1199,10 +1981,15 @@
 
 
       const freq =
-        String(e.frequency || '').toLowerCase();
+        String(
+          e.frequency || ''
+        ).toLowerCase();
+
 
       const rec =
-        String(e.recurrence || '').toLowerCase();
+        String(
+          e.recurrence || ''
+        ).toLowerCase();
 
 
       if (
@@ -1210,10 +1997,12 @@
         freq === 'one off' ||
         freq === ''
       ) {
+
         return (
           targetDate >= startDate &&
           targetDate <= endDate
         );
+
       }
 
 
@@ -1223,6 +2012,7 @@
 
 
       const dayNames = [
+
         'sunday',
         'monday',
         'tuesday',
@@ -1230,15 +2020,20 @@
         'thursday',
         'friday',
         'saturday'
+
       ];
 
 
       const targetDayName =
-        dayNames[targetDate.getDay()];
+        dayNames[
+          targetDate.getDay()
+        ];
 
 
       const matchesDayOfWeek =
-        rec.includes(targetDayName);
+        rec.includes(
+          targetDayName
+        );
 
 
       if (
@@ -1258,9 +2053,13 @@
       ) {
 
         const weekNum =
-          Math.ceil(targetDate.getDate() / 7);
+          Math.ceil(
+            targetDate.getDate() / 7
+          );
 
-        let matchesOrdinal = false;
+
+        let matchesOrdinal =
+          false;
 
 
         if (
@@ -1300,9 +2099,11 @@
           const nextWeek =
             new Date(targetDate);
 
+
           nextWeek.setDate(
             targetDate.getDate() + 7
           );
+
 
           if (
             nextWeek.getMonth() !==
@@ -1330,16 +2131,23 @@
           targetDate.getTime() -
           startDate.getTime();
 
+
         const diffDays =
           Math.floor(
             diffTime /
             (1000 * 60 * 60 * 24)
           );
 
-        const diffWeeks =
-          Math.floor(diffDays / 7);
 
-        if (diffWeeks % 2 !== 0) {
+        const diffWeeks =
+          Math.floor(
+            diffDays / 7
+          );
+
+
+        if (
+          diffWeeks % 2 !== 0
+        ) {
           return false;
         }
 
@@ -1358,16 +2166,19 @@
 
       try {
 
-        const res = await fetch(
-          'https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=' +
-          new Date().getTime()
-        );
+        const res =
+          await fetch(
+            'https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=' +
+            new Date().getTime()
+          );
 
 
         if (!res.ok) {
+
           throw new Error(
             'Failed to load sheet data'
           );
+
         }
 
 
@@ -1380,6 +2191,7 @@
 
             const cleanRow = {};
 
+
             for (let key in row) {
 
               cleanRow[
@@ -1389,6 +2201,7 @@
               ] = row[key];
 
             }
+
 
             return cleanRow;
 
@@ -1538,21 +2351,27 @@
 
                 year: y,
 
+
                 month:
                   !isNaN(mInput)
                     ? mInput - 1
                     : NaN,
 
+
                 date: d,
 
+
                 endYear: endY,
+
 
                 endMonth:
                   !isNaN(endMInput)
                     ? endMInput - 1
                     : NaN,
 
+
                 endDate: endD,
+
 
                 title:
                   getField(
@@ -1565,6 +2384,7 @@
                     ]
                   ),
 
+
                 city:
                   getField(
                     e,
@@ -1576,6 +2396,7 @@
                     ]
                   ),
 
+
                 time:
                   getField(
                     e,
@@ -1586,6 +2407,7 @@
                       'ora'
                     ]
                   ),
+
 
                 location:
                   getField(
@@ -1599,6 +2421,7 @@
                     ]
                   ),
 
+
                 description:
                   getField(
                     e,
@@ -1609,6 +2432,7 @@
                       'info'
                     ]
                   ),
+
 
                 link:
                   getField(
@@ -1622,21 +2446,31 @@
                     ]
                   ),
 
+
                 img:
                   rawImg ||
                   'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
 
-                categories: categories,
 
-                frequency: frequency,
+                categories:
+                  categories,
 
-                recurrence: recurrence,
 
-                raw: e
+                frequency:
+                  frequency,
+
+
+                recurrence:
+                  recurrence,
+
+
+                raw:
+                  e
 
               };
 
             })
+
 
             .filter(
               e =>
@@ -1656,6 +2490,7 @@
       } catch (err) {
 
         console.error(err);
+
 
         document.getElementById(
           'events-container'
@@ -1736,9 +2571,13 @@
         ).getDate();
 
 
-      const today = new Date();
+      const today =
+        new Date();
 
-      today.setHours(0, 0, 0, 0);
+
+      today.setHours(
+        0, 0, 0, 0
+      );
 
 
       for (
@@ -1752,7 +2591,9 @@
 
 
         const cell =
-          document.createElement('div');
+          document.createElement(
+            'div'
+          );
 
 
         cell.className =
@@ -1775,7 +2616,9 @@
       ) {
 
         const cell =
-          document.createElement('div');
+          document.createElement(
+            'div'
+          );
 
 
         cell.className =
@@ -1790,28 +2633,45 @@
           );
 
 
-        cellDate.setHours(0, 0, 0, 0);
+        cellDate.setHours(
+          0, 0, 0, 0
+        );
 
 
         if (cellDate < today) {
-          cell.classList.add('past');
+
+          cell.classList.add(
+            'past'
+          );
+
         }
 
 
         if (
-          selectedYear === today.getFullYear() &&
-          selectedMonth === today.getMonth() &&
-          d === today.getDate() &&
-          selectedDay === today.getDate()
+          selectedYear ===
+            today.getFullYear() &&
+
+          selectedMonth ===
+            today.getMonth() &&
+
+          d ===
+            today.getDate() &&
+
+          selectedDay ===
+            today.getDate()
         ) {
 
-          cell.classList.add('active');
+          cell.classList.add(
+            'active'
+          );
 
         } else if (
           d === selectedDay
         ) {
 
-          cell.classList.add('active');
+          cell.classList.add(
+            'active'
+          );
 
         }
 
@@ -1831,17 +2691,22 @@
 
 
         if (hasEvents) {
+
           html +=
             `<div class="event-dot"></div>`;
+
         }
 
 
-        cell.innerHTML = html;
+        cell.innerHTML =
+          html;
 
 
         cell.onclick = () => {
 
-          selectedDay = d;
+          selectedDay =
+            d;
+
 
           buildCalendar();
 
@@ -1850,7 +2715,9 @@
         };
 
 
-        gridEl.appendChild(cell);
+        gridEl.appendChild(
+          cell
+        );
 
       }
 
@@ -1861,19 +2728,30 @@
        CHANGE MONTH
        ========================================================= */
 
-    function changeMonth(direction) {
+    function changeMonth(
+      direction
+    ) {
 
-      selectedMonth += direction;
+      selectedMonth +=
+        direction;
 
 
-      if (selectedMonth > 11) {
+      if (
+        selectedMonth > 11
+      ) {
 
         selectedMonth = 0;
+
         selectedYear++;
 
-      } else if (selectedMonth < 0) {
+      }
+
+      else if (
+        selectedMonth < 0
+      ) {
 
         selectedMonth = 11;
+
         selectedYear--;
 
       }
@@ -1885,6 +2763,162 @@
       buildCalendar();
 
       renderEvents();
+
+    }
+
+
+    /* =========================================================
+       GETYOURGUIDE RIVIERA SECTION
+       ========================================================= */
+
+    function createGetYourGuideSection() {
+
+      const wrapper =
+        document.createElement(
+          'div'
+        );
+
+
+      wrapper.className =
+        'gyg-private-tour-widget';
+
+
+      wrapper.innerHTML = `
+
+        <p class="gyg-riviera-intro">
+
+          Discover tours and experiences
+          across the Italian Riviera,
+          French Riviera and Monaco.
+
+        </p>
+
+
+        <div class="gyg-riviera-grid">
+
+
+          <!-- =========================================
+               SANREMO / ITALIAN RIVIERA
+               ========================================= -->
+
+          <div class="gyg-riviera-card">
+
+            <span class="gyg-riviera-label">
+              Italian Riviera
+            </span>
+
+
+            <h3>
+              Sanremo & Italian Riviera
+            </h3>
+
+
+            <p>
+
+              Explore Sanremo and the Italian Riviera
+              with sightseeing tours, food experiences,
+              walking tours, excursions and activities.
+
+            </p>
+
+
+            <a
+              href="https://www.getyourguide.com/destinations/sanremo-l2571/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Explore Italian Riviera Tours ↗
+            </a>
+
+          </div>
+
+
+          <!-- =========================================
+               MENTON / FRENCH RIVIERA
+               ========================================= -->
+
+          <div class="gyg-riviera-card">
+
+            <span class="gyg-riviera-label">
+              French Riviera
+            </span>
+
+
+            <h3>
+              Menton & Côte d'Azur
+            </h3>
+
+
+            <p>
+
+              Discover Menton and the French Riviera
+              through walking tours, food experiences,
+              boat trips, private tours and excursions.
+
+            </p>
+
+
+            <a
+              href="https://www.getyourguide.com/destinations/menton-l294/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Explore French Riviera Tours ↗
+            </a>
+
+          </div>
+
+
+          <!-- =========================================
+               MONACO / MONTE CARLO
+               ========================================= -->
+
+          <div class="gyg-riviera-card">
+
+            <span class="gyg-riviera-label">
+              Monaco
+            </span>
+
+
+            <h3>
+              Monaco & Monte Carlo
+            </h3>
+
+
+            <p>
+
+              Explore Monaco and Monte Carlo with
+              sightseeing experiences, private tours,
+              boat trips and Riviera excursions.
+
+            </p>
+
+
+            <a
+              href="https://www.getyourguide.com/destinations/monaco-l515/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Explore Monaco Tours ↗
+            </a>
+
+          </div>
+
+
+        </div>
+
+
+        <p class="gyg-riviera-note">
+
+          Activities and availability are provided
+          by GetYourGuide.
+
+        </p>
+
+      `;
+
+
+      return wrapper;
 
     }
 
@@ -1934,38 +2968,63 @@
       const filteredEvents =
         allEvents.filter(e => {
 
+
           const matchesCity =
-            cityFilter === 'ALL' ||
-            String(e.city || '')
+
+            cityFilter === 'ALL'
+
+            ||
+
+            String(
+              e.city || ''
+            )
               .toLowerCase() ===
             cityFilter.toLowerCase();
 
 
-          if (searchQuery !== '') {
+          if (
+            searchQuery !== ''
+          ) {
 
             const matchesSearch =
 
-              String(e.title || '')
+              String(
+                e.title || ''
+              )
                 .toLowerCase()
-                .includes(searchQuery)
+                .includes(
+                  searchQuery
+                )
 
               ||
 
-              String(e.description || '')
+              String(
+                e.description || ''
+              )
                 .toLowerCase()
-                .includes(searchQuery)
+                .includes(
+                  searchQuery
+                )
 
               ||
 
-              String(e.city || '')
+              String(
+                e.city || ''
+              )
                 .toLowerCase()
-                .includes(searchQuery)
+                .includes(
+                  searchQuery
+                )
 
               ||
 
-              String(e.location || '')
+              String(
+                e.location || ''
+              )
                 .toLowerCase()
-                .includes(searchQuery);
+                .includes(
+                  searchQuery
+                );
 
 
             return (
@@ -1991,26 +3050,30 @@
         });
 
 
-      /*
-       * IMPORTANT:
-       * We do NOT return when there are zero events.
-       * This allows Private Tour to remain visible
-       * with its GetYourGuide widget.
-       */
+      /* =====================================================
+         EMPTY RESULTS
+         ===================================================== */
 
-      if (filteredEvents.length === 0) {
+      if (
+        filteredEvents.length === 0
+      ) {
 
         const noEvents =
-          document.createElement('div');
+          document.createElement(
+            'div'
+          );
+
 
         noEvents.className =
           'no-events';
+
 
         noEvents.innerHTML = `
 
           <h3>
             No events found for this date.
           </h3>
+
 
           <p>
             Try adjusting your search query,
@@ -2019,7 +3082,10 @@
 
         `;
 
-        container.appendChild(noEvents);
+
+        container.appendChild(
+          noEvents
+        );
 
       }
 
@@ -2028,278 +3094,309 @@
          CATEGORY SECTIONS
          ===================================================== */
 
-      categoryOrder.forEach(catName => {
-
-        const matchingCatEvents =
-          filteredEvents.filter(e =>
-            e.categories.some(
-              c =>
-                categoryKey(c) ===
-                categoryKey(catName)
-            )
-          );
+      categoryOrder.forEach(
+        catName => {
 
 
-        const isPrivateTour =
-          categoryKey(catName) ===
-          'private tour';
-
-
-        /*
-         * All normal categories only appear
-         * when they have events.
-         *
-         * Private Tour ALWAYS appears.
-         */
-
-        if (
-          matchingCatEvents.length > 0 ||
-          isPrivateTour
-        ) {
-
-          const section =
-            document.createElement('div');
-
-
-          section.className =
-            'category-section';
-
-
-          section.id =
-            `cat-${categoryKey(catName)}`;
-
-
-          /* ===============================================
-             CATEGORY HEADER
-             =============================================== */
-
-          section.innerHTML = `
-
-            <div class="category-header">
-
-              <div class="category-title-wrapper">
-
-                <div
-                  class="category-colour-dot"
-                  style="
-                    background:
-                    ${
-                      categoryDotColours[
-                        categoryKey(catName)
-                      ] ||
-                      'var(--accent-pink)'
-                    }
-                  "
-                ></div>
-
-                <h2 class="category-title">
-                  ${escapeHtml(catName)}
-                </h2>
-
-              </div>
-
-              ${
-                matchingCatEvents.length > 0
-
-                  ? `
-                    <span class="category-count">
-                      ${matchingCatEvents.length}
-                    </span>
-                  `
-
-                  : ''
-              }
-
-            </div>
-
-          `;
-
-
-          /* ===============================================
-             GETYOURGUIDE WIDGET
-             =============================================== */
-
-          if (isPrivateTour) {
-
-            const widget =
-              document.createElement('div');
-
-
-            widget.className =
-              'gyg-private-tour-widget';
-
-
-            widget.setAttribute(
-              'data-gyg-widget',
-              'auto'
+          const matchingCatEvents =
+            filteredEvents.filter(
+              e =>
+                e.categories.some(
+                  c =>
+                    categoryKey(c) ===
+                    categoryKey(catName)
+                )
             );
 
 
-            widget.setAttribute(
-              'data-gyg-partner-id',
-              'LNHKRSN'
-            );
+          const isPrivateTour =
+            categoryKey(catName) ===
+            'private tour';
 
 
-            widget.setAttribute(
-              'data-gyg-cmp',
-              'ventimiglia'
-            );
-
-
-            section.appendChild(widget);
-
-          }
-
-
-          /* ===============================================
-             GOOGLE SHEET EVENT CARDS
-             =============================================== */
+          /*
+           * Normal categories appear only
+           * when they contain events.
+           *
+           * Private Tour is always displayed
+           * because it contains the Riviera
+           * GetYourGuide destinations.
+           */
 
           if (
-            matchingCatEvents.length > 0
+            matchingCatEvents.length > 0 ||
+            isPrivateTour
           ) {
 
-            const eventsGrid =
-              document.createElement('div');
+
+            const section =
+              document.createElement(
+                'div'
+              );
 
 
-            eventsGrid.className =
-              'events-grid';
+            section.className =
+              'category-section';
 
 
-            matchingCatEvents.forEach(evt => {
-
-              const card =
-                document.createElement('div');
+            section.id =
+              `cat-${categoryKey(catName)}`;
 
 
-              card.className =
-                'event-card';
+            /* ===============================================
+               CATEGORY HEADER
+               =============================================== */
 
+            section.innerHTML = `
 
-              const tagsHtml =
-                evt.categories
-                  .map(c => `
-                    <span
-                      class="tag-badge ${getCategoryClass(c)}"
-                    >
-                      ${escapeHtml(c)}
-                    </span>
-                  `)
-                  .join('');
+              <div class="category-header">
 
+                <div class="category-title-wrapper">
 
-              card.innerHTML = `
-
-                <div class="img-wrapper">
-
-                  <div class="tag-container">
-                    ${tagsHtml}
-                  </div>
-
-                  <img
-                    src="${escapeHtml(evt.img)}"
-                    alt="${escapeHtml(evt.title)}"
-                    onerror="
-                      this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'
+                  <div
+                    class="category-colour-dot"
+                    style="
+                      background:
+                      ${
+                        categoryDotColours[
+                          categoryKey(catName)
+                        ] ||
+                        'var(--accent-pink)'
+                      }
                     "
-                  >
+                  ></div>
+
+
+                  <h2 class="category-title">
+                    ${escapeHtml(catName)}
+                  </h2>
 
                 </div>
 
 
-                <div class="card-body">
+                ${
+                  matchingCatEvents.length > 0
 
-                  <h3>
-                    ${escapeHtml(evt.title)}
-                  </h3>
+                    ? `
+                      <span class="category-count">
+                        ${matchingCatEvents.length}
+                      </span>
+                    `
+
+                    : ''
+                }
+
+              </div>
+
+            `;
 
 
-                  <div class="meta-info">
+            /* ===============================================
+               GETYOURGUIDE
+               =============================================== */
 
-                    <div class="meta-row">
+            if (
+              isPrivateTour
+            ) {
 
-                      📍
+              const gygSection =
+                createGetYourGuideSection();
 
-                      <strong>
-                        ${escapeHtml(evt.city)}
-                      </strong>
 
-                      ${
-                        evt.location
-                          ? '- ' +
-                            escapeHtml(
-                              evt.location
-                            )
-                          : ''
-                      }
+              section.appendChild(
+                gygSection
+              );
+
+            }
+
+
+            /* ===============================================
+               GOOGLE SHEET EVENTS
+               =============================================== */
+
+            if (
+              matchingCatEvents.length > 0
+            ) {
+
+              const eventsGrid =
+                document.createElement(
+                  'div'
+                );
+
+
+              eventsGrid.className =
+                'events-grid';
+
+
+              matchingCatEvents.forEach(
+                evt => {
+
+
+                  const card =
+                    document.createElement(
+                      'div'
+                    );
+
+
+                  card.className =
+                    'event-card';
+
+
+                  const tagsHtml =
+                    evt.categories
+                      .map(
+                        c => `
+
+                          <span
+                            class="
+                              tag-badge
+                              ${getCategoryClass(c)}
+                            "
+                          >
+                            ${escapeHtml(c)}
+                          </span>
+
+                        `
+                      )
+                      .join('');
+
+
+                  card.innerHTML = `
+
+                    <div class="img-wrapper">
+
+
+                      <div class="tag-container">
+                        ${tagsHtml}
+                      </div>
+
+
+                      <img
+                        src="${escapeHtml(evt.img)}"
+                        alt="${escapeHtml(evt.title)}"
+                        onerror="
+                          this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'
+                        "
+                      >
 
                     </div>
 
 
-                    ${
-                      evt.time
-
-                        ? `
-                          <div class="meta-row">
-                            🕒
-                            ${escapeHtml(evt.time)}
-                          </div>
-                        `
-
-                        : ''
-                    }
-
-                  </div>
+                    <div class="card-body">
 
 
-                  <div class="description">
-                    ${escapeHtml(evt.description)}
-                  </div>
+                      <h3>
+                        ${escapeHtml(evt.title)}
+                      </h3>
 
 
-                  ${
-                    evt.link
-
-                      ? `
-                        <a
-                          href="${escapeHtml(evt.link)}"
-                          target="_blank"
-                          rel="noopener"
-                          class="btn-link"
-                        >
-                          More Info & Tickets ↗
-                        </a>
-                      `
-
-                      : ''
-                  }
-
-                </div>
-
-              `;
+                      <div class="meta-info">
 
 
-              eventsGrid.appendChild(card);
+                        <div class="meta-row">
 
-            });
+                          📍
+
+                          <strong>
+                            ${escapeHtml(evt.city)}
+                          </strong>
 
 
-            section.appendChild(eventsGrid);
+                          ${
+                            evt.location
+
+                              ? '- ' +
+                                escapeHtml(
+                                  evt.location
+                                )
+
+                              : ''
+                          }
+
+                        </div>
+
+
+                        ${
+                          evt.time
+
+                            ? `
+                              <div class="meta-row">
+
+                                🕒
+
+                                ${escapeHtml(
+                                  evt.time
+                                )}
+
+                              </div>
+                            `
+
+                            : ''
+                        }
+
+
+                      </div>
+
+
+                      <div class="description">
+
+                        ${escapeHtml(
+                          evt.description
+                        )}
+
+                      </div>
+
+
+                      ${
+                        evt.link
+
+                          ? `
+                            <a
+                              href="${escapeHtml(evt.link)}"
+                              target="_blank"
+                              rel="noopener"
+                              class="btn-link"
+                            >
+                              More Info & Tickets ↗
+                            </a>
+                          `
+
+                          : ''
+                      }
+
+
+                    </div>
+
+                  `;
+
+
+                  eventsGrid.appendChild(
+                    card
+                  );
+
+                }
+              );
+
+
+              section.appendChild(
+                eventsGrid
+              );
+
+            }
+
+
+            /* ===============================================
+               ADD CATEGORY SECTION
+               =============================================== */
+
+            container.appendChild(
+              section
+            );
 
           }
 
-
-          /* ===============================================
-             ADD SECTION TO PAGE
-             =============================================== */
-
-          container.appendChild(section);
-
         }
-
-      });
+      );
 
     }
 
@@ -2319,44 +3416,52 @@
       navInner.innerHTML = '';
 
 
-      categoryOrder.forEach(catName => {
-
-        const btn =
-          document.createElement('button');
+      categoryOrder.forEach(
+        catName => {
 
 
-        btn.className =
-          `category-nav-btn ${
-            getNavButtonClass(catName)
-          }`;
-
-
-        btn.innerText =
-          catName;
-
-
-        btn.onclick = () => {
-
-          const target =
-            document.getElementById(
-              `cat-${categoryKey(catName)}`
+          const btn =
+            document.createElement(
+              'button'
             );
 
 
-          if (target) {
-
-            target.scrollIntoView({
-              behavior: 'smooth'
-            });
-
-          }
-
-        };
+          btn.className =
+            `category-nav-btn ${
+              getNavButtonClass(catName)
+            }`;
 
 
-        navInner.appendChild(btn);
+          btn.innerText =
+            catName;
 
-      });
+
+          btn.onclick = () => {
+
+
+            const target =
+              document.getElementById(
+                `cat-${categoryKey(catName)}`
+              );
+
+
+            if (target) {
+
+              target.scrollIntoView({
+                behavior: 'smooth'
+              });
+
+            }
+
+          };
+
+
+          navInner.appendChild(
+            btn
+          );
+
+        }
+      );
 
     }
 
@@ -2365,7 +3470,8 @@
        START APP
        ========================================================= */
 
-    window.onload = initApp;
+    window.onload =
+      initApp;
 
   </script>
 
