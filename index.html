@@ -699,7 +699,7 @@
 
     // Market and Public Event placed at the top
     const categoryOrder = [
-      "Market", "Public Event", "Concert", "Exhibition", "Live Music", "Private Tour", "Sport"
+      "Market", "Public Event", "Concert", "Exhibition", "Live Music", "Sport", "Private Tour" 
     ];
 
     const categoryStyles = {
@@ -993,102 +993,101 @@
       }
 
       categoryOrder.forEach(catName => {
-        const matchingCatEvents = filteredEvents.filter(e => 
-          e.categories.some(c => categoryKey(c) === categoryKey(catName))
-        );
+  const matchingCatEvents = filteredEvents.filter(e => 
+    e.categories.some(c => categoryKey(c) === categoryKey(catName))
+  );
 
-const alwaysShowCategory = categoryKey(catName) === 'private tour';
+  // Always show the Private Tour heading,
+  // even when there are no Private Tour events in Google Sheets.
+  const isPrivateTour = categoryKey(catName) === 'private tour';
 
-if (matchingCatEvents.length > 0 || alwaysShowCategory) {
-  const section = document.createElement('div');
-  section.className = 'category-section';
-  section.id = `cat-${categoryKey(catName)}`;
+  if (matchingCatEvents.length > 0 || isPrivateTour) {
+    const section = document.createElement('div');
+    section.className = 'category-section';
+    section.id = `cat-${categoryKey(catName)}`;
 
-  let eventsHtml = '';
+    let eventsHtml = '';
 
-  if (matchingCatEvents.length > 0) {
-    eventsHtml = `<div class="events-grid">`;
+    // Only show Google Sheet event cards when events exist.
+    if (matchingCatEvents.length > 0) {
+      eventsHtml = `<div class="events-grid">`;
 
-    matchingCatEvents.forEach(evt => {
-      const tagsHtml = evt.categories.map(c => `<span class="tag-badge ${getCategoryClass(c)}">${escapeHtml(c)}</span>`).join('');
+      matchingCatEvents.forEach(evt => {
+        const tagsHtml = evt.categories.map(c =>
+          `<span class="tag-badge ${getCategoryClass(c)}">${escapeHtml(c)}</span>`
+        ).join('');
 
-      eventsHtml += `
-        <div class="event-card">
-          <div class="img-wrapper">
-            <div class="tag-container">${tagsHtml}</div>
-            <img src="${escapeHtml(evt.img)}" alt="${escapeHtml(evt.title)}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
-          </div>
-          <div class="card-body">
-            <h3>${escapeHtml(evt.title)}</h3>
-            <div class="meta-info">
-              <div class="meta-row">📍 <strong>${escapeHtml(evt.city)}</strong> ${evt.location ? '- ' + escapeHtml(evt.location) : ''}</div>
-              ${evt.time ? `<div class="meta-row">🕒 ${escapeHtml(evt.time)}</div>` : ''}
+        eventsHtml += `
+          <div class="event-card">
+            <div class="img-wrapper">
+              <div class="tag-container">${tagsHtml}</div>
+              <img 
+                src="${escapeHtml(evt.img)}" 
+                alt="${escapeHtml(evt.title)}"
+                onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'"
+              >
             </div>
-            <div class="description">${escapeHtml(evt.description)}</div>
-            ${evt.link ? `<a href="${escapeHtml(evt.link)}" target="_blank" rel="noopener" class="btn-link">More Info & Tickets ↗</a>` : ''}
-          </div>
-        </div>
-      `;
-    });
 
-    eventsHtml += `</div>`;
-  } else {
-    eventsHtml = `
-      <div class="no-events">
-        <p>No private tours currently listed.</p>
-      </div>
-    `;
-  }
+            <div class="card-body">
+              <h3>${escapeHtml(evt.title)}</h3>
 
-  section.innerHTML = `
-    <div class="category-header">
-      <div class="category-title-wrapper">
-        <div class="category-colour-dot" style="background: ${categoryDotColours[categoryKey(catName)] || 'var(--accent-pink)'}"></div>
-        <h2 class="category-title">${escapeHtml(catName)}</h2>
-      </div>
-      <span class="category-count">${matchingCatEvents.length}</span>
-    </div>
-    ${eventsHtml}
-  `;
-
-  container.appendChild(section);
-}
-            const tagsHtml = evt.categories.map(c => `<span class="tag-badge ${getCategoryClass(c)}">${escapeHtml(c)}</span>`).join('');
-            eventsHtml += `
-              <div class="event-card">
-                <div class="img-wrapper">
-                  <div class="tag-container">${tagsHtml}</div>
-                  <img src="${escapeHtml(evt.img)}" alt="${escapeHtml(evt.title)}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
+              <div class="meta-info">
+                <div class="meta-row">
+                  📍 <strong>${escapeHtml(evt.city)}</strong>
+                  ${evt.location ? '- ' + escapeHtml(evt.location) : ''}
                 </div>
-                <div class="card-body">
-                  <h3>${escapeHtml(evt.title)}</h3>
-                  <div class="meta-info">
-                    <div class="meta-row">📍 <strong>${escapeHtml(evt.city)}</strong> ${evt.location ? '- ' + escapeHtml(evt.location) : ''}</div>
-                    ${evt.time ? `<div class="meta-row">🕒 ${escapeHtml(evt.time)}</div>` : ''}
-                  </div>
-                  <div class="description">${escapeHtml(evt.description)}</div>
-                  ${evt.link ? `<a href="${escapeHtml(evt.link)}" target="_blank" rel="noopener" class="btn-link">More Info & Tickets ↗</a>` : ''}
-                </div>
-              </div>
-            `;
-          });
-          eventsHtml += `</div>`;
 
-          section.innerHTML = `
-            <div class="category-header">
-              <div class="category-title-wrapper">
-                <div class="category-colour-dot" style="background: ${categoryDotColours[categoryKey(catName)] || 'var(--accent-pink)'}"></div>
-                <h2 class="category-title">${escapeHtml(catName)}</h2>
+                ${evt.time ? `
+                  <div class="meta-row">🕒 ${escapeHtml(evt.time)}</div>
+                ` : ''}
               </div>
-              <span class="category-count">${matchingCatEvents.length}</span>
+
+              <div class="description">
+                ${escapeHtml(evt.description)}
+              </div>
+
+              ${evt.link ? `
+                <a 
+                  href="${escapeHtml(evt.link)}" 
+                  target="_blank" 
+                  rel="noopener" 
+                  class="btn-link"
+                >
+                  More Info & Tickets ↗
+                </a>
+              ` : ''}
             </div>
-            ${eventsHtml}
-          `;
-          container.appendChild(section);
-        }
+          </div>
+        `;
       });
+
+      eventsHtml += `</div>`;
     }
 
+    section.innerHTML = `
+      <div class="category-header">
+        <div class="category-title-wrapper">
+          <div 
+            class="category-colour-dot" 
+            style="background: ${categoryDotColours[categoryKey(catName)] || 'var(--accent-pink)'}"
+          ></div>
+
+          <h2 class="category-title">${escapeHtml(catName)}</h2>
+        </div>
+
+        ${
+          matchingCatEvents.length > 0
+            ? `<span class="category-count">${matchingCatEvents.length}</span>`
+            : ''
+        }
+      </div>
+
+      ${eventsHtml}
+    `;
+
+    container.appendChild(section);
+  }
+});
     function buildCategoryNav() {
       const navInner = document.getElementById('category-nav-inner');
       navInner.innerHTML = '';
