@@ -689,7 +689,7 @@
 
 
     /* =========================================================
-       GETYOURGUIDE - RIVIERA
+       GETYOURGUIDE WIDGET
        ========================================================= */
 
     .gyg-private-tour-widget {
@@ -828,6 +828,15 @@
       text-transform: uppercase;
 
       letter-spacing: 0.4px;
+    }
+
+
+    .gyg-widget-wrapper {
+      width: 100%;
+
+      min-height: 320px;
+
+      margin: 0 0 12px 0;
     }
 
 
@@ -2768,7 +2777,7 @@
 
 
     /* =========================================================
-       GETYOURGUIDE RIVIERA SECTION
+       GETYOURGUIDE WIDGET
        ========================================================= */
 
     function createGetYourGuideSection() {
@@ -2788,122 +2797,18 @@
         <p class="gyg-riviera-intro">
 
           Discover tours and experiences
-          across the Italian Riviera,
-          French Riviera and Monaco.
+          across the French Riviera and Menton.
 
         </p>
 
 
-        <div class="gyg-riviera-grid">
+        <div class="gyg-widget-wrapper">
 
-
-          <!-- =========================================
-               SANREMO / ITALIAN RIVIERA
-               ========================================= -->
-
-          <div class="gyg-riviera-card">
-
-            <span class="gyg-riviera-label">
-              Italian Riviera
-            </span>
-
-
-            <h3>
-              Sanremo & Italian Riviera
-            </h3>
-
-
-            <p>
-
-              Explore Sanremo and the Italian Riviera
-              with sightseeing tours, food experiences,
-              walking tours, excursions and activities.
-
-            </p>
-
-
-            <a
-              href="https://www.getyourguide.com/destinations/sanremo-l2571/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Explore Italian Riviera Tours ↗
-            </a>
-
-          </div>
-
-
-          <!-- =========================================
-               MENTON / FRENCH RIVIERA
-               ========================================= -->
-
-          <div class="gyg-riviera-card">
-
-            <span class="gyg-riviera-label">
-              French Riviera
-            </span>
-
-
-            <h3>
-              Menton & Côte d'Azur
-            </h3>
-
-
-            <p>
-
-              Discover Menton and the French Riviera
-              through walking tours, food experiences,
-              boat trips, private tours and excursions.
-
-            </p>
-
-
-            <a
-              href="https://www.getyourguide.com/destinations/menton-l294/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Explore French Riviera Tours ↗
-            </a>
-
-          </div>
-
-
-          <!-- =========================================
-               MONACO / MONTE CARLO
-               ========================================= -->
-
-          <div class="gyg-riviera-card">
-
-            <span class="gyg-riviera-label">
-              Monaco
-            </span>
-
-
-            <h3>
-              Monaco & Monte Carlo
-            </h3>
-
-
-            <p>
-
-              Explore Monaco and Monte Carlo with
-              sightseeing experiences, private tours,
-              boat trips and Riviera excursions.
-
-            </p>
-
-
-            <a
-              href="https://www.getyourguide.com/destinations/monaco-l515/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Explore Monaco Tours ↗
-            </a>
-
-          </div>
-
+          <div
+            data-gyg-widget="auto"
+            data-gyg-partner-id="LNHKRSN"
+            data-gyg-cmp="Menton"
+          ></div>
 
         </div>
 
@@ -3120,7 +3025,7 @@
            *
            * Private Tour is always displayed
            * because it contains the Riviera
-           * GetYourGuide destinations.
+           * GetYourGuide widget.
            */
 
           if (
@@ -3291,7 +3196,6 @@
 
 
                       <div class="meta-info">
-
 
                         <div class="meta-row">
 
