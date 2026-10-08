@@ -1,17 +1,17 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
   <title>Contact Us | Inside Riviera</title>
 
   <meta name="description"
-        content="Contact Inside Riviera for event submissions,
-        questions, partnerships and enquiries
-        about the Italian and French Riviera.">
+        content="Contact Inside Riviera for event enquiries, corrections, partnerships and local Riviera information.">
 
   <style>
     * {
@@ -30,7 +30,7 @@
       background: #0f172a;
       color: white;
       text-align: center;
-      padding: 50px 20px;
+      padding: 45px 20px;
     }
 
     header h1 {
@@ -55,45 +55,91 @@
 
     h2 {
       color: #ff007a;
-      margin-top: 28px;
+      margin-top: 30px;
     }
 
     p {
       margin-bottom: 18px;
     }
 
+    .contact-form {
+      margin-top: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      background: white;
+      color: #0f172a;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid #ff007a;
+      outline-offset: 1px;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    button,
+    .back-button {
+      display: inline-block;
+      background: #ff007a;
+      color: white;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    button:hover,
+    .back-button:hover {
+      background: #d90068;
+    }
+
+    .privacy-note {
+      font-size: 13px;
+      color: #475569;
+      margin-top: 15px;
+    }
+
     a {
       color: #ff007a;
     }
 
-    .contact-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      padding: 22px;
-      border-radius: 12px;
-      margin: 24px 0;
-    }
-
-    .contact-button {
-      display: inline-block;
-      background: #ff007a;
-      color: white;
-      padding: 12px 22px;
-      border-radius: 8px;
-      text-decoration: none;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .contact-button:hover {
-      background: #d90068;
+    .back-button {
+      margin-top: 25px;
     }
 
     footer {
       background: #0f172a;
       color: white;
       text-align: center;
-      padding: 25px;
+      padding: 28px 20px;
+      margin-top: 40px;
     }
 
     footer a {
@@ -112,101 +158,184 @@
 
 <body>
 
-<header>
-  <h1>INSIDE RIVIERA</h1>
-  <p>Events • Places • Lifestyle</p>
-</header>
+  <header>
+    <h1>INSIDE RIVIERA</h1>
+    <p>Events • Places • Lifestyle</p>
+  </header>
 
-<main>
+  <main>
 
-  <h1>Contact Inside Riviera</h1>
-
-  <p>
-    We'd love to hear from you!
-  </p>
-
-  <p>
-    Whether you have a question about
-    an event, want to suggest an activity,
-    or are interested in working with
-    Inside Riviera, please get in touch.
-  </p>
-
-  <h2>General Enquiries</h2>
-
-  <div class="contact-box">
+    <h1>Contact Inside Riviera</h1>
 
     <p>
-      For general questions, corrections,
-      collaborations and partnership
-      enquiries, contact us by email.
+      Have a question, event correction,
+      collaboration proposal or suggestion?
+      We'd love to hear from you.
     </p>
 
     <p>
-      <strong>Email:</strong>
-      <a href="mailto:YOUR-EMAIL@example.com">
-        YOUR-EMAIL@example.com
+      Complete the form below and we'll
+      review your message.
+    </p>
+
+    <h2>Send Us a Message</h2>
+
+    <form
+      class="contact-form"
+      action="https://formspree.io/f/xeaokrqw"
+      method="POST">
+
+      <div class="form-group">
+        <label for="name">
+          Your Name *
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+          autocomplete="name"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">
+          Your Email *
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">
+          Subject *
+        </label>
+
+        <select
+          id="subject"
+          name="subject"
+          required>
+
+          <option value="">
+            Select a subject
+          </option>
+
+          <option value="General Enquiry">
+            General Enquiry
+          </option>
+
+          <option value="Event Correction">
+            Event Correction
+          </option>
+
+          <option value="Event Submission">
+            Event Submission
+          </option>
+
+          <option value="Partnership">
+            Partnership
+          </option>
+
+          <option value="Advertising">
+            Advertising
+          </option>
+
+          <option value="Other">
+            Other
+          </option>
+
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">
+          Your Message *
+        </label>
+
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Write your message here..."
+          required></textarea>
+      </div>
+
+      <input
+        type="hidden"
+        name="_subject"
+        value="New Inside Riviera Contact Message">
+
+      <button type="submit">
+        Send Message
+      </button>
+
+      <p class="privacy-note">
+        By submitting this form, you understand
+        that your information will be processed
+        to respond to your enquiry, using
+        Formspree as our form service.
+        See our
+        <a href="/privacy-policy.html">
+          Privacy Policy
+        </a>
+        for more information.
+      </p>
+
+    </form>
+
+    <h2>Event Submissions</h2>
+
+    <p>
+      If you're organising an event along
+      the Italian or French Riviera,
+      you can contact us using the form
+      above and select "Event Submission".
+    </p>
+
+    <h2>Event Corrections</h2>
+
+    <p>
+      If an event is cancelled, rescheduled
+      or contains incorrect information,
+      please let us know so we can review it.
+    </p>
+
+    <h2>Partnerships and Advertising</h2>
+
+    <p>
+      Local businesses, event organisers
+      and potential partners can use
+      this form to enquire about
+      collaborations and advertising.
+    </p>
+
+    <a href="/" class="back-button">
+      Back to Events Calendar
+    </a>
+
+  </main>
+
+  <footer>
+
+    <p>
+      <a href="/">Home</a> |
+      <a href="/about.html">About Us</a> |
+      <a href="/privacy-policy.html">
+        Privacy Policy
       </a>
     </p>
 
-  </div>
+    <p>
+      © Inside Riviera. All rights reserved.
+    </p>
 
-  <h2>Submit Your Event</h2>
-
-  <p>
-    Organising an event in Sanremo,
-    Bordighera, Ventimiglia, Menton
-    or anywhere along the Riviera?
-  </p>
-
-  <p>
-    Submit your event using our
-    event submission form.
-  </p>
-
-  <a
-    href="https://forms.gle/GTXcdJFB4TnCidsL9"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="contact-button">
-    Submit an Event
-  </a>
-
-  <h2>Event Corrections</h2>
-
-  <p>
-    If an event has been cancelled,
-    rescheduled or contains incorrect
-    information, please contact us
-    so we can review the details.
-  </p>
-
-  <h2>Partnerships and Advertising</h2>
-
-  <p>
-    For collaboration opportunities,
-    local business features or
-    advertising enquiries,
-    please contact us by email.
-  </p>
-
-  <a href="/" class="contact-button">
-    Back to Events Calendar
-  </a>
-
-</main>
-
-<footer>
-  <p>
-    <a href="/">Home</a> |
-    <a href="/about.html">About Us</a> |
-    <a href="/privacy-policy.html">
-      Privacy Policy
-    </a>
-  </p>
-
-  <p>© Inside Riviera. All rights reserved.</p>
-</footer>
+  </footer>
 
 </body>
 </html>
