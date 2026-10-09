@@ -1,18 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<<script async
-  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-  crossorigin="anonymous">
-</script>>
-
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Inside Riviera - What's On Today</title>
 
-  <!-- =========================================================
-       GETYOURGUIDE PARTNER SCRIPT
-       ========================================================= -->
+  <!-- GetYourGuide -->
   <script
     async
     defer
@@ -20,38 +14,19 @@
     data-gyg-partner-id="LNHKRSN">
   </script>
 
-
   <style>
-
-    /* =========================================================
-       COLOUR PALETTE
-       ========================================================= */
-
     :root {
       --accent-pink: #ff007a;
       --accent-green: #a3e635;
-
       --text-dark: #0f172a;
       --text-muted: #64748b;
-
-      --card-bg: #ffffff;
       --page-bg: #f8fafc;
-
       --border: #e2e8f0;
-
       --soft-pink: #ffe4f1;
       --soft-green: #eef9d2;
-      --soft-dark: #e2e8f0;
       --soft-purple: #eee8ff;
-
-      --shadow:
-        0 4px 14px rgba(15, 23, 42, 0.07);
+      --shadow: 0 4px 14px rgba(15,23,42,.07);
     }
-
-
-    /* =========================================================
-       RESET
-       ========================================================= */
 
     * {
       box-sizing: border-box;
@@ -64,1456 +39,673 @@
     }
 
     body {
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Arial, sans-serif;
       background: var(--page-bg);
       color: var(--text-dark);
     }
 
-
-    /* =========================================================
-       HERO
-       ========================================================= */
+    /* HERO */
 
     .hero {
       position: relative;
-
       background:
         linear-gradient(
-          rgba(15, 23, 42, 0.25),
-          rgba(15, 23, 42, 0.35)
+          rgba(15,23,42,.25),
+          rgba(15,23,42,.35)
         ),
-        url(
-          'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80'
-        )
+        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80")
         center / cover no-repeat;
-
-      padding: 50px 20px 140px 20px;
-
+      padding: 35px 20px 140px;
       text-align: center;
-      color: #ffffff;
+      color: white;
     }
-
 
     .brand-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-
       gap: 8px;
       margin-bottom: 20px;
     }
 
-
     .logo-graphic {
-      display: block;
-
-      margin: 0 auto;
-
       width: 36px;
       height: 30px;
-
       fill: var(--accent-green);
-
-      filter:
-        drop-shadow(
-          0 2px 4px rgba(0,0,0,0.2)
-        );
     }
-
 
     .hero h1 {
       font-size: 1.8rem;
       font-weight: 900;
-
       letter-spacing: 2.5px;
-
-      margin: 0;
-
       text-transform: uppercase;
-
-      color: #ffffff;
-
-      text-shadow:
-        0 2px 8px rgba(0,0,0,0.3);
     }
-
 
     .brand-tagline {
-      font-size: 0.65rem;
+      font-size: .65rem;
       font-weight: 700;
-
       letter-spacing: 3px;
-
-      color: #ffffff;
-
       text-transform: uppercase;
-
-      opacity: 0.85;
-
+      opacity: .9;
       margin-bottom: 16px;
     }
-
 
     .hero-title-main {
       font-size: 1.1rem;
       font-weight: 700;
-
       letter-spacing: 1px;
-
-      opacity: 0.85;
-
       text-transform: uppercase;
     }
 
-
     .hero .highlight {
       display: block;
-
       font-size: 3.2rem;
       font-weight: 900;
-
       color: var(--accent-green);
-
       letter-spacing: 2px;
-
       margin-bottom: 12px;
-
-      text-shadow:
-        0 2px 10px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 10px rgba(0,0,0,.3);
     }
-
 
     .hero p {
-      font-size: 0.95rem;
-
       max-width: 650px;
-
-      margin: 0 auto;
-
-      opacity: 0.9;
-
-      line-height: 1.4;
+      margin: auto;
+      font-size: .95rem;
+      line-height: 1.5;
     }
-
-
-    /* =========================================================
-       MAIN CONTAINER
-       ========================================================= */
 
     .main-content {
       max-width: 1100px;
-
-      margin:
-        -100px auto
-        40px auto;
-
+      margin: -100px auto 40px;
       padding: 0 20px;
-
       position: relative;
-
       z-index: 10;
     }
 
-
-    /* =========================================================
-       CALENDAR
-       ========================================================= */
+    /* CALENDAR */
 
     .calendar-card {
-      background: #ffffff;
-
+      background: white;
       border-radius: 24px;
-
       padding: 28px 32px;
-
-      box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.12);
-
+      box-shadow: 0 20px 40px rgba(0,0,0,.12);
       max-width: 480px;
-
-      margin:
-        0 auto
-        24px auto;
+      margin: 0 auto 24px;
     }
-
 
     .cal-header {
       display: flex;
-
-      justify-content: space-between;
-
       align-items: center;
-
+      justify-content: space-between;
       margin-bottom: 24px;
     }
-
 
     .cal-header h2 {
       font-size: 1.1rem;
       font-weight: 800;
-
       letter-spacing: 1px;
     }
 
-
     .nav-btn {
       background: #f1f5f9;
-
       border: none;
-
       width: 32px;
       height: 32px;
-
       border-radius: 50%;
-
       cursor: pointer;
-
       font-weight: bold;
-
       color: var(--text-muted);
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
     }
 
-
-    .nav-btn:hover {
-      background: #e2e8f0;
+    .weekdays,
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
     }
-
 
     .weekdays {
-      display: grid;
-
-      grid-template-columns:
-        repeat(7, 1fr);
-
-      text-align: center;
-
-      font-size: 0.75rem;
-
+      font-size: .75rem;
       font-weight: 700;
-
       color: var(--text-muted);
-
       margin-bottom: 12px;
     }
 
-
     .days-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(7, 1fr);
-
       gap: 8px 0;
-
-      text-align: center;
     }
-
 
     .day-cell {
       height: 40px;
-
       display: flex;
-
       flex-direction: column;
-
       align-items: center;
       justify-content: center;
-
-      font-size: 0.9rem;
-
+      font-size: .9rem;
       font-weight: 600;
-
       cursor: pointer;
-
       position: relative;
-
       user-select: none;
     }
 
+    .day-cell.empty {
+      cursor: default;
+    }
 
     .day-number {
       width: 32px;
       height: 32px;
-
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       border-radius: 50%;
     }
 
-
     .day-cell.active .day-number {
-      background-color:
-        var(--accent-pink);
-
-      color: #ffffff;
-
+      background: var(--accent-pink);
+      color: white;
       font-weight: 800;
     }
-
 
     .day-cell.past {
       color: #cbd5e1;
     }
 
-
-    .day-cell.past .event-dot {
-      background-color: #cbd5e1;
-
-      opacity: 0.4;
-    }
-
-
     .event-dot {
-      width: 4px;
-      height: 4px;
-
-      background-color:
-        var(--accent-green);
-
+      width: 5px;
+      height: 5px;
+      background: var(--accent-green);
       border-radius: 50%;
-
       position: absolute;
-
-      bottom: 2px;
+      bottom: 1px;
     }
 
-
-    /* =========================================================
-       FILTERS & SEARCH
-       ========================================================= */
+    /* SEARCH AND FILTER */
 
     .filter-wrapper {
       display: flex;
-
       justify-content: center;
-
       gap: 12px;
-
       margin-bottom: 20px;
-
       flex-wrap: wrap;
     }
 
-
-    .city-select,
-    .search-input {
-      background: #ffffff;
-
-      border:
-        1px solid var(--border);
-
+    .search-input,
+    .city-select {
+      background: white;
+      border: 1px solid var(--border);
       padding: 12px 20px;
-
       border-radius: 30px;
-
       font-weight: 600;
-
-      font-size: 0.9rem;
-
-      box-shadow:
-        0 2px 8px rgba(0,0,0,0.05);
-
+      font-size: .9rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
       outline: none;
     }
-
-
-    .city-select {
-      cursor: pointer;
-    }
-
 
     .search-input {
       width: 260px;
     }
 
-
-    .search-input:focus,
-    .city-select:focus {
-      border-color:
-        var(--accent-pink);
-    }
-
-
-    /* =========================================================
-       CATEGORY NAVIGATION
-       ========================================================= */
+    /* CATEGORY NAVIGATION */
 
     .category-navigation {
-      background:
-        rgba(255,255,255,0.96);
-
-      border:
-        1px solid var(--border);
-
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--border);
       border-radius: 16px;
-
       padding: 12px;
-
       margin-bottom: 28px;
-
       box-shadow: var(--shadow);
-
       position: sticky;
-
       top: 10px;
-
       z-index: 20;
-
       overflow-x: auto;
-
-      scrollbar-width: none;
     }
-
-
-    .category-navigation::-webkit-scrollbar {
-      display: none;
-    }
-
 
     .category-nav-inner {
       display: flex;
-
       gap: 8px;
-
       min-width: max-content;
-
       justify-content: center;
     }
 
-
     .category-nav-btn {
-      border:
-        1px solid transparent;
-
+      border: 1px solid transparent;
       padding: 8px 14px;
-
       border-radius: 999px;
-
-      font-size: 0.78rem;
-
+      font-size: .78rem;
       font-weight: 800;
-
       cursor: pointer;
-
       white-space: nowrap;
-
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        opacity 0.2s ease;
-
-      box-shadow:
-        0 2px 6px rgba(0,0,0,0.04);
+      transition: transform .2s ease;
     }
-
 
     .category-nav-btn:hover {
-      transform:
-        translateY(-2px);
-
-      box-shadow:
-        0 4px 10px rgba(0,0,0,0.1);
-
-      opacity: 0.9;
+      transform: translateY(-2px);
     }
-
-
-    .nav-concert {
-      background:
-        var(--soft-purple);
-
-      color:
-        var(--text-dark);
-
-      border-color:
-        rgba(238, 232, 255, 0.8);
-    }
-
-
-    .nav-exhibition {
-      background:
-        var(--accent-pink);
-
-      color: #ffffff;
-    }
-
-
-    .nav-public-event {
-      background:
-        var(--text-dark);
-
-      color: #ffffff;
-    }
-
-
-    .nav-live-music {
-      background:
-        #1e293b;
-
-      color:
-        var(--accent-green);
-    }
-
-
-    .nav-private-tour {
-      background:
-        #e0f2fe;
-
-      color:
-        #0369a1;
-
-      border-color:
-        rgba(3, 105, 161, 0.2);
-    }
-
-
-    .nav-sport {
-      background:
-        #fff1f2;
-
-      color:
-        #e11d48;
-
-      border-color:
-        rgba(225, 29, 72, 0.2);
-    }
-
 
     .nav-market {
-      background:
-        var(--soft-pink);
-
-      color:
-        var(--accent-pink);
-
-      border-color:
-        rgba(255, 0, 122, 0.3);
+      background: var(--soft-pink);
+      color: var(--accent-pink);
     }
 
-/* CINEMA CATEGORY BUTTON */
-.nav-cinema {
-  background: #dbeafe;
-  color: #1d4ed8;
-  border-color: #93c5fd;
-}
-
-/* CINEMA EVENT LABEL */
-.tag-cinema {
-  background: #1d4ed8;
-  color: #ffffff;
-}
-    .nav-default {
-    
-      background:
-        var(--soft-dark);
-
-      color:
-        var(--text-dark);
+    .nav-public-event {
+      background: var(--text-dark);
+      color: white;
     }
 
+    .nav-concert {
+      background: var(--soft-purple);
+      color: var(--text-dark);
+    }
 
-    /* =========================================================
-       CATEGORY SECTION
-       ========================================================= */
+    .nav-exhibition {
+      background: var(--accent-pink);
+      color: white;
+    }
+
+    .nav-live-music {
+      background: #1e293b;
+      color: var(--accent-green);
+    }
+
+    .nav-sport {
+      background: #fff1f2;
+      color: #e11d48;
+    }
+
+    .nav-cinema {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-color: #93c5fd;
+    }
+
+    .nav-private-tour {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    /* EVENT SECTIONS */
 
     .category-section {
       margin-bottom: 38px;
-
-      scroll-margin-top: 80px;
+      scroll-margin-top: 85px;
     }
-
 
     .category-header {
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
-      gap: 15px;
-
-      margin-bottom: 14px;
-
       padding-bottom: 10px;
-
-      border-bottom:
-        2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 14px;
     }
-
 
     .category-title-wrapper {
       display: flex;
-
       align-items: center;
-
       gap: 10px;
     }
 
-
     .category-title {
       font-size: 1.25rem;
-
       font-weight: 900;
-
-      letter-spacing: -0.2px;
     }
-
-
-    .category-count {
-      background:
-        var(--soft-dark);
-
-      color:
-        var(--text-muted);
-
-      font-size: 0.72rem;
-
-      font-weight: 800;
-
-      padding: 4px 8px;
-
-      border-radius: 999px;
-    }
-
 
     .category-colour-dot {
       width: 12px;
       height: 12px;
-
       border-radius: 50%;
-
-      flex-shrink: 0;
     }
 
-
-    /* =========================================================
-       GETYOURGUIDE WIDGET
-       ========================================================= */
-
-    .gyg-private-tour-widget {
-      width: 100%;
-
-      margin:
-        0 0 28px 0;
-    }
-
-
-    .gyg-riviera-intro {
-      margin-bottom: 18px;
-
-      color:
-        var(--text-muted);
-
-      font-size: 0.88rem;
-
-      line-height: 1.5;
-    }
-
-
-    .gyg-riviera-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 14px;
-
-      margin-bottom: 10px;
-    }
-
-
-    .gyg-riviera-card {
-      background: #ffffff;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 16px;
-
-      padding: 18px;
-
-      box-shadow:
-        var(--shadow);
-
-      display: flex;
-
-      flex-direction: column;
-
-      min-height: 205px;
-    }
-
-
-    .gyg-riviera-card h3 {
-      font-size: 1rem;
-
-      font-weight: 900;
-
-      margin-bottom: 7px;
-
-      line-height: 1.3;
-    }
-
-
-    .gyg-riviera-card p {
-      color:
-        var(--text-muted);
-
-      font-size: 0.78rem;
-
-      line-height: 1.45;
-
-      margin-bottom: 16px;
-
-      flex-grow: 1;
-    }
-
-
-    .gyg-riviera-card a {
-      display: block;
-
-      text-align: center;
-
-      background:
-        #f1f5f9;
-
-      color:
-        var(--text-dark);
-
-      text-decoration: none;
-
-      padding: 10px 12px;
-
-      border-radius: 9px;
-
-      font-size: 0.78rem;
-
-      font-weight: 800;
-
-      transition:
-        0.2s ease;
-    }
-
-
-    .gyg-riviera-card a:hover {
-      background:
-        var(--accent-pink);
-
-      color: #ffffff;
-    }
-
-
-    .gyg-riviera-label {
-      display: inline-block;
-
-      align-self: flex-start;
-
-      margin-bottom: 10px;
-
-      padding: 5px 9px;
-
+    .category-count {
+      background: #e2e8f0;
+      color: var(--text-muted);
+      padding: 4px 8px;
       border-radius: 999px;
-
-      background:
-        var(--soft-green);
-
-      color:
-        var(--text-dark);
-
-      font-size: 0.65rem;
-
-      font-weight: 900;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.4px;
+      font-size: .72rem;
+      font-weight: 800;
     }
-
-
-    .gyg-widget-wrapper {
-      width: 100%;
-
-      min-height: 320px;
-
-      margin: 0 0 12px 0;
-    }
-
-
-    .gyg-riviera-note {
-      font-size: 0.7rem;
-
-      color:
-        var(--text-muted);
-
-      text-align: center;
-
-      margin-top: 10px;
-    }
-
-
-    /* =========================================================
-       EVENTS GRID & CARDS
-       ========================================================= */
 
     .events-grid {
       display: grid;
-
-      grid-template-columns:
-        repeat(
-          auto-fill,
-          minmax(290px, 1fr)
-        );
-
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(290px, 1fr)
+      );
       gap: 16px;
     }
 
-
     .event-card {
-      background:
-        var(--card-bg);
-
+      background: white;
       border-radius: 14px;
-
       overflow: hidden;
-
-      box-shadow:
-        var(--shadow);
-
+      box-shadow: var(--shadow);
       display: flex;
-
       flex-direction: column;
-
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
     }
-
-
-    .event-card:hover {
-      transform:
-        translateY(-3px);
-
-      box-shadow:
-        0 10px 24px
-        rgba(15, 23, 42, 0.10);
-    }
-
 
     .img-wrapper {
-      position: relative;
-
       height: 145px;
-
+      position: relative;
       overflow: hidden;
     }
-
 
     .img-wrapper img {
       width: 100%;
       height: 100%;
-
       object-fit: cover;
-
       display: block;
     }
 
-
     .tag-container {
       position: absolute;
-
       top: 10px;
       left: 10px;
       right: 10px;
-
       display: flex;
-
       flex-wrap: wrap;
-
       gap: 5px;
-
       z-index: 2;
     }
 
-
     .tag-badge {
-      display: inline-flex;
-
-      align-items: center;
-
       padding: 5px 9px;
-
       border-radius: 999px;
-
-      font-size: 0.67rem;
-
+      font-size: .67rem;
       font-weight: 800;
-
-      line-height: 1;
-
       text-transform: uppercase;
-
-      letter-spacing: 0.3px;
-
-      box-shadow:
-        0 2px 5px rgba(0,0,0,0.12);
+      box-shadow: 0 2px 5px rgba(0,0,0,.12);
     }
 
-
-    .tag-concert {
-      background:
-        var(--soft-purple);
-
-      color:
-        var(--text-dark);
-    }
-
-
+    .tag-market,
     .tag-exhibition {
-      background:
-        var(--accent-pink);
-
-      color:
-        #ffffff;
+      background: var(--accent-pink);
+      color: white;
     }
-
 
     .tag-public-event {
-      background:
-        var(--text-dark);
-
-      color:
-        #ffffff;
+      background: var(--text-dark);
+      color: white;
     }
 
+    .tag-concert {
+      background: var(--soft-purple);
+      color: var(--text-dark);
+    }
 
     .tag-live-music {
-      background:
-        var(--text-dark);
-
-      color:
-        var(--accent-green);
+      background: var(--text-dark);
+      color: var(--accent-green);
     }
-
-
-    .tag-private-tour {
-      background:
-        var(--soft-green);
-
-      color:
-        var(--text-dark);
-    }
-
 
     .tag-sport {
-      background:
-        var(--soft-pink);
-
-      color:
-        var(--accent-pink);
+      background: var(--soft-pink);
+      color: var(--accent-pink);
     }
 
-
-    .tag-market {
-      background:
-        var(--accent-pink);
-
-      color:
-        #ffffff;
+    .tag-cinema {
+      background: #1d4ed8;
+      color: white;
     }
 
+    .tag-private-tour {
+      background: var(--soft-green);
+      color: var(--text-dark);
+    }
 
     .tag-default {
-      background:
-        var(--soft-dark);
-
-      color:
-        var(--text-dark);
+      background: #e2e8f0;
+      color: var(--text-dark);
     }
-
 
     .card-body {
       padding: 15px;
-
       display: flex;
-
       flex-direction: column;
-
       flex-grow: 1;
     }
-
 
     .card-body h3 {
       font-size: 1rem;
-
       margin-bottom: 8px;
-
-      line-height: 1.3;
-
       font-weight: 800;
     }
 
-
     .meta-info {
-      font-size: 0.78rem;
-
-      color:
-        var(--text-muted);
-
+      font-size: .78rem;
+      color: var(--text-muted);
       margin-bottom: 9px;
-
       display: flex;
-
       flex-direction: column;
-
       gap: 4px;
     }
 
-
-    .meta-row {
-      display: flex;
-
-      align-items: flex-start;
-
-      gap: 5px;
-    }
-
-
     .description {
-      font-size: 0.8rem;
-
-      color:
-        var(--text-muted);
-
+      font-size: .8rem;
+      color: var(--text-muted);
       line-height: 1.45;
-
       margin-bottom: 14px;
-
       flex-grow: 1;
-
-      display: -webkit-box;
-
-      -webkit-line-clamp: 3;
-
-      -webkit-box-orient: vertical;
-
-      overflow: hidden;
     }
-
 
     .btn-link {
+      display: block;
       text-align: center;
-
-      background-color:
-        #f1f5f9;
-
-      color:
-        var(--text-dark);
-
+      background: #f1f5f9;
+      color: var(--text-dark);
       text-decoration: none;
-
       padding: 9px;
-
       border-radius: 8px;
-
-      font-size: 0.78rem;
-
+      font-size: .78rem;
       font-weight: 700;
-
-      transition:
-        0.2s ease;
     }
-
 
     .btn-link:hover {
-      background:
-        var(--accent-pink);
-
-      color:
-        #ffffff;
+      background: var(--accent-pink);
+      color: white;
     }
-
 
     .no-events {
       text-align: center;
-
       padding: 40px;
-
-      color:
-        var(--text-muted);
-
-      background:
-        #ffffff;
-
+      color: var(--text-muted);
+      background: white;
       border-radius: 16px;
-
-      box-shadow:
-        var(--shadow);
-
+      box-shadow: var(--shadow);
       margin-bottom: 30px;
     }
 
+    /* GETYOURGUIDE */
 
-    /* =========================================================
-       SUBMIT SECTION
-       ========================================================= */
-
-    .submit-section {
-      background:
-        #ffffff;
-
-      border-radius: 20px;
-
-      padding: 32px;
-
-      box-shadow:
-        var(--shadow);
-
-      max-width: 600px;
-
-      margin:
-        0 auto;
-
-      text-align: center;
+    .gyg-private-tour-widget {
+      width: 100%;
+      margin-bottom: 28px;
     }
 
+    .gyg-riviera-intro {
+      margin-bottom: 18px;
+      color: var(--text-muted);
+      font-size: .88rem;
+      line-height: 1.5;
+    }
 
-    .submit-section h2 {
-      font-size: 1.2rem;
-
+    .gyg-widget-wrapper {
+      min-height: 320px;
       margin-bottom: 12px;
     }
 
-
-    .submit-btn {
-      background:
-        var(--accent-pink);
-
-      color:
-        #ffffff;
-
-      border: none;
-
-      padding: 14px 28px;
-
-      border-radius: 10px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-      font-size: 0.95rem;
-
-      display: inline-block;
-
-      text-decoration: none;
-
+    .gyg-riviera-note {
+      font-size: .7rem;
+      color: var(--text-muted);
+      text-align: center;
       margin-top: 10px;
     }
 
+    /* SUBMIT EVENT */
 
-    /* =========================================================
-       MOBILE RESPONSIVE
-       ========================================================= */
-
-    @media (max-width: 800px) {
-
-      .gyg-riviera-grid {
-        grid-template-columns: 1fr;
-      }
-
+    .submit-section {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
     }
 
+    .submit-section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .submit-btn {
+      display: inline-block;
+      background: var(--accent-pink);
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .riviera-intro {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+
+    .riviera-intro p {
+      margin-top: 12px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    /* MOBILE */
 
     @media (max-width: 700px) {
-
       .hero {
-        padding:
-          30px 18px
-          120px 18px;
+        padding: 30px 18px 120px;
       }
-
 
       .hero h1 {
         font-size: 1.5rem;
       }
 
-
       .hero .highlight {
         font-size: 2.5rem;
       }
 
-
       .main-content {
         margin-top: -80px;
-
-        padding:
-          0 12px;
+        padding: 0 12px;
       }
-
 
       .calendar-card {
-        padding:
-          20px 15px;
-
-        border-radius: 18px;
-
-        max-width: 100%;
+        padding: 20px 15px;
       }
-
 
       .filter-wrapper {
         flex-direction: column;
-
-        align-items: stretch;
       }
 
-
-      .city-select,
-      .search-input {
+      .search-input,
+      .city-select {
         width: 100%;
       }
 
-
       .category-navigation {
         margin-left: -12px;
-
         margin-right: -12px;
-
         border-radius: 0;
-
         top: 0;
-
-        padding:
-          9px 12px;
       }
-
 
       .events-grid {
         grid-template-columns: 1fr;
-
         gap: 12px;
       }
 
-
       .event-card {
         display: grid;
-
-        grid-template-columns:
-          120px 1fr;
-
+        grid-template-columns: 120px 1fr;
         min-height: 150px;
       }
-
 
       .img-wrapper {
         height: 100%;
-
         min-height: 150px;
       }
-
 
       .card-body {
         padding: 12px;
       }
-
     }
-
   </style>
-
 </head>
-
 
 <body>
 
-
-  <!-- =========================================================
-       HERO
-       ========================================================= -->
-
   <div class="hero">
-
     <div class="brand-container">
 
       <svg
         class="logo-graphic"
         viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-
-        <g transform="translate(0, 0)">
-
-          <path
-            d="
-              M12 2
-              C9.5 2 7.2 2.9 5.4 4.3
-              C7 5.2 8.7 5.7 12 5.7
-              C15.3 5.7 17 5.2 18.6 4.3
-              C16.8 2.9 14.5 2 12 2Z
-            "
-          />
-
-          <path
-            d="
-              M4.3 5.5
-              C2.5 7.2 1.5 9.5 1.5 12H5
-              C5 9.8 5.7 7.5 7 5.5H4.3Z
-            "
-          />
-
-          <path
-            d="
-              M19.7 5.5
-              C21 7.5 21.7 9.8 21.7 12H25.2
-              C25.2 9.5 24.2 7.2 22.4 5.5H19.7Z
-            "
-          />
-
-          <path
-            d="
-              M12 6
-              C8.5 6 5.5 7 3.5 8.3
-              C3.2 8.9 3 9.4 3 10H21
-              C21 9.4 20.8 8.9 20.5 8.3
-              C18.5 7 15.5 6 12 6Z
-            "
-          />
-
-          <path
-            d="
-              M11 10.5V19.3
-              C10.4 19.4 9.9 19.6 9.4 19.8
-              C9.8 20.5 10.8 21 12 21
-              C13.2 21 14.2 20.5 14.6 19.8
-              C14.1 19.6 13.6 19.4 13 19.3
-              V10.5H11Z
-            "
-          />
-
-          <path
-            d="
-              M2.5 22
-              C4.5 22 5.5 21 7.5 22
-              C9.5 23 10.5 22 12.5 22
-              C14.5 22 15.5 23 17.5 22
-              C19.5 21 20.5 22 22.5 22
-            "
-            stroke="var(--accent-green)"
-            stroke-width="1.2"
-            stroke-linecap="round"
-            fill="none"
-          />
-
-          <path
-            d="
-              M2.5 24
-              C4.5 24 5.5 23 7.5 24
-              C9.5 25 10.5 24 12.5 24
-              C14.5 24 15.5 25 17.5 24
-              C19.5 23 20.5 24 22.5 24
-            "
-            stroke="var(--accent-green)"
-            stroke-width="1.2"
-            stroke-linecap="round"
-            fill="none"
-          />
-
-        </g>
-
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C7 2 4 5 4 9h16c0-4-3-7-8-7Z"/>
+        <path d="M11 9h2v11h-2z"/>
+        <path
+          d="M2 22c3-2 5 2 8 0s5 2 8 0 4 0 4 0"
+          stroke="#a3e635"
+          fill="none"
+          stroke-width="1.2"/>
       </svg>
 
-
-      <h1>
-        Inside Riviera
-      </h1>
-
-
+      <h1>Inside Riviera</h1>
       <div class="brand-tagline">
         Events / Places / Lifestyle
       </div>
-
     </div>
-
 
     <div class="hero-title-main">
       What's on
     </div>
 
-
-    <span
-      class="highlight"
-      id="hero-date-text"
-    >
+    <span class="highlight" id="hero-date-text">
       TODAY
     </span>
-
 
     <p>
       Events, markets, and things to do across Sanremo,
       Bordighera, Ventimiglia, Vallecrosia, Ospedaletti,
       Vallebona, Menton, and Monte Carlo.
     </p>
-
   </div>
 
+  <main class="main-content">
 
-  <!-- =========================================================
-       MAIN CONTENT
-       ========================================================= -->
-
-  <div class="main-content">
-
-
-    <!-- =======================================================
-         CALENDAR
-         ======================================================= -->
-
+    <!-- CALENDAR -->
     <div class="calendar-card">
-
       <div class="cal-header">
-
         <button
           class="nav-btn"
           onclick="changeMonth(-1)"
-          aria-label="Previous month"
-        >
-          &lt;
-        </button>
-
+          aria-label="Previous month">&lt;</button>
 
         <h2 id="calendar-month-title">
           Loading...
         </h2>
 
-
         <button
           class="nav-btn"
           onclick="changeMonth(1)"
-          aria-label="Next month"
-        >
-          &gt;
-        </button>
-
+          aria-label="Next month">&gt;</button>
       </div>
 
-
       <div class="weekdays">
-
         <div>MON</div>
         <div>TUE</div>
         <div>WED</div>
@@ -1521,1947 +713,1001 @@
         <div>FRI</div>
         <div>SAT</div>
         <div>SUN</div>
-
       </div>
 
-
-      <div
-        class="days-grid"
-        id="days-grid"
-      ></div>
-
+      <div class="days-grid" id="days-grid"></div>
     </div>
 
-
-    <!-- =======================================================
-         SEARCH + CITY FILTER
-         ======================================================= -->
-
+    <!-- SEARCH AND CITY FILTER -->
     <div class="filter-wrapper">
-
       <input
         type="text"
         class="search-input"
         id="search-input"
         placeholder="🔍 Search specific event..."
-        oninput="renderEvents()"
-      >
-
+        oninput="renderEvents()">
 
       <select
         class="city-select"
         id="city-filter"
-        onchange="renderEvents()"
-      >
+        onchange="renderEvents()">
 
         <option value="ALL">
           All Cities (Italian & French Riviera)
         </option>
-
-        <option value="Sanremo">
-          Sanremo
-        </option>
-
-        <option value="Bordighera">
-          Bordighera
-        </option>
-
-        <option value="Ventimiglia">
-          Ventimiglia
-        </option>
-
-        <option value="Vallecrosia">
-          Vallecrosia
-        </option>
-
-        <option value="Ospedaletti">
-          Ospedaletti
-        </option>
-
-        <option value="Vallebona">
-          Vallebona
-        </option>
-
-        <option value="Menton">
-          Menton
-        </option>
-
-        <option value="Monte Carlo">
-          Monte Carlo
-        </option>
-
+        <option value="Sanremo">Sanremo</option>
+        <option value="Bordighera">Bordighera</option>
+        <option value="Ventimiglia">Ventimiglia</option>
+        <option value="Vallecrosia">Vallecrosia</option>
+        <option value="Ospedaletti">Ospedaletti</option>
+        <option value="Vallebona">Vallebona</option>
+        <option value="Menton">Menton</option>
+        <option value="Monte Carlo">Monte Carlo</option>
       </select>
-
     </div>
 
-
-    <!-- =======================================================
-         CATEGORY NAVIGATION
-         ======================================================= -->
-
-    <div
-      class="category-navigation"
-      id="category-navigation"
-    >
-
+    <!-- CATEGORY BUTTONS -->
+    <div class="category-navigation">
       <div
         class="category-nav-inner"
-        id="category-nav-inner"
-      ></div>
-
+        id="category-nav-inner">
+      </div>
     </div>
 
+    <!-- INTRODUCTION -->
+    <section class="riviera-intro">
+      <h2>Discover What's Happening on the Riviera</h2>
+      <p>
+        Inside Riviera helps visitors and residents discover
+        local events, markets, concerts, exhibitions, cinema
+        and activities across the Italian and French Riviera.
+      </p>
+      <p>
+        Explore what's happening in Sanremo, Bordighera,
+        Ventimiglia, Menton, Monte Carlo and nearby towns.
+        Browse our calendar and discover activities for
+        your visit.
+      </p>
+    </section>
 
-    <!-- =======================================================
-         EVENTS
-         ======================================================= -->
-
-<section class="riviera-intro"
-  style="background:white; padding:24px;
-  border-radius:16px; margin-bottom:24px;">
-
-  <h2>Discover What's Happening on the Riviera</h2>
-
-  <p>
-    Inside Riviera helps visitors and residents
-    discover local events, markets, concerts,
-    exhibitions and activities across the
-    Italian and French Riviera.
-  </p>
-
-  <p>
-    Explore what's happening in Sanremo,
-    Bordighera, Ventimiglia, Menton,
-    Monte Carlo and nearby towns.
-    Browse our calendar, search by location
-    and discover activities for your visit.
-  </p>
-
-</section>
-
+    <!-- EVENTS -->
     <div id="events-container"></div>
 
-
-    <!-- =======================================================
-         SUBMIT EVENT
-         ======================================================= -->
-
+    <!-- SUBMIT EVENT -->
     <div class="submit-section">
-
-      <h2>
-        Add Your Event
-      </h2>
-
-
-      <p
-        style="
-          color: var(--text-muted);
-          font-size: 0.9rem;
-          margin-bottom: 16px;
-        "
-      >
+      <h2>Add Your Event</h2>
+      <p>
         Got an event happening in the Riviera?
         Submit it via our official form and it will
         auto-populate on the calendar!
       </p>
-
-
       <a
+        class="submit-btn"
         href="https://forms.gle/GTXcdJFB4TnCidsL9"
         target="_blank"
-        rel="noopener"
-        class="submit-btn"
-      >
+        rel="noopener">
         Open Event Submission Form ↗
       </a>
-
     </div>
 
-  </div>
-
-
-  <!-- =========================================================
-       JAVASCRIPT
-       ========================================================= -->
+  </main>
 
   <script>
+    "use strict";
 
-
-    /* =========================================================
-       GLOBAL STATE
-       ========================================================= */
+    /* GLOBAL STATE */
 
     let allEvents = [];
 
-
-    let selectedYear =
-      new Date().getFullYear();
-
-
-    let selectedMonth =
-      new Date().getMonth();
-
-
-    let selectedDay =
-      new Date().getDate();
-
+    let selectedYear = new Date().getFullYear();
+    let selectedMonth = new Date().getMonth();
+    let selectedDay = new Date().getDate();
 
     const monthNames = [
-
-      "JANUARY",
-      "FEBRUARY",
-      "MARCH",
-      "APRIL",
-      "MAY",
-      "JUNE",
-      "JULY",
-      "AUGUST",
-      "SEPTEMBER",
-      "OCTOBER",
-      "NOVEMBER",
-      "DECEMBER"
-
+      "JANUARY", "FEBRUARY", "MARCH",
+      "APRIL", "MAY", "JUNE",
+      "JULY", "AUGUST", "SEPTEMBER",
+      "OCTOBER", "NOVEMBER", "DECEMBER"
     ];
-
-
-    /* =========================================================
-       CATEGORY ORDER
-       ========================================================= */
 
     const categoryOrder = [
-
-  "Market",
-  "Public Event",
-  "Concert",
-  "Exhibition",
-  "Live Music",
-  "Sport",
-  "Cinema",
-  "Private Tour"
-
+      "Market",
+      "Public Event",
+      "Concert",
+      "Exhibition",
+      "Live Music",
+      "Sport",
+      "Cinema",
+      "Private Tour"
     ];
 
-
-    /* =========================================================
-       CATEGORY STYLES
-       ========================================================= */
-
     const categoryStyles = {
-
-      "concert":
-        "tag-concert",
-
-      "exhibition":
-        "tag-exhibition",
-
-      "public event":
-        "tag-public-event",
-
-      "live music":
-        "tag-live-music",
-
-      "private tour":
-        "tag-private-tour",
-
-      "sport":
-        "tag-sport",
-
-      "market":
-        "tag-market"
-      "cinema":
-        "tag-cinema"
+      "market": "tag-market",
+      "public event": "tag-public-event",
+      "concert": "tag-concert",
+      "exhibition": "tag-exhibition",
+      "live music": "tag-live-music",
+      "sport": "tag-sport",
+      "cinema": "tag-cinema",
+      "private tour": "tag-private-tour"
     };
-
 
     const navButtonStyles = {
-
-      "concert":
-        "nav-concert",
-
-      "exhibition":
-        "nav-exhibition",
-
-      "public event":
-        "nav-public-event",
-
-      "live music":
-        "nav-live-music",
-
-      "private tour":
-        "nav-private-tour",
-
-      "sport":
-        "nav-sport",
-
-"market":
-  "nav-market",
-
-"cinema":
-  "nav-cinema"
-
+      "market": "nav-market",
+      "public event": "nav-public-event",
+      "concert": "nav-concert",
+      "exhibition": "nav-exhibition",
+      "live music": "nav-live-music",
+      "sport": "nav-sport",
+      "cinema": "nav-cinema",
+      "private tour": "nav-private-tour"
     };
-
 
     const categoryDotColours = {
-
-      "concert":
-        "var(--soft-purple)",
-
-      "exhibition":
-        "var(--accent-pink)",
-
-      "public event":
-        "var(--text-dark)",
-
-      "live music":
-        "var(--accent-green)",
-
-      "private tour":
-        "var(--accent-green)",
-
-      "sport":
-        "var(--accent-pink)",
-
-    "market":
-  "var(--accent-pink)",
-
-"cinema":
-  "#1d4ed8"
-
+      "market": "#ff007a",
+      "public event": "#0f172a",
+      "concert": "#a78bfa",
+      "exhibition": "#ff007a",
+      "live music": "#a3e635",
+      "sport": "#e11d48",
+      "cinema": "#1d4ed8",
+      "private tour": "#0369a1"
     };
 
+    const fallbackImage =
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80";
 
-    /* =========================================================
-       HELPER FUNCTIONS
-       ========================================================= */
+    /* HELPERS */
 
     function getField(obj, keys) {
-
-      for (let k of keys) {
-
+      for (const key of keys) {
         if (
-          obj[k] !== undefined &&
-          obj[k] !== null &&
-          obj[k] !== ''
+          obj[key] !== undefined &&
+          obj[key] !== null &&
+          obj[key] !== ""
         ) {
-          return obj[k];
+          return obj[key];
         }
-
       }
-
-      return '';
+      return "";
     }
 
-
-    function parseNum(val) {
-
+    function parseNum(value) {
       if (
-        val === undefined ||
-        val === null ||
-        val === ''
+        value === undefined ||
+        value === null ||
+        value === ""
       ) {
         return NaN;
       }
 
+      const result = Number(
+        String(value).replace(/,/g, "").trim()
+      );
 
-      const num =
-        Number(
-          String(val)
-            .replace(/,/g, '')
-            .trim()
-        );
-
-
-      return isNaN(num)
-        ? NaN
-        : num;
+      return Number.isFinite(result) ? result : NaN;
     }
 
-
-    function cleanCategoryName(category) {
-
-      return String(category || '')
-        .trim()
-        .replace(/\s+/g, ' ');
+    function categoryKey(value) {
+      return String(value || "").trim().toLowerCase();
     }
-
 
     function parseCategories(value) {
+      if (!value) return ["Public Event"];
 
-      if (
-        value === undefined ||
-        value === null ||
-        value === ''
-      ) {
-        return ['Public Event'];
-      }
+      const result = String(value)
+        .split(",")
+        .map(value => value.trim())
+        .filter(Boolean);
 
-
-      const categories =
-        String(value)
-          .split(',')
-          .map(c =>
-            cleanCategoryName(c)
-          )
-          .filter(c => c !== '');
-
-
-      return categories.length
-        ? categories
-        : ['Public Event'];
+      return result.length ? result : ["Public Event"];
     }
-
-
-    function categoryKey(category) {
-
-      return String(category || '')
-        .trim()
-        .toLowerCase();
-    }
-
-
-    function getCategoryClass(category) {
-
-      return (
-        categoryStyles[
-          categoryKey(category)
-        ] ||
-        'tag-default'
-      );
-    }
-
-
-    function getNavButtonClass(category) {
-
-      return (
-        navButtonStyles[
-          categoryKey(category)
-        ] ||
-        'nav-default'
-      );
-    }
-
 
     function escapeHtml(value) {
-
-      return String(value ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
 
-
     function cleanImageUrl(value) {
+      if (!value) return "";
 
-      if (!value) {
-        return '';
-      }
+      let url = String(value).trim();
 
+      const match = url.match(
+        /\((https?:\/\/[^)\s]+)\)/
+      );
 
-      let url =
-        String(value).trim();
-
-
-      const markdownMatch =
-        url.match(
-          /\((https?:\/\/[^)\s]+)\)/
-        );
-
-
-      if (markdownMatch) {
-        url =
-          markdownMatch[1];
-      }
-
+      if (match) url = match[1];
 
       return url
-        .replace(/^["']|["']$/g, '')
+        .replace(/^["']|["']$/g, "")
         .trim();
     }
 
+    function getCategoryClass(category) {
+      return categoryStyles[categoryKey(category)] ||
+        "tag-default";
+    }
 
-    /* =========================================================
-       DATE / RECURRENCE LOGIC
-       ========================================================= */
+    function getNavButtonClass(category) {
+      return navButtonStyles[categoryKey(category)] ||
+        "nav-public-event";
+    }
 
-    function isEventActiveOnDate(
-      e,
-      targetDate
-    ) {
+    /* DATE AND RECURRENCE */
 
-      const startDate =
-        new Date(
-          e.year,
-          e.month,
-          e.date
-        );
-
-
-      startDate.setHours(
-        0, 0, 0, 0
+    function isEventActiveOnDate(event, targetDate) {
+      const start = new Date(
+        event.year,
+        event.month,
+        event.date
       );
 
+      const hasEnd =
+        Number.isFinite(event.endYear) &&
+        Number.isFinite(event.endMonth) &&
+        Number.isFinite(event.endDate);
 
-      const endDate =
-        (
-          !isNaN(e.endYear) &&
-          !isNaN(e.endMonth) &&
-          !isNaN(e.endDate)
-        )
+      const end = hasEnd
+        ? new Date(
+            event.endYear,
+            event.endMonth,
+            event.endDate
+          )
+        : new Date(start);
 
-          ? new Date(
-              e.endYear,
-              e.endMonth,
-              e.endDate
-            )
+      start.setHours(0, 0, 0, 0);
+      end.setHours(0, 0, 0, 0);
 
-          : new Date(
-              startDate
-            );
-
-
-      endDate.setHours(
-        0, 0, 0, 0
-      );
-
-
-      if (
-        targetDate < startDate ||
-        targetDate > endDate
-      ) {
+      if (targetDate < start || targetDate > end) {
         return false;
       }
 
+      const frequency = String(
+        event.frequency || ""
+      ).trim().toLowerCase();
 
-      const freq =
-        String(
-          e.frequency || ''
-        ).toLowerCase();
-
-
-      const rec =
-        String(
-          e.recurrence || ''
-        ).toLowerCase();
-
+      const recurrence = String(
+        event.recurrence || ""
+      ).trim().toLowerCase();
 
       if (
-        freq === 'one-off' ||
-        freq === 'one off' ||
-        freq === ''
+        frequency === "one-off" ||
+        frequency === "one off" ||
+        frequency === ""
       ) {
-
-        return (
-          targetDate >= startDate &&
-          targetDate <= endDate
-        );
-
-      }
-
-
-      if (freq === 'daily') {
         return true;
       }
 
+      if (frequency === "daily") {
+        return true;
+      }
 
-      const dayNames = [
-
-        'sunday',
-        'monday',
-        'tuesday',
-        'wednesday',
-        'thursday',
-        'friday',
-        'saturday'
-
+      const days = [
+        "sunday", "monday", "tuesday",
+        "wednesday", "thursday", "friday",
+        "saturday"
       ];
 
-
-      const targetDayName =
-        dayNames[
-          targetDate.getDay()
-        ];
-
-
-      const matchesDayOfWeek =
-        rec.includes(
-          targetDayName
-        );
-
+      const dayName = days[targetDate.getDay()];
 
       if (
-        !matchesDayOfWeek &&
-        rec !== ''
+        recurrence &&
+        !recurrence.includes(dayName)
       ) {
         return false;
       }
 
-
       if (
-        rec.includes('1st') ||
-        rec.includes('2nd') ||
-        rec.includes('3rd') ||
-        rec.includes('4th') ||
-        rec.includes('last')
+        recurrence.includes("1st") ||
+        recurrence.includes("2nd") ||
+        recurrence.includes("3rd") ||
+        recurrence.includes("4th") ||
+        recurrence.includes("last")
       ) {
+        const weekNumber = Math.ceil(
+          targetDate.getDate() / 7
+        );
 
-        const weekNum =
-          Math.ceil(
-            targetDate.getDate() / 7
-          );
-
-
-        let matchesOrdinal =
-          false;
-
+        let matches = false;
 
         if (
-          rec.includes('1st') &&
-          weekNum === 1
-        ) {
-          matchesOrdinal = true;
-        }
-
+          recurrence.includes("1st") &&
+          weekNumber === 1
+        ) matches = true;
 
         if (
-          rec.includes('2nd') &&
-          weekNum === 2
-        ) {
-          matchesOrdinal = true;
-        }
-
+          recurrence.includes("2nd") &&
+          weekNumber === 2
+        ) matches = true;
 
         if (
-          rec.includes('3rd') &&
-          weekNum === 3
-        ) {
-          matchesOrdinal = true;
-        }
-
+          recurrence.includes("3rd") &&
+          weekNumber === 3
+        ) matches = true;
 
         if (
-          rec.includes('4th') &&
-          weekNum === 4
-        ) {
-          matchesOrdinal = true;
-        }
+          recurrence.includes("4th") &&
+          weekNumber === 4
+        ) matches = true;
 
-
-        if (rec.includes('last')) {
-
-          const nextWeek =
-            new Date(targetDate);
-
-
+        if (recurrence.includes("last")) {
+          const nextWeek = new Date(targetDate);
           nextWeek.setDate(
-            targetDate.getDate() + 7
+            nextWeek.getDate() + 7
           );
-
 
           if (
             nextWeek.getMonth() !==
             targetDate.getMonth()
           ) {
-            matchesOrdinal = true;
+            matches = true;
           }
-
         }
 
-
-        if (!matchesOrdinal) {
-          return false;
-        }
-
+        if (!matches) return false;
       }
-
 
       if (
-        freq === 'biweekly' ||
-        rec.includes('every other')
+        frequency === "biweekly" ||
+        recurrence.includes("every other")
       ) {
+        const diffDays = Math.round(
+          (targetDate - start) / 86400000
+        );
 
-        const diffTime =
-          targetDate.getTime() -
-          startDate.getTime();
+        const diffWeeks = Math.floor(
+          diffDays / 7
+        );
 
-
-        const diffDays =
-          Math.floor(
-            diffTime /
-            (1000 * 60 * 60 * 24)
-          );
-
-
-        const diffWeeks =
-          Math.floor(
-            diffDays / 7
-          );
-
-
-        if (
-          diffWeeks % 2 !== 0
-        ) {
+        if (diffWeeks % 2 !== 0) {
           return false;
         }
-
       }
-
 
       return true;
     }
 
-
-    /* =========================================================
-       INITIALISE APP
-       ========================================================= */
-
-    async function initApp() {
-
-      try {
-
-        const res =
-          await fetch(
-            'https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=' +
-            new Date().getTime()
-          );
-
-
-        if (!res.ok) {
-
-          throw new Error(
-            'Failed to load sheet data'
-          );
-
-        }
-
-
-        const rawData =
-          await res.json();
-
-
-        const standardizedData =
-          rawData.map(row => {
-
-            const cleanRow = {};
-
-
-            for (let key in row) {
-
-              cleanRow[
-                key
-                  .toLowerCase()
-                  .replace(/[\s_-]/g, '')
-              ] = row[key];
-
-            }
-
-
-            return cleanRow;
-
-          });
-
-
-        allEvents =
-          standardizedData
-
-            .map(e => {
-
-              const y =
-                parseNum(
-                  getField(
-                    e,
-                    [
-                      'startyear',
-                      'year',
-                      'anno',
-                      'yr'
-                    ]
-                  )
-                );
-
-
-              const mInput =
-                parseNum(
-                  getField(
-                    e,
-                    [
-                      'startmonth',
-                      'month',
-                      'mese',
-                      'mo'
-                    ]
-                  )
-                );
-
-
-              const d =
-                parseNum(
-                  getField(
-                    e,
-                    [
-                      'startdate',
-                      'day',
-                      'giorno',
-                      'data'
-                    ]
-                  )
-                );
-
-
-              const endY =
-                parseNum(
-                  getField(
-                    e,
-                    [
-                      'endyear',
-                      'endanno'
-                    ]
-                  )
-                );
-
-
-              const endMInput =
-                parseNum(
-                  getField(
-                    e,
-                    [
-                      'endmonth',
-                      'endmese'
-                    ]
-                  )
-                );
-
-
-              const endD =
-                parseNum(
-                  getField(
-                    e,
-                    [
-                      'enddate',
-                      'endgiorno'
-                    ]
-                  )
-                );
-
-
-              const rawImg =
-                cleanImageUrl(
-                  getField(
-                    e,
-                    [
-                      'img',
-                      'image',
-                      'photo',
-                      'picture',
-                      'foto',
-                      'imgurl',
-                      'imageurl'
-                    ]
-                  )
-                );
-
-
-              const categories =
-                parseCategories(
-                  getField(
-                    e,
-                    [
-                      'category',
-                      'categories',
-                      'categoria',
-                      'categorie',
-                      'tags',
-                      'tag'
-                    ]
-                  )
-                );
-
-
-              const frequency =
-                getField(
-                  e,
-                  [
-                    'frequency',
-                    'freq',
-                    'frequenza'
-                  ]
-                );
-
-
-              const recurrence =
-                getField(
-                  e,
-                  [
-                    'recurrence',
-                    'ricorrenza',
-                    'days',
-                    'schedule'
-                  ]
-                );
-
-
-              return {
-
-                year: y,
-
-
-                month:
-                  !isNaN(mInput)
-                    ? mInput - 1
-                    : NaN,
-
-
-                date: d,
-
-
-                endYear: endY,
-
-
-                endMonth:
-                  !isNaN(endMInput)
-                    ? endMInput - 1
-                    : NaN,
-
-
-                endDate: endD,
-
-
-                title:
-                  getField(
-                    e,
-                    [
-                      'title',
-                      'titolo',
-                      'name',
-                      'event'
-                    ]
-                  ),
-
-
-                city:
-                  getField(
-                    e,
-                    [
-                      'city',
-                      'citta',
-                      'town',
-                      'location'
-                    ]
-                  ),
-
-
-                time:
-                  getField(
-                    e,
-                    [
-                      'time',
-                      'orario',
-                      'hours',
-                      'ora'
-                    ]
-                  ),
-
-
-                location:
-                  getField(
-                    e,
-                    [
-                      'venue',
-                      'location',
-                      'luogo',
-                      'address',
-                      'place'
-                    ]
-                  ),
-
-
-                description:
-                  getField(
-                    e,
-                    [
-                      'description',
-                      'descrizione',
-                      'details',
-                      'info'
-                    ]
-                  ),
-
-
-                link:
-                  getField(
-                    e,
-                    [
-                      'link',
-                      'url',
-                      'website',
-                      'sito',
-                      'ticketlink'
-                    ]
-                  ),
-
-
-                img:
-                  rawImg ||
-                  'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
-
-
-                categories:
-                  categories,
-
-
-                frequency:
-                  frequency,
-
-
-                recurrence:
-                  recurrence,
-
-
-                raw:
-                  e
-
-              };
-
-            })
-
-
-            .filter(
-              e =>
-                !isNaN(e.year) &&
-                !isNaN(e.month) &&
-                !isNaN(e.date)
-            );
-
-
-        buildCalendar();
-
-        renderEvents();
-
-        buildCategoryNav();
-
-
-      } catch (err) {
-
-        console.error(err);
-
-
-        document.getElementById(
-          'events-container'
-        ).innerHTML = `
-
-          <div class="no-events">
-
-            <h3>
-              Unable to load events at the moment.
-            </h3>
-
-            <p>
-              Please check your connection
-              or try again later.
-            </p>
-
-          </div>
-
-        `;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       CALENDAR
-       ========================================================= */
+    /* CALENDAR - RUNS WITHOUT WAITING FOR SHEETDB */
 
     function buildCalendar() {
-
-      const titleEl =
-        document.getElementById(
-          'calendar-month-title'
-        );
-
-
-      const gridEl =
-        document.getElementById(
-          'days-grid'
-        );
-
-
-      titleEl.innerText =
-        `${monthNames[selectedMonth]} ${selectedYear}`;
-
-
-      gridEl.innerHTML = '';
-
-
-      const firstDayIndex =
-        new Date(
-          selectedYear,
-          selectedMonth,
-          1
-        ).getDay();
-
-
-      const adjustedFirstDay =
-        firstDayIndex === 0
-          ? 6
-          : firstDayIndex - 1;
-
-
-      const totalDays =
-        new Date(
-          selectedYear,
-          selectedMonth + 1,
-          0
-        ).getDate();
-
-
-      const prevTotalDays =
-        new Date(
-          selectedYear,
-          selectedMonth,
-          0
-        ).getDate();
-
-
-      const today =
-        new Date();
-
-
-      today.setHours(
-        0, 0, 0, 0
+      const title = document.getElementById(
+        "calendar-month-title"
       );
 
+      const grid = document.getElementById(
+        "days-grid"
+      );
 
-      for (
-        let i = adjustedFirstDay - 1;
-        i >= 0;
-        i--
-      ) {
+      if (!title || !grid) return;
 
-        const dayNum =
-          prevTotalDays - i;
+      title.textContent =
+        monthNames[selectedMonth] + " " + selectedYear;
 
+      grid.innerHTML = "";
 
-        const cell =
-          document.createElement(
-            'div'
-          );
+      const firstDay = new Date(
+        selectedYear,
+        selectedMonth,
+        1
+      ).getDay();
 
+      const offset = (firstDay + 6) % 7;
 
-        cell.className =
-          'day-cell past';
+      const totalDays = new Date(
+        selectedYear,
+        selectedMonth + 1,
+        0
+      ).getDate();
 
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
 
-        cell.innerHTML =
-          `<div class="day-number">${dayNum}</div>`;
-
-
-        gridEl.appendChild(cell);
-
+      for (let i = 0; i < offset; i++) {
+        const blank = document.createElement("div");
+        blank.className = "day-cell empty";
+        grid.appendChild(blank);
       }
 
+      for (let day = 1; day <= totalDays; day++) {
+        const cell = document.createElement("div");
+        cell.className = "day-cell";
 
-      for (
-        let d = 1;
-        d <= totalDays;
-        d++
-      ) {
-
-        const cell =
-          document.createElement(
-            'div'
-          );
-
-
-        cell.className =
-          'day-cell';
-
-
-        const cellDate =
-          new Date(
-            selectedYear,
-            selectedMonth,
-            d
-          );
-
-
-        cellDate.setHours(
-          0, 0, 0, 0
+        const date = new Date(
+          selectedYear,
+          selectedMonth,
+          day
         );
 
+        date.setHours(0, 0, 0, 0);
 
-        if (cellDate < today) {
-
-          cell.classList.add(
-            'past'
-          );
-
+        if (date < today) {
+          cell.classList.add("past");
         }
 
-
-        if (
-          selectedYear ===
-            today.getFullYear() &&
-
-          selectedMonth ===
-            today.getMonth() &&
-
-          d ===
-            today.getDate() &&
-
-          selectedDay ===
-            today.getDate()
-        ) {
-
-          cell.classList.add(
-            'active'
-          );
-
-        } else if (
-          d === selectedDay
-        ) {
-
-          cell.classList.add(
-            'active'
-          );
-
+        if (day === selectedDay) {
+          cell.classList.add("active");
         }
 
+        const number = document.createElement("div");
+        number.className = "day-number";
+        number.textContent = day;
 
-        const hasEvents =
-          allEvents.some(
-            e =>
-              isEventActiveOnDate(
-                e,
-                cellDate
-              )
-          );
+        cell.appendChild(number);
 
-
-        let html =
-          `<div class="day-number">${d}</div>`;
-
+        const hasEvents = allEvents.some(event =>
+          isEventActiveOnDate(event, date)
+        );
 
         if (hasEvents) {
-
-          html +=
-            `<div class="event-dot"></div>`;
-
+          const dot = document.createElement("div");
+          dot.className = "event-dot";
+          cell.appendChild(dot);
         }
 
-
-        cell.innerHTML =
-          html;
-
-
-        cell.onclick = () => {
-
-          selectedDay =
-            d;
-
-
+        cell.onclick = function () {
+          selectedDay = day;
           buildCalendar();
-
           renderEvents();
-
         };
 
-
-        gridEl.appendChild(
-          cell
-        );
-
+        grid.appendChild(cell);
       }
 
+      updateHeroDate();
     }
 
+    function updateHeroDate() {
+      const hero = document.getElementById(
+        "hero-date-text"
+      );
 
-    /* =========================================================
-       CHANGE MONTH
-       ========================================================= */
+      if (!hero) return;
 
-    function changeMonth(
-      direction
-    ) {
+      const today = new Date();
 
-      selectedMonth +=
-        direction;
+      const isToday =
+        selectedYear === today.getFullYear() &&
+        selectedMonth === today.getMonth() &&
+        selectedDay === today.getDate();
 
+      if (isToday) {
+        hero.textContent = "TODAY";
+      } else {
+        hero.textContent =
+          selectedDay + " " +
+          monthNames[selectedMonth];
+      }
+    }
 
-      if (
-        selectedMonth > 11
-      ) {
+    function changeMonth(direction) {
+      selectedMonth += direction;
 
+      if (selectedMonth > 11) {
         selectedMonth = 0;
-
         selectedYear++;
-
       }
 
-      else if (
-        selectedMonth < 0
-      ) {
-
+      if (selectedMonth < 0) {
         selectedMonth = 11;
-
         selectedYear--;
-
       }
-
 
       selectedDay = 1;
 
-
       buildCalendar();
-
       renderEvents();
-
     }
 
+    /* GOOGLE SHEETS CONNECTION */
 
-    /* =========================================================
-       GETYOURGUIDE WIDGET
-       ========================================================= */
-
-    function createGetYourGuideSection() {
-
-      const wrapper =
-        document.createElement(
-          'div'
+    async function loadEvents() {
+      try {
+        const response = await fetch(
+          "https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=" +
+          Date.now()
         );
 
+        if (!response.ok) {
+          throw new Error(
+            "SheetDB returned HTTP " + response.status
+          );
+        }
+
+        const rawData = await response.json();
+
+        if (!Array.isArray(rawData)) {
+          throw new Error(
+            "SheetDB response is not an array"
+          );
+        }
+
+        allEvents = rawData.map(row => {
+          const clean = {};
+
+          for (const key in row) {
+            const normalizedKey = key
+              .toLowerCase()
+              .replace(/[\s_-]/g, "");
+
+            clean[normalizedKey] = row[key];
+          }
+
+          const year = parseNum(
+            getField(clean, [
+              "startyear", "year", "anno", "yr"
+            ])
+          );
+
+          const month = parseNum(
+            getField(clean, [
+              "startmonth", "month", "mese", "mo"
+            ])
+          );
+
+          const date = parseNum(
+            getField(clean, [
+              "startdate", "day", "giorno", "data"
+            ])
+          );
+
+          const endYear = parseNum(
+            getField(clean, [
+              "endyear", "endanno"
+            ])
+          );
+
+          const endMonth = parseNum(
+            getField(clean, [
+              "endmonth", "endmese"
+            ])
+          );
+
+          const endDate = parseNum(
+            getField(clean, [
+              "enddate", "endgiorno"
+            ])
+          );
+
+          const categories = parseCategories(
+            getField(clean, [
+              "category", "categories",
+              "categoria", "categorie",
+              "tags", "tag"
+            ])
+          );
+
+          const image = cleanImageUrl(
+            getField(clean, [
+              "img", "image", "photo",
+              "picture", "foto",
+              "imgurl", "imageurl"
+            ])
+          );
+
+          return {
+            year: year,
+            month: month - 1,
+            date: date,
+
+            endYear: endYear,
+            endMonth: endMonth - 1,
+            endDate: endDate,
+
+            title: getField(clean, [
+              "title", "titolo", "name", "event"
+            ]),
+
+            city: getField(clean, [
+              "city", "citta", "town", "location"
+            ]),
+
+            time: getField(clean, [
+              "time", "orario", "hours", "ora"
+            ]),
+
+            location: getField(clean, [
+              "venue", "location", "luogo",
+              "address", "place"
+            ]),
+
+            description: getField(clean, [
+              "description", "desc",
+              "descrizione", "details", "info"
+            ]),
+
+            link: getField(clean, [
+              "link", "url", "website",
+              "sito", "ticketlink"
+            ]),
+
+            img: image || fallbackImage,
+
+            categories: categories,
+
+            frequency: getField(clean, [
+              "frequency", "freq", "frequenza"
+            ]),
+
+            recurrence: getField(clean, [
+              "recurrence", "ricorrenza",
+              "days", "schedule"
+            ])
+          };
+        }).filter(event =>
+          Number.isFinite(event.year) &&
+          Number.isFinite(event.month) &&
+          Number.isFinite(event.date) &&
+          event.month >= 0 &&
+          event.month <= 11 &&
+          event.date >= 1 &&
+          event.date <= 31
+        );
+
+        buildCalendar();
+        renderEvents();
+
+      } catch (error) {
+        console.error(
+          "Unable to load SheetDB events:",
+          error
+        );
+
+        const container = document.getElementById(
+          "events-container"
+        );
+
+        container.innerHTML = `
+          <div class="no-events">
+            <h3>Events temporarily unavailable</h3>
+            <p>
+              The calendar is working, but events
+              could not be loaded from Google Sheets.
+              Please try refreshing the page.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    /* GETYOURGUIDE */
+
+    function createGetYourGuideSection() {
+      const wrapper = document.createElement("div");
 
       wrapper.className =
-        'gyg-private-tour-widget';
-
+        "gyg-private-tour-widget";
 
       wrapper.innerHTML = `
-
         <p class="gyg-riviera-intro">
-
-          Discover tours and experiences
-          across the French Riviera and Menton.
-
+          Discover tours and experiences across
+          the French Riviera and Menton.
         </p>
 
-
         <div class="gyg-widget-wrapper">
-
           <div
             data-gyg-widget="auto"
             data-gyg-partner-id="LNHKRSN"
-            data-gyg-cmp="Menton"
-          ></div>
-
+            data-gyg-cmp="Menton">
+          </div>
         </div>
 
-
         <p class="gyg-riviera-note">
-
           Activities and availability are provided
           by GetYourGuide.
-
         </p>
-
       `;
 
-
       return wrapper;
-
     }
 
-
-    /* =========================================================
-       RENDER EVENTS
-       ========================================================= */
+    /* RENDER EVENTS */
 
     function renderEvents() {
-
-      const container =
-        document.getElementById(
-          'events-container'
-        );
-
-
-      const cityFilter =
-        document.getElementById(
-          'city-filter'
-        ).value;
-
-
-      const searchQuery =
-        document.getElementById(
-          'search-input'
-        ).value
-          .toLowerCase()
-          .trim();
-
-
-      container.innerHTML = '';
-
-
-      const selectedDateObj =
-        new Date(
-          selectedYear,
-          selectedMonth,
-          selectedDay
-        );
-
-
-      selectedDateObj.setHours(
-        0, 0, 0, 0
+      const container = document.getElementById(
+        "events-container"
       );
 
+      if (!container) return;
 
-      const filteredEvents =
-        allEvents.filter(e => {
+      const cityFilter = document.getElementById(
+        "city-filter"
+      ).value;
 
+      const searchQuery = document.getElementById(
+        "search-input"
+      ).value.toLowerCase().trim();
 
-          const matchesCity =
+      container.innerHTML = "";
 
-            cityFilter === 'ALL'
+      const selectedDate = new Date(
+        selectedYear,
+        selectedMonth,
+        selectedDay
+      );
 
-            ||
+      selectedDate.setHours(0, 0, 0, 0);
 
-            String(
-              e.city || ''
-            )
-              .toLowerCase() ===
-            cityFilter.toLowerCase();
+      const filteredEvents = allEvents.filter(event => {
+        const matchesCity =
+          cityFilter === "ALL" ||
+          String(event.city || "").toLowerCase() ===
+          cityFilter.toLowerCase();
 
-
-          if (
-            searchQuery !== ''
-          ) {
-
-            const matchesSearch =
-
-              String(
-                e.title || ''
-              )
-                .toLowerCase()
-                .includes(
-                  searchQuery
-                )
-
-              ||
-
-              String(
-                e.description || ''
-              )
-                .toLowerCase()
-                .includes(
-                  searchQuery
-                )
-
-              ||
-
-              String(
-                e.city || ''
-              )
-                .toLowerCase()
-                .includes(
-                  searchQuery
-                )
-
-              ||
-
-              String(
-                e.location || ''
-              )
-                .toLowerCase()
-                .includes(
-                  searchQuery
-                );
-
-
-            return (
-              matchesCity &&
-              matchesSearch
-            );
-
-          }
-
-
-          const matchesFrequency =
-            isEventActiveOnDate(
-              e,
-              selectedDateObj
-            );
-
-
-          return (
-            matchesCity &&
-            matchesFrequency
+        const matchesSearch =
+          !searchQuery ||
+          [
+            event.title,
+            event.description,
+            event.city,
+            event.location
+          ].some(value =>
+            String(value || "")
+              .toLowerCase()
+              .includes(searchQuery)
           );
 
-        });
+        return (
+          matchesCity &&
+          matchesSearch &&
+          isEventActiveOnDate(event, selectedDate)
+        );
+      });
 
+      if (filteredEvents.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "no-events";
 
-      /* =====================================================
-         EMPTY RESULTS
-         ===================================================== */
-
-      if (
-        filteredEvents.length === 0
-      ) {
-
-        const noEvents =
-          document.createElement(
-            'div'
-          );
-
-
-        noEvents.className =
-          'no-events';
-
-
-        noEvents.innerHTML = `
-
-          <h3>
-            No events found for this date.
-          </h3>
-
-
+        empty.innerHTML = `
+          <h3>No events found for this date.</h3>
           <p>
-            Try adjusting your search query,
-            date, or city filter.
+            Try another date, search term or city.
           </p>
-
         `;
 
-
-        container.appendChild(
-          noEvents
-        );
-
+        container.appendChild(empty);
       }
 
-
-      /* =====================================================
-         CATEGORY SECTIONS
-         ===================================================== */
-
-      categoryOrder.forEach(
-        catName => {
-
-
-          const matchingCatEvents =
-            filteredEvents.filter(
-              e =>
-                e.categories.some(
-                  c =>
-                    categoryKey(c) ===
-                    categoryKey(catName)
-                )
-            );
-
-
-          const isPrivateTour =
-            categoryKey(catName) ===
-            'private tour';
-
-
-          /*
-           * Normal categories appear only
-           * when they contain events.
-           *
-           * Private Tour is always displayed
-           * because it contains the Riviera
-           * GetYourGuide widget.
-           */
-
-          if (
-            matchingCatEvents.length > 0 ||
-            isPrivateTour
-          ) {
-
-
-            const section =
-              document.createElement(
-                'div'
-              );
-
-
-            section.className =
-              'category-section';
-
-
-            section.id =
-              `cat-${categoryKey(catName)}`;
-
-
-            /* ===============================================
-               CATEGORY HEADER
-               =============================================== */
-
-            section.innerHTML = `
-
-              <div class="category-header">
-
-                <div class="category-title-wrapper">
-
-                  <div
-                    class="category-colour-dot"
-                    style="
-                      background:
-                      ${
-                        categoryDotColours[
-                          categoryKey(catName)
-                        ] ||
-                        'var(--accent-pink)'
-                      }
-                    "
-                  ></div>
-
-
-                  <h2 class="category-title">
-                    ${escapeHtml(catName)}
-                  </h2>
-
-                </div>
-
-
-                ${
-                  matchingCatEvents.length > 0
-
-                    ? `
-                      <span class="category-count">
-                        ${matchingCatEvents.length}
-                      </span>
-                    `
-
-                    : ''
-                }
-
-              </div>
-
-            `;
-
-
-            /* ===============================================
-               GETYOURGUIDE
-               =============================================== */
-
-            if (
-              isPrivateTour
-            ) {
-
-              const gygSection =
-                createGetYourGuideSection();
-
-
-              section.appendChild(
-                gygSection
-              );
-
-            }
-
-
-            /* ===============================================
-               GOOGLE SHEET EVENTS
-               =============================================== */
-
-            if (
-              matchingCatEvents.length > 0
-            ) {
-
-              const eventsGrid =
-                document.createElement(
-                  'div'
-                );
-
-
-              eventsGrid.className =
-                'events-grid';
-
-
-              matchingCatEvents.forEach(
-                evt => {
-
-
-                  const card =
-                    document.createElement(
-                      'div'
-                    );
-
-
-                  card.className =
-                    'event-card';
-
-
-                  const tagsHtml =
-                    evt.categories
-                      .map(
-                        c => `
-
-                          <span
-                            class="
-                              tag-badge
-                              ${getCategoryClass(c)}
-                            "
-                          >
-                            ${escapeHtml(c)}
-                          </span>
-
-                        `
-                      )
-                      .join('');
-
-
-                  card.innerHTML = `
-
-                    <div class="img-wrapper">
-
-
-                      <div class="tag-container">
-                        ${tagsHtml}
-                      </div>
-
-
-                      <img
-                        src="${escapeHtml(evt.img)}"
-                        alt="${escapeHtml(evt.title)}"
-                        onerror="
-                          this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'
-                        "
-                      >
-
-                    </div>
-
-
-                    <div class="card-body">
-
-
-                      <h3>
-                        ${escapeHtml(evt.title)}
-                      </h3>
-
-
-                      <div class="meta-info">
-
-                        <div class="meta-row">
-
-                          📍
-
-                          <strong>
-                            ${escapeHtml(evt.city)}
-                          </strong>
-
-
-                          ${
-                            evt.location
-
-                              ? '- ' +
-                                escapeHtml(
-                                  evt.location
-                                )
-
-                              : ''
-                          }
-
-                        </div>
-
-
-                        ${
-                          evt.time
-
-                            ? `
-                              <div class="meta-row">
-
-                                🕒
-
-                                ${escapeHtml(
-                                  evt.time
-                                )}
-
-                              </div>
-                            `
-
-                            : ''
-                        }
-
-
-                      </div>
-
-
-                      <div class="description">
-
-                        ${escapeHtml(
-                          evt.description
-                        )}
-
-                      </div>
-
-
-                      ${
-                        evt.link
-
-                          ? `
-                            <a
-                              href="${escapeHtml(evt.link)}"
-                              target="_blank"
-                              rel="noopener"
-                              class="btn-link"
-                            >
-                              More Info & Tickets ↗
-                            </a>
-                          `
-
-                          : ''
-                      }
-
-
-                    </div>
-
-                  `;
-
-
-                  eventsGrid.appendChild(
-                    card
-                  );
-
-                }
-              );
-
-
-              section.appendChild(
-                eventsGrid
-              );
-
-            }
-
-
-            /* ===============================================
-               ADD CATEGORY SECTION
-               =============================================== */
-
-            container.appendChild(
-              section
-            );
-
-          }
-
-        }
-      );
-
-    }
-
-
-    /* =========================================================
-       CATEGORY NAVIGATION
-       ========================================================= */
-
-    function buildCategoryNav() {
-
-      const navInner =
-        document.getElementById(
-          'category-nav-inner'
+      categoryOrder.forEach(category => {
+        const events = filteredEvents.filter(event =>
+          event.categories.some(value =>
+            categoryKey(value) === categoryKey(category)
+          )
         );
 
+        const isPrivateTour =
+          categoryKey(category) === "private tour";
 
-      navInner.innerHTML = '';
-
-
-      categoryOrder.forEach(
-        catName => {
-
-
-          const btn =
-            document.createElement(
-              'button'
-            );
-
-
-          btn.className =
-            `category-nav-btn ${
-              getNavButtonClass(catName)
-            }`;
-
-
-          btn.innerText =
-            catName;
-
-
-          btn.onclick = () => {
-
-
-            const target =
-              document.getElementById(
-                `cat-${categoryKey(catName)}`
-              );
-
-
-            if (target) {
-
-              target.scrollIntoView({
-                behavior: 'smooth'
-              });
-
-            }
-
-          };
-
-
-          navInner.appendChild(
-            btn
-          );
-
+        if (!events.length && !isPrivateTour) {
+          return;
         }
-      );
 
+        const section = document.createElement("section");
+
+        section.className = "category-section";
+        section.id = "cat-" + categoryKey(category);
+
+        const dotColour =
+          categoryDotColours[categoryKey(category)] ||
+          "#ff007a";
+
+        section.innerHTML = `
+          <div class="category-header">
+            <div class="category-title-wrapper">
+              <div
+                class="category-colour-dot"
+                style="background:${dotColour}">
+              </div>
+              <h2 class="category-title">
+                ${escapeHtml(category)}
+              </h2>
+            </div>
+
+            ${
+              events.length
+                ? `<span class="category-count">
+                     ${events.length}
+                   </span>`
+                : ""
+            }
+          </div>
+        `;
+
+        if (isPrivateTour) {
+          section.appendChild(
+            createGetYourGuideSection()
+          );
+        }
+
+        if (events.length) {
+          const grid = document.createElement("div");
+          grid.className = "events-grid";
+
+          events.forEach(event => {
+            const card = document.createElement("article");
+            card.className = "event-card";
+
+            const tags = event.categories.map(value => `
+              <span class="tag-badge ${getCategoryClass(value)}">
+                ${escapeHtml(value)}
+              </span>
+            `).join("");
+
+            const locationText = event.location
+              ? " - " + escapeHtml(event.location)
+              : "";
+
+            const timeHtml = event.time
+              ? `
+                <div class="meta-row">
+                  🕒 ${escapeHtml(event.time)}
+                </div>
+              `
+              : "";
+
+            const linkHtml = event.link
+              ? `
+                <a
+                  class="btn-link"
+                  href="${escapeHtml(event.link)}"
+                  target="_blank"
+                  rel="noopener">
+                  More Info & Tickets ↗
+                </a>
+              `
+              : "";
+
+            card.innerHTML = `
+              <div class="img-wrapper">
+                <div class="tag-container">
+                  ${tags}
+                </div>
+
+                <img
+                  src="${escapeHtml(event.img)}"
+                  alt="${escapeHtml(event.title)}">
+              </div>
+
+              <div class="card-body">
+                <h3>${escapeHtml(event.title)}</h3>
+
+                <div class="meta-info">
+                  <div class="meta-row">
+                    📍
+                    <strong>${escapeHtml(event.city)}</strong>
+                    ${locationText}
+                  </div>
+                  ${timeHtml}
+                </div>
+
+                <div class="description">
+                  ${escapeHtml(event.description)}
+                </div>
+
+                ${linkHtml}
+              </div>
+            `;
+
+            const image = card.querySelector("img");
+
+            image.onerror = function () {
+              this.onerror = null;
+              this.src = fallbackImage;
+            };
+
+            grid.appendChild(card);
+          });
+
+          section.appendChild(grid);
+        }
+
+        container.appendChild(section);
+      });
     }
 
+    /* CATEGORY NAVIGATION */
 
-    /* =========================================================
-       START APP
-       ========================================================= */
+    function buildCategoryNav() {
+      const nav = document.getElementById(
+        "category-nav-inner"
+      );
 
-    window.onload =
-      initApp;
+      nav.innerHTML = "";
 
+      categoryOrder.forEach(category => {
+        const button = document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+          "category-nav-btn " +
+          getNavButtonClass(category);
+
+        button.textContent = category;
+
+        button.onclick = function () {
+          const section = document.getElementById(
+            "cat-" + categoryKey(category)
+          );
+
+          if (section) {
+            section.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
+        };
+
+        nav.appendChild(button);
+      });
+    }
+
+    /* START THE WEBSITE */
+
+    function startApp() {
+      // Show the calendar immediately.
+      buildCalendar();
+
+      // Show category buttons immediately.
+      buildCategoryNav();
+
+      // Load event data separately.
+      loadEvents();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener(
+        "DOMContentLoaded",
+        startApp
+      );
+    } else {
+      startApp();
+    }
   </script>
 
-<footer style="
-  background:#0f172a;
-  color:white;
-  text-align:center;
-  padding:35px 20px;
-  margin-top:40px;">
+  <footer style="
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+    margin-top:40px;">
 
-  <h3 style="color:#a3e635;">
-    INSIDE RIVIERA
-  </h3>
+    <h3 style="color:#a3e635;">
+      INSIDE RIVIERA
+    </h3>
 
-  <p style="margin:12px 0;">
-    Events • Places • Lifestyle
-  </p>
+    <p style="margin:12px 0;">
+      Events • Places • Lifestyle
+    </p>
 
-  <nav style="margin:20px 0;">
-    <a href="/about.html"
-       style="color:white;margin:10px;">
-      About Us
-    </a>
+    <nav style="margin:20px 0;">
+      <a
+        href="/about.html"
+        style="color:white;margin:10px;">
+        About Us
+      </a>
 
-    <a href="/contact.html"
-       style="color:white;margin:10px;">
-      Contact
-    </a>
+      <a
+        href="/contact.html"
+        style="color:white;margin:10px;">
+        Contact
+      </a>
 
-    <a href="/privacy-policy.html"
-       style="color:white;margin:10px;">
-      Privacy Policy
-    </a>
-  </nav>
+      <a
+        href="/privacy-policy.html"
+        style="color:white;margin:10px;">
+        Privacy Policy
+      </a>
+    </nav>
 
-  <p style="font-size:12px;opacity:0.7;">
-    © Inside Riviera. All rights reserved.
-  </p>
-
-</footer>
+    <p style="font-size:12px;opacity:.7;">
+      © Inside Riviera. All rights reserved.
+    </p>
+  </footer>
 
 </body>
 </html>
