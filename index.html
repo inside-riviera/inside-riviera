@@ -7,7 +7,9 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inside Riviera - What's On Today</title>
+  <title>Inside Riviera | Events, Markets & Things to Do</title>
+  <meta name="description" content="Discover events, markets, concerts and things to do in Sanremo, Bordighera, Ventimiglia, Menton and the Italian and French Riviera.">
+  <link rel="canonical" href="https://www.insideriviera.net/">
 
   <!-- GetYourGuide -->
   <script
@@ -646,111 +648,178 @@
         padding: 12px;
       }
     }
+
+    /* 2026 DISCOVERY REDESIGN — PRESERVES ORIGINAL EVENT LOGIC */
+    :root { --navy:#07102d; }
+    body { background:#fff; }
+    .hero { min-height:540px; padding:0 24px 125px; background:linear-gradient(90deg,rgba(5,12,31,.75),rgba(5,12,31,.35) 60%,rgba(5,12,31,.26)),url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85") center/cover no-repeat; text-align:left; }
+    .topbar { max-width:1240px; margin:0 auto; padding:25px 0; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .top-brand { display:flex; align-items:center; gap:9px; color:#fff; text-decoration:none; font-size:1.05rem; letter-spacing:.06em; font-weight:900; white-space:nowrap; }
+    .top-brand b { color:var(--accent-green); }
+    .top-brand .logo-graphic { width:34px; height:34px; flex-shrink:0; }
+    .top-nav { display:flex; align-items:center; gap:4px; padding:5px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25); border-radius:999px; backdrop-filter:blur(12px); }
+    .top-nav a { color:#fff; text-decoration:none; font-size:.82rem; font-weight:700; padding:10px 15px; border-radius:999px; white-space:nowrap; }
+    .top-nav a:hover,.top-nav a.current { background:#fff; color:var(--navy); }
+    .top-submit { color:var(--navy); background:#fff; padding:12px 18px; border-radius:999px; font-size:.82rem; font-weight:800; text-decoration:none; white-space:nowrap; }
+    .hero-copy { max-width:1240px; margin:95px auto 0; }
+    .eyebrow,.section-kicker { font-size:.74rem; font-weight:900; letter-spacing:.19em; color:var(--accent-green); }
+    .hero-copy h1 { font-size:clamp(2.7rem,5.5vw,5.3rem); letter-spacing:-.05em; line-height:1.04; text-transform:none; margin:18px 0; max-width:850px; }
+    .hero-copy h1 span { color:var(--accent-green); }
+    .hero-copy p { margin:0; max-width:650px; font-size:1.05rem; line-height:1.65; }
+    .hero-cta { display:inline-block; margin-top:26px; background:var(--accent-pink); color:#fff; text-decoration:none; font-weight:800; padding:14px 23px; border-radius:999px; }
+    .main-content { max-width:1240px; margin:-57px auto 0; padding:0 24px; }
+    .discovery-bar { display:grid; grid-template-columns:1fr 1fr 1fr auto; align-items:stretch; gap:10px; background:#fff; border-radius:23px; box-shadow:0 16px 45px rgba(7,16,45,.15); padding:14px; margin-bottom:68px; }
+    .discovery-field { padding:10px 18px; border-right:1px solid var(--border); min-width:0; }
+    .discovery-field label { display:block; color:var(--navy); font-size:.82rem; font-weight:900; margin-bottom:7px; }
+    .discovery-field select { display:block; border:0; box-shadow:none; background:transparent; border-radius:0; width:100%; padding:2px 0; font-size:.85rem; font-weight:600; color:#536176; outline-offset:4px; }
+    .discovery-submit { align-self:center; border:0; background:var(--accent-pink); color:#fff; border-radius:14px; padding:20px 26px; font-weight:900; cursor:pointer; }
+    .featured-section,.calendar-section,.listing-section { scroll-margin-top:95px; margin-bottom:60px; }
+    .section-heading { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:15px; }
+    .section-heading h2 { color:var(--navy); font-size:clamp(1.65rem,3vw,2.25rem); font-weight:900; letter-spacing:-.035em; margin-top:8px; }
+    .section-heading h2 em { color:var(--accent-pink); font-style:normal; }
+    .section-heading a { color:var(--navy); font-size:.88rem; font-weight:800; text-decoration:none; white-space:nowrap; }
+    .featured-intro,.selected-date-label { color:var(--text-muted); margin:0 0 20px; font-size:.92rem; }
+    .featured-track { display:flex; overflow-x:auto; gap:20px; padding:4px 2px 20px; scroll-snap-type:x mandatory; scrollbar-color:var(--accent-green) #f1f5f9; }
+    .featured-card { flex:0 0 clamp(220px,25%,285px); min-width:0; scroll-snap-align:start; }
+    .featured-open { border:0; padding:0; text-align:left; background:transparent; width:100%; cursor:pointer; font:inherit; color:inherit; }
+    .featured-image { display:block; position:relative; height:225px; overflow:hidden; border-radius:20px; background:#e2e8f0; }
+    .featured-image img { width:100%; height:100%; object-fit:cover; transition:transform .25s; }
+    .featured-open:hover img { transform:scale(1.05); }
+    .featured-date { position:absolute; top:12px; left:12px; display:flex; flex-direction:column; background:#fff; color:var(--navy); border-radius:11px; padding:7px 11px; font-size:.72rem; font-weight:800; }
+    .featured-date strong { font-size:.98rem; }
+    .featured-info { display:flex; flex-direction:column; gap:8px; padding:13px 3px; }
+    .featured-info strong { font-size:1rem; line-height:1.35; }
+    .featured-info span { font-size:.8rem; color:var(--text-muted); }
+    .featured-status { background:#f8fafc; color:var(--text-muted); padding:35px; border-radius:16px; width:100%; }
+    .calendar-section { background:#f7f9fc; border-radius:26px; padding:32px; }
+    .calendar-layout { display:grid; grid-template-columns:minmax(0,480px) 1fr; gap:40px; align-items:center; }
+    .calendar-card { margin:0; width:100%; max-width:none; padding:26px; box-shadow:0 10px 30px rgba(7,16,45,.07); }
+    .cal-header h3 { font-size:1.05rem; font-weight:900; letter-spacing:.05em; }
+    .calendar-side h3 { font-size:clamp(1.5rem,2.7vw,2.2rem); line-height:1.2; margin:12px 0; }
+    .calendar-side p { color:var(--text-muted); line-height:1.65; margin-bottom:24px; }
+    .calendar-side label { font-weight:800; font-size:.83rem; display:block; margin-bottom:9px; }
+    .calendar-side .search-input { width:100%; max-width:390px; border-radius:12px; }
+    .browse-link { display:block; color:var(--accent-pink); font-weight:800; margin-top:20px; text-decoration:none; }
+    .category-navigation { scroll-margin-top:85px; position:relative; top:auto; }
+    .category-nav-inner { justify-content:flex-start; }
+    .riviera-intro { border:1px solid var(--border); }
+    .listing-section { margin-top:28px; }
+    .event-card { border:1px solid var(--border); box-shadow:0 6px 22px rgba(7,16,45,.06); }
+    .img-wrapper { height:190px; }
+    .submit-section { background:var(--navy); color:#fff; max-width:none; padding:45px 24px; margin-top:45px; }
+    .submit-section p { color:#d7deea; line-height:1.6; }
+    .submit-btn { border-radius:999px; }
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--accent-green); outline-offset:3px; }
+    @media(max-width:950px) { .topbar { flex-wrap:wrap; } .top-nav { order:3; width:100%; justify-content:center; overflow-x:auto; } .discovery-bar { grid-template-columns:repeat(2,minmax(0,1fr)); } .discovery-field:nth-child(2) { border-right:0; } .discovery-submit { width:100%; } .calendar-layout { gap:22px; } }
+    @media(max-width:700px) { .hero { min-height:495px; padding:0 16px 110px; } .topbar { gap:12px; padding:17px 0; } .top-brand { font-size:.82rem; } .top-brand .logo-graphic { width:28px; height:28px; } .top-submit { font-size:.72rem; padding:9px 12px; } .top-nav { justify-content:flex-start; } .top-nav a { font-size:.75rem; padding:8px 12px; } .hero-copy { margin:58px auto 0; } .hero-copy h1 { font-size:clamp(2.35rem,10vw,3.5rem); } .hero-copy p { font-size:.93rem; } .main-content { margin:-60px auto 0; padding:0 14px; } .discovery-bar { gap:5px; border-radius:18px; padding:10px; margin-bottom:45px; } .discovery-field { padding:9px; } .discovery-field label { font-size:.72rem; } .discovery-field select { font-size:.75rem; } .discovery-submit { padding:15px; } .section-heading { align-items:start; } .section-heading a { font-size:.75rem; white-space:normal; text-align:right; } .featured-card { flex-basis:75%; max-width:285px; } .featured-image { height:210px; } .calendar-section { padding:20px 14px; border-radius:20px; } .calendar-layout { grid-template-columns:1fr; } .calendar-card { padding:19px 12px; } .calendar-side { padding:8px; } .category-navigation { margin-left:0; margin-right:0; border-radius:14px; } .img-wrapper { height:100%; } }
+
   </style>
 </head>
 
 <body>
 
-  <div class="hero">
-    <div class="brand-container">
-
-      <svg
-        class="logo-graphic"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C7 2 4 5 4 9h16c0-4-3-7-8-7Z"/>
-        <path d="M11 9h2v11h-2z"/>
-        <path
-          d="M2 22c3-2 5 2 8 0s5 2 8 0 4 0 4 0"
-          stroke="#a3e635"
-          fill="none"
-          stroke-width="1.2"/>
-      </svg>
-
-      <h1>Inside Riviera</h1>
-      <div class="brand-tagline">
-        Events / Places / Lifestyle
-      </div>
+  <header class="hero" id="home">
+    <div class="topbar">
+      <a class="top-brand" href="#home" aria-label="Inside Riviera homepage">
+        <svg class="logo-graphic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C7 2 4 5 4 9h16c0-4-3-7-8-7Z"/><path d="M11 9h2v11h-2z"/><path d="M2 22c3-2 5 2 8 0s5 2 8 0 4 0 4 0" stroke="#a3e635" fill="none" stroke-width="1.2"/></svg>
+        <span>INSIDE <b>RIVIERA</b></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a class="current" href="#home">Home</a>
+        <a href="#upcoming">Events</a>
+        <a href="#categories">Categories</a>
+        <a href="#calendar">Calendar</a>
+        <a href="/about.html">About us</a>
+      </nav>
+      <a class="top-submit" href="#submit-event">+ Submit an event</a>
     </div>
-
-    <div class="hero-title-main">
-      What's on
+    <div class="hero-copy">
+      <div class="eyebrow">EVENTS · PLACES · LIFESTYLE</div>
+      <h1>Your Riviera, <span>what's on.</span></h1>
+      <p>Discover concerts, markets, festivals and local experiences from Sanremo and Bordighera to Menton and Monte Carlo.</p>
+      <a class="hero-cta" href="#upcoming">Explore upcoming events <span aria-hidden="true">↗</span></a>
     </div>
-
-    <span class="highlight" id="hero-date-text">
-      TODAY
-    </span>
-
-    <p>
-      Events, markets, and things to do across Sanremo,
-      Bordighera, Ventimiglia, Vallecrosia, Ospedaletti,
-      Vallebona, Menton, and Monte Carlo.
-    </p>
-  </div>
+  </header>
 
   <main class="main-content">
-
-    <!-- CALENDAR -->
-    <div class="calendar-card">
-      <div class="cal-header">
-        <button
-          class="nav-btn"
-          onclick="changeMonth(-1)"
-          aria-label="Previous month">&lt;</button>
-
-        <h2 id="calendar-month-title">
-          Loading...
-        </h2>
-
-        <button
-          class="nav-btn"
-          onclick="changeMonth(1)"
-          aria-label="Next month">&gt;</button>
+    <!-- FLOATING DISCOVERY BAR -->
+    <section class="discovery-bar" aria-label="Find events">
+      <div class="discovery-field">
+        <label for="quick-date">📅 When</label>
+        <select id="quick-date" aria-label="Choose date" onchange="applyQuickDate()">
+          <option value="today">Today</option>
+          <option value="tomorrow">Tomorrow</option>
+          <option value="weekend">This weekend</option>
+          <option value="custom">Selected calendar date</option>
+        </select>
       </div>
-
-      <div class="weekdays">
-        <div>MON</div>
-        <div>TUE</div>
-        <div>WED</div>
-        <div>THU</div>
-        <div>FRI</div>
-        <div>SAT</div>
-        <div>SUN</div>
+      <div class="discovery-field">
+        <label for="city-filter">📍 Location</label>
+        <select class="city-select" id="city-filter" onchange="updateAllListings()">
+          <option value="ALL">All Riviera towns</option>
+          <option value="Sanremo">Sanremo</option>
+          <option value="Bordighera">Bordighera</option>
+          <option value="Ventimiglia">Ventimiglia</option>
+          <option value="Vallecrosia">Vallecrosia</option>
+          <option value="Ospedaletti">Ospedaletti</option>
+          <option value="Vallebona">Vallebona</option>
+          <option value="Menton">Menton</option>
+          <option value="Monte Carlo">Monte Carlo</option>
+        </select>
       </div>
+      <div class="discovery-field">
+        <label for="category-filter">◈ Category</label>
+        <select id="category-filter" onchange="updateAllListings()">
+          <option value="ALL">All categories</option>
+          <option value="Market">Markets</option>
+          <option value="Public Event">Public events</option>
+          <option value="Concert">Concerts</option>
+          <option value="Exhibition">Exhibitions</option>
+          <option value="Live Music">Live music</option>
+          <option value="Sport">Sport</option>
+          <option value="Cinema">Cinema</option>
+          <option value="Private Tour">Private tours</option>
+        </select>
+      </div>
+      <button class="discovery-submit" type="button" onclick="searchAndScroll()">Search ↗</button>
+    </section>
 
-      <div class="days-grid" id="days-grid"></div>
-    </div>
+    <!-- UPCOMING EVENTS -->
+    <section class="featured-section" id="upcoming" aria-labelledby="upcoming-title">
+      <div class="section-heading">
+        <div><span class="section-kicker">DON'T MISS</span><h2 id="upcoming-title">Coming up <em>on the Riviera</em></h2></div>
+        <a href="#calendar">Explore the calendar →</a>
+      </div>
+      <p class="featured-intro">A selection of upcoming events across the Italian and French Riviera.</p>
+      <div class="featured-track" id="featured-track" aria-live="polite"><p class="featured-status">Loading upcoming events…</p></div>
+    </section>
 
-    <!-- SEARCH AND CITY FILTER -->
-    <div class="filter-wrapper">
-      <input
-        type="text"
-        class="search-input"
-        id="search-input"
-        placeholder="🔍 Search specific event..."
-        oninput="renderEvents()">
-
-      <select
-        class="city-select"
-        id="city-filter"
-        onchange="renderEvents()">
-
-        <option value="ALL">
-          All Cities (Italian & French Riviera)
-        </option>
-        <option value="Sanremo">Sanremo</option>
-        <option value="Bordighera">Bordighera</option>
-        <option value="Ventimiglia">Ventimiglia</option>
-        <option value="Vallecrosia">Vallecrosia</option>
-        <option value="Ospedaletti">Ospedaletti</option>
-        <option value="Vallebona">Vallebona</option>
-        <option value="Menton">Menton</option>
-        <option value="Monte Carlo">Monte Carlo</option>
-      </select>
-    </div>
+    <!-- CALENDAR AND SEARCH -->
+    <section class="calendar-section" id="calendar" aria-labelledby="calendar-heading">
+      <div class="section-heading"><div><span class="section-kicker">PLAN YOUR VISIT</span><h2 id="calendar-heading">Find your next <em>Riviera moment</em></h2></div></div>
+      <div class="calendar-layout">
+        <div class="calendar-card">
+          <div class="cal-header">
+            <button class="nav-btn" onclick="changeMonth(-1)" aria-label="Previous month">&lt;</button>
+            <h3 id="calendar-month-title">Loading...</h3>
+            <button class="nav-btn" onclick="changeMonth(1)" aria-label="Next month">&gt;</button>
+          </div>
+          <div class="weekdays"><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div></div>
+          <div class="days-grid" id="days-grid"></div>
+        </div>
+        <div class="calendar-side">
+          <span class="section-kicker">EXPLORE MORE</span>
+          <h3>Every day brings something new.</h3>
+          <p>Pick a date to see what's happening. Search for a specific event or browse by town and category.</p>
+          <label for="search-input">Search events</label>
+          <input type="search" class="search-input" id="search-input" placeholder="Search concerts, markets, places…" oninput="updateAllListings()">
+          <a href="#event-listings" class="browse-link">See events for selected date →</a>
+        </div>
+      </div>
+    </section>
 
     <!-- CATEGORY BUTTONS -->
-    <div class="category-navigation">
+    <div class="category-navigation" id="categories">
       <div
         class="category-nav-inner"
         id="category-nav-inner">
@@ -774,10 +843,14 @@
     </section>
 
     <!-- EVENTS -->
-    <div id="events-container"></div>
+    <section id="event-listings" class="listing-section" aria-labelledby="listings-title">
+      <div class="section-heading"><div><span class="section-kicker">DISCOVER</span><h2 id="listings-title">Events for <em>your selected date</em></h2></div></div>
+      <p id="selected-date-label" class="selected-date-label"></p>
+      <div id="events-container"></div>
+    </section>
 
     <!-- SUBMIT EVENT -->
-    <div class="submit-section">
+    <div class="submit-section" id="submit-event">
       <h2>Add Your Event</h2>
       <p>
         Got an event happening in the Riviera?
@@ -1154,6 +1227,7 @@
 
         cell.onclick = function () {
           selectedDay = day;
+          document.getElementById("quick-date").value = "custom";
           buildCalendar();
           renderEvents();
         };
@@ -1201,6 +1275,7 @@
       }
 
       selectedDay = 1;
+      document.getElementById("quick-date").value = "custom";
 
       buildCalendar();
       renderEvents();
@@ -1352,7 +1427,7 @@
         );
 
         buildCalendar();
-        renderEvents();
+        updateAllListings();
 
       } catch (error) {
         console.error(
@@ -1364,6 +1439,8 @@
           "events-container"
         );
 
+        const featured = document.getElementById("featured-track");
+        if (featured) featured.innerHTML = '<p class="featured-status">Upcoming events are temporarily unavailable. Please try again later.</p>';
         container.innerHTML = `
           <div class="no-events">
             <h3>Events temporarily unavailable</h3>
@@ -1425,6 +1502,10 @@
         "search-input"
       ).value.toLowerCase().trim();
 
+      const categoryFilter = document.getElementById("category-filter").value;
+      const dateLabel = document.getElementById("selected-date-label");
+      if (dateLabel) dateLabel.textContent = new Date(selectedYear, selectedMonth, selectedDay).toLocaleDateString("en-GB", {weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
       container.innerHTML = "";
 
       const selectedDate = new Date(
@@ -1457,6 +1538,7 @@
         return (
           matchesCity &&
           matchesSearch &&
+          (categoryFilter === "ALL" || event.categories.some(value => categoryKey(value) === categoryKey(categoryFilter))) &&
           isEventActiveOnDate(event, selectedDate)
         );
       });
@@ -1485,7 +1567,7 @@
         const isPrivateTour =
           categoryKey(category) === "private tour";
 
-        if (!events.length && !isPrivateTour) {
+        if (!events.length && (!isPrivateTour || categoryFilter !== "ALL" && categoryFilter !== "Private Tour")) {
           return;
         }
 
@@ -1637,8 +1719,13 @@
             "cat-" + categoryKey(category)
           );
 
-          if (section) {
-            section.scrollIntoView({
+          if (!section) {
+            document.getElementById("category-filter").value = category;
+            renderEvents();
+          }
+          const target = document.getElementById("cat-" + categoryKey(category));
+          if (target) {
+            target.scrollIntoView({
               behavior: "smooth",
               block: "start"
             });
@@ -1646,6 +1733,85 @@
         };
 
         nav.appendChild(button);
+      });
+    }
+
+    /* DISCOVERY AND FEATURED EVENTS */
+
+    function updateAllListings() {
+      renderEvents();
+      renderFeaturedEvents();
+    }
+
+    function applyQuickDate() {
+      const choice = document.getElementById("quick-date").value;
+      if (choice === "custom") return;
+      const date = new Date();
+      date.setHours(12, 0, 0, 0);
+      if (choice === "tomorrow") date.setDate(date.getDate() + 1);
+      if (choice === "weekend") {
+        const daysToSaturday = (6 - date.getDay() + 7) % 7;
+        date.setDate(date.getDate() + daysToSaturday);
+      }
+      selectedYear = date.getFullYear();
+      selectedMonth = date.getMonth();
+      selectedDay = date.getDate();
+      buildCalendar();
+      updateAllListings();
+    }
+
+    function searchAndScroll() {
+      applyQuickDate();
+      document.getElementById("event-listings").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+
+    function renderFeaturedEvents() {
+      const track = document.getElementById("featured-track");
+      if (!track) return;
+      const city = document.getElementById("city-filter").value;
+      const category = document.getElementById("category-filter").value;
+      const query = document.getElementById("search-input").value.toLowerCase().trim();
+      const start = new Date();
+      start.setHours(0, 0, 0, 0);
+      const found = [];
+      const seen = new Set();
+      for (let offset = 0; offset < 21 && found.length < 8; offset++) {
+        const date = new Date(start.getFullYear(), start.getMonth(), start.getDate() + offset);
+        for (const event of allEvents) {
+          if (found.length >= 8) break;
+          if (!isEventActiveOnDate(event, date)) continue;
+          if (city !== "ALL" && String(event.city || "").toLowerCase() !== city.toLowerCase()) continue;
+          if (category !== "ALL" && !event.categories.some(c => categoryKey(c) === categoryKey(category))) continue;
+          if (query && ![event.title,event.city,event.description,event.location].some(v => String(v || "").toLowerCase().includes(query))) continue;
+          const key = [event.title,event.city,event.year,event.month,event.date].join("|");
+          if (seen.has(key)) continue;
+          seen.add(key);
+          found.push({event,date});
+        }
+      }
+      if (!found.length) {
+        track.innerHTML = '<p class="featured-status">No upcoming events match these filters in the next three weeks. Try another town or category.</p>';
+        return;
+      }
+      track.innerHTML = found.map(({event,date}) => {
+        const dateText = date.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+        const dayText = date.toLocaleDateString("en-GB",{weekday:"short"});
+        const dateCode = [date.getFullYear(),date.getMonth(),date.getDate()].join("-");
+        return `<article class="featured-card">
+          <button type="button" class="featured-open" data-date="${dateCode}" aria-label="View ${escapeHtml(event.title)} on ${escapeHtml(dateText)}">
+            <span class="featured-image"><img src="${escapeHtml(event.img)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImage}'"><span class="featured-date">${escapeHtml(dayText)}<strong>${escapeHtml(dateText)}</strong></span></span>
+            <span class="featured-info"><strong>${escapeHtml(event.title || 'Riviera event')}</strong><span>📍 ${escapeHtml(event.city || 'Riviera')} ${event.time ? ' · '+escapeHtml(event.time) : ''}</span></span>
+          </button>
+        </article>`;
+      }).join("");
+      track.querySelectorAll(".featured-open").forEach(button => {
+        button.addEventListener("click", () => {
+          const [y,m,d] = button.dataset.date.split("-").map(Number);
+          selectedYear = y; selectedMonth = m; selectedDay = d;
+          document.getElementById("quick-date").value = "custom";
+          buildCalendar(); renderEvents();
+          document.getElementById("event-listings").scrollIntoView({behavior:"smooth",block:"start"});
+        });
       });
     }
 
