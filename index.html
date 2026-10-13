@@ -841,10 +841,10 @@
     <!-- UPCOMING EVENTS -->
     <section class="featured-section" id="upcoming" aria-labelledby="upcoming-title">
       <div class="section-heading">
-        <div><span class="section-kicker">DON'T MISS</span><h2 id="upcoming-title">Coming up <em>on the Riviera</em></h2></div>
+        <div><span class="section-kicker">DON'T MISS</span><h2 id="upcoming-title">Highlights <em>for this month</em></h2></div>
         <a href="#calendar">Explore the calendar →</a>
       </div>
-      <p class="featured-intro">A selection of upcoming events across the Italian and French Riviera.</p>
+      <p class="featured-intro">Priority events happening this month across the French and Italian Riviera.</p>
       <div class="featured-track" id="featured-track" aria-live="polite"><p class="featured-status">Loading upcoming events…</p></div>
     </section>
 
@@ -1437,6 +1437,8 @@
 
             categories: categories,
 
+            priority: String(getField(clean, ["priority"] ) ?? "").trim(),
+
             frequency: getField(clean, [
               "frequency", "freq", "frequenza"
             ]),
@@ -1803,12 +1805,15 @@
       const query = document.getElementById("search-input").value.toLowerCase().trim();
       const start = new Date();
       start.setHours(0, 0, 0, 0);
+      const endOfMonth = new Date(start.getFullYear(), start.getMonth() + 1, 1);
       const found = [];
       const seen = new Set();
-      for (let offset = 0; offset < 21 && found.length < 8; offset++) {
+      for (let offset = 0; found.length < 8; offset++) {
         const date = new Date(start.getFullYear(), start.getMonth(), start.getDate() + offset);
+        if (date >= endOfMonth) break;
         for (const event of allEvents) {
           if (found.length >= 8) break;
+          if (event.priority !== "1") continue;
           if (!isEventActiveOnDate(event, date)) continue;
           if (city !== "ALL" && String(event.city || "").toLowerCase() !== city.toLowerCase()) continue;
           if (category !== "ALL" && !event.categories.some(c => categoryKey(c) === categoryKey(category))) continue;
@@ -1820,7 +1825,7 @@
         }
       }
       if (!found.length) {
-        track.innerHTML = '<p class="featured-status">No upcoming events match these filters in the next three weeks. Try another town or category.</p>';
+        track.innerHTML = '<p class="featured-status">No priority 1 events are scheduled for the rest of this month. Add priority 1 to an upcoming event in your sheet to feature it.</p>';
         return;
       }
       track.innerHTML = found.map(({event,date}) => {
