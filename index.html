@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1783038837894885"
     crossorigin="anonymous"></script>
+
   
 <link rel="icon" type="image/png" href="/favicon.png">
 
@@ -717,6 +717,39 @@
     @media(max-width:950px) { .topbar { flex-wrap:wrap; } .top-nav { order:3; width:100%; justify-content:center; overflow-x:auto; } .discovery-bar { grid-template-columns:repeat(2,minmax(0,1fr)); } .discovery-field:nth-child(2) { border-right:0; } .discovery-submit { width:100%; } .calendar-layout { gap:22px; } }
     @media(max-width:700px) { .hero { min-height:495px; padding:0 16px 110px; } .topbar { gap:12px; padding:17px 0; } .top-brand { font-size:.82rem; } .top-brand .logo-graphic { width:28px; height:28px; } .top-submit { font-size:.72rem; padding:9px 12px; } .top-nav { justify-content:flex-start; } .top-nav a { font-size:.75rem; padding:8px 12px; } .hero-copy { margin:58px auto 0; } .hero-copy h1 { font-size:clamp(2.35rem,10vw,3.5rem); } .hero-copy p { font-size:.93rem; } .main-content { margin:-60px auto 0; padding:0 14px; } .discovery-bar { gap:5px; border-radius:18px; padding:10px; margin-bottom:45px; } .discovery-field { padding:9px; } .discovery-field label { font-size:.72rem; } .discovery-field select { font-size:.75rem; } .discovery-submit { padding:15px; } .section-heading { align-items:start; } .section-heading a { font-size:.75rem; white-space:normal; text-align:right; } .featured-card { flex-basis:75%; max-width:285px; } .featured-image { height:210px; } .calendar-section { padding:20px 14px; border-radius:20px; } .calendar-layout { grid-template-columns:1fr; } .calendar-card { padding:19px 12px; } .calendar-side { padding:8px; } .category-navigation { margin-left:0; margin-right:0; border-radius:14px; } .img-wrapper { height:100%; } }
 
+    /* Calendar replaces the floating discovery search bar */
+    .calendar-featured {
+      position:relative;
+      margin-top:0;
+      margin-bottom:64px;
+      padding:30px;
+      background:#f7f9fc;
+      border:1px solid #e9edf4;
+      box-shadow:0 18px 45px rgba(7,16,45,.12);
+    }
+    .calendar-featured .calendar-layout { align-items:center; }
+    .calendar-extra-filters {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+    .calendar-extra-filters .discovery-field {
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px;
+    }
+    .calendar-extra-filters .discovery-field label { display:block; font-weight:800; font-size:.8rem; margin-bottom:8px; }
+    .calendar-extra-filters .city-select,
+    .calendar-extra-filters select {
+      width:100%; background:transparent; border:0; padding:0;
+      box-shadow:none; font-size:.85rem; color:#536176;
+    }
+    @media(max-width:700px) {
+      .calendar-featured { padding:20px 14px; margin-bottom:40px; }
+      .calendar-extra-filters { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 
@@ -746,60 +779,16 @@
   </header>
 
   <main class="main-content">
-    <!-- FLOATING DISCOVERY BAR -->
-    <section class="discovery-bar" aria-label="Find events">
-      <div class="discovery-field">
-        <label for="quick-date">📅 When</label>
-        <select id="quick-date" aria-label="Choose date" onchange="applyQuickDate()">
-          <option value="today">Today</option>
-          <option value="tomorrow">Tomorrow</option>
-          <option value="weekend">This weekend</option>
-          <option value="custom">Selected calendar date</option>
-        </select>
-      </div>
-      <div class="discovery-field">
-        <label for="city-filter">📍 Location</label>
-        <select class="city-select" id="city-filter" onchange="updateAllListings()">
-          <option value="ALL">All Riviera towns</option>
-          <option value="Sanremo">Sanremo</option>
-          <option value="Bordighera">Bordighera</option>
-          <option value="Ventimiglia">Ventimiglia</option>
-          <option value="Vallecrosia">Vallecrosia</option>
-          <option value="Ospedaletti">Ospedaletti</option>
-          <option value="Vallebona">Vallebona</option>
-          <option value="Menton">Menton</option>
-          <option value="Monte Carlo">Monte Carlo</option>
-        </select>
-      </div>
-      <div class="discovery-field">
-        <label for="category-filter">◈ Category</label>
-        <select id="category-filter" onchange="updateAllListings()">
-          <option value="ALL">All categories</option>
-          <option value="Market">Markets</option>
-          <option value="Public Event">Public events</option>
-          <option value="Concert">Concerts</option>
-          <option value="Exhibition">Exhibitions</option>
-          <option value="Live Music">Live music</option>
-          <option value="Sport">Sport</option>
-          <option value="Cinema">Cinema</option>
-          <option value="Private Tour">Private tours</option>
-        </select>
-      </div>
-      <button class="discovery-submit" type="button" onclick="searchAndScroll()">Search ↗</button>
-    </section>
-
-    <!-- UPCOMING EVENTS -->
-    <section class="featured-section" id="upcoming" aria-labelledby="upcoming-title">
-      <div class="section-heading">
-        <div><span class="section-kicker">DON'T MISS</span><h2 id="upcoming-title">Coming up <em>on the Riviera</em></h2></div>
-        <a href="#calendar">Explore the calendar →</a>
-      </div>
-      <p class="featured-intro">A selection of upcoming events across the Italian and French Riviera.</p>
-      <div class="featured-track" id="featured-track" aria-live="polite"><p class="featured-status">Loading upcoming events…</p></div>
-    </section>
+    <!-- Retained for the date-filter logic -->
+    <select id="quick-date" aria-label="Date filter" hidden>
+      <option value="today">Today</option>
+      <option value="tomorrow">Tomorrow</option>
+      <option value="weekend">This weekend</option>
+      <option value="custom">Selected calendar date</option>
+    </select>
 
     <!-- CALENDAR AND SEARCH -->
-    <section class="calendar-section" id="calendar" aria-labelledby="calendar-heading">
+    <section class="calendar-section calendar-featured" id="calendar" aria-labelledby="calendar-heading">
       <div class="section-heading"><div><span class="section-kicker">PLAN YOUR VISIT</span><h2 id="calendar-heading">Find your next <em>Riviera moment</em></h2></div></div>
       <div class="calendar-layout">
         <div class="calendar-card">
@@ -817,9 +806,46 @@
           <p>Pick a date to see what's happening. Search for a specific event or browse by town and category.</p>
           <label for="search-input">Search events</label>
           <input type="search" class="search-input" id="search-input" placeholder="Search concerts, markets, places…" oninput="updateAllListings()">
+          <div class="calendar-extra-filters">      <div class="discovery-field">
+        <label for="city-filter">📍 Location</label>
+        <select class="city-select" id="city-filter" onchange="updateAllListings()">
+          <option value="ALL">All Riviera towns</option>
+          <option value="Sanremo">Sanremo</option>
+          <option value="Bordighera">Bordighera</option>
+          <option value="Ventimiglia">Ventimiglia</option>
+          <option value="Vallecrosia">Vallecrosia</option>
+          <option value="Ospedaletti">Ospedaletti</option>
+          <option value="Vallebona">Vallebona</option>
+          <option value="Menton">Menton</option>
+          <option value="Monte Carlo">Monte Carlo</option>
+        </select>
+      </div>      <div class="discovery-field">
+        <label for="category-filter">◈ Category</label>
+        <select id="category-filter" onchange="updateAllListings()">
+          <option value="ALL">All categories</option>
+          <option value="Market">Markets</option>
+          <option value="Public Event">Public events</option>
+          <option value="Concert">Concerts</option>
+          <option value="Exhibition">Exhibitions</option>
+          <option value="Live Music">Live music</option>
+          <option value="Sport">Sport</option>
+          <option value="Cinema">Cinema</option>
+          <option value="Private Tour">Private tours</option>
+        </select>
+      </div></div>
           <a href="#event-listings" class="browse-link">See events for selected date →</a>
         </div>
       </div>
+    </section>
+
+    <!-- UPCOMING EVENTS -->
+    <section class="featured-section" id="upcoming" aria-labelledby="upcoming-title">
+      <div class="section-heading">
+        <div><span class="section-kicker">DON'T MISS</span><h2 id="upcoming-title">Coming up <em>on the Riviera</em></h2></div>
+        <a href="#calendar">Explore the calendar →</a>
+      </div>
+      <p class="featured-intro">A selection of upcoming events across the Italian and French Riviera.</p>
+      <div class="featured-track" id="featured-track" aria-live="polite"><p class="featured-status">Loading upcoming events…</p></div>
     </section>
 
     <!-- EVENTS -->
