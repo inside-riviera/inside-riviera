@@ -322,13 +322,7 @@
       color: #e11d48;
     }
 
-    .nav-cinema {
-      background: #dbeafe;
-      color: #1d4ed8;
-      border-color: #93c5fd;
-    }
-
-    .nav-private-tour {
+.nav-private-tour {
       background: #e0f2fe;
       color: #0369a1;
     }
@@ -452,12 +446,7 @@
       color: var(--accent-pink);
     }
 
-    .tag-cinema {
-      background: #1d4ed8;
-      color: white;
-    }
-
-    .tag-private-tour {
+.tag-private-tour {
       background: var(--soft-green);
       color: var(--text-dark);
     }
@@ -829,7 +818,6 @@
           <option value="Exhibition">Exhibitions</option>
           <option value="Live Music">Live music</option>
           <option value="Sport">Sport</option>
-          <option value="Cinema">Cinema</option>
           <option value="Private Tour">Private tours</option>
         </select>
       </div></div>
@@ -868,7 +856,7 @@
       <h2>Discover What's Happening on the Riviera</h2>
       <p>
         Inside Riviera helps visitors and residents discover
-        local events, markets, concerts, exhibitions, cinema
+        local events, markets, concerts and exhibitions
         and activities across the Italian and French Riviera.
       </p>
       <p>
@@ -923,7 +911,6 @@
       "Exhibition",
       "Live Music",
       "Sport",
-      "Cinema",
       "Private Tour"
     ];
 
@@ -934,7 +921,6 @@
       "exhibition": "tag-exhibition",
       "live music": "tag-live-music",
       "sport": "tag-sport",
-      "cinema": "tag-cinema",
       "private tour": "tag-private-tour"
     };
 
@@ -945,7 +931,6 @@
       "exhibition": "nav-exhibition",
       "live music": "nav-live-music",
       "sport": "nav-sport",
-      "cinema": "nav-cinema",
       "private tour": "nav-private-tour"
     };
 
@@ -956,7 +941,6 @@
       "exhibition": "#ff007a",
       "live music": "#a3e635",
       "sport": "#e11d48",
-      "cinema": "#1d4ed8",
       "private tour": "#0369a1"
     };
 
@@ -1435,7 +1419,7 @@
 
             img: image || fallbackImage,
 
-            categories: categories,
+            categories: categories.filter(category => categoryKey(category) !== "cinema"),
 
             priority: String(getField(clean, ["priority"] ) ?? "").trim(),
 
@@ -1590,11 +1574,13 @@
       }
 
       categoryOrder.forEach(category => {
-        const events = filteredEvents.filter(event =>
+        const categoryEvents = filteredEvents.filter(event =>
           event.categories.some(value =>
             categoryKey(value) === categoryKey(category)
           )
         );
+
+        const events = categoryEvents;
 
         const isPrivateTour =
           categoryKey(category) === "private tour";
@@ -1659,11 +1645,7 @@
               : "";
 
             const timeHtml = event.time
-              ? `
-                <div class="meta-row">
-                  🕒 ${escapeHtml(event.time)}
-                </div>
-              `
+              ? `<div class="meta-row">🕒 ${escapeHtml(event.time)}</div>`
               : "";
 
             const linkHtml = event.link
