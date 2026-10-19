@@ -770,9 +770,33 @@
     .hero-now-loading { color:#e2e8f0; font-size:.83rem; grid-column:1/-1; }
     .hero[data-season="spring"] { background-image:linear-gradient(90deg,rgba(5,12,31,.78),rgba(5,12,31,.35) 70%),url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=2000&q=85"); }
     .hero[data-season="summer"] { background-image:linear-gradient(90deg,rgba(5,12,31,.76),rgba(5,12,31,.27) 70%),url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85"); }
-    .hero[data-season="autumn"] { background-image:linear-gradient(90deg,rgba(5,12,31,.82),rgba(5,12,31,.38) 70%),url("https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2000&q=85"); }
+    .hero[data-season="autumn"] { background-image:linear-gradient(90deg,rgba(5,12,31,.55),rgba(5,12,31,.06) 75%),url("https://images.unsplash.com/photo-1657478315749-4152ab02e639?auto=format&fit=crop&w=2200&q=85"); }
     .hero[data-season="winter"] { background-image:linear-gradient(90deg,rgba(5,12,31,.83),rgba(5,12,31,.40) 70%),url("https://images.unsplash.com/photo-1483664852095-d6cc6870702d?auto=format&fit=crop&w=2000&q=85"); }
     @media(max-width:700px) { .hero { min-height:0; padding-bottom:105px; } .hero-copy { margin-top:40px; } .hero-copy h1 { font-size:clamp(2.15rem,9vw,3.5rem); white-space:normal; } .hero-copy h1 span { white-space:normal; } .hero-now { margin-top:25px; padding:13px; } .hero-now-events { grid-template-columns:1fr; } .hero-now-item:nth-child(n+3) { display:none; } .season-edition { font-size:.62rem; letter-spacing:.07em; } }
+
+    /* BRIGHT RIVIERA EDITION: authentic Menton photo and rotating photo cards */
+    .hero { min-height:720px; background-position:center center; }
+    .hero-copy { max-width:1240px; }
+    .hero-copy h1 { font-size:clamp(3.2rem,5.2vw,5.5rem); max-width:740px; white-space:normal; line-height:1.02; text-shadow:0 2px 14px rgba(7,16,45,.2); }
+    .hero-copy h1 span { color:var(--accent-pink); white-space:normal; }
+    .hero-now { max-width:1150px; background:transparent; border:0; padding:0; margin-top:34px; backdrop-filter:none; }
+    .hero-now-top { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+    .hero-now-label { margin:0; color:#fff; text-shadow:0 1px 5px #07102d; }
+    .hero-now-events { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; }
+    .hero-now-item { padding:0; overflow:hidden; border:1px solid rgba(255,255,255,.65); background:#fff; color:var(--navy); border-radius:16px; box-shadow:0 12px 28px rgba(7,16,45,.20); }
+    .hero-now-item:hover { background:#fff; transform:translateY(-3px); }
+    .hero-event-photo { position:relative; display:block; height:145px; background:#e2e8f0; }
+    .hero-event-photo img { display:block; width:100%; height:100%; object-fit:cover; }
+    .hero-event-date { position:absolute; top:10px; left:10px; padding:8px 10px; border-radius:10px; background:#fff; font-weight:900; color:var(--navy); font-size:.78rem; }
+    .hero-event-info { display:block; padding:13px 14px 15px; }
+    .hero-now-item strong { margin:0 0 8px; color:var(--navy); font-size:.94rem; }
+    .hero-now-item small { color:#58677f; font-size:.78rem; }
+    .hero-carousel-controls { display:flex; align-items:center; gap:10px; color:#fff; font-size:.8rem; font-weight:800; }
+    .hero-carousel-controls button { width:36px; height:36px; border:0; border-radius:50%; background:#fff; color:var(--navy); font-size:1.55rem; cursor:pointer; }
+    .hero-carousel-controls button:disabled { opacity:.45; cursor:default; }
+    .top-submit { background:var(--accent-pink); color:#fff; }
+    @media(min-width:1000px) { .hero-copy { margin-top:55px; } .hero-now { max-width:870px; margin-left:auto; } }
+    @media(max-width:700px) { .hero { min-height:0; } .hero-copy h1 { font-size:clamp(2.5rem,10vw,3.8rem); } .hero-now-events { grid-template-columns:1fr 1fr; gap:9px; } .hero-now-item:nth-child(n+3) { display:none; } .hero-event-photo { height:110px; } .hero-event-info { padding:10px; } .hero-now-item strong { font-size:.8rem; } .hero-now-item small { font-size:.68rem; } }
   </style>
 </head>
 
@@ -808,7 +832,7 @@
       <h1 id="season-headline">Your Riviera, <span>what's on.</span></h1>
       <p id="season-description">Discover concerts, markets, festivals and local experiences from Sanremo and Bordighera to Menton and Monte Carlo.</p>
       <div class="hero-actions"><a class="hero-cta" href="#upcoming">Explore this month's highlights <span aria-hidden="true">↗</span></a><a class="hero-calendar-link" href="#calendar">Browse the calendar →</a></div>
-      <div class="hero-now" aria-label="Featured upcoming events"><div class="hero-now-label"><span class="now-pulse"></span> WHAT'S COMING UP <span id="hero-now-month"></span></div><div class="hero-now-events" id="hero-now-events"><span class="hero-now-loading">Checking this month's highlights…</span></div></div>
+      <div class="hero-now" aria-label="Featured upcoming events"><div class="hero-now-top"><div class="hero-now-label"><span class="now-pulse"></span> WHAT'S COMING UP <span id="hero-now-month"></span></div><div class="hero-carousel-controls"><button type="button" id="hero-carousel-prev" aria-label="Previous events" onclick="moveHeroCarousel(-1)">‹</button><span id="hero-carousel-status" aria-live="polite"></span><button type="button" id="hero-carousel-next" aria-label="Next events" onclick="moveHeroCarousel(1)">›</button></div></div><div class="hero-now-events" id="hero-now-events"><span class="hero-now-loading">Checking this month's highlights…</span></div></div>
     </div>
   </header>
 
@@ -1902,31 +1926,70 @@
       document.getElementById('hero-now-month').textContent = '· ' + now.toLocaleDateString('en-GB',{month:'long'}).toUpperCase();
     }
 
-    /* Show real priority=1 highlights, never invented event names. */
+    /* Rotating editorial cards from actual priority events in SheetDB. */
+    let heroCarouselItems = [];
+    let heroCarouselIndex = 0;
+    let heroCarouselTimer = null;
+
+    function openHeroEvent(index) {
+      const item = heroCarouselItems[index];
+      if (!item) return;
+      selectedYear=item.date.getFullYear(); selectedMonth=item.date.getMonth(); selectedDay=item.date.getDate();
+      document.getElementById('quick-date').value='custom';
+      buildCalendar(); renderEvents();
+      document.getElementById('event-listings').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    function showHeroCarousel() {
+      const el=document.getElementById('hero-now-events');
+      if (!el || !heroCarouselItems.length) return;
+      const visible=Math.min(3,heroCarouselItems.length);
+      el.innerHTML=Array.from({length:visible},(_,offset)=>{
+        const index=(heroCarouselIndex+offset)%heroCarouselItems.length;
+        const {event,date}=heroCarouselItems[index];
+        return `<button type="button" class="hero-now-item" data-index="${index}" aria-label="See ${escapeHtml(event.title)} on ${escapeHtml(date.toLocaleDateString('en-GB'))}">
+          <span class="hero-event-photo"><img src="${escapeHtml(event.img||fallbackImage)}" alt="" loading="lazy"><span class="hero-event-date">${escapeHtml(date.toLocaleDateString('en-GB',{day:'numeric',month:'short'}))}</span></span>
+          <span class="hero-event-info"><strong>${escapeHtml(event.title||'Riviera event')}</strong><small>📍 ${escapeHtml(event.city||'Riviera')} · ${escapeHtml(event.categories[0]||'Event')}</small></span>
+        </button>`;
+      }).join('');
+      el.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>openHeroEvent(Number(button.dataset.index))));
+      const prev=document.getElementById('hero-carousel-prev');
+      const next=document.getElementById('hero-carousel-next');
+      if(prev)prev.disabled=heroCarouselItems.length<=visible;
+      if(next)next.disabled=heroCarouselItems.length<=visible;
+      const status=document.getElementById('hero-carousel-status');
+      if(status)status.textContent=`${heroCarouselIndex+1} / ${heroCarouselItems.length}`;
+    }
+
+    function moveHeroCarousel(step) {
+      if (heroCarouselItems.length<=3) return;
+      heroCarouselIndex=(heroCarouselIndex+step+heroCarouselItems.length)%heroCarouselItems.length;
+      showHeroCarousel();
+    }
+
     function renderHeroHighlights() {
-      const el = document.getElementById('hero-now-events');
-      if (!el) return;
-      const today = new Date(); today.setHours(0,0,0,0);
-      const monthEnd = new Date(today.getFullYear(),today.getMonth()+1,1);
-      const picks = []; const seen = new Set();
-      for (let d=new Date(today);d<monthEnd && picks.length<3;d.setDate(d.getDate()+1)) {
-        for (const event of allEvents) {
-          if (picks.length>=3) break;
-          if (event.priority!=='1' || !event.categories.length || !isEventActiveOnDate(event,d)) continue;
-          const key=[event.title,event.city,event.year,event.month,event.date].join('|');
-          if (seen.has(key)) continue;
-          seen.add(key); picks.push({event,date:new Date(d)});
+      const el=document.getElementById('hero-now-events');
+      if(!el)return;
+      const today=new Date();today.setHours(0,0,0,0);
+      const monthEnd=new Date(today.getFullYear(),today.getMonth()+1,1);
+      const picks=[];const seen=new Set();
+      for(let d=new Date(today);d<monthEnd;d.setDate(d.getDate()+1)) {
+        for(const event of allEvents) {
+          if(event.priority!=='1'||!event.categories.length||!isEventActiveOnDate(event,d))continue;
+          const key=[event.title,event.city,event.location].join('|').toLowerCase();
+          if(seen.has(key))continue;
+          seen.add(key);picks.push({event,date:new Date(d)});
         }
       }
-      if (!picks.length) { el.innerHTML='<span class="hero-now-loading">New highlights coming soon. Browse the calendar for more events →</span>'; return; }
-      el.innerHTML=picks.map(({event,date})=>`<button type="button" class="hero-now-item" data-date="${date.getFullYear()}-${date.getMonth()}-${date.getDate()}"><small>${escapeHtml(date.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}))} · ${escapeHtml(event.city||'Riviera')}</small><strong>${escapeHtml(event.title||'Riviera event')} ↗</strong></button>`).join('');
-      el.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
-        const [y,m,d]=button.dataset.date.split('-').map(Number);
-        selectedYear=y;selectedMonth=m;selectedDay=d;
-        document.getElementById('quick-date').value='custom';
-        buildCalendar();renderEvents();
-        document.getElementById('event-listings').scrollIntoView({behavior:'smooth',block:'start'});
-      }));
+      const halloween=picks.filter(({event})=>/halloween|hallowe'en|pumpkin|citrouille|zucca|dolcetto|scherzetto/i.test([event.title,event.description].join(' ')));
+      const others=picks.filter(item=>!halloween.includes(item));
+      heroCarouselItems=[...halloween,...others];heroCarouselIndex=0;
+      if(heroCarouselTimer){clearInterval(heroCarouselTimer);heroCarouselTimer=null;}
+      if(!heroCarouselItems.length){el.innerHTML='<span class="hero-now-loading">More highlights coming soon — explore the calendar for upcoming events.</span>';return;}
+      showHeroCarousel();
+      if(heroCarouselItems.length>3 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        heroCarouselTimer=setInterval(()=>moveHeroCarousel(1),5500);
+      }
     }
 
     /* START THE WEBSITE */
