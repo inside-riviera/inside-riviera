@@ -749,6 +749,30 @@
     .top-nav .destination-links a { display:block; color:var(--navy); padding:11px 13px; border-radius:8px; }
     .top-nav .destination-links a:hover { background:#ffe4f1; color:#ff007a; }
     @media(max-width:700px) { .destination-trigger { font-size:.75rem; padding:8px 12px; } .destination-links { position:fixed; top:auto; left:16px; right:16px; min-width:0; } }
+
+    /* SEASONAL EDITORIAL HERO — dynamic month, season and real SheetDB highlights */
+    .hero { min-height:640px; padding-bottom:125px; transition:background-image .5s ease; }
+    .hero-copy { margin-top:63px; }
+    .season-edition { display:inline-flex; align-items:center; gap:10px; padding:9px 14px; border:1px solid rgba(255,255,255,.42); border-radius:999px; background:rgba(7,16,45,.30); backdrop-filter:blur(8px); font-size:.73rem; letter-spacing:.13em; font-weight:900; color:#fff; }
+    .edition-dot,.now-pulse { width:8px; height:8px; border-radius:50%; background:var(--accent-green); flex-shrink:0; }
+    .edition-divider { opacity:.5; }
+    .hero-copy .eyebrow { margin-top:23px; }
+    .hero-copy h1 { max-width:1100px; }
+    .hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:18px; }
+    .hero-calendar-link { color:#fff; text-decoration:none; font-weight:800; margin-top:26px; border-bottom:1px solid rgba(255,255,255,.65); padding-bottom:5px; }
+    .hero-now { margin-top:35px; max-width:1000px; background:rgba(7,16,45,.70); border:1px solid rgba(255,255,255,.25); border-radius:18px; padding:16px 18px; backdrop-filter:blur(10px); }
+    .hero-now-label { display:flex; align-items:center; gap:9px; color:var(--accent-green); font-size:.7rem; font-weight:900; letter-spacing:.14em; margin-bottom:11px; }
+    .hero-now-events { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .hero-now-item { background:rgba(255,255,255,.09); color:#fff; text-align:left; border:1px solid rgba(255,255,255,.16); border-radius:10px; padding:11px 12px; cursor:pointer; min-width:0; font:inherit; }
+    .hero-now-item:hover { background:rgba(255,255,255,.19); }
+    .hero-now-item strong { display:block; font-size:.86rem; line-height:1.35; margin-top:4px; }
+    .hero-now-item small { color:#d8e0ed; font-size:.7rem; }
+    .hero-now-loading { color:#e2e8f0; font-size:.83rem; grid-column:1/-1; }
+    .hero[data-season="spring"] { background-image:linear-gradient(90deg,rgba(5,12,31,.78),rgba(5,12,31,.35) 70%),url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=2000&q=85"); }
+    .hero[data-season="summer"] { background-image:linear-gradient(90deg,rgba(5,12,31,.76),rgba(5,12,31,.27) 70%),url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85"); }
+    .hero[data-season="autumn"] { background-image:linear-gradient(90deg,rgba(5,12,31,.82),rgba(5,12,31,.38) 70%),url("https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2000&q=85"); }
+    .hero[data-season="winter"] { background-image:linear-gradient(90deg,rgba(5,12,31,.83),rgba(5,12,31,.40) 70%),url("https://images.unsplash.com/photo-1483664852095-d6cc6870702d?auto=format&fit=crop&w=2000&q=85"); }
+    @media(max-width:700px) { .hero { min-height:0; padding-bottom:105px; } .hero-copy { margin-top:40px; } .hero-copy h1 { font-size:clamp(2.15rem,9vw,3.5rem); white-space:normal; } .hero-copy h1 span { white-space:normal; } .hero-now { margin-top:25px; padding:13px; } .hero-now-events { grid-template-columns:1fr; } .hero-now-item:nth-child(n+3) { display:none; } .season-edition { font-size:.62rem; letter-spacing:.07em; } }
   </style>
 </head>
 
@@ -779,10 +803,12 @@
       <a class="top-submit" href="#submit-event">+ Submit an event</a>
     </div>
     <div class="hero-copy">
-      <div class="eyebrow">EVENTS · PLACES · LIFESTYLE</div>
-      <h1>Your Riviera, <span>what's on.</span></h1>
-      <p>Discover concerts, markets, festivals and local experiences from Sanremo and Bordighera to Menton and Monte Carlo.</p>
-      <a class="hero-cta" href="#upcoming">Explore upcoming events <span aria-hidden="true">↗</span></a>
+      <div class="season-edition"><span class="edition-dot" aria-hidden="true"></span><span id="season-edition">THE RIVIERA EDIT</span><span class="edition-divider">/</span><span id="edition-date"></span></div>
+      <div class="eyebrow" id="season-kicker">YOUR GUIDE TO WHAT'S HAPPENING</div>
+      <h1 id="season-headline">Your Riviera, <span>what's on.</span></h1>
+      <p id="season-description">Discover concerts, markets, festivals and local experiences from Sanremo and Bordighera to Menton and Monte Carlo.</p>
+      <div class="hero-actions"><a class="hero-cta" href="#upcoming">Explore this month's highlights <span aria-hidden="true">↗</span></a><a class="hero-calendar-link" href="#calendar">Browse the calendar →</a></div>
+      <div class="hero-now" aria-label="Featured upcoming events"><div class="hero-now-label"><span class="now-pulse"></span> WHAT'S COMING UP <span id="hero-now-month"></span></div><div class="hero-now-events" id="hero-now-events"><span class="hero-now-loading">Checking this month's highlights…</span></div></div>
     </div>
   </header>
 
@@ -1463,6 +1489,7 @@
 
         buildCalendar();
         updateAllListings();
+        renderHeroHighlights();
 
       } catch (error) {
         console.error(
@@ -1475,6 +1502,8 @@
         );
 
         const featured = document.getElementById("featured-track");
+        const heroHighlights = document.getElementById('hero-now-events');
+        if (heroHighlights) heroHighlights.textContent = 'Highlights are temporarily unavailable. Browse the calendar below.';
         if (featured) featured.innerHTML = '<p class="featured-status">Upcoming events are temporarily unavailable. Please try again later.</p>';
         container.innerHTML = `
           <div class="no-events">
@@ -1814,7 +1843,7 @@
         if (date >= endOfMonth) break;
         for (const event of allEvents) {
           if (found.length >= 8) break;
-          if (event.priority !== "1") continue;
+          if (event.priority !== "1" || !event.categories.length) continue;
           if (!isEventActiveOnDate(event, date)) continue;
           if (city !== "ALL" && String(event.city || "").toLowerCase() !== city.toLowerCase()) continue;
           if (category !== "ALL" && !event.categories.some(c => categoryKey(c) === categoryKey(category))) continue;
@@ -1851,9 +1880,60 @@
       });
     }
 
+
+    /* Local season/month update — no manual edits needed. */
+    function updateSeasonalHero() {
+      const now = new Date();
+      const month = now.getMonth();
+      const season = [11,0,1].includes(month) ? 'winter' : [2,3,4].includes(month) ? 'spring' : [5,6,7].includes(month) ? 'summer' : 'autumn';
+      const seasonCopy = {
+        spring: {headline:'The Riviera <span>in bloom.</span>', kicker:'FRESH PLACES · EVENTS · EXPERIENCES', description:'Fresh discoveries, local markets and memorable days across the French and Italian Riviera.'},
+        summer: {headline:'Your Riviera <span>summer starts here.</span>', kicker:'SUMMER DAYS · LONG NIGHTS · LOCAL EVENTS', description:'From seaside evenings to festivals and open-air events, discover what’s happening across the Riviera.'},
+        autumn: {headline:'Autumn on <span>the Riviera.</span>', kicker:'NEW SEASON · NEW EXPERIENCES', description:'Markets, culture, live music and local discoveries across the French and Italian Riviera.'},
+        winter: {headline:'Winter moments <span>on the Riviera.</span>', kicker:'A DIFFERENT SIDE OF THE RIVIERA', description:'Explore winter events, cultural highlights and local experiences from Sanremo to Monte Carlo.'}
+      };
+      const copy = seasonCopy[season];
+      document.querySelector('.hero').dataset.season = season;
+      document.getElementById('season-edition').textContent = 'THE ' + now.toLocaleDateString('en-GB',{month:'long'}).toUpperCase() + ' EDIT';
+      document.getElementById('edition-date').textContent = now.getFullYear();
+      document.getElementById('season-kicker').textContent = copy.kicker;
+      document.getElementById('season-headline').innerHTML = copy.headline;
+      document.getElementById('season-description').textContent = copy.description;
+      document.getElementById('hero-now-month').textContent = '· ' + now.toLocaleDateString('en-GB',{month:'long'}).toUpperCase();
+    }
+
+    /* Show real priority=1 highlights, never invented event names. */
+    function renderHeroHighlights() {
+      const el = document.getElementById('hero-now-events');
+      if (!el) return;
+      const today = new Date(); today.setHours(0,0,0,0);
+      const monthEnd = new Date(today.getFullYear(),today.getMonth()+1,1);
+      const picks = []; const seen = new Set();
+      for (let d=new Date(today);d<monthEnd && picks.length<3;d.setDate(d.getDate()+1)) {
+        for (const event of allEvents) {
+          if (picks.length>=3) break;
+          if (event.priority!=='1' || !event.categories.length || !isEventActiveOnDate(event,d)) continue;
+          const key=[event.title,event.city,event.year,event.month,event.date].join('|');
+          if (seen.has(key)) continue;
+          seen.add(key); picks.push({event,date:new Date(d)});
+        }
+      }
+      if (!picks.length) { el.innerHTML='<span class="hero-now-loading">New highlights coming soon. Browse the calendar for more events →</span>'; return; }
+      el.innerHTML=picks.map(({event,date})=>`<button type="button" class="hero-now-item" data-date="${date.getFullYear()}-${date.getMonth()}-${date.getDate()}"><small>${escapeHtml(date.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}))} · ${escapeHtml(event.city||'Riviera')}</small><strong>${escapeHtml(event.title||'Riviera event')} ↗</strong></button>`).join('');
+      el.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+        const [y,m,d]=button.dataset.date.split('-').map(Number);
+        selectedYear=y;selectedMonth=m;selectedDay=d;
+        document.getElementById('quick-date').value='custom';
+        buildCalendar();renderEvents();
+        document.getElementById('event-listings').scrollIntoView({behavior:'smooth',block:'start'});
+      }));
+    }
+
     /* START THE WEBSITE */
 
     function startApp() {
+      // Update the editorial header immediately.
+      updateSeasonalHero();
       // Show the calendar immediately.
       buildCalendar();
 
