@@ -832,7 +832,7 @@
       <h1 id="season-headline">Your Riviera, <span>what's on.</span></h1>
       <p id="season-description">Discover concerts, markets, festivals and local experiences from Sanremo and Bordighera to Menton and Monte Carlo.</p>
       <div class="hero-actions"><a class="hero-cta" href="#upcoming">Explore this month's highlights <span aria-hidden="true">↗</span></a><a class="hero-calendar-link" href="#calendar">Browse the calendar →</a></div>
-      <div class="hero-now" aria-label="Featured upcoming events"><div class="hero-now-top"><div class="hero-now-label"><span class="now-pulse"></span> WHAT'S COMING UP <span id="hero-now-month"></span></div><div class="hero-carousel-controls"><button type="button" id="hero-carousel-prev" aria-label="Previous events" onclick="moveHeroCarousel(-1)">‹</button><span id="hero-carousel-status" aria-live="polite"></span><button type="button" id="hero-carousel-next" aria-label="Next events" onclick="moveHeroCarousel(1)">›</button></div></div><div class="hero-now-events" id="hero-now-events"><span class="hero-now-loading">Checking this month's highlights…</span></div></div>
+      <div class="hero-now" id="upcoming" aria-label="Featured upcoming events"><div class="hero-now-top"><div class="hero-now-label"><span class="now-pulse"></span> WHAT'S COMING UP <span id="hero-now-month"></span></div><div class="hero-carousel-controls"><button type="button" id="hero-carousel-prev" aria-label="Previous events" onclick="moveHeroCarousel(-1)">‹</button><span id="hero-carousel-status" aria-live="polite"></span><button type="button" id="hero-carousel-next" aria-label="Next events" onclick="moveHeroCarousel(1)">›</button></div></div><div class="hero-now-events" id="hero-now-events"><span class="hero-now-loading">Checking this month's highlights…</span></div></div>
     </div>
   </header>
 
@@ -893,16 +893,6 @@
           <a href="#event-listings" class="browse-link">See events for selected date →</a>
         </div>
       </div>
-    </section>
-
-    <!-- UPCOMING EVENTS -->
-    <section class="featured-section" id="upcoming" aria-labelledby="upcoming-title">
-      <div class="section-heading">
-        <div><span class="section-kicker">DON'T MISS</span><h2 id="upcoming-title">Highlights <em>for this month</em></h2></div>
-        <a href="#calendar">Explore the calendar →</a>
-      </div>
-      <p class="featured-intro">Priority events happening this month across the French and Italian Riviera.</p>
-      <div class="featured-track" id="featured-track" aria-live="polite"><p class="featured-status">Loading upcoming events…</p></div>
     </section>
 
     <!-- EVENTS -->
@@ -1826,7 +1816,6 @@
 
     function updateAllListings() {
       renderEvents();
-      renderFeaturedEvents();
     }
 
     function applyQuickDate() {
