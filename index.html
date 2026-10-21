@@ -851,27 +851,6 @@
         text-align:left;
       }
     }
-    /* Compact mobile calendar search; filters remain available on demand */
-    .mobile-filter-toggle { display:none; }
-    @media (max-width:700px) {
-      .calendar-side > .section-kicker,
-      .calendar-side > h3,
-      .calendar-side > p { display:none; }
-      .calendar-side { padding:0 2px 4px; }
-      .calendar-side > label { margin-bottom:8px; }
-      .calendar-side .search-input { max-width:none; }
-      .mobile-filter-toggle {
-        display:flex; align-items:center; justify-content:space-between;
-        width:100%; margin:12px 0 0; padding:11px 14px;
-        border:1px solid #e2e8f0; border-radius:12px;
-        background:#fff; color:#07102d; font:800 .85rem -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-        cursor:pointer;
-      }
-      .filter-toggle-symbol { font-size:1.3rem; line-height:1; color:#ff007a; }
-      .calendar-side .calendar-extra-filters { display:none; margin-top:10px; }
-      .calendar-side .calendar-extra-filters.filters-open { display:grid; }
-      .calendar-side .browse-link { margin-top:12px; font-size:.85rem; }
-    }
   </style>
 </head>
 
@@ -939,8 +918,7 @@
           <p>Explore what's happening across the French and Italian Riviera. Pick a date to see upcoming events, search for something specific, or browse by town and category.</p>
           <label for="search-input">Search events</label>
           <input type="search" class="search-input" id="search-input" placeholder="Search concerts, markets, places…" oninput="updateAllListings()">
-          <button class="mobile-filter-toggle" type="button" aria-controls="calendar-extra-filters" aria-expanded="false" onclick="const filters=document.getElementById('calendar-extra-filters'); const expanded=this.getAttribute('aria-expanded')==='true'; this.setAttribute('aria-expanded',String(!expanded)); filters.classList.toggle('filters-open',!expanded); this.querySelector('.filter-toggle-symbol').textContent=expanded?'+':'−';">⚙ Filters <span class="filter-toggle-symbol" aria-hidden="true">+</span></button>
-          <div class="calendar-extra-filters" id="calendar-extra-filters">      <div class="discovery-field">
+          <div class="calendar-extra-filters">      <div class="discovery-field">
         <label for="city-filter">📍 Location</label>
         <select class="city-select" id="city-filter" onchange="updateAllListings()">
           <option value="ALL">All Riviera towns</option>
