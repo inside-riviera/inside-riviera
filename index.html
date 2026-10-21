@@ -797,6 +797,60 @@
     .top-submit { background:var(--accent-pink); color:#fff; }
     @media(min-width:1000px) { .hero-copy { margin-top:55px; } .hero-now { max-width:870px; margin-left:auto; } }
     @media(max-width:700px) { .hero { min-height:0; } .hero-copy h1 { font-size:clamp(2.5rem,10vw,3.8rem); } .hero-now-events { grid-template-columns:1fr 1fr; gap:9px; } .hero-now-item:nth-child(n+3) { display:none; } .hero-event-photo { height:110px; } .hero-event-info { padding:10px; } .hero-now-item strong { font-size:.8rem; } .hero-now-item small { font-size:.68rem; } }
+    /* MOBILE NAVIGATION FIX — all links fit, dropdown stays on screen */
+    .destination-mobile-label { display:none; }
+    @media (max-width:700px) {
+      .topbar { position:relative; }
+      .top-nav {
+        display:grid;
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        align-items:stretch;
+        justify-content:stretch;
+        gap:5px;
+        width:100%;
+        min-width:0;
+        overflow:visible;
+        border-radius:18px;
+        padding:7px;
+      }
+      .top-nav > a, .top-nav > .destination-menu {
+        min-width:0;
+        width:100%;
+      }
+      .top-nav > a, .destination-trigger {
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        width:100%;
+        min-height:39px;
+        padding:8px 4px;
+        font-size:clamp(.65rem,2.8vw,.78rem);
+        line-height:1.15;
+        white-space:normal;
+      }
+      .destination-trigger { gap:3px; }
+      .destination-desktop-label { display:none; }
+      .destination-mobile-label { display:inline; }
+      .destination-links {
+        position:absolute;
+        top:calc(100% + 7px);
+        left:auto;
+        right:0;
+        width:min(255px,calc(100vw - 32px));
+        min-width:0;
+        max-height:65vh;
+        overflow-y:auto;
+        z-index:1000;
+      }
+      .top-nav .destination-links a {
+        justify-content:flex-start;
+        min-height:42px;
+        padding:12px 14px;
+        font-size:.85rem;
+        text-align:left;
+      }
+    }
   </style>
 </head>
 
@@ -812,7 +866,7 @@
         <a class="current" href="#home">Home</a>
         <a href="#upcoming">Events</a>
         <div class="destination-menu">
-          <button class="destination-trigger" type="button" aria-expanded="false" aria-controls="destination-links">Destination Guide <span aria-hidden="true">⌄</span></button>
+          <button class="destination-trigger" type="button" aria-expanded="false" aria-controls="destination-links"><span class="destination-desktop-label">Destination Guide</span><span class="destination-mobile-label">Destinations</span> <span aria-hidden="true">⌄</span></button>
           <div class="destination-links" id="destination-links">
             <a href="/sanremo.html">Sanremo</a>
             <a href="/ventimiglia.html">Ventimiglia</a>
