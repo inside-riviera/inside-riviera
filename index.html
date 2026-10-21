@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1783038837894885"
-    crossorigin="anonymous"></script>
+  <!-- AdSense script paused pending Google-certified CMP configuration. -->
 
   
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -1449,6 +1448,8 @@
             endMonth: endMonth - 1,
             endDate: endDate,
 
+            eventId: rawData.indexOf(row),
+
             title: getField(clean, [
               "title", "titolo", "name", "event"
             ]),
@@ -1714,10 +1715,8 @@
               ? `
                 <a
                   class="btn-link"
-                  href="${escapeHtml(event.link)}"
-                  target="_blank"
-                  rel="noopener">
-                  More Info & Tickets ↗
+                  href="/event.html?id=${encodeURIComponent(event.eventId)}">
+                  View event details →
                 </a>
               `
               : "";
