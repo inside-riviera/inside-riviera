@@ -916,7 +916,16 @@
     .saved-empty { color:#64748b; font-size:.9rem; padding:12px 0; }
     .saved-nav-count { display:inline-block; margin-left:3px; }
     @media(max-width:700px) { .saved-section { padding:18px 14px; } .saved-list { grid-template-columns:1fr; } }
-  </style>
+  
+/* Halloween editorial feature */
+.halloween-feature{margin:0 0 52px;padding:25px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(230px,.7fr);gap:22px;align-items:center;border-radius:23px;background:linear-gradient(125deg,#101632,#381039);color:white;box-shadow:0 12px 30px #07102d19}
+.halloween-feature .halloween-kicker{color:#a3e635;letter-spacing:.14em;font-size:.75rem;font-weight:900;text-transform:uppercase}
+.halloween-feature h2{font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.14;margin:12px 0}
+.halloween-feature p{line-height:1.6;color:#e5ddea;font-size:.94rem}
+.halloween-feature a{display:inline-block;background:#ff007a;color:white;text-decoration:none;padding:13px 19px;border-radius:999px;font-weight:850;margin-top:17px}
+.halloween-feature .halloween-art{border-radius:16px;min-height:175px;background:radial-gradient(circle at 70% 32%,#ffad31 0 35px,transparent 37px),radial-gradient(circle at 35% 80%,#ff007a66,transparent 65%),linear-gradient(145deg,#342148,#100f24);display:flex;justify-content:center;align-items:center;font-size:5rem}
+@media(max-width:700px){.halloween-feature{grid-template-columns:1fr;padding:22px}.halloween-feature .halloween-art{min-height:110px;font-size:3.5rem;order:-1}}
+</style>
 </head>
 
 <body>
@@ -1020,6 +1029,18 @@
       <h2 id="saved-heading">❤️ My Saved Events <span id="saved-count"></span></h2>
       <p class="saved-note">Tap the heart on an event to keep it here. Saved events stay on this browser and device.</p>
       <div class="saved-list" id="saved-list"><p class="saved-empty">No saved events yet. Tap a heart to get started!</p></div>
+    </section>
+
+
+    <!-- Editorial Halloween guide: separate indexable page -->
+    <section class="halloween-feature" aria-labelledby="halloween-guide-title">
+      <div>
+        <span class="halloween-kicker">🎃 Halloween weekend · 30 October–1 November 2026</span>
+        <h2 id="halloween-guide-title">Halloween 2026 on the Riviera</h2>
+        <p>From family fun in Menton and Monaco to spooky celebrations in Sanremo and Triora: discover confirmed events, times and official organiser links.</p>
+        <a href="/halloween-2026-riviera.html">Explore the Halloween guide →</a>
+      </div>
+      <div class="halloween-art" aria-hidden="true">🎃 🌙</div>
     </section>
 
     <!-- EVENTS -->
