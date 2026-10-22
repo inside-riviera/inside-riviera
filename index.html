@@ -891,6 +891,31 @@
       .hero-now-events { width:100%; margin:0 auto; grid-template-columns:repeat(2,minmax(0,1fr)); justify-content:center; gap:10px; }
       .hero-now-item { width:100%; min-width:0; }
     }
+
+    @media(max-width:700px) { .hero-event-wrap:nth-child(n+3) { display:none; } }
+    /* SAVED EVENTS — hearts and personal collection */
+    .save-heart { display:inline-flex; align-items:center; justify-content:center; gap:5px; border:1px solid #e2e8f0; border-radius:999px; padding:7px 11px; background:#fff; color:#07102d; cursor:pointer; font-size:.8rem; font-weight:800; }
+    .save-heart svg { width:19px; height:19px; stroke:#ff007a; stroke-width:2; fill:none; }
+    .save-heart[aria-pressed="true"] { background:#ffe4f1; border-color:#ffb1d6; color:#c5005f; }
+    .save-heart[aria-pressed="true"] svg { fill:#ff007a; }
+    .event-card .img-wrapper .save-heart { position:absolute; right:10px; bottom:10px; z-index:4; width:38px; height:38px; padding:7px; box-shadow:0 2px 9px #0002; }
+    .hero-event-wrap { position:relative; min-width:0; }
+    .hero-event-wrap .hero-now-item { width:100%; height:100%; }
+    .hero-event-wrap .save-heart { position:absolute; top:8px; right:8px; z-index:5; width:35px; height:35px; padding:6px; box-shadow:0 2px 9px #0002; }
+    .saved-section { margin:0 0 54px; padding:25px; border:1px solid #e9edf4; border-radius:22px; background:#fff7fb; scroll-margin-top:90px; }
+    .saved-section h2 { color:#07102d; font-size:1.55rem; margin:5px 0 8px; }
+    .saved-note { color:#64748b; font-size:.86rem; margin-bottom:16px; line-height:1.5; }
+    .saved-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:12px; }
+    .saved-item { display:flex; gap:12px; padding:12px; border:1px solid #e2e8f0; border-radius:14px; background:white; min-width:0; }
+    .saved-item img { width:72px; height:75px; object-fit:cover; border-radius:9px; flex-shrink:0; }
+    .saved-item-body { min-width:0; flex:1; display:flex; flex-direction:column; gap:6px; }
+    .saved-item-body strong { font-size:.87rem; line-height:1.3; }
+    .saved-item-body small { color:#64748b; }
+    .saved-item-actions { display:flex; align-items:center; gap:10px; margin-top:auto; }
+    .saved-item-actions a { font-size:.78rem; color:#c5005f; font-weight:800; }
+    .saved-empty { color:#64748b; font-size:.9rem; padding:12px 0; }
+    .saved-nav-count { display:inline-block; margin-left:3px; }
+    @media(max-width:700px) { .saved-section { padding:18px 14px; } .saved-list { grid-template-columns:1fr; } }
   </style>
 </head>
 
@@ -988,6 +1013,13 @@
           <a href="#event-listings" class="browse-link">See events for selected date →</a>
         </div>
       </div>
+    </section>
+
+    <section class="saved-section" id="saved-events" aria-labelledby="saved-heading">
+      <span class="section-kicker">YOUR PERSONAL SHORTLIST</span>
+      <h2 id="saved-heading">❤️ My Saved Events <span id="saved-count"></span></h2>
+      <p class="saved-note">Tap the heart on an event to keep it here. Saved events stay on this browser and device.</p>
+      <div class="saved-list" id="saved-list"><p class="saved-empty">No saved events yet. Tap a heart to get started!</p></div>
     </section>
 
     <!-- EVENTS -->
@@ -1601,6 +1633,7 @@
         buildCalendar();
         updateAllListings();
         renderHeroHighlights();
+        renderSavedEvents();
 
       } catch (error) {
         console.error(
@@ -1823,6 +1856,7 @@
                   ${tags}
                 </div>
 
+                ${saveHeartHtml(event)}
                 <img
                   src="${escapeHtml(event.img)}"
                   alt="${escapeHtml(event.title)}">
@@ -2031,12 +2065,12 @@
       el.innerHTML=Array.from({length:visible},(_,offset)=>{
         const index=(heroCarouselIndex+offset)%heroCarouselItems.length;
         const {event,date}=heroCarouselItems[index];
-        return `<button type="button" class="hero-now-item" data-index="${index}" aria-label="See ${escapeHtml(event.title)} on ${escapeHtml(date.toLocaleDateString('en-GB'))}">
+        return `<div class="hero-event-wrap"><button type="button" class="hero-now-item" data-index="${index}" aria-label="See ${escapeHtml(event.title)} on ${escapeHtml(date.toLocaleDateString('en-GB'))}">
           <span class="hero-event-photo"><img src="${escapeHtml(event.img||fallbackImage)}" alt="" loading="lazy"><span class="hero-event-date">${escapeHtml(date.toLocaleDateString('en-GB',{day:'numeric',month:'short'}))}</span></span>
           <span class="hero-event-info"><strong>${escapeHtml(event.title||'Riviera event')}</strong><small>📍 ${escapeHtml(event.city||'Riviera')} · ${escapeHtml(event.categories[0]||'Event')}</small></span>
-        </button>`;
+        </button>${saveHeartHtml(event)}</div>`;
       }).join('');
-      el.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>openHeroEvent(Number(button.dataset.index))));
+      el.querySelectorAll('.hero-now-item').forEach(button=>button.addEventListener('click',()=>openHeroEvent(Number(button.dataset.index))));
       const prev=document.getElementById('hero-carousel-prev');
       const next=document.getElementById('hero-carousel-next');
       if(prev)prev.disabled=heroCarouselItems.length<=visible;
@@ -2076,6 +2110,61 @@
       }
     }
 
+
+    /* Browser-only saved events. No login or database required. */
+    const SAVED_KEY = 'insideRivieraSavedEventsV1';
+    const heartSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    function savedEventKey(event) {
+      return [event.title,event.city,event.year,event.month,event.date].map(v=>String(v??'').trim().toLowerCase()).join('|');
+    }
+    function getSavedEvents() {
+      try { const value=JSON.parse(localStorage.getItem(SAVED_KEY)||'{}'); return value&&typeof value==='object'&&!Array.isArray(value)?value:{}; }
+      catch (_) { return {}; }
+    }
+    function saveHeartHtml(event) {
+      const key=savedEventKey(event);
+      const saved=Boolean(getSavedEvents()[key]);
+      return `<button type="button" class="save-heart" data-save-key="${escapeHtml(key)}" aria-label="${saved?'Remove saved event':'Save event'}: ${escapeHtml(event.title)}" aria-pressed="${saved}" title="${saved?'Remove from saved events':'Save this event'}">${heartSvg}</button>`;
+    }
+    function renderSavedEvents() {
+      const list=document.getElementById('saved-list');
+      if(!list)return;
+      const saved=Object.values(getSavedEvents());
+      const count=document.getElementById('saved-count');
+      if(count)count.textContent=saved.length?'('+saved.length+')':'';
+      if(!saved.length){list.innerHTML='<p class="saved-empty">No saved events yet. Tap a heart on any event to add it here!</p>';return;}
+      list.innerHTML=saved.map(event=>{
+        const key=savedEventKey(event);
+        const date=Number.isFinite(event.year)&&Number.isFinite(event.month)&&Number.isFinite(event.date)
+          ? new Date(event.year,event.month,event.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';
+        const matching=allEvents.find(e=>savedEventKey(e)===key);
+        const link=matching&&matching.link?`<a href="/event.html?id=${encodeURIComponent(matching.eventId)}">Event details →</a>`:'';
+        return `<article class="saved-item"><img src="${escapeHtml(event.img||fallbackImage)}" alt="" loading="lazy"><div class="saved-item-body"><strong>${escapeHtml(event.title)}</strong><small>📍 ${escapeHtml(event.city||'Riviera')} · ${escapeHtml(date)}</small><div class="saved-item-actions">${link}${saveHeartHtml(event)}</div></div></article>`;
+      }).join('');
+    }
+    document.addEventListener('click',function(event){
+      const button=event.target.closest('.save-heart');
+      if(!button)return;
+      event.preventDefault();event.stopPropagation();
+      const key=button.dataset.saveKey;
+      const stored=getSavedEvents();
+      if(stored[key])delete stored[key];
+      else {
+        const item=allEvents.find(e=>savedEventKey(e)===key);
+        if(!item)return;
+        stored[key]={title:item.title,city:item.city,year:item.year,month:item.month,date:item.date,img:item.img};
+      }
+      try {localStorage.setItem(SAVED_KEY,JSON.stringify(stored));}
+      catch (_) {alert('This browser cannot store saved events right now.');return;}
+      document.querySelectorAll('.save-heart').forEach(el=>{
+        const on=Boolean(stored[el.dataset.saveKey]);
+        el.setAttribute('aria-pressed',String(on));
+        el.setAttribute('aria-label',(on?'Remove saved event':'Save event'));
+        el.title=on?'Remove from saved events':'Save this event';
+      });
+      renderSavedEvents();
+    });
+
     /* START THE WEBSITE */
 
     function startApp() {
@@ -2083,6 +2172,7 @@
       updateSeasonalHero();
       // Show the calendar immediately.
       buildCalendar();
+      renderSavedEvents();
 
       // Show category buttons immediately.
       buildCategoryNav();
