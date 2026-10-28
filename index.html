@@ -926,6 +926,30 @@
 .halloween-feature .halloween-art{border-radius:16px;min-height:175px;background:radial-gradient(circle at 70% 32%,#ffad31 0 35px,transparent 37px),radial-gradient(circle at 35% 80%,#ff007a66,transparent 65%),linear-gradient(145deg,#342148,#100f24);display:flex;justify-content:center;align-items:center;font-size:5rem}
 @media(max-width:700px){.halloween-feature{grid-template-columns:1fr;padding:22px}.halloween-feature .halloween-art{min-height:110px;font-size:3.5rem;order:-1}}
 </style>
+<script>
+/* Seasonal change begins at 00:00 on 1 November 2026, Europe/Paris. */
+(function(){
+  const dateParts = new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const get = type => dateParts.find(p => p.type === type).value;
+  const date = get('year')+'-'+get('month')+'-'+get('day');
+  if (date >= '2026-11-01') document.documentElement.classList.add('november-live');
+})();
+</script>
+<style>
+/* November 2026 editorial switch: Europe/Paris calendar date */
+.november-feature{display:none;margin:0 0 52px;padding:25px;grid-template-columns:minmax(0,1.3fr) minmax(230px,.7fr);gap:22px;align-items:center;border-radius:23px;background:linear-gradient(120deg,#10243c,#4b3443);color:#fff;box-shadow:0 12px 30px #07102d19}
+.november-feature .november-kicker{color:#a3e635;letter-spacing:.14em;font-size:.75rem;font-weight:900;text-transform:uppercase}
+.november-feature h2{font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.14;margin:12px 0}
+.november-feature p{line-height:1.6;color:#f0e8e5;font-size:.94rem}
+.november-feature a{display:inline-block;background:#ff007a;color:#fff;text-decoration:none;padding:13px 19px;border-radius:999px;font-weight:850;margin-top:17px}
+.november-feature .november-art{min-height:205px;border-radius:16px;background:linear-gradient(90deg,rgba(7,16,45,.35),rgba(7,16,45,.06)),url('https://images.unsplash.com/photo-1657478315749-4152ab02e639?auto=format&fit=crop&w=1100&q=80') center/cover no-repeat}
+.past-guides-footer{display:none;margin:20px auto 8px;font-size:.76rem;opacity:.68}
+.past-guides-footer a{color:#d7deea;text-decoration:underline;text-underline-offset:3px}
+html.november-live .halloween-feature{display:none}
+html.november-live .november-feature{display:grid}
+html.november-live .past-guides-footer{display:block}
+@media(max-width:700px){.november-feature{grid-template-columns:1fr;padding:22px}.november-feature .november-art{min-height:155px;order:-1}}
+</style>
 </head>
 
 <body>
@@ -1041,6 +1065,18 @@
         <a href="/halloween-2026-riviera.html">Explore the Halloween guide →</a>
       </div>
       <div class="halloween-art" aria-hidden="true">🎃 🌙</div>
+    </section>
+
+    
+    <!-- November editorial feature; automatically revealed from 1 November 2026, Riviera time -->
+    <section class="november-feature" aria-labelledby="november-guide-title">
+      <div>
+        <span class="november-kicker">🍂 The Riviera Edit · November 2026</span>
+        <h2 id="november-guide-title">November on the French &amp; Italian Riviera</h2>
+        <p>Olive-oil festivals, Monaco National Day, jazz, opera, markets and coastal discoveries. Explore our curated November events guide.</p>
+        <a href="/november-2026-riviera-with-images.html">Explore November events →</a>
+      </div>
+      <div class="november-art" role="img" aria-label="Golden autumn Riviera landscape"></div>
     </section>
 
     <!-- EVENTS -->
@@ -2250,6 +2286,7 @@
     <p style="font-size:12px;opacity:.7;">
       © Inside Riviera. All rights reserved.
     </p>
+  <div class="past-guides-footer"><span>Past Events &amp; Guides</span> · <a href="/halloween-2026-riviera.html">Halloween 2026 on the Riviera</a></div>
   </footer>
 
 
