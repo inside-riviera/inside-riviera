@@ -3,8 +3,10 @@ name: Publish November 2026
 
 on:
   schedule:
-    # 1 November 2026 at 00:15 French Riviera time (CET)
+    # 1 November 2026 at 00:15 French Riviera time
     - cron: '15 23 31 10 *'
+    # Additional attempts during the morning of 1 November
+    - cron: '15 0-5 1 11 *'
   workflow_dispatch:
 
 permissions:
