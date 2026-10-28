@@ -1,0 +1,44 @@
+
+name: Publish November 2026
+
+on:
+  schedule:
+    # 1 November 2026 at 00:15 French Riviera time (CET)
+    - cron: '15 23 31 10 *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check launch date
+        id: date
+        run: |
+          if [ "$(TZ=Europe/Paris date +%Y-%m-%d)" = "2026-11-01" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out main
+        if: steps.date.outputs.ready == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Publish November files
+        if: steps.date.outputs.ready == 'true'
+        run: |
+          git fetch origin november-launch
+          git checkout origin/november-launch -- index.html november-2026-riviera-with-images.html images/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html november-2026-riviera-with-images.html images/
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish November 2026 Riviera guide"
+            git push origin HEAD:main
+          fi
