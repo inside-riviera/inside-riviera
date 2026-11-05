@@ -1036,7 +1036,7 @@ html.november-live .past-guides-footer{display:block}
           <option value="ALL">All categories</option>
           <option value="Market">Markets</option>
           <option value="Public Event">Public events</option>
-          <option value="Concert">Concerts</option>
+          <option value="Concerts and Theatre">Concerts and Theatre</option>
           <option value="Exhibition">Exhibitions</option>
           <option value="Live Music">Live music</option>
           <option value="Sport">Sport</option>
@@ -1150,7 +1150,7 @@ html.november-live .past-guides-footer{display:block}
     const categoryOrder = [
       "Market",
       "Public Event",
-      "Concert",
+      "Concerts and Theatre",
       "Exhibition",
       "Live Music",
       "Sport",
@@ -1160,7 +1160,7 @@ html.november-live .past-guides-footer{display:block}
     const categoryStyles = {
       "market": "tag-market",
       "public event": "tag-public-event",
-      "concert": "tag-concert",
+      "concerts and theatre": "tag-concert",
       "exhibition": "tag-exhibition",
       "live music": "tag-live-music",
       "sport": "tag-sport",
@@ -1170,7 +1170,7 @@ html.november-live .past-guides-footer{display:block}
     const navButtonStyles = {
       "market": "nav-market",
       "public event": "nav-public-event",
-      "concert": "nav-concert",
+      "concerts and theatre": "nav-concert",
       "exhibition": "nav-exhibition",
       "live music": "nav-live-music",
       "sport": "nav-sport",
@@ -1180,7 +1180,7 @@ html.november-live .past-guides-footer{display:block}
     const categoryDotColours = {
       "market": "#ff007a",
       "public event": "#0f172a",
-      "concert": "#a78bfa",
+      "concerts and theatre": "#a78bfa",
       "exhibition": "#ff007a",
       "live music": "#a3e635",
       "sport": "#e11d48",
@@ -1222,7 +1222,12 @@ html.november-live .past-guides-footer{display:block}
     }
 
     function categoryKey(value) {
-      return String(value || "").trim().toLowerCase();
+      const key = String(value || "").trim().toLowerCase();
+      // Keep the spreadsheet labels unchanged while grouping concerts and theatre together.
+      if (["concert", "concerts", "theatre", "theater", "concerts and theatre", "concert and theatre"].includes(key)) {
+        return "concerts and theatre";
+      }
+      return key;
     }
 
     function parseCategories(value) {
@@ -1231,9 +1236,11 @@ html.november-live .past-guides-footer{display:block}
       const result = String(value)
         .split(",")
         .map(value => value.trim())
-        .filter(Boolean);
+        .filter(Boolean)
+        .map(value => categoryKey(value) === "concerts and theatre" ? "Concerts and Theatre" : value);
 
-      return result.length ? result : ["Public Event"];
+      // An event tagged both Concert and Theatre should appear only once in this category.
+      return result.length ? [...new Set(result)] : ["Public Event"];
     }
 
     function escapeHtml(value) {
