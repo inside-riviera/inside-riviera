@@ -91,8 +91,9 @@
     statusEl.querySelector("p").textContent = description;
   }
   function estimate(maxWave,maxSwell){
-    const wave = Math.max(maxWave || 0, maxSwell || 0);
-    if (!Number.isFinite(wave)) return {kind:"",title:"Outlook unavailable",description:"There is not enough forecast information to estimate today's beach conditions."};
+    const available = [maxWave,maxSwell].filter(Number.isFinite);
+    if (!available.length) return {kind:"",title:"Outlook unavailable",description:"There is not enough forecast information to estimate today's beach conditions."};
+    const wave = Math.max(...available);
     if (wave <= 0.4) return {kind:"good",title:"More favourable for exposed sand",description:"The forecast suggests relatively calm sea conditions today. There may be a better chance of finding exposed beach, but this cannot be confirmed without a direct observation."};
     if (wave <= 0.8) return {kind:"warn",title:"Sand may be limited",description:"Some wave activity is expected. The exposed strip of beach may be narrow or change during the day."};
     return {kind:"bad",title:"Sea may cover much of the shore",description:"The forecast indicates more energetic sea conditions. There is a greater chance that the beach will be narrow or largely covered."};
@@ -101,8 +102,9 @@
     const root=document.getElementById("days"); root.innerHTML="";
     const dates=data.daily.time, waves=data.daily.wave_height_max||[], swells=data.daily.swell_wave_height_max||[];
     dates.forEach((date,i)=>{
-      const wave=Math.max(Number(waves[i])||0,Number(swells[i])||0);
-      const e=estimate(wave,wave);
+      const available=[Number(waves[i]),Number(swells[i])].filter(Number.isFinite);
+      const wave=available.length?Math.max(...available):NaN;
+      const e=estimate(Number(waves[i]),Number(swells[i]));
       const card=document.createElement("article"); card.className="day"+(i===0?" today":"");
       const dateEl=document.createElement("div"); dateEl.className="date"; dateEl.textContent=i===0?"TODAY · "+fmtDate.format(new Date(date+"T12:00:00+01:00")):fmtDate.format(new Date(date+"T12:00:00+01:00"));
       const value=document.createElement("strong"); value.textContent=Number.isFinite(wave)?wave.toFixed(1)+" m":"—";
