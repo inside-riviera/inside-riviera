@@ -21,7 +21,7 @@
     .hero{background:linear-gradient(125deg,#103542,#17636b 72%,#d2a982);color:white;padding:58px 24px 76px}.hero-inner{max-width:1050px;margin:auto}.eyebrow{font-size:11px;letter-spacing:.18em;font-weight:800;color:#f5d5b1;text-transform:uppercase}.hero h1{font: bold clamp(36px,6vw,64px)/1.05 Georgia,serif;max-width:800px;margin:14px 0}.hero p{max-width:680px;font-size:18px;color:#e6f0ee;margin:0}
     main{max-width:1050px;margin:-38px auto 70px;padding:0 22px;position:relative}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:clamp(20px,4vw,34px);margin-bottom:22px}
     .status-top{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.status-kicker{font-size:11px;letter-spacing:.13em;font-weight:800;color:var(--muted);text-transform:uppercase}.updated{font-size:12px;color:var(--muted)}
-    .status{margin:18px 0 10px;padding:19px 21px;border-radius:15px;background:#eef2f2;border:1px solid #dce5e3}.status.good{background:var(--goodbg);border-color:#cce5d5}.status.warn{background:var(--warnbg);border-color:#f0dfb5}.status.bad{background:var(--badbg);border-color:#edcfca}.status h2{font:700 clamp(25px,4vw,36px)/1.15 Georgia,serif;margin:0 0 7px}.status p{margin:0;color:#40565e}.status.good h2{color:var(--good)}.status.warn h2{color:var(--warn)}.status.bad h2{color:var(--bad)}
+    .status{margin:18px 0 10px;padding:19px 21px;border-radius:15px;background:#eef2f2;border:1px solid #dce5e3}.status.good{background:var(--goodbg);border-color:#cce5d5}.status.warn{background:var(--warnbg);border-color:#f0dfb5}.status.bad{background:var(--badbg);border-color:#edcfca}.status.grey{background:#f0f2f3;border-color:#dce2e4}.signal-line{display:flex;align-items:center;gap:12px}.signal-dot{width:19px;height:19px;flex:0 0 19px;border-radius:50%;background:#879398}.status.good .signal-dot{background:#247653}.status.warn .signal-dot{background:#d59a25}.status.bad .signal-dot{background:#b84b40}.status h2{font:700 clamp(25px,4vw,36px)/1.15 Georgia,serif;margin:0 0 7px}.status p{margin:0;color:#40565e}.status.good h2{color:var(--good)}.status.warn h2{color:var(--warn)}.status.bad h2{color:var(--bad)}
     .disclaimer{font-size:13px;color:var(--muted);margin:13px 0 0}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.metric{background:#f7f9f8;border:1px solid var(--line);padding:15px;border-radius:13px}.metric span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:700}.metric strong{display:block;font:700 25px Georgia,serif;margin-top:5px}.metric small{color:var(--muted);font-size:12px}
     h2.section{font:700 27px Georgia,serif;margin:0 0 7px}.lead{color:var(--muted);margin:0 0 20px}.days{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.day{border:1px solid var(--line);border-radius:13px;padding:15px;background:#fff}.day.today{border-color:#8ebdc0;background:#f2f8f7}.day .date{font-size:12px;font-weight:800;color:var(--muted)}.day strong{display:block;font:700 22px Georgia,serif;margin:7px 0 3px}.day small{color:var(--muted);font-size:12px}.day .mini{font-size:12px;margin-top:9px;font-weight:700}
     .chart{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;align-items:end;height:170px;padding:12px 2px 0;border-bottom:1px solid var(--line)}.bar-wrap{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}.bar{width:min(100%,38px);min-height:3px;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#69b8b7,#176b75)}.bar-label,.bar-value{font-size:11px;color:var(--muted)}.bar-value{font-weight:700;color:var(--ink)}
@@ -85,14 +85,15 @@
   const directions = ["N","NE","E","SE","S","SW","W","NW"];
   function direction(deg){return Number.isFinite(deg) ? directions[Math.round(deg/45)%8] : "—";}
   function setStatus(kind,title,description){
-    statusEl.className = "status " + kind;
-    statusEl.innerHTML = "<h2></h2><p></p>";
-    statusEl.querySelector("h2").textContent = title;
+    const labels={good:"GREEN",warn:"AMBER",bad:"RED",grey:"GREY"};
+    statusEl.className = "status " + (kind||"grey");
+    statusEl.innerHTML = '<div class="signal-line"><span class="signal-dot" aria-hidden="true"></span><h2></h2></div><p></p>';
+    statusEl.querySelector("h2").textContent = (labels[kind]||"GREY")+" · "+title;
     statusEl.querySelector("p").textContent = description;
   }
   function estimate(maxWave,maxSwell){
     const available = [maxWave,maxSwell].filter(Number.isFinite);
-    if (!available.length) return {kind:"",title:"Outlook unavailable",description:"There is not enough forecast information to estimate today's beach conditions."};
+    if (!available.length) return {kind:"grey",title:"Outlook unavailable",description:"There is not enough forecast information to estimate today's beach conditions."};
     const wave = Math.max(...available);
     if (wave <= 0.4) return {kind:"good",title:"More favourable for exposed sand",description:"The forecast suggests relatively calm sea conditions today. There may be a better chance of finding exposed beach, but this cannot be confirmed without a direct observation."};
     if (wave <= 0.8) return {kind:"warn",title:"Sand may be limited",description:"Some wave activity is expected. The exposed strip of beach may be narrow or change during the day."};
@@ -109,7 +110,7 @@
       const dateEl=document.createElement("div"); dateEl.className="date"; dateEl.textContent=i===0?"TODAY · "+fmtDate.format(new Date(date+"T12:00:00+01:00")):fmtDate.format(new Date(date+"T12:00:00+01:00"));
       const value=document.createElement("strong"); value.textContent=Number.isFinite(wave)?wave.toFixed(1)+" m":"—";
       const caption=document.createElement("small"); caption.textContent="Maximum forecast wave";
-      const label=document.createElement("div"); label.className="mini"; label.textContent=e.kind==="good"?"More favourable":e.kind==="warn"?"Mixed conditions":"Unfavourable";
+      const label=document.createElement("div"); label.className="mini"; label.textContent=e.kind==="good"?"🟢 Green · More favourable":e.kind==="warn"?"🟠 Amber · Mixed":e.kind==="bad"?"🔴 Red · Unfavourable":"⚪ Grey · No data";
       card.append(dateEl,value,caption,label); root.appendChild(card);
     });
   }
@@ -148,7 +149,7 @@
       renderDays(data);renderChart(data);
       updatedEl.textContent="Forecast retrieved "+fmtTime.format(new Date())+" · local time";
     }catch(error){
-      setStatus("warn","Live forecast unavailable","We could not retrieve the latest marine forecast. Please try again later; no sand-availability estimate is being shown.");
+      setStatus("grey","Live forecast unavailable","We could not retrieve the latest marine forecast. Please try again later; no sand-availability estimate is being shown.");
       updatedEl.textContent="Unable to refresh just now";
       console.error("Calandre Beach Watch:",error);
     }
