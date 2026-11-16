@@ -800,7 +800,7 @@
     .hero[data-season="spring"] { background-image:linear-gradient(90deg,rgba(5,12,31,.78),rgba(5,12,31,.35) 70%),url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=2000&q=85"); }
     .hero[data-season="summer"] { background-image:linear-gradient(90deg,rgba(5,12,31,.76),rgba(5,12,31,.27) 70%),url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85"); }
     .hero[data-season="autumn"] { background-image:linear-gradient(90deg,rgba(5,12,31,.55),rgba(5,12,31,.06) 75%),url("https://images.unsplash.com/photo-1657478315749-4152ab02e639?auto=format&fit=crop&w=2200&q=85"); }
-    .hero[data-season="winter"] { background-image:linear-gradient(90deg,rgba(5,12,31,.83),rgba(5,12,31,.40) 70%),url("https://images.unsplash.com/photo-1483664852095-d6cc6870702d?auto=format&fit=crop&w=2000&q=85"); }
+    .hero[data-season="winter"] { background-image:linear-gradient(90deg,rgba(5,12,31,.78),rgba(5,12,31,.28) 72%),url("https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=2200&q=90"); }
     @media(max-width:700px) { .hero { min-height:0; padding-bottom:105px; } .hero-copy { margin-top:40px; } .hero-copy h1 { font-size:clamp(2.15rem,9vw,3.5rem); white-space:normal; } .hero-copy h1 span { white-space:normal; } .hero-now { margin-top:25px; padding:13px; } .hero-now-events { grid-template-columns:1fr; } .hero-now-item:nth-child(n+3) { display:none; } .season-edition { font-size:.62rem; letter-spacing:.07em; } }
 
     /* BRIGHT RIVIERA EDITION: authentic Menton photo and rotating photo cards */
@@ -971,7 +971,7 @@
 .christmas-feature h2{font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.14;margin:12px 0}
 .christmas-feature p{line-height:1.6;color:#f0e8e5;font-size:.94rem}
 .christmas-feature a{display:inline-block;background:#ff007a;color:#fff;text-decoration:none;padding:13px 19px;border-radius:999px;font-weight:850;margin-top:17px}
-.christmas-feature .christmas-art{min-height:205px;border-radius:16px;background:radial-gradient(circle at 50% 28%,#f7e6a6 0 2px,transparent 3px),radial-gradient(circle at 24% 70%,#f7e6a6 0 2px,transparent 3px),radial-gradient(circle at 80% 60%,#f7e6a6 0 2px,transparent 3px),linear-gradient(145deg,#153b39,#0d2036 60%,#4c233d);display:flex;align-items:center;justify-content:center;font-size:clamp(3.4rem,7vw,6rem);letter-spacing:.08em;text-shadow:0 6px 22px #0008}
+.christmas-feature .christmas-art{min-height:225px;border-radius:16px;background:linear-gradient(0deg,rgba(5,12,31,.12),rgba(5,12,31,.12)),url("https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=1100&q=90") center 48%/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:0;letter-spacing:.08em;text-shadow:0 6px 22px #0008}
 .past-guides-footer{display:block;margin:20px auto 8px;font-size:.76rem;opacity:.82}
 .past-guides-footer a{color:#d7deea;text-decoration:underline;text-underline-offset:3px;margin:0 4px}
 @media(max-width:700px){.christmas-feature{grid-template-columns:1fr;padding:22px}.christmas-feature .christmas-art{min-height:145px;order:-1}}
@@ -2237,7 +2237,7 @@ footer{background:#0f172a!important}
     function updateSeasonalHero() {
       const now = new Date();
       const month = now.getMonth();
-      const season = [11,0,1].includes(month) ? 'winter' : [2,3,4].includes(month) ? 'spring' : [5,6,7].includes(month) ? 'summer' : 'autumn';
+      const season = [10,11,0,1].includes(month) ? 'winter' : [2,3,4].includes(month) ? 'spring' : [5,6,7].includes(month) ? 'summer' : 'autumn';
       const seasonCopy = {
         spring: {headline:'The Riviera <span>in bloom.</span>', kicker:'FRESH PLACES · EVENTS · EXPERIENCES', description:'Fresh discoveries, local markets and memorable days across the French and Italian Riviera.'},
         summer: {headline:'Your Riviera <span>summer starts here.</span>', kicker:'SUMMER DAYS · LONG NIGHTS · LOCAL EVENTS', description:'From seaside evenings to festivals and open-air events, discover what’s happening across the Riviera.'},
