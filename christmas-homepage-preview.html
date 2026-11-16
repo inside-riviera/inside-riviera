@@ -1,0 +1,2455 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="ea71097e-77cf-48d5-b2ec-c10ddde7a251" data-blockingmode="auto" type="text/javascript"></script>
+  <!-- AdSense script paused pending Google-certified CMP configuration. -->
+
+  
+<link rel="icon" type="image/png" href="/favicon.png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inside Riviera | Events, Markets & Things to Do</title>
+  <meta name="description" content="Discover events, markets, concerts and things to do in Sanremo, Bordighera, Ventimiglia, Menton and the Italian and French Riviera.">
+  <link rel="canonical" href="https://www.insideriviera.net/">
+
+  <!-- GetYourGuide -->
+  <script
+    async
+    defer
+    src="https://widget.getyourguide.com/dist/pa.umd.production.min.js"
+    data-gyg-partner-id="LNHKRSN">
+  </script>
+
+  <style>
+    :root {
+      --accent-pink: #ff007a;
+      --accent-green: #a3e635;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --page-bg: #f8fafc;
+      --border: #e2e8f0;
+      --soft-pink: #ffe4f1;
+      --soft-green: #eef9d2;
+      --soft-purple: #eee8ff;
+      --shadow: 0 4px 14px rgba(15,23,42,.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--page-bg);
+      color: var(--text-dark);
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      background:
+        linear-gradient(
+          rgba(15,23,42,.25),
+          rgba(15,23,42,.35)
+        ),
+        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80")
+        center / cover no-repeat;
+      padding: 35px 20px 140px;
+      text-align: center;
+      color: white;
+    }
+
+    .brand-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .logo-graphic {
+      width: 36px;
+      height: 30px;
+      fill: var(--accent-green);
+    }
+
+    .hero h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: .9;
+      margin-bottom: 16px;
+    }
+
+    .hero-title-main {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .hero .highlight {
+      display: block;
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--accent-green);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0,0,0,.3);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      font-size: .95rem;
+      line-height: 1.5;
+    }
+
+    .main-content {
+      max-width: 1100px;
+      margin: -100px auto 40px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* CALENDAR */
+
+    .calendar-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.12);
+      max-width: 480px;
+      margin: 0 auto 24px;
+    }
+
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .cal-header h2 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .nav-btn {
+      background: #f1f5f9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--text-muted);
+    }
+
+    .weekdays,
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+    }
+
+    .weekdays {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .days-grid {
+      gap: 8px 0;
+    }
+
+    .day-cell {
+      height: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+    }
+
+    .day-cell.empty {
+      cursor: default;
+    }
+
+    .day-number {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .day-cell.active .day-number {
+      background: var(--accent-pink);
+      color: white;
+      font-weight: 800;
+    }
+
+    .day-cell.past {
+      color: #cbd5e1;
+    }
+
+    .event-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      position: absolute;
+      bottom: 1px;
+    }
+
+    /* SEARCH AND FILTER */
+
+    .filter-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .search-input,
+    .city-select {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: .9rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      outline: none;
+    }
+
+    .search-input {
+      width: 260px;
+    }
+
+    /* CATEGORY NAVIGATION */
+
+    .category-navigation {
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      overflow-x: auto;
+    }
+
+    .category-nav-inner {
+      display: flex;
+      gap: 8px;
+      min-width: max-content;
+      justify-content: center;
+    }
+
+    .category-nav-btn {
+      border: 1px solid transparent;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform .2s ease;
+    }
+
+    .category-nav-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .nav-market {
+      background: var(--soft-pink);
+      color: var(--accent-pink);
+    }
+
+    .nav-public-event {
+      background: var(--text-dark);
+      color: white;
+    }
+
+    .nav-concert {
+      background: var(--soft-purple);
+      color: var(--text-dark);
+    }
+
+    .nav-exhibition {
+      background: var(--accent-pink);
+      color: white;
+    }
+
+    .nav-live-music {
+      background: #1e293b;
+      color: var(--accent-green);
+    }
+
+    .nav-sport {
+      background: #fff1f2;
+      color: #e11d48;
+    }
+
+.nav-private-tour {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .nav-things-to-do {
+      background: #e0f2fe;
+      color: #075985;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .things-to-do-section {
+      margin: 30px 0 44px;
+      padding: 30px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 90px;
+    }
+    .things-to-do-heading {max-width:720px;margin:0 auto 22px;text-align:center}
+    .things-to-do-heading h2 {font-size:clamp(1.6rem,3vw,2.1rem);margin:7px 0}
+    .things-to-do-heading p {color:var(--text-muted);line-height:1.6}
+    .things-to-do-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .things-to-do-card {padding:24px;border-radius:16px;background:#f8fafc;border:1px solid var(--border)}
+    .things-to-do-region {font-size:.68rem;font-weight:850;letter-spacing:.12em;color:#0e7490}
+    .things-to-do-card h3 {font-size:1.25rem;line-height:1.3;margin:10px 0}
+    .things-to-do-card p {font-size:.92rem;line-height:1.6;color:var(--text-muted);margin-bottom:16px}
+    .things-to-do-card a {font-weight:800;color:#0e5964;text-decoration:none}
+    .things-to-do-card a:hover {text-decoration:underline}
+    @media(max-width:650px){.things-to-do-section{padding:22px}.things-to-do-grid{grid-template-columns:1fr}}
+
+    /* EVENT SECTIONS */
+
+    .category-section {
+      margin-bottom: 38px;
+      scroll-margin-top: 85px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .category-title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+
+    .category-colour-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .category-count {
+      background: #e2e8f0;
+      color: var(--text-muted);
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(290px, 1fr)
+      );
+      gap: 16px;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .img-wrapper {
+      height: 145px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tag-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      z-index: 2;
+    }
+
+    .tag-badge {
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: .67rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      box-shadow: 0 2px 5px rgba(0,0,0,.12);
+    }
+
+    .tag-market,
+    .tag-exhibition {
+      background: var(--accent-pink);
+      color: white;
+    }
+
+    .tag-public-event {
+      background: var(--text-dark);
+      color: white;
+    }
+
+    .tag-concert {
+      background: var(--soft-purple);
+      color: var(--text-dark);
+    }
+
+    .tag-live-music {
+      background: var(--text-dark);
+      color: var(--accent-green);
+    }
+
+    .tag-sport {
+      background: var(--soft-pink);
+      color: var(--accent-pink);
+    }
+
+.tag-private-tour {
+      background: var(--soft-green);
+      color: var(--text-dark);
+    }
+
+    .tag-default {
+      background: #e2e8f0;
+      color: var(--text-dark);
+    }
+
+    .card-body {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-body h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .meta-info {
+      font-size: .78rem;
+      color: var(--text-muted);
+      margin-bottom: 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .description {
+      font-size: .8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 14px;
+      flex-grow: 1;
+    }
+
+    .btn-link {
+      display: block;
+      text-align: center;
+      background: #f1f5f9;
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 9px;
+      border-radius: 8px;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .btn-link:hover {
+      background: var(--accent-pink);
+      color: white;
+    }
+
+    .no-events {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+    }
+
+    /* GETYOURGUIDE */
+
+    .gyg-private-tour-widget {
+      width: 100%;
+      margin-bottom: 28px;
+    }
+
+    .gyg-riviera-intro {
+      margin-bottom: 18px;
+      color: var(--text-muted);
+      font-size: .88rem;
+      line-height: 1.5;
+    }
+
+    .gyg-widget-wrapper {
+      min-height: 320px;
+      margin-bottom: 12px;
+    }
+
+    .gyg-riviera-note {
+      font-size: .7rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* SUBMIT EVENT */
+
+    .submit-section {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .submit-section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .submit-btn {
+      display: inline-block;
+      background: var(--accent-pink);
+      color: white;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .riviera-intro {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+
+    .riviera-intro p {
+      margin-top: 12px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+      .hero {
+        padding: 30px 18px 120px;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero .highlight {
+        font-size: 2.5rem;
+      }
+
+      .main-content {
+        margin-top: -80px;
+        padding: 0 12px;
+      }
+
+      .calendar-card {
+        padding: 20px 15px;
+      }
+
+      .filter-wrapper {
+        flex-direction: column;
+      }
+
+      .search-input,
+      .city-select {
+        width: 100%;
+      }
+
+      .category-navigation {
+        margin-left: -12px;
+        margin-right: -12px;
+        border-radius: 0;
+        top: 0;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .event-card {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        min-height: 150px;
+      }
+
+      .img-wrapper {
+        height: 100%;
+        min-height: 150px;
+      }
+
+      .card-body {
+        padding: 12px;
+      }
+    }
+
+    /* 2026 DISCOVERY REDESIGN — PRESERVES ORIGINAL EVENT LOGIC */
+    :root { --navy:#07102d; }
+    body { background:#fff; }
+    .hero { min-height:540px; padding:0 24px 125px; background:linear-gradient(90deg,rgba(5,12,31,.75),rgba(5,12,31,.35) 60%,rgba(5,12,31,.26)),url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85") center/cover no-repeat; text-align:left; }
+    .topbar { max-width:1240px; margin:0 auto; padding:25px 0; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .top-brand { display:flex; align-items:center; gap:9px; color:#fff; text-decoration:none; font-size:1.05rem; letter-spacing:.06em; font-weight:900; white-space:nowrap; }
+    .top-brand b { color:var(--accent-green); }
+    .top-brand .logo-graphic { width:34px; height:34px; flex-shrink:0; }
+    .top-nav { display:flex; align-items:center; gap:4px; padding:5px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25); border-radius:999px; backdrop-filter:blur(12px); }
+    .top-nav a { color:#fff; text-decoration:none; font-size:.82rem; font-weight:700; padding:10px 15px; border-radius:999px; white-space:nowrap; }
+    .top-nav a:hover,.top-nav a.current { background:#fff; color:var(--navy); }
+    .top-submit { color:var(--navy); background:#fff; padding:12px 18px; border-radius:999px; font-size:.82rem; font-weight:800; text-decoration:none; white-space:nowrap; }
+    .hero-copy { max-width:1240px; margin:95px auto 0; }
+    .eyebrow,.section-kicker { font-size:.74rem; font-weight:900; letter-spacing:.19em; color:var(--accent-green); }
+    .hero-copy h1 { font-size:clamp(2.7rem,5.5vw,5.3rem); letter-spacing:-.05em; line-height:1.04; text-transform:none; margin:18px 0; max-width:850px; }
+    .hero-copy h1 span { color:var(--accent-green); white-space:nowrap; }
+    @media (min-width: 1100px) { .hero-copy h1 { font-size:clamp(2.7rem,4.3vw,4.4rem); max-width:none; white-space:nowrap; } }
+    .hero-copy p { margin:0; max-width:650px; font-size:1.05rem; line-height:1.65; }
+    .hero-cta { display:inline-block; margin-top:26px; background:var(--accent-pink); color:#fff; text-decoration:none; font-weight:800; padding:14px 23px; border-radius:999px; }
+    .main-content { max-width:1240px; margin:-57px auto 0; padding:0 24px; }
+    .discovery-bar { display:grid; grid-template-columns:1fr 1fr 1fr auto; align-items:stretch; gap:10px; background:#fff; border-radius:23px; box-shadow:0 16px 45px rgba(7,16,45,.15); padding:14px; margin-bottom:68px; }
+    .discovery-field { padding:10px 18px; border-right:1px solid var(--border); min-width:0; }
+    .discovery-field label { display:block; color:var(--navy); font-size:.82rem; font-weight:900; margin-bottom:7px; }
+    .discovery-field select { display:block; border:0; box-shadow:none; background:transparent; border-radius:0; width:100%; padding:2px 0; font-size:.85rem; font-weight:600; color:#536176; outline-offset:4px; }
+    .discovery-submit { align-self:center; border:0; background:var(--accent-pink); color:#fff; border-radius:14px; padding:20px 26px; font-weight:900; cursor:pointer; }
+    .featured-section,.calendar-section,.listing-section { scroll-margin-top:95px; margin-bottom:60px; }
+    .section-heading { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:15px; }
+    .section-heading h2 { color:var(--navy); font-size:clamp(1.65rem,3vw,2.25rem); font-weight:900; letter-spacing:-.035em; margin-top:8px; }
+    .section-heading h2 em { color:var(--accent-pink); font-style:normal; }
+    .section-heading a { color:var(--navy); font-size:.88rem; font-weight:800; text-decoration:none; white-space:nowrap; }
+    .featured-intro,.selected-date-label { color:var(--text-muted); margin:0 0 20px; font-size:.92rem; }
+    .featured-track { display:flex; overflow-x:auto; gap:20px; padding:4px 2px 20px; scroll-snap-type:x mandatory; scrollbar-color:var(--accent-green) #f1f5f9; }
+    .featured-card { flex:0 0 clamp(220px,25%,285px); min-width:0; scroll-snap-align:start; }
+    .featured-open { border:0; padding:0; text-align:left; background:transparent; width:100%; cursor:pointer; font:inherit; color:inherit; }
+    .featured-image { display:block; position:relative; height:225px; overflow:hidden; border-radius:20px; background:#e2e8f0; }
+    .featured-image img { width:100%; height:100%; object-fit:cover; transition:transform .25s; }
+    .featured-open:hover img { transform:scale(1.05); }
+    .featured-date { position:absolute; top:12px; left:12px; display:flex; flex-direction:column; background:#fff; color:var(--navy); border-radius:11px; padding:7px 11px; font-size:.72rem; font-weight:800; }
+    .featured-date strong { font-size:.98rem; }
+    .featured-info { display:flex; flex-direction:column; gap:8px; padding:13px 3px; }
+    .featured-info strong { font-size:1rem; line-height:1.35; }
+    .featured-info span { font-size:.8rem; color:var(--text-muted); }
+    .featured-status { background:#f8fafc; color:var(--text-muted); padding:35px; border-radius:16px; width:100%; }
+    .calendar-section { background:#f7f9fc; border-radius:26px; padding:32px; }
+    .calendar-layout { display:grid; grid-template-columns:minmax(0,480px) 1fr; gap:40px; align-items:center; }
+    .calendar-card { margin:0; width:100%; max-width:none; padding:26px; box-shadow:0 10px 30px rgba(7,16,45,.07); }
+    .cal-header h3 { font-size:1.05rem; font-weight:900; letter-spacing:.05em; }
+    .calendar-side h3 { font-size:clamp(1.5rem,2.7vw,2.2rem); line-height:1.2; margin:12px 0; }
+    .calendar-side p { color:var(--text-muted); line-height:1.65; margin-bottom:24px; }
+    .calendar-side label { font-weight:800; font-size:.83rem; display:block; margin-bottom:9px; }
+    .calendar-side .search-input { width:100%; max-width:390px; border-radius:12px; }
+    .browse-link { display:block; color:var(--accent-pink); font-weight:800; margin-top:20px; text-decoration:none; }
+    .category-navigation { scroll-margin-top:85px; position:relative; top:auto; }
+    .category-nav-inner { justify-content:flex-start; }
+    .riviera-intro { border:1px solid var(--border); }
+    .listing-section { margin-top:28px; }
+    .event-card { border:1px solid var(--border); box-shadow:0 6px 22px rgba(7,16,45,.06); }
+    .img-wrapper { height:190px; }
+    .submit-section { background:var(--navy); color:#fff; max-width:none; padding:45px 24px; margin-top:45px; }
+    .submit-section p { color:#d7deea; line-height:1.6; }
+    .submit-btn { border-radius:999px; }
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { outline:3px solid var(--accent-green); outline-offset:3px; }
+    @media(max-width:950px) { .topbar { flex-wrap:wrap; } .top-nav { order:3; width:100%; justify-content:center; overflow-x:auto; } .discovery-bar { grid-template-columns:repeat(2,minmax(0,1fr)); } .discovery-field:nth-child(2) { border-right:0; } .discovery-submit { width:100%; } .calendar-layout { gap:22px; } }
+    @media(max-width:700px) { .hero { min-height:495px; padding:0 16px 110px; } .topbar { gap:12px; padding:17px 0; } .top-brand { font-size:.82rem; } .top-brand .logo-graphic { width:28px; height:28px; } .top-submit { font-size:.72rem; padding:9px 12px; } .top-nav { justify-content:flex-start; } .top-nav a { font-size:.75rem; padding:8px 12px; } .hero-copy { margin:58px auto 0; } .hero-copy h1 { font-size:clamp(2.35rem,10vw,3.5rem); } .hero-copy p { font-size:.93rem; } .main-content { margin:-60px auto 0; padding:0 14px; } .discovery-bar { gap:5px; border-radius:18px; padding:10px; margin-bottom:45px; } .discovery-field { padding:9px; } .discovery-field label { font-size:.72rem; } .discovery-field select { font-size:.75rem; } .discovery-submit { padding:15px; } .section-heading { align-items:start; } .section-heading a { font-size:.75rem; white-space:normal; text-align:right; } .featured-card { flex-basis:75%; max-width:285px; } .featured-image { height:210px; } .calendar-section { padding:20px 14px; border-radius:20px; } .calendar-layout { grid-template-columns:1fr; } .calendar-card { padding:19px 12px; } .calendar-side { padding:8px; } .category-navigation { margin-left:0; margin-right:0; border-radius:14px; } .img-wrapper { height:100%; } }
+
+    /* Calendar replaces the floating discovery search bar */
+    .calendar-featured {
+      position:relative;
+      margin-top:0;
+      margin-bottom:64px;
+      padding:30px;
+      background:#f7f9fc;
+      border:1px solid #e9edf4;
+      box-shadow:0 18px 45px rgba(7,16,45,.12);
+    }
+    .calendar-featured .calendar-layout { align-items:center; }
+    .calendar-extra-filters {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+    .calendar-extra-filters .discovery-field {
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px;
+    }
+    .calendar-extra-filters .discovery-field label { display:block; font-weight:800; font-size:.8rem; margin-bottom:8px; }
+    .calendar-extra-filters .city-select,
+    .calendar-extra-filters select {
+      width:100%; background:transparent; border:0; padding:0;
+      box-shadow:none; font-size:.85rem; color:#536176;
+    }
+    @media(max-width:700px) {
+      .calendar-featured { padding:20px 14px; margin-bottom:40px; }
+      .calendar-extra-filters { grid-template-columns:1fr; }
+    }
+
+    /* Destination Guide dropdown */
+    .destination-menu { position:relative; }
+    .destination-trigger { border:0; background:transparent; color:#fff; font:700 .82rem -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; padding:10px 15px; border-radius:999px; white-space:nowrap; cursor:pointer; }
+    .destination-trigger:hover,.destination-trigger[aria-expanded="true"] { background:#fff; color:var(--navy); }
+    .destination-links { display:none; position:absolute; top:calc(100% + 8px); left:0; min-width:175px; background:#fff; border-radius:13px; padding:7px; box-shadow:0 15px 35px rgba(7,16,45,.22); z-index:100; }
+    .destination-menu.open .destination-links { display:block; }
+    .top-nav .destination-links a { display:block; color:var(--navy); padding:11px 13px; border-radius:8px; }
+    .top-nav .destination-links a:hover { background:#ffe4f1; color:#ff007a; }
+    @media(max-width:700px) { .destination-trigger { font-size:.75rem; padding:8px 12px; } .destination-links { position:fixed; top:auto; left:16px; right:16px; min-width:0; } }
+
+    /* SEASONAL EDITORIAL HERO — dynamic month, season and real SheetDB highlights */
+    .hero { min-height:640px; padding-bottom:125px; transition:background-image .5s ease; }
+    .hero-copy { margin-top:63px; }
+    .season-edition { display:inline-flex; align-items:center; gap:10px; padding:9px 14px; border:1px solid rgba(255,255,255,.42); border-radius:999px; background:rgba(7,16,45,.30); backdrop-filter:blur(8px); font-size:.73rem; letter-spacing:.13em; font-weight:900; color:#fff; }
+    .edition-dot,.now-pulse { width:8px; height:8px; border-radius:50%; background:var(--accent-green); flex-shrink:0; }
+    .edition-divider { opacity:.5; }
+    .hero-copy .eyebrow { margin-top:23px; }
+    .hero-copy h1 { max-width:1100px; }
+    .hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:18px; }
+    .hero-calendar-link { color:#fff; text-decoration:none; font-weight:800; margin-top:26px; border-bottom:1px solid rgba(255,255,255,.65); padding-bottom:5px; }
+    .hero-now { margin-top:35px; max-width:1000px; background:rgba(7,16,45,.70); border:1px solid rgba(255,255,255,.25); border-radius:18px; padding:16px 18px; backdrop-filter:blur(10px); }
+    .hero-now-label { display:flex; align-items:center; gap:9px; color:var(--accent-green); font-size:.7rem; font-weight:900; letter-spacing:.14em; margin-bottom:11px; }
+    .hero-now-events { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .hero-now-item { background:rgba(255,255,255,.09); color:#fff; text-align:left; border:1px solid rgba(255,255,255,.16); border-radius:10px; padding:11px 12px; cursor:pointer; min-width:0; font:inherit; }
+    .hero-now-item:hover { background:rgba(255,255,255,.19); }
+    .hero-now-item strong { display:block; font-size:.86rem; line-height:1.35; margin-top:4px; }
+    .hero-now-item small { color:#d8e0ed; font-size:.7rem; }
+    .hero-now-loading { color:#e2e8f0; font-size:.83rem; grid-column:1/-1; }
+    .hero[data-season="spring"] { background-image:linear-gradient(90deg,rgba(5,12,31,.78),rgba(5,12,31,.35) 70%),url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=2000&q=85"); }
+    .hero[data-season="summer"] { background-image:linear-gradient(90deg,rgba(5,12,31,.76),rgba(5,12,31,.27) 70%),url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85"); }
+    .hero[data-season="autumn"] { background-image:linear-gradient(90deg,rgba(5,12,31,.55),rgba(5,12,31,.06) 75%),url("https://images.unsplash.com/photo-1657478315749-4152ab02e639?auto=format&fit=crop&w=2200&q=85"); }
+    .hero[data-season="winter"] { background-image:linear-gradient(90deg,rgba(5,12,31,.83),rgba(5,12,31,.40) 70%),url("https://images.unsplash.com/photo-1483664852095-d6cc6870702d?auto=format&fit=crop&w=2000&q=85"); }
+    @media(max-width:700px) { .hero { min-height:0; padding-bottom:105px; } .hero-copy { margin-top:40px; } .hero-copy h1 { font-size:clamp(2.15rem,9vw,3.5rem); white-space:normal; } .hero-copy h1 span { white-space:normal; } .hero-now { margin-top:25px; padding:13px; } .hero-now-events { grid-template-columns:1fr; } .hero-now-item:nth-child(n+3) { display:none; } .season-edition { font-size:.62rem; letter-spacing:.07em; } }
+
+    /* BRIGHT RIVIERA EDITION: authentic Menton photo and rotating photo cards */
+    .hero { min-height:720px; background-position:center center; }
+    .hero-copy { max-width:1240px; }
+    .hero-copy h1 { font-size:clamp(3.2rem,5.2vw,5.5rem); max-width:740px; white-space:normal; line-height:1.02; text-shadow:0 2px 14px rgba(7,16,45,.2); }
+    .hero-copy h1 span { color:var(--accent-pink); white-space:normal; }
+    .hero-now { max-width:1150px; background:transparent; border:0; padding:0; margin-top:34px; backdrop-filter:none; }
+    .hero-now-top { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+    .hero-now-label { margin:0; color:#fff; text-shadow:0 1px 5px #07102d; }
+    .hero-now-events { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; }
+    .hero-now-item { padding:0; overflow:hidden; border:1px solid rgba(255,255,255,.65); background:#fff; color:var(--navy); border-radius:16px; box-shadow:0 12px 28px rgba(7,16,45,.20); }
+    .hero-now-item:hover { background:#fff; transform:translateY(-3px); }
+    .hero-event-photo { position:relative; display:block; height:145px; background:#e2e8f0; }
+    .hero-event-photo img { display:block; width:100%; height:100%; object-fit:cover; }
+    .hero-event-date { position:absolute; top:10px; left:10px; padding:8px 10px; border-radius:10px; background:#fff; font-weight:900; color:var(--navy); font-size:.78rem; }
+    .hero-event-info { display:block; padding:13px 14px 15px; }
+    .hero-now-item strong { margin:0 0 8px; color:var(--navy); font-size:.94rem; }
+    .hero-now-item small { color:#58677f; font-size:.78rem; }
+    .hero-carousel-controls { display:flex; align-items:center; gap:10px; color:#fff; font-size:.8rem; font-weight:800; }
+    .hero-carousel-controls button { width:36px; height:36px; border:0; border-radius:50%; background:#fff; color:var(--navy); font-size:1.55rem; cursor:pointer; }
+    .hero-carousel-controls button:disabled { opacity:.45; cursor:default; }
+    .top-submit { background:var(--accent-pink); color:#fff; }
+    @media(min-width:1000px) { .hero-copy { margin-top:55px; } .hero-now { max-width:870px; margin-left:auto; } }
+    @media(max-width:700px) { .hero { min-height:0; } .hero-copy h1 { font-size:clamp(2.5rem,10vw,3.8rem); } .hero-now-events { grid-template-columns:1fr 1fr; gap:9px; } .hero-now-item:nth-child(n+3) { display:none; } .hero-event-photo { height:110px; } .hero-event-info { padding:10px; } .hero-now-item strong { font-size:.8rem; } .hero-now-item small { font-size:.68rem; } }
+    /* MOBILE NAVIGATION FIX — all links fit, dropdown stays on screen */
+    .destination-mobile-label { display:none; }
+    @media (max-width:700px) {
+      .topbar { position:relative; }
+      .top-nav {
+        display:grid;
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        align-items:stretch;
+        justify-content:stretch;
+        gap:5px;
+        width:100%;
+        min-width:0;
+        overflow:visible;
+        border-radius:18px;
+        padding:7px;
+      }
+      .top-nav > a, .top-nav > .destination-menu {
+        min-width:0;
+        width:100%;
+      }
+      .top-nav > a, .destination-trigger {
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        width:100%;
+        min-height:39px;
+        padding:8px 4px;
+        font-size:clamp(.65rem,2.8vw,.78rem);
+        line-height:1.15;
+        white-space:normal;
+      }
+      .destination-trigger { gap:3px; }
+      .destination-desktop-label { display:none; }
+      .destination-mobile-label { display:inline; }
+      .destination-links {
+        position:absolute;
+        top:calc(100% + 7px);
+        left:auto;
+        right:0;
+        width:min(255px,calc(100vw - 32px));
+        min-width:0;
+        max-height:65vh;
+        overflow-y:auto;
+        z-index:1000;
+      }
+      .top-nav .destination-links a {
+        justify-content:flex-start;
+        min-height:42px;
+        padding:12px 14px;
+        font-size:.85rem;
+        text-align:left;
+      }
+    }
+    /* Compact mobile calendar search; filters remain available on demand */
+    .mobile-filter-toggle { display:none; }
+    @media (max-width:700px) {
+      .calendar-side > .section-kicker,
+      .calendar-side > h3,
+      .calendar-side > p { display:none; }
+      .calendar-side { padding:0 2px 4px; }
+      .calendar-side > label { margin-bottom:8px; }
+      .calendar-side .search-input { max-width:none; }
+      .mobile-filter-toggle {
+        display:flex; align-items:center; justify-content:space-between;
+        width:100%; margin:12px 0 0; padding:11px 14px;
+        border:1px solid #e2e8f0; border-radius:12px;
+        background:#fff; color:#07102d; font:800 .85rem -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+        cursor:pointer;
+      }
+      .filter-toggle-symbol { font-size:1.3rem; line-height:1; color:#ff007a; }
+      .calendar-side .calendar-extra-filters { display:none; margin-top:10px; }
+      .calendar-side .calendar-extra-filters.filters-open { display:grid; }
+      .calendar-side .browse-link { margin-top:12px; font-size:.85rem; }
+    }
+
+    /* HERO CAROUSEL ALIGNMENT + COMPACT MOBILE COUNTER */
+    .hero-now { margin-left:auto; margin-right:auto; }
+    .hero-now-events { justify-content:center; }
+    .hero-carousel-controls { flex-shrink:0; white-space:nowrap; }
+    #hero-carousel-status { display:inline-block; min-width:38px; text-align:center; font-size:.76rem; line-height:1; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    @media (min-width:1000px) {
+      .hero-now { margin-left:auto; margin-right:auto; }
+    }
+    @media (max-width:700px) {
+      .hero-now { width:100%; max-width:560px; margin-left:auto; margin-right:auto; }
+      .hero-now-top { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px 12px; }
+      .hero-now-label { flex:1 1 100%; justify-content:center; text-align:center; flex-wrap:wrap; font-size:.68rem; line-height:1.3; }
+      .hero-carousel-controls { justify-content:center; gap:7px; font-size:.7rem; }
+      .hero-carousel-controls button { width:32px; height:32px; font-size:1.2rem; flex-shrink:0; }
+      #hero-carousel-status { min-width:34px; font-size:.7rem; }
+      .hero-now-events { width:100%; margin:0 auto; grid-template-columns:repeat(2,minmax(0,1fr)); justify-content:center; gap:10px; }
+      .hero-now-item { width:100%; min-width:0; }
+    }
+
+    @media(max-width:700px) { .hero-event-wrap:nth-child(n+3) { display:none; } }
+    /* SAVED EVENTS — hearts and personal collection */
+    .save-heart { display:inline-flex; align-items:center; justify-content:center; gap:5px; border:1px solid #e2e8f0; border-radius:999px; padding:7px 11px; background:#fff; color:#07102d; cursor:pointer; font-size:.8rem; font-weight:800; }
+    .save-heart svg { width:19px; height:19px; stroke:#ff007a; stroke-width:2; fill:none; }
+    .save-heart[aria-pressed="true"] { background:#ffe4f1; border-color:#ffb1d6; color:#c5005f; }
+    .save-heart[aria-pressed="true"] svg { fill:#ff007a; }
+    .event-card .img-wrapper .save-heart { position:absolute; right:10px; bottom:10px; z-index:4; width:38px; height:38px; padding:7px; box-shadow:0 2px 9px #0002; }
+    .hero-event-wrap { position:relative; min-width:0; }
+    .hero-event-wrap .hero-now-item { width:100%; height:100%; }
+    .hero-event-wrap .save-heart { position:absolute; top:8px; right:8px; z-index:5; width:35px; height:35px; padding:6px; box-shadow:0 2px 9px #0002; }
+    .saved-section { margin:0 0 54px; padding:25px; border:1px solid #e9edf4; border-radius:22px; background:#fff7fb; scroll-margin-top:90px; }
+    .saved-section h2 { color:#07102d; font-size:1.55rem; margin:5px 0 8px; }
+    .saved-note { color:#64748b; font-size:.86rem; margin-bottom:16px; line-height:1.5; }
+    .saved-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:12px; }
+    .saved-item { display:flex; gap:12px; padding:12px; border:1px solid #e2e8f0; border-radius:14px; background:white; min-width:0; }
+    .saved-item img { width:72px; height:75px; object-fit:cover; border-radius:9px; flex-shrink:0; }
+    .saved-item-body { min-width:0; flex:1; display:flex; flex-direction:column; gap:6px; }
+    .saved-item-body strong { font-size:.87rem; line-height:1.3; }
+    .saved-item-body small { color:#64748b; }
+    .saved-item-actions { display:flex; align-items:center; gap:10px; margin-top:auto; }
+    .saved-item-actions a { font-size:.78rem; color:#c5005f; font-weight:800; }
+    .saved-empty { color:#64748b; font-size:.9rem; padding:12px 0; }
+    .saved-nav-count { display:inline-block; margin-left:3px; }
+    @media(max-width:700px) { .saved-section { padding:18px 14px; } .saved-list { grid-template-columns:1fr; } }
+  
+/* Halloween editorial feature */
+.halloween-feature{margin:0 0 52px;padding:25px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(230px,.7fr);gap:22px;align-items:center;border-radius:23px;background:linear-gradient(125deg,#101632,#381039);color:white;box-shadow:0 12px 30px #07102d19}
+.halloween-feature .halloween-kicker{color:#a3e635;letter-spacing:.14em;font-size:.75rem;font-weight:900;text-transform:uppercase}
+.halloween-feature h2{font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.14;margin:12px 0}
+.halloween-feature p{line-height:1.6;color:#e5ddea;font-size:.94rem}
+.halloween-feature a{display:inline-block;background:#ff007a;color:white;text-decoration:none;padding:13px 19px;border-radius:999px;font-weight:850;margin-top:17px}
+.halloween-feature .halloween-art{border-radius:16px;min-height:175px;background:radial-gradient(circle at 70% 32%,#ffad31 0 35px,transparent 37px),radial-gradient(circle at 35% 80%,#ff007a66,transparent 65%),linear-gradient(145deg,#342148,#100f24);display:flex;justify-content:center;align-items:center;font-size:5rem}
+@media(max-width:700px){.halloween-feature{grid-template-columns:1fr;padding:22px}.halloween-feature .halloween-art{min-height:110px;font-size:3.5rem;order:-1}}
+
+/* French Riviera best-things editorial feature */
+.best-things-feature{display:grid;margin:0 0 42px;padding:28px;grid-template-columns:minmax(0,1.25fr) minmax(220px,.75fr);gap:24px;align-items:center;border-radius:23px;background:linear-gradient(120deg,#102b3a,#17616a 62%,#d58a73);color:#fff;box-shadow:0 12px 30px #07102d19;overflow:hidden}
+.best-things-feature .feature-kicker{color:#f6c5a8;letter-spacing:.14em;font-size:.72rem;font-weight:900;text-transform:uppercase}
+.best-things-feature h2{font-size:clamp(1.55rem,3vw,2.25rem);line-height:1.14;margin:12px 0}
+.best-things-feature p{line-height:1.6;color:#edf4f1;font-size:.94rem}
+.best-things-feature a{display:inline-block;background:#fff;color:#123c46;text-decoration:none;padding:13px 19px;border-radius:999px;font-weight:850;margin-top:14px}
+.best-things-feature .feature-art{min-height:185px;border-radius:16px;background:radial-gradient(ellipse at 25% 80%,#e8b28b 0 12%,transparent 13%),radial-gradient(ellipse at 75% 70%,#f0d6a3 0 10%,transparent 11%),linear-gradient(155deg,#7bb7b4 0 28%,#e8c7a3 29% 42%,#17616a 43% 66%,#123b4a 67%);display:flex;align-items:flex-end;justify-content:center;padding:16px;font-size:2.4rem;text-shadow:0 3px 12px #0008}
+@media(max-width:700px){.best-things-feature{grid-template-columns:1fr;padding:22px}.best-things-feature .feature-art{min-height:110px;order:-1}}
+</style>
+<style>
+/* Christmas 2026 homepage feature */
+.christmas-feature{display:grid;margin:0 0 52px;padding:25px;grid-template-columns:minmax(0,1.3fr) minmax(230px,.7fr);gap:22px;align-items:center;border-radius:23px;background:linear-gradient(120deg,#10243c 0%,#254b48 58%,#7c304d 100%);color:#fff;box-shadow:0 12px 30px #07102d19;overflow:hidden}
+.christmas-feature .christmas-kicker{color:#f5d78c;letter-spacing:.14em;font-size:.75rem;font-weight:900;text-transform:uppercase}
+.christmas-feature h2{font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.14;margin:12px 0}
+.christmas-feature p{line-height:1.6;color:#f0e8e5;font-size:.94rem}
+.christmas-feature a{display:inline-block;background:#ff007a;color:#fff;text-decoration:none;padding:13px 19px;border-radius:999px;font-weight:850;margin-top:17px}
+.christmas-feature .christmas-art{min-height:205px;border-radius:16px;background:radial-gradient(circle at 50% 28%,#f7e6a6 0 2px,transparent 3px),radial-gradient(circle at 24% 70%,#f7e6a6 0 2px,transparent 3px),radial-gradient(circle at 80% 60%,#f7e6a6 0 2px,transparent 3px),linear-gradient(145deg,#153b39,#0d2036 60%,#4c233d);display:flex;align-items:center;justify-content:center;font-size:clamp(3.4rem,7vw,6rem);letter-spacing:.08em;text-shadow:0 6px 22px #0008}
+.past-guides-footer{display:block;margin:20px auto 8px;font-size:.76rem;opacity:.82}
+.past-guides-footer a{color:#d7deea;text-decoration:underline;text-underline-offset:3px;margin:0 4px}
+@media(max-width:700px){.christmas-feature{grid-template-columns:1fr;padding:22px}.christmas-feature .christmas-art{min-height:145px;order:-1}}
+
+/* CHRISTMAS HOMEPAGE PREVIEW — design-only overrides */
+:root{--accent-pink:#bd1451;--accent-green:#d8b36a;--navy:#071b3d;--page-bg:#fbf6ee;--border:#eadfce;--soft-pink:#f8e8eb;--soft-green:#edf0e4}
+body{background:#fbf6ee;color:#10213e}
+.hero{min-height:650px;padding-bottom:115px;background:linear-gradient(90deg,rgba(4,17,43,.78),rgba(4,17,43,.28) 68%,rgba(4,17,43,.24)),url("https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=2200&q=88") center 48%/cover no-repeat}
+.topbar{border-bottom:1px solid rgba(255,255,255,.18)}
+.top-brand{font-family:Georgia,serif;font-size:1.3rem;letter-spacing:.08em}
+.top-brand b{color:#e7c47d}
+.top-nav{background:rgba(5,19,48,.48);border-color:rgba(255,255,255,.28)}
+.top-nav a:hover,.top-nav a.current{background:#e7c47d;color:#071b3d}
+.top-submit{background:#e7c47d;color:#071b3d}
+.hero-copy{margin-top:76px}
+.eyebrow,.section-kicker{color:#f2d58f}
+.hero-copy h1{font-family:Georgia,serif;font-weight:500;letter-spacing:-.035em;text-shadow:0 4px 24px #0008}
+.hero-copy h1 span{color:#f1d58f}
+.hero-copy p{color:#fff;font-size:1.08rem}
+.hero-cta{background:#bd1451;border:1px solid rgba(255,255,255,.25);box-shadow:0 8px 24px #0004}
+.hero-calendar-link{color:#fff}
+.hero-now{background:rgba(5,18,43,.68);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(10px)}
+.discovery-bar{border:1px solid #ead8b8}
+.discovery-submit{background:#bd1451}
+.section-heading h2{font-family:Georgia,serif;color:#10213e}
+.section-heading h2 em{color:#bd1451}
+.category-navigation{background:#fffaf2;border-color:#eadfce}
+.category-nav-btn{border-radius:8px}
+.nav-market,.nav-exhibition{background:#f8e8eb;color:#a40f45}
+.nav-public-event,.nav-live-music{background:#10213e;color:#f1d58f}
+.calendar-section,.things-to-do-section,.submit-section,.riviera-intro{background:#fffaf2;border-color:#eadfce}
+.event-card,.featured-card{border:1px solid #eadfce;box-shadow:0 8px 24px rgba(25,30,45,.08)}
+.btn-link{background:#f8e8eb;color:#94113f}
+.btn-link:hover{background:#bd1451}
+.christmas-home-banner{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;margin:0 auto 48px;padding:30px;border:1px solid #ead8b8;border-radius:22px;background:linear-gradient(115deg,#fffaf1,#f5ead8);box-shadow:0 12px 30px rgba(30,25,15,.07)}
+.christmas-home-banner .season-label{color:#a40f45;font-size:.72rem;font-weight:900;letter-spacing:.16em}
+.christmas-home-banner h2{font:500 clamp(1.7rem,3vw,2.6rem)/1.12 Georgia,serif;color:#10213e;margin:10px 0}
+.christmas-home-banner p{color:#596477;line-height:1.65}
+.christmas-home-banner a{display:inline-block;margin-top:15px;padding:12px 18px;border-radius:999px;background:#bd1451;color:#fff;text-decoration:none;font-weight:800}
+.christmas-home-banner .ornament{min-height:160px;border-radius:16px;background:linear-gradient(140deg,rgba(5,22,49,.22),rgba(5,22,49,.15)),url("https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&w=900&q=85") center/cover;color:#f8e8c0;display:flex;align-items:center;justify-content:center;font:italic 2rem Georgia,serif;text-shadow:0 2px 10px #000}
+footer{background:#071b3d!important}
+@media(max-width:700px){.hero{min-height:710px;padding:0 16px 100px}.hero-copy{margin-top:52px}.christmas-home-banner{grid-template-columns:1fr;padding:22px}.christmas-home-banner .ornament{min-height:145px;order:-1}.topbar{align-items:flex-start}}
+
+</style>
+</head>
+
+<body>
+
+  <header class="hero" id="home">
+    <div class="topbar">
+      <a class="top-brand" href="#home" aria-label="Inside Riviera homepage">
+        <svg class="logo-graphic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C7 2 4 5 4 9h16c0-4-3-7-8-7Z"/><path d="M11 9h2v11h-2z"/><path d="M2 22c3-2 5 2 8 0s5 2 8 0 4 0 4 0" stroke="#a3e635" fill="none" stroke-width="1.2"/></svg>
+        <span>INSIDE <b>RIVIERA</b></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a class="current" href="#home">Home</a>
+        <a href="#upcoming">Events</a>
+        <a href="#things-to-do">Things to Do</a>
+        <div class="destination-menu">
+          <button class="destination-trigger" type="button" aria-expanded="false" aria-controls="destination-links"><span class="destination-desktop-label">Destination Guide</span><span class="destination-mobile-label">Destinations</span> <span aria-hidden="true">⌄</span></button>
+          <div class="destination-links" id="destination-links">
+            <a href="/sanremo.html">Sanremo</a>
+            <a href="/ventimiglia.html">Ventimiglia</a>
+            <a href="/menton.html">Menton</a>
+            <a href="/montecarlo.html">Monte Carlo</a>
+          </div>
+        </div>
+        <a href="#categories">Categories</a>
+        <a href="#calendar">Calendar</a>
+      </nav>
+      <a class="top-submit" href="#submit-event">+ Submit an event</a>
+    </div>
+    <div class="hero-copy">
+      <div class="season-edition"><span class="edition-dot" aria-hidden="true"></span><span id="season-edition">THE RIVIERA EDIT</span><span class="edition-divider">/</span><span id="edition-date"></span></div>
+      <div class="eyebrow" id="season-kicker">YOUR GUIDE TO WHAT'S HAPPENING</div>
+      <h1 id="season-headline">Your Riviera, <span>what's on.</span></h1>
+      <p id="season-description">Discover concerts, markets, festivals and local experiences from Sanremo and Bordighera to Menton and Monte Carlo.</p>
+      <div class="hero-actions"><a class="hero-cta" href="/christmas-2026-riviera.html">Read our Christmas guide <span aria-hidden="true">↗</span></a><a class="hero-calendar-link" href="#calendar">Browse the calendar →</a></div>
+      <div class="hero-now" id="upcoming" aria-label="Featured upcoming events"><div class="hero-now-top"><div class="hero-now-label"><span class="now-pulse"></span> WHAT'S COMING UP <span id="hero-now-month"></span></div><div class="hero-carousel-controls"><button type="button" id="hero-carousel-prev" aria-label="Previous events" onclick="moveHeroCarousel(-1)">‹</button><span id="hero-carousel-status" aria-live="polite"></span><button type="button" id="hero-carousel-next" aria-label="Next events" onclick="moveHeroCarousel(1)">›</button></div></div><div class="hero-now-events" id="hero-now-events"><span class="hero-now-loading">Checking this month's highlights…</span></div></div>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <section class="christmas-home-banner" aria-label="Christmas on the Riviera guide">
+      <div><div class="season-label">THE FESTIVE RIVIERA · 2026</div>
+      <h2>Discover the Riviera this Christmas</h2>
+      <p>From sparkling Christmas markets and illuminated waterfronts to magnificent trees and festive events, explore the season from Sanremo to Monte-Carlo.</p>
+      <a href="/christmas-2026-riviera.html">Explore the Christmas guide →</a></div>
+      <div class="ornament" role="img" aria-label="Festive Christmas lights">A Riviera Christmas</div>
+    </section>
+
+    <!-- Retained for the date-filter logic -->
+    <select id="quick-date" aria-label="Date filter" hidden>
+      <option value="today">Today</option>
+      <option value="tomorrow">Tomorrow</option>
+      <option value="weekend">This weekend</option>
+      <option value="custom">Selected calendar date</option>
+    </select>
+
+    <!-- CALENDAR AND SEARCH -->
+    <section class="calendar-section calendar-featured" id="calendar" aria-labelledby="calendar-heading">
+      <div class="section-heading"><div><span class="section-kicker">PLAN YOUR VISIT</span><h2 id="calendar-heading">Find your next <em>Riviera moment</em></h2></div></div>
+      <div class="calendar-layout">
+        <div class="calendar-card">
+          <div class="cal-header">
+            <button class="nav-btn" onclick="changeMonth(-1)" aria-label="Previous month">&lt;</button>
+            <h3 id="calendar-month-title">Loading...</h3>
+            <button class="nav-btn" onclick="changeMonth(1)" aria-label="Next month">&gt;</button>
+          </div>
+          <div class="weekdays"><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div></div>
+          <div class="days-grid" id="days-grid"></div>
+        </div>        <div class="calendar-side">
+          <span class="section-kicker">EXPLORE MORE</span>
+          <h3>Every day brings something new.</h3>
+          <p>Explore what's happening across the French and Italian Riviera. Pick a date to see upcoming events, search for something specific, or browse by town and category.</p>
+          <label for="search-input">Search events</label>
+          <input type="search" class="search-input" id="search-input" placeholder="Search concerts, markets, places…" oninput="updateAllListings()">
+          <button class="mobile-filter-toggle" type="button" aria-controls="calendar-extra-filters" aria-expanded="false" onclick="const filters=document.getElementById('calendar-extra-filters'); const expanded=this.getAttribute('aria-expanded')==='true'; this.setAttribute('aria-expanded',String(!expanded)); filters.classList.toggle('filters-open',!expanded); this.querySelector('.filter-toggle-symbol').textContent=expanded?'+':'−';">⚙ Filters <span class="filter-toggle-symbol" aria-hidden="true">+</span></button>
+          <div class="calendar-extra-filters" id="calendar-extra-filters">      <div class="discovery-field">
+        <label for="city-filter">📍 Location</label>
+        <select class="city-select" id="city-filter" onchange="updateAllListings()">
+          <option value="ALL">All Riviera towns</option>
+          <option value="Sanremo">Sanremo</option>
+          <option value="Bordighera">Bordighera</option>
+          <option value="Ventimiglia">Ventimiglia</option>
+          <option value="Vallecrosia">Vallecrosia</option>
+          <option value="Ospedaletti">Ospedaletti</option>
+          <option value="Vallebona">Vallebona</option>
+          <option value="Menton">Menton</option>
+          <option value="Monte Carlo">Monte Carlo</option>
+        </select>
+      </div>      <div class="discovery-field">
+        <label for="category-filter">◈ Category</label>
+        <select id="category-filter" onchange="updateAllListings()">
+          <option value="ALL">All categories</option>
+          <option value="Market">Markets</option>
+          <option value="Public Event">Public events</option>
+          <option value="Concerts and Theatre">Concerts and Theatre</option>
+          <option value="Exhibition">Exhibitions</option>
+          <option value="Live Music">Live music</option>
+          <option value="Sport">Sport</option>
+          <option value="Private Tour">Private tours</option>
+        </select>
+      </div></div>
+          <a href="#event-listings" class="browse-link">See events for selected date →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="saved-section" id="saved-events" aria-labelledby="saved-heading">
+      <span class="section-kicker">YOUR PERSONAL SHORTLIST</span>
+      <h2 id="saved-heading">❤️ My Saved Events <span id="saved-count"></span></h2>
+      <p class="saved-note">Tap the heart on an event to keep it here. Saved events stay on this browser and device.</p>
+      <div class="saved-list" id="saved-list"><p class="saved-empty">No saved events yet. Tap a heart to get started!</p></div>
+    </section>
+
+
+    <!-- Editorial Halloween guide: separate indexable page -->
+    <section class="christmas-feature" aria-labelledby="christmas-guide-title">
+      <div>
+        <span class="christmas-kicker">🎄 The Riviera Edit · Christmas 2026</span>
+        <h2 id="christmas-guide-title">Christmas on the Riviera: Trees, Lights &amp; Festive Events</h2>
+        <p>Follow our festive route from Sanremo to Monte-Carlo, with the best Christmas trees, sparkling streets, markets and seasonal events across the Italian and French Riviera.</p>
+        <a href="/christmas-2026-riviera.html">Explore the Christmas guide →</a>
+      </div>
+      <div class="christmas-art" role="img" aria-label="Festive Christmas trees and lights">🎄 ✨ 🎄</div>
+    </section>
+<!-- EVENTS -->
+    <section id="event-listings" class="listing-section" aria-labelledby="listings-title">
+      <div class="section-heading"><div><span class="section-kicker">DISCOVER</span><h2 id="listings-title">Events for <em>your selected date</em></h2></div></div>
+      <p id="selected-date-label" class="selected-date-label"></p>
+      <div id="events-container"></div>
+    </section>
+
+    <!-- CATEGORY BUTTONS -->
+    <div class="category-navigation" id="categories">
+      <div
+        class="category-nav-inner"
+        id="category-nav-inner">
+      </div>
+    </div>
+
+    <!-- THINGS TO DO GUIDES -->
+    <section class="things-to-do-section" id="things-to-do" aria-labelledby="things-to-do-heading">
+      <div class="things-to-do-heading">
+        <span class="section-kicker">EXPLORE THE RIVIERA</span>
+        <h2 id="things-to-do-heading">Things to Do</h2>
+        <p>Independent guides to memorable places, experiences and days out on both sides of the border.</p>
+      </div>
+      <div class="things-to-do-grid">
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">FRANCE · CÔTE D’AZUR</span>
+          <h3>30 Wonderful Things to Do on the French Riviera</h3>
+          <p>From Menton and Nice to Antibes, Cannes, hilltop villages, gardens and coastal walks.</p>
+          <a href="/best-things-to-do-french-riviera.html">Explore the French Riviera guide →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">ITALY · RIVIERA DEI FIORI</span>
+          <h3>30 Wonderful Things to Do on the Italian Riviera</h3>
+          <p>Discover Ventimiglia, Bordighera, Sanremo, Imperia, inland villages, gardens and the coast path.</p>
+          <a href="/best-things-to-do-italian-riviera.html">Explore the Italian Riviera guide →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">ITALY · FOOD &amp; DRINK</span>
+          <h3>Where to Eat the Best Pizza on the Italian Riviera</h3>
+          <p>Discover pizzerias from Ventimiglia to Imperia, plus the local speciality sardenaira.</p>
+          <a href="/best-pizza-italian-riviera.html">Explore the pizza guide →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">FRANCE · FOOD &amp; DRINK</span>
+          <h3>20 Typical Foods You Must Try on the French Riviera</h3>
+          <p>From socca and salade niçoise to bouillabaisse, Menton lemons and tarte tropézienne.</p>
+          <a href="/typical-food-french-riviera.html">Explore the French Riviera food guide →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">FRANCE &amp; ITALY · OUTDOORS</span>
+          <h3>The Riviera by Bike: Coastal Paths and Itineraries</h3>
+          <p>Explore scenic cycle paths from Nice to Cannes and Sanremo to Imperia, with half-day and full-day rides and café stops.</p>
+          <a href="/bike-paths-cycling-itineraries-french-italian-riviera.html">Explore the cycling guide →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">FRANCE &amp; ITALY · SPORT</span>
+          <h3>Where to Play Golf on the Riviera</h3>
+          <p>Discover golf courses, short courses and practice facilities from Menton and Monaco to Sanremo, Cannes and Saint-Tropez.</p>
+          <a href="/where-to-play-golf-french-italian-riviera.html">Explore the Riviera golf guide →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">FRANCE &amp; ITALY · SPORT</span>
+          <h3>Where to Play Padel and Tennis on the Riviera</h3>
+          <p>Find tennis clubs and padel courts from Menton and Nice to Ventimiglia, Bordighera, Sanremo and Imperia.</p>
+          <a href="/where-to-play-padel-tennis-french-italian-riviera.html">Explore the racket-sports guide →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">FRANCE &amp; ITALY · INDOORS</span>
+          <h3>20 Best Things to Do on a Rainy Day on the Riviera</h3>
+          <p>Discover museums, aquariums, perfume workshops, olive-oil experiences and easy half-day and full-day rainy-day itineraries.</p>
+          <a href="/rainy-day-things-to-do-french-italian-riviera.html">Explore the rainy-day guide →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">FRANCE &amp; ITALY · SWIMMING</span>
+          <h3>Where to Swim on a Cold Day on the Riviera</h3>
+          <p>Find indoor heated pools, warm spa water and winter swimming options from Monaco and Cannes to Bordighera, Sanremo and Imperia.</p>
+          <a href="/swimming-pools-cold-days-french-italian-riviera.html">Explore the winter swimming guide →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">ITALY · LIVE BEACH CONDITIONS</span>
+          <h3>Calandre Beach Watch</h3>
+          <p>Check the latest sea forecast and see whether conditions may leave exposed sand at Le Calandre in Ventimiglia.</p>
+          <a href="/calandre-beach-watch.html">Check today's beach outlook →</a>
+        </article>
+        <article class="things-to-do-card">
+          <span class="things-to-do-region">FRANCE &amp; ITALY · 5-DAY ITINERARY</span>
+          <h3>Five Unforgettable Days on the French and Italian Riviera</h3>
+          <p>Follow a coast-to-coast route from Nice and Menton to Ventimiglia, Bordighera, Sanremo and Imperia.</p>
+          <a href="/5-day-french-italian-riviera-itinerary.html">Explore the five-day itinerary →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="riviera-intro">
+      <h2>Discover What's Happening on the Riviera</h2>
+      <p>
+        Inside Riviera helps visitors and residents discover
+        local events, markets, concerts and exhibitions
+        and activities across the Italian and French Riviera.
+      </p>
+      <p>
+        Explore what's happening in Sanremo, Bordighera,
+        Ventimiglia, Menton, Monte Carlo and nearby towns.
+        Browse our calendar and discover activities for
+        your visit.
+      </p>
+    </section>
+
+    <!-- SUBMIT EVENT -->
+    <div class="submit-section" id="submit-event">
+      <h2>Add Your Event</h2>
+      <p>
+        Got an event happening in the Riviera?
+        Submit it via our official form and it will
+        auto-populate on the calendar!
+      </p>
+      <a
+        class="submit-btn"
+        href="https://forms.gle/GTXcdJFB4TnCidsL9"
+        target="_blank"
+        rel="noopener">
+        Open Event Submission Form ↗
+      </a>
+    </div>
+
+  </main>
+
+  <script>
+    "use strict";
+
+    /* GLOBAL STATE */
+
+    let allEvents = [];
+
+    let selectedYear = new Date().getFullYear();
+    let selectedMonth = new Date().getMonth();
+    let selectedDay = new Date().getDate();
+
+    const monthNames = [
+      "JANUARY", "FEBRUARY", "MARCH",
+      "APRIL", "MAY", "JUNE",
+      "JULY", "AUGUST", "SEPTEMBER",
+      "OCTOBER", "NOVEMBER", "DECEMBER"
+    ];
+
+    const categoryOrder = [
+      "Market",
+      "Public Event",
+      "Concerts and Theatre",
+      "Exhibition",
+      "Live Music",
+      "Sport",
+      "Private Tour"
+    ];
+
+    const categoryStyles = {
+      "market": "tag-market",
+      "public event": "tag-public-event",
+      "concerts and theatre": "tag-concert",
+      "exhibition": "tag-exhibition",
+      "live music": "tag-live-music",
+      "sport": "tag-sport",
+      "private tour": "tag-private-tour"
+    };
+
+    const navButtonStyles = {
+      "market": "nav-market",
+      "public event": "nav-public-event",
+      "concerts and theatre": "nav-concert",
+      "exhibition": "nav-exhibition",
+      "live music": "nav-live-music",
+      "sport": "nav-sport",
+      "private tour": "nav-private-tour"
+    };
+
+    const categoryDotColours = {
+      "market": "#ff007a",
+      "public event": "#0f172a",
+      "concerts and theatre": "#a78bfa",
+      "exhibition": "#ff007a",
+      "live music": "#a3e635",
+      "sport": "#e11d48",
+      "private tour": "#0369a1"
+    };
+
+    const fallbackImage =
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80";
+
+    /* HELPERS */
+
+    function getField(obj, keys) {
+      for (const key of keys) {
+        if (
+          obj[key] !== undefined &&
+          obj[key] !== null &&
+          obj[key] !== ""
+        ) {
+          return obj[key];
+        }
+      }
+      return "";
+    }
+
+    function parseNum(value) {
+      if (
+        value === undefined ||
+        value === null ||
+        value === ""
+      ) {
+        return NaN;
+      }
+
+      const result = Number(
+        String(value).replace(/,/g, "").trim()
+      );
+
+      return Number.isFinite(result) ? result : NaN;
+    }
+
+    function categoryKey(value) {
+      const key = String(value || "").trim().toLowerCase();
+      // Keep the spreadsheet labels unchanged while grouping concerts and theatre together.
+      if (["concert", "concerts", "theatre", "theater", "concerts and theatre", "concert and theatre"].includes(key)) {
+        return "concerts and theatre";
+      }
+      return key;
+    }
+
+    function parseCategories(value) {
+      if (!value) return ["Public Event"];
+
+      const result = String(value)
+        .split(",")
+        .map(value => value.trim())
+        .filter(Boolean)
+        .map(value => categoryKey(value) === "concerts and theatre" ? "Concerts and Theatre" : value);
+
+      // An event tagged both Concert and Theatre should appear only once in this category.
+      return result.length ? [...new Set(result)] : ["Public Event"];
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function cleanImageUrl(value) {
+      if (!value) return "";
+
+      let url = String(value).trim();
+
+      const match = url.match(
+        /\((https?:\/\/[^)\s]+)\)/
+      );
+
+      if (match) url = match[1];
+
+      return url
+        .replace(/^["']|["']$/g, "")
+        .trim();
+    }
+
+    function getCategoryClass(category) {
+      return categoryStyles[categoryKey(category)] ||
+        "tag-default";
+    }
+
+    function getNavButtonClass(category) {
+      return navButtonStyles[categoryKey(category)] ||
+        "nav-public-event";
+    }
+
+    /* DATE AND RECURRENCE */
+
+    function isEventActiveOnDate(event, targetDate) {
+      const start = new Date(
+        event.year,
+        event.month,
+        event.date
+      );
+
+      const hasEnd =
+        Number.isFinite(event.endYear) &&
+        Number.isFinite(event.endMonth) &&
+        Number.isFinite(event.endDate);
+
+      const end = hasEnd
+        ? new Date(
+            event.endYear,
+            event.endMonth,
+            event.endDate
+          )
+        : new Date(start);
+
+      start.setHours(0, 0, 0, 0);
+      end.setHours(0, 0, 0, 0);
+
+      if (targetDate < start || targetDate > end) {
+        return false;
+      }
+
+      const frequency = String(
+        event.frequency || ""
+      ).trim().toLowerCase();
+
+      const recurrence = String(
+        event.recurrence || ""
+      ).trim().toLowerCase();
+
+      if (
+        frequency === "one-off" ||
+        frequency === "one off" ||
+        frequency === ""
+      ) {
+        return true;
+      }
+
+      if (frequency === "daily") {
+        return true;
+      }
+
+      const days = [
+        "sunday", "monday", "tuesday",
+        "wednesday", "thursday", "friday",
+        "saturday"
+      ];
+
+      const dayName = days[targetDate.getDay()];
+
+      if (
+        recurrence &&
+        !recurrence.includes(dayName)
+      ) {
+        return false;
+      }
+
+      if (
+        recurrence.includes("1st") ||
+        recurrence.includes("2nd") ||
+        recurrence.includes("3rd") ||
+        recurrence.includes("4th") ||
+        recurrence.includes("last")
+      ) {
+        const weekNumber = Math.ceil(
+          targetDate.getDate() / 7
+        );
+
+        let matches = false;
+
+        if (
+          recurrence.includes("1st") &&
+          weekNumber === 1
+        ) matches = true;
+
+        if (
+          recurrence.includes("2nd") &&
+          weekNumber === 2
+        ) matches = true;
+
+        if (
+          recurrence.includes("3rd") &&
+          weekNumber === 3
+        ) matches = true;
+
+        if (
+          recurrence.includes("4th") &&
+          weekNumber === 4
+        ) matches = true;
+
+        if (recurrence.includes("last")) {
+          const nextWeek = new Date(targetDate);
+          nextWeek.setDate(
+            nextWeek.getDate() + 7
+          );
+
+          if (
+            nextWeek.getMonth() !==
+            targetDate.getMonth()
+          ) {
+            matches = true;
+          }
+        }
+
+        if (!matches) return false;
+      }
+
+      if (
+        frequency === "biweekly" ||
+        recurrence.includes("every other")
+      ) {
+        const diffDays = Math.round(
+          (targetDate - start) / 86400000
+        );
+
+        const diffWeeks = Math.floor(
+          diffDays / 7
+        );
+
+        if (diffWeeks % 2 !== 0) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    /* CALENDAR - RUNS WITHOUT WAITING FOR SHEETDB */
+
+    function buildCalendar() {
+      const title = document.getElementById(
+        "calendar-month-title"
+      );
+
+      const grid = document.getElementById(
+        "days-grid"
+      );
+
+      if (!title || !grid) return;
+
+      title.textContent =
+        monthNames[selectedMonth] + " " + selectedYear;
+
+      grid.innerHTML = "";
+
+      const firstDay = new Date(
+        selectedYear,
+        selectedMonth,
+        1
+      ).getDay();
+
+      const offset = (firstDay + 6) % 7;
+
+      const totalDays = new Date(
+        selectedYear,
+        selectedMonth + 1,
+        0
+      ).getDate();
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      for (let i = 0; i < offset; i++) {
+        const blank = document.createElement("div");
+        blank.className = "day-cell empty";
+        grid.appendChild(blank);
+      }
+
+      for (let day = 1; day <= totalDays; day++) {
+        const cell = document.createElement("div");
+        cell.className = "day-cell";
+
+        const date = new Date(
+          selectedYear,
+          selectedMonth,
+          day
+        );
+
+        date.setHours(0, 0, 0, 0);
+
+        if (date < today) {
+          cell.classList.add("past");
+        }
+
+        if (day === selectedDay) {
+          cell.classList.add("active");
+        }
+
+        const number = document.createElement("div");
+        number.className = "day-number";
+        number.textContent = day;
+
+        cell.appendChild(number);
+
+        const hasEvents = allEvents.some(event =>
+          isEventActiveOnDate(event, date)
+        );
+
+        if (hasEvents) {
+          const dot = document.createElement("div");
+          dot.className = "event-dot";
+          cell.appendChild(dot);
+        }
+
+        cell.onclick = function () {
+          selectedDay = day;
+          document.getElementById("quick-date").value = "custom";
+          buildCalendar();
+          renderEvents();
+        };
+
+        grid.appendChild(cell);
+      }
+
+      updateHeroDate();
+    }
+
+    function updateHeroDate() {
+      const hero = document.getElementById(
+        "hero-date-text"
+      );
+
+      if (!hero) return;
+
+      const today = new Date();
+
+      const isToday =
+        selectedYear === today.getFullYear() &&
+        selectedMonth === today.getMonth() &&
+        selectedDay === today.getDate();
+
+      if (isToday) {
+        hero.textContent = "TODAY";
+      } else {
+        hero.textContent =
+          selectedDay + " " +
+          monthNames[selectedMonth];
+      }
+    }
+
+    function changeMonth(direction) {
+      selectedMonth += direction;
+
+      if (selectedMonth > 11) {
+        selectedMonth = 0;
+        selectedYear++;
+      }
+
+      if (selectedMonth < 0) {
+        selectedMonth = 11;
+        selectedYear--;
+      }
+
+      selectedDay = 1;
+      document.getElementById("quick-date").value = "custom";
+
+      buildCalendar();
+      renderEvents();
+    }
+
+    /* GOOGLE SHEETS CONNECTION */
+
+    async function loadEvents() {
+      try {
+        const response = await fetch(
+          "https://sheetdb.io/api/v1/nxxtx0pb2uuw7?_t=" +
+          Date.now()
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "SheetDB returned HTTP " + response.status
+          );
+        }
+
+        const rawData = await response.json();
+
+        if (!Array.isArray(rawData)) {
+          throw new Error(
+            "SheetDB response is not an array"
+          );
+        }
+
+        allEvents = rawData.map(row => {
+          const clean = {};
+
+          for (const key in row) {
+            const normalizedKey = key
+              .toLowerCase()
+              .replace(/[\s_-]/g, "");
+
+            clean[normalizedKey] = row[key];
+          }
+
+          const year = parseNum(
+            getField(clean, [
+              "startyear", "year", "anno", "yr"
+            ])
+          );
+
+          const month = parseNum(
+            getField(clean, [
+              "startmonth", "month", "mese", "mo"
+            ])
+          );
+
+          const date = parseNum(
+            getField(clean, [
+              "startdate", "day", "giorno", "data"
+            ])
+          );
+
+          const endYear = parseNum(
+            getField(clean, [
+              "endyear", "endanno"
+            ])
+          );
+
+          const endMonth = parseNum(
+            getField(clean, [
+              "endmonth", "endmese"
+            ])
+          );
+
+          const endDate = parseNum(
+            getField(clean, [
+              "enddate", "endgiorno"
+            ])
+          );
+
+          const categories = parseCategories(
+            getField(clean, [
+              "category", "categories",
+              "categoria", "categorie",
+              "tags", "tag"
+            ])
+          );
+
+          const image = cleanImageUrl(
+            getField(clean, [
+              "img", "image", "photo",
+              "picture", "foto",
+              "imgurl", "imageurl"
+            ])
+          );
+
+          return {
+            year: year,
+            month: month - 1,
+            date: date,
+
+            endYear: endYear,
+            endMonth: endMonth - 1,
+            endDate: endDate,
+
+            eventId: rawData.indexOf(row),
+
+            title: getField(clean, [
+              "title", "titolo", "name", "event"
+            ]),
+
+            city: getField(clean, [
+              "city", "citta", "town", "location"
+            ]),
+
+            time: getField(clean, [
+              "time", "orario", "hours", "ora"
+            ]),
+
+            location: getField(clean, [
+              "venue", "location", "luogo",
+              "address", "place"
+            ]),
+
+            description: getField(clean, [
+              "description", "desc",
+              "descrizione", "details", "info"
+            ]),
+
+            link: getField(clean, [
+              "link", "url", "website",
+              "sito", "ticketlink"
+            ]),
+
+            img: image || fallbackImage,
+
+            categories: categories.filter(category => categoryKey(category) !== "cinema"),
+
+            priority: String(getField(clean, ["priority"] ) ?? "").trim(),
+
+            frequency: getField(clean, [
+              "frequency", "freq", "frequenza"
+            ]),
+
+            recurrence: getField(clean, [
+              "recurrence", "ricorrenza",
+              "days", "schedule"
+            ])
+          };
+        }).filter(event =>
+          Number.isFinite(event.year) &&
+          Number.isFinite(event.month) &&
+          Number.isFinite(event.date) &&
+          event.month >= 0 &&
+          event.month <= 11 &&
+          event.date >= 1 &&
+          event.date <= 31
+        );
+
+        buildCalendar();
+        updateAllListings();
+        renderHeroHighlights();
+        renderSavedEvents();
+
+      } catch (error) {
+        console.error(
+          "Unable to load SheetDB events:",
+          error
+        );
+
+        const container = document.getElementById(
+          "events-container"
+        );
+
+        const featured = document.getElementById("featured-track");
+        const heroHighlights = document.getElementById('hero-now-events');
+        if (heroHighlights) heroHighlights.textContent = 'Highlights are temporarily unavailable. Browse the calendar below.';
+        if (featured) featured.innerHTML = '<p class="featured-status">Upcoming events are temporarily unavailable. Please try again later.</p>';
+        container.innerHTML = `
+          <div class="no-events">
+            <h3>Events temporarily unavailable</h3>
+            <p>
+              The calendar is working, but events
+              could not be loaded from Google Sheets.
+              Please try refreshing the page.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    /* GETYOURGUIDE */
+
+    function createGetYourGuideSection() {
+      const wrapper = document.createElement("div");
+
+      wrapper.className =
+        "gyg-private-tour-widget";
+
+      wrapper.innerHTML = `
+        <p class="gyg-riviera-intro">
+          Discover tours and experiences across
+          the French Riviera and Menton.
+        </p>
+
+        <div class="gyg-widget-wrapper">
+          <div
+            data-gyg-widget="auto"
+            data-gyg-partner-id="LNHKRSN"
+            data-gyg-cmp="Menton">
+          </div>
+        </div>
+
+        <p class="gyg-riviera-note">
+          Activities and availability are provided
+          by GetYourGuide.
+        </p>
+      `;
+
+      return wrapper;
+    }
+
+    /* RENDER EVENTS */
+
+    function renderEvents() {
+      const container = document.getElementById(
+        "events-container"
+      );
+
+      if (!container) return;
+
+      const cityFilter = document.getElementById(
+        "city-filter"
+      ).value;
+
+      const searchQuery = document.getElementById(
+        "search-input"
+      ).value.toLowerCase().trim();
+
+      const categoryFilter = document.getElementById("category-filter").value;
+      const dateLabel = document.getElementById("selected-date-label");
+      if (dateLabel) dateLabel.textContent = new Date(selectedYear, selectedMonth, selectedDay).toLocaleDateString("en-GB", {weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+      container.innerHTML = "";
+
+      const selectedDate = new Date(
+        selectedYear,
+        selectedMonth,
+        selectedDay
+      );
+
+      selectedDate.setHours(0, 0, 0, 0);
+
+      const filteredEvents = allEvents.filter(event => {
+        const matchesCity =
+          cityFilter === "ALL" ||
+          String(event.city || "").toLowerCase() ===
+          cityFilter.toLowerCase();
+
+        const matchesSearch =
+          !searchQuery ||
+          [
+            event.title,
+            event.description,
+            event.city,
+            event.location
+          ].some(value =>
+            String(value || "")
+              .toLowerCase()
+              .includes(searchQuery)
+          );
+
+        return (
+          matchesCity &&
+          matchesSearch &&
+          (categoryFilter === "ALL" || event.categories.some(value => categoryKey(value) === categoryKey(categoryFilter))) &&
+          isEventActiveOnDate(event, selectedDate)
+        );
+      });
+
+      if (filteredEvents.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "no-events";
+
+        empty.innerHTML = `
+          <h3>No events found for this date.</h3>
+          <p>
+            Try another date, search term or city.
+          </p>
+        `;
+
+        container.appendChild(empty);
+      }
+
+      categoryOrder.forEach(category => {
+        const categoryEvents = filteredEvents.filter(event =>
+          event.categories.some(value =>
+            categoryKey(value) === categoryKey(category)
+          )
+        );
+
+        const events = categoryEvents;
+
+        const isPrivateTour =
+          categoryKey(category) === "private tour";
+
+        if (!events.length && (!isPrivateTour || categoryFilter !== "ALL" && categoryFilter !== "Private Tour")) {
+          return;
+        }
+
+        const section = document.createElement("section");
+
+        section.className = "category-section";
+        section.id = "cat-" + categoryKey(category);
+
+        const dotColour =
+          categoryDotColours[categoryKey(category)] ||
+          "#ff007a";
+
+        section.innerHTML = `
+          <div class="category-header">
+            <div class="category-title-wrapper">
+              <div
+                class="category-colour-dot"
+                style="background:${dotColour}">
+              </div>
+              <h2 class="category-title">
+                ${escapeHtml(category)}
+              </h2>
+            </div>
+
+            ${
+              events.length
+                ? `<span class="category-count">
+                     ${events.length}
+                   </span>`
+                : ""
+            }
+          </div>
+        `;
+
+        if (isPrivateTour) {
+          section.appendChild(
+            createGetYourGuideSection()
+          );
+        }
+
+        if (events.length) {
+          const grid = document.createElement("div");
+          grid.className = "events-grid";
+
+          events.forEach(event => {
+            const card = document.createElement("article");
+            card.className = "event-card";
+
+            const tags = event.categories.map(value => `
+              <span class="tag-badge ${getCategoryClass(value)}">
+                ${escapeHtml(value)}
+              </span>
+            `).join("");
+
+            const locationText = event.location
+              ? " - " + escapeHtml(event.location)
+              : "";
+
+            const timeHtml = event.time
+              ? `<div class="meta-row">🕒 ${escapeHtml(event.time)}</div>`
+              : "";
+
+            const linkHtml = event.link
+              ? `
+                <a
+                  class="btn-link"
+                  href="/event.html?id=${encodeURIComponent(event.eventId)}">
+                  View event details →
+                </a>
+              `
+              : "";
+
+            card.innerHTML = `
+              <div class="img-wrapper">
+                <div class="tag-container">
+                  ${tags}
+                </div>
+
+                ${saveHeartHtml(event)}
+                <img
+                  src="${escapeHtml(event.img)}"
+                  alt="${escapeHtml(event.title)}">
+              </div>
+
+              <div class="card-body">
+                <h3>${escapeHtml(event.title)}</h3>
+
+                <div class="meta-info">
+                  <div class="meta-row">
+                    📍
+                    <strong>${escapeHtml(event.city)}</strong>
+                    ${locationText}
+                  </div>
+                  ${timeHtml}
+                </div>
+
+                <div class="description">
+                  ${escapeHtml(event.description)}
+                </div>
+
+                ${linkHtml}
+              </div>
+            `;
+
+            const image = card.querySelector("img");
+
+            image.onerror = function () {
+              this.onerror = null;
+              this.src = fallbackImage;
+            };
+
+            grid.appendChild(card);
+          });
+
+          section.appendChild(grid);
+        }
+
+        container.appendChild(section);
+      });
+    }
+
+    /* CATEGORY NAVIGATION */
+
+    function buildCategoryNav() {
+      const nav = document.getElementById(
+        "category-nav-inner"
+      );
+
+      nav.innerHTML = "";
+
+      categoryOrder.forEach(category => {
+        const button = document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+          "category-nav-btn " +
+          getNavButtonClass(category);
+
+        button.textContent = category;
+
+        button.onclick = function () {
+          const section = document.getElementById(
+            "cat-" + categoryKey(category)
+          );
+
+          if (!section) {
+            document.getElementById("category-filter").value = category;
+            renderEvents();
+          }
+          const target = document.getElementById("cat-" + categoryKey(category));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }
+        };
+
+        nav.appendChild(button);
+      });
+
+      const guidesLink = document.createElement("a");
+      guidesLink.className = "category-nav-btn nav-things-to-do";
+      guidesLink.href = "#things-to-do";
+      guidesLink.textContent = "Things to Do";
+      nav.appendChild(guidesLink);
+    }
+
+    /* DISCOVERY AND FEATURED EVENTS */
+
+    function updateAllListings() {
+      renderEvents();
+    }
+
+    function applyQuickDate() {
+      const choice = document.getElementById("quick-date").value;
+      if (choice === "custom") return;
+      const date = new Date();
+      date.setHours(12, 0, 0, 0);
+      if (choice === "tomorrow") date.setDate(date.getDate() + 1);
+      if (choice === "weekend") {
+        const daysToSaturday = (6 - date.getDay() + 7) % 7;
+        date.setDate(date.getDate() + daysToSaturday);
+      }
+      selectedYear = date.getFullYear();
+      selectedMonth = date.getMonth();      selectedDay = date.getDate();
+      buildCalendar();
+      updateAllListings();
+    }
+
+    function searchAndScroll() {
+      applyQuickDate();
+      document.getElementById("event-listings").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+
+    function renderFeaturedEvents() {
+      const track = document.getElementById("featured-track");
+      if (!track) return;
+      const city = document.getElementById("city-filter").value;
+      const category = document.getElementById("category-filter").value;
+      const query = document.getElementById("search-input").value.toLowerCase().trim();
+      const start = new Date();
+      start.setHours(0, 0, 0, 0);
+      const endOfMonth = new Date(start.getFullYear(), start.getMonth() + 1, 1);
+      const found = [];
+      const seen = new Set();
+      for (let offset = 0; found.length < 8; offset++) {
+        const date = new Date(start.getFullYear(), start.getMonth(), start.getDate() + offset);
+        if (date >= endOfMonth) break;
+        for (const event of allEvents) {
+          if (found.length >= 8) break;
+          if (event.priority !== "1" || !event.categories.length) continue;
+          if (!isEventActiveOnDate(event, date)) continue;
+          if (city !== "ALL" && String(event.city || "").toLowerCase() !== city.toLowerCase()) continue;
+          if (category !== "ALL" && !event.categories.some(c => categoryKey(c) === categoryKey(category))) continue;
+          if (query && ![event.title,event.city,event.description,event.location].some(v => String(v || "").toLowerCase().includes(query))) continue;
+          const key = [event.title,event.city,event.year,event.month,event.date].join("|");
+          if (seen.has(key)) continue;
+          seen.add(key);
+          found.push({event,date});
+        }
+      }
+      if (!found.length) {
+        track.innerHTML = '<p class="featured-status">No priority 1 events are scheduled for the rest of this month. Add priority 1 to an upcoming event in your sheet to feature it.</p>';
+        return;
+      }
+      track.innerHTML = found.map(({event,date}) => {
+        const dateText = date.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+        const dayText = date.toLocaleDateString("en-GB",{weekday:"short"});
+        const dateCode = [date.getFullYear(),date.getMonth(),date.getDate()].join("-");
+        return `<article class="featured-card">
+          <button type="button" class="featured-open" data-date="${dateCode}" aria-label="View ${escapeHtml(event.title)} on ${escapeHtml(dateText)}">
+            <span class="featured-image"><img src="${escapeHtml(event.img)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImage}'"><span class="featured-date">${escapeHtml(dayText)}<strong>${escapeHtml(dateText)}</strong></span></span>
+            <span class="featured-info"><strong>${escapeHtml(event.title || 'Riviera event')}</strong><span>📍 ${escapeHtml(event.city || 'Riviera')} ${event.time ? ' · '+escapeHtml(event.time) : ''}</span></span>
+          </button>
+        </article>`;
+      }).join("");
+      track.querySelectorAll(".featured-open").forEach(button => {
+        button.addEventListener("click", () => {
+          const [y,m,d] = button.dataset.date.split("-").map(Number);
+          selectedYear = y; selectedMonth = m; selectedDay = d;
+          document.getElementById("quick-date").value = "custom";
+          buildCalendar(); renderEvents();
+          document.getElementById("event-listings").scrollIntoView({behavior:"smooth",block:"start"});
+        });
+      });
+    }
+
+
+    /* Local season/month update — no manual edits needed. */
+    function updateSeasonalHero() {
+      const now = new Date();
+      const month = now.getMonth();
+      const season = [11,0,1].includes(month) ? 'winter' : [2,3,4].includes(month) ? 'spring' : [5,6,7].includes(month) ? 'summer' : 'autumn';
+      const seasonCopy = {
+        spring: {headline:'The Riviera <span>in bloom.</span>', kicker:'FRESH PLACES · EVENTS · EXPERIENCES', description:'Fresh discoveries, local markets and memorable days across the French and Italian Riviera.'},
+        summer: {headline:'Your Riviera <span>summer starts here.</span>', kicker:'SUMMER DAYS · LONG NIGHTS · LOCAL EVENTS', description:'From seaside evenings to festivals and open-air events, discover what’s happening across the Riviera.'},
+        autumn: {headline:'Autumn on <span>the Riviera.</span>', kicker:'NEW SEASON · NEW EXPERIENCES', description:'Markets, culture, live music and local discoveries across the French and Italian Riviera.'},
+        winter: {headline:'Christmas on <span>the Riviera.</span>', kicker:'CHRISTMAS MARKETS · LIGHTS · FESTIVE EVENTS', description:'Discover Christmas markets, illuminated towns and festive events from Sanremo to Monte Carlo.'}
+      };
+      const copy = seasonCopy[season];
+      document.querySelector('.hero').dataset.season = season;
+      document.getElementById('season-edition').textContent = 'THE ' + now.toLocaleDateString('en-GB',{month:'long'}).toUpperCase() + ' EDIT';
+      document.getElementById('edition-date').textContent = now.getFullYear();
+      document.getElementById('season-kicker').textContent = copy.kicker;
+      document.getElementById('season-headline').innerHTML = copy.headline;
+      document.getElementById('season-description').textContent = copy.description;
+      document.getElementById('hero-now-month').textContent = '· ' + now.toLocaleDateString('en-GB',{month:'long'}).toUpperCase();
+    }
+
+    /* Rotating editorial cards from actual priority events in SheetDB. */
+    let heroCarouselItems = [];
+    let heroCarouselIndex = 0;
+    let heroCarouselTimer = null;
+
+    function openHeroEvent(index) {
+      const item = heroCarouselItems[index];
+      if (!item) return;
+      selectedYear=item.date.getFullYear(); selectedMonth=item.date.getMonth(); selectedDay=item.date.getDate();
+      document.getElementById('quick-date').value='custom';
+      buildCalendar(); renderEvents();
+      document.getElementById('event-listings').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    function showHeroCarousel() {
+      const el=document.getElementById('hero-now-events');
+      if (!el || !heroCarouselItems.length) return;
+      const visible=Math.min(3,heroCarouselItems.length);
+      el.innerHTML=Array.from({length:visible},(_,offset)=>{
+        const index=(heroCarouselIndex+offset)%heroCarouselItems.length;
+        const {event,date}=heroCarouselItems[index];
+        return `<div class="hero-event-wrap"><button type="button" class="hero-now-item" data-index="${index}" aria-label="See ${escapeHtml(event.title)} on ${escapeHtml(date.toLocaleDateString('en-GB'))}">
+          <span class="hero-event-photo"><img src="${escapeHtml(event.img||fallbackImage)}" alt="" loading="lazy"><span class="hero-event-date">${escapeHtml(date.toLocaleDateString('en-GB',{day:'numeric',month:'short'}))}</span></span>
+          <span class="hero-event-info"><strong>${escapeHtml(event.title||'Riviera event')}</strong><small>📍 ${escapeHtml(event.city||'Riviera')} · ${escapeHtml(event.categories[0]||'Event')}</small></span>
+        </button>${saveHeartHtml(event)}</div>`;
+      }).join('');
+      el.querySelectorAll('.hero-now-item').forEach(button=>button.addEventListener('click',()=>openHeroEvent(Number(button.dataset.index))));
+      const prev=document.getElementById('hero-carousel-prev');
+      const next=document.getElementById('hero-carousel-next');
+      if(prev)prev.disabled=heroCarouselItems.length<=visible;
+      if(next)next.disabled=heroCarouselItems.length<=visible;
+      const status=document.getElementById('hero-carousel-status');
+      if(status)status.textContent=`${heroCarouselIndex+1} / ${heroCarouselItems.length}`;
+    }
+
+    function moveHeroCarousel(step) {
+      if (heroCarouselItems.length<=3) return;
+      heroCarouselIndex=(heroCarouselIndex+step+heroCarouselItems.length)%heroCarouselItems.length;
+      showHeroCarousel();
+    }
+
+    function renderHeroHighlights() {
+      const el=document.getElementById('hero-now-events');
+      if(!el)return;
+      const today=new Date();today.setHours(0,0,0,0);
+      const monthEnd=new Date(today.getFullYear(),today.getMonth()+1,1);
+      const picks=[];const seen=new Set();
+      for(let d=new Date(today);d<monthEnd;d.setDate(d.getDate()+1)) {
+        for(const event of allEvents) {
+          if(event.priority!=='1'||!event.categories.length||!isEventActiveOnDate(event,d))continue;
+          const key=[event.title,event.city,event.location].join('|').toLowerCase();
+          if(seen.has(key))continue;
+          seen.add(key);picks.push({event,date:new Date(d)});
+        }
+      }
+      const halloween=picks.filter(({event})=>/halloween|hallowe'en|pumpkin|citrouille|zucca|dolcetto|scherzetto/i.test([event.title,event.description].join(' ')));
+      const others=picks.filter(item=>!halloween.includes(item));
+      heroCarouselItems=[...halloween,...others];heroCarouselIndex=0;
+      if(heroCarouselTimer){clearInterval(heroCarouselTimer);heroCarouselTimer=null;}
+      if(!heroCarouselItems.length){el.innerHTML='<span class="hero-now-loading">More highlights coming soon — explore the calendar for upcoming events.</span>';return;}
+      showHeroCarousel();
+      if(heroCarouselItems.length>3 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        heroCarouselTimer=setInterval(()=>moveHeroCarousel(1),5500);
+      }
+    }
+
+
+    /* Browser-only saved events. No login or database required. */
+    const SAVED_KEY = 'insideRivieraSavedEventsV1';
+    const heartSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    function savedEventKey(event) {
+      return [event.title,event.city,event.year,event.month,event.date].map(v=>String(v??'').trim().toLowerCase()).join('|');
+    }
+    function getSavedEvents() {
+      try { const value=JSON.parse(localStorage.getItem(SAVED_KEY)||'{}'); return value&&typeof value==='object'&&!Array.isArray(value)?value:{}; }
+      catch (_) { return {}; }
+    }
+    function saveHeartHtml(event) {
+      const key=savedEventKey(event);
+      const saved=Boolean(getSavedEvents()[key]);
+      return `<button type="button" class="save-heart" data-save-key="${escapeHtml(key)}" aria-label="${saved?'Remove saved event':'Save event'}: ${escapeHtml(event.title)}" aria-pressed="${saved}" title="${saved?'Remove from saved events':'Save this event'}">${heartSvg}</button>`;
+    }
+    function renderSavedEvents() {
+      const list=document.getElementById('saved-list');
+      if(!list)return;
+      const saved=Object.values(getSavedEvents());
+      const count=document.getElementById('saved-count');
+      if(count)count.textContent=saved.length?'('+saved.length+')':'';
+      if(!saved.length){list.innerHTML='<p class="saved-empty">No saved events yet. Tap a heart on any event to add it here!</p>';return;}
+      list.innerHTML=saved.map(event=>{
+        const key=savedEventKey(event);
+        const date=Number.isFinite(event.year)&&Number.isFinite(event.month)&&Number.isFinite(event.date)
+          ? new Date(event.year,event.month,event.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';
+        const matching=allEvents.find(e=>savedEventKey(e)===key);
+        const link=matching&&matching.link?`<a href="/event.html?id=${encodeURIComponent(matching.eventId)}">Event details →</a>`:'';
+        return `<article class="saved-item"><img src="${escapeHtml(event.img||fallbackImage)}" alt="" loading="lazy"><div class="saved-item-body"><strong>${escapeHtml(event.title)}</strong><small>📍 ${escapeHtml(event.city||'Riviera')} · ${escapeHtml(date)}</small><div class="saved-item-actions">${link}${saveHeartHtml(event)}</div></div></article>`;
+      }).join('');
+    }
+    document.addEventListener('click',function(event){
+      const button=event.target.closest('.save-heart');
+      if(!button)return;
+      event.preventDefault();event.stopPropagation();
+      const key=button.dataset.saveKey;
+      const stored=getSavedEvents();
+      if(stored[key])delete stored[key];
+      else {
+        const item=allEvents.find(e=>savedEventKey(e)===key);
+        if(!item)return;
+        stored[key]={title:item.title,city:item.city,year:item.year,month:item.month,date:item.date,img:item.img};
+      }
+      try {localStorage.setItem(SAVED_KEY,JSON.stringify(stored));}
+      catch (_) {alert('This browser cannot store saved events right now.');return;}
+      document.querySelectorAll('.save-heart').forEach(el=>{
+        const on=Boolean(stored[el.dataset.saveKey]);
+        el.setAttribute('aria-pressed',String(on));
+        el.setAttribute('aria-label',(on?'Remove saved event':'Save event'));
+        el.title=on?'Remove from saved events':'Save this event';
+      });
+      renderSavedEvents();
+    });
+
+    /* START THE WEBSITE */
+
+    function startApp() {
+      // Update the editorial header immediately.
+      updateSeasonalHero();
+      // Show the calendar immediately.
+      buildCalendar();
+      renderSavedEvents();
+
+      // Show category buttons immediately.
+      buildCategoryNav();
+
+      // Load event data separately.
+      loadEvents();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener(
+        "DOMContentLoaded",
+        startApp
+      );
+    } else {
+      startApp();
+    }
+  </script>
+
+  <footer style="
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+    margin-top:40px;">
+
+    <h3 style="color:#a3e635;">
+      INSIDE RIVIERA
+    </h3>
+
+    <p style="margin:12px 0;">
+      Events • Places • Lifestyle
+    </p>
+
+    <nav style="margin:20px 0;">
+      <a
+        href="/about.html"
+        style="color:white;margin:10px;">
+        About Us
+      </a>
+
+      <a
+        href="/contact.html"
+        style="color:white;margin:10px;">
+        Contact
+      </a>
+
+      <a
+        href="/privacy-policy.html"
+        style="color:white;margin:10px;">
+        Privacy Policy
+      </a>
+    </nav>
+
+    <p style="font-size:12px;opacity:.7;">
+      © Inside Riviera. All rights reserved.
+    </p>
+  <div class="past-guides-footer"><span>Past Events &amp; Guides:</span> <a href="/november-2026-riviera-with-images.html">November 2026 on the French &amp; Italian Riviera</a> · <a href="/halloween-2026-riviera.html">Halloween 2026 on the Riviera</a></div>
+  </footer>
+
+
+  <script>
+    (() => {
+      const menu = document.querySelector('.destination-menu');
+      if (!menu) return;
+      const trigger = menu.querySelector('.destination-trigger');
+      const close = () => { menu.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); };
+      trigger.addEventListener('click', () => { const open = !menu.classList.contains('open'); menu.classList.toggle('open',open); trigger.setAttribute('aria-expanded',String(open)); });
+      document.addEventListener('click', e => { if (!menu.contains(e.target)) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    })();
+  </script>
+</body>
+</html>
