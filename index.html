@@ -671,17 +671,17 @@
     }
 
     /* 2026 DISCOVERY REDESIGN — PRESERVES ORIGINAL EVENT LOGIC */
-    :root { --navy:#07102d; }
-    body { background:#fff; }
-    .hero { min-height:540px; padding:0 24px 125px; background:linear-gradient(90deg,rgba(5,12,31,.75),rgba(5,12,31,.35) 60%,rgba(5,12,31,.26)),url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85") center/cover no-repeat; text-align:left; }
+    :root { --navy:#0f172a; --text-dark:#0f172a; --accent-pink:#ff007a; --accent-green:#a3e635; }
+    body { background:var(--page-bg); color:#0f172a; }
+    .hero { min-height:540px; padding:0 24px 125px; background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.42) 60%,rgba(0,0,0,.32)),url("https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&w=2200&q=88") center/cover no-repeat; text-align:left; }
     .topbar { max-width:1240px; margin:0 auto; padding:25px 0; display:flex; justify-content:space-between; align-items:center; gap:20px; }
     .top-brand { display:flex; align-items:center; gap:9px; color:#fff; text-decoration:none; font-size:1.05rem; letter-spacing:.06em; font-weight:900; white-space:nowrap; }
     .top-brand b { color:var(--accent-green); }
     .top-brand .logo-graphic { width:34px; height:34px; flex-shrink:0; }
     .top-nav { display:flex; align-items:center; gap:4px; padding:5px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25); border-radius:999px; backdrop-filter:blur(12px); }
     .top-nav a { color:#fff; text-decoration:none; font-size:.82rem; font-weight:700; padding:10px 15px; border-radius:999px; white-space:nowrap; }
-    .top-nav a:hover,.top-nav a.current { background:#fff; color:var(--navy); }
-    .top-submit { color:var(--navy); background:#fff; padding:12px 18px; border-radius:999px; font-size:.82rem; font-weight:800; text-decoration:none; white-space:nowrap; }
+    .top-nav a:hover,.top-nav a.current { background:var(--accent-green); color:#0f172a; }
+    .top-submit { color:#0f172a; background:var(--accent-pink); padding:12px 18px; border-radius:999px; font-size:.82rem; font-weight:800; text-decoration:none; white-space:nowrap; }
     .hero-copy { max-width:1240px; margin:95px auto 0; }
     .eyebrow,.section-kicker { font-size:.74rem; font-weight:900; letter-spacing:.19em; color:var(--accent-green); }
     .hero-copy h1 { font-size:clamp(2.7rem,5.5vw,5.3rem); letter-spacing:-.05em; line-height:1.04; text-transform:none; margin:18px 0; max-width:850px; }
@@ -1015,6 +1015,16 @@ body{background:#fbf6ee;color:#10213e}
 footer{background:#071b3d!important}
 @media(max-width:700px){.hero{min-height:710px;padding:0 16px 100px}.hero-copy{margin-top:52px}.christmas-home-banner{grid-template-columns:1fr;padding:22px}.christmas-home-banner .ornament{min-height:145px;order:-1}.topbar{align-items:flex-start}}
 
+
+/* Brand palette retained: neon pink, neon green and black. */
+:root{--accent-pink:#ff007a;--accent-green:#a3e635;--navy:#0f172a;--text-dark:#0f172a}
+body{color:#0f172a;background:var(--page-bg)}
+.hero-copy h1 span{color:var(--accent-green)}
+.eyebrow,.section-kicker{color:var(--accent-green)}
+.hero-cta,.discovery-submit{background:var(--accent-pink);color:#0f172a}
+.top-nav a:hover,.top-nav a.current{background:var(--accent-green);color:#0f172a}
+.top-submit{background:var(--accent-pink);color:#0f172a}
+footer{background:#0f172a!important}
 </style>
 </head>
 
@@ -1056,13 +1066,6 @@ footer{background:#071b3d!important}
 
   <main class="main-content">
 
-    <section class="christmas-home-banner" aria-label="Christmas on the Riviera guide">
-      <div><div class="season-label">THE FESTIVE RIVIERA · 2026</div>
-      <h2>Discover the Riviera this Christmas</h2>
-      <p>From sparkling Christmas markets and illuminated waterfronts to magnificent trees and festive events, explore the season from Sanremo to Monte-Carlo.</p>
-      <a href="/christmas-2026-riviera.html">Explore the Christmas guide →</a></div>
-      <div class="ornament" role="img" aria-label="Festive Christmas lights">A Riviera Christmas</div>
-    </section>
 
     <!-- Retained for the date-filter logic -->
     <select id="quick-date" aria-label="Date filter" hidden>
@@ -2239,9 +2242,9 @@ footer{background:#071b3d!important}
         spring: {headline:'The Riviera <span>in bloom.</span>', kicker:'FRESH PLACES · EVENTS · EXPERIENCES', description:'Fresh discoveries, local markets and memorable days across the French and Italian Riviera.'},
         summer: {headline:'Your Riviera <span>summer starts here.</span>', kicker:'SUMMER DAYS · LONG NIGHTS · LOCAL EVENTS', description:'From seaside evenings to festivals and open-air events, discover what’s happening across the Riviera.'},
         autumn: {headline:'Autumn on <span>the Riviera.</span>', kicker:'NEW SEASON · NEW EXPERIENCES', description:'Markets, culture, live music and local discoveries across the French and Italian Riviera.'},
-        winter: {headline:'Christmas on <span>the Riviera.</span>', kicker:'CHRISTMAS MARKETS · LIGHTS · FESTIVE EVENTS', description:'Discover Christmas markets, illuminated towns and festive events from Sanremo to Monte Carlo.'}
+        winter: {headline:'Christmas in <span>Riviera</span>', kicker:'CHRISTMAS MARKETS · LIGHTS · FESTIVE EVENTS', description:'Discover Christmas markets, illuminated towns and festive events from Sanremo to Monte Carlo.'}
       };
-      const copy = seasonCopy[season];
+      const copy = {headline:'Christmas in <span>Riviera</span>', kicker:'CHRISTMAS MARKETS · LIGHTS · FESTIVE EVENTS', description:'Discover Christmas markets, illuminated towns and festive events from Sanremo to Monte Carlo.'};
       document.querySelector('.hero').dataset.season = season;
       document.getElementById('season-edition').textContent = 'THE ' + now.toLocaleDateString('en-GB',{month:'long'}).toUpperCase() + ' EDIT';
       document.getElementById('edition-date').textContent = now.getFullYear();
