@@ -975,6 +975,46 @@
 .past-guides-footer{display:block;margin:20px auto 8px;font-size:.76rem;opacity:.82}
 .past-guides-footer a{color:#d7deea;text-decoration:underline;text-underline-offset:3px;margin:0 4px}
 @media(max-width:700px){.christmas-feature{grid-template-columns:1fr;padding:22px}.christmas-feature .christmas-art{min-height:145px;order:-1}}
+
+/* CHRISTMAS HOMEPAGE PREVIEW — design-only overrides */
+:root{--accent-pink:#bd1451;--accent-green:#d8b36a;--navy:#071b3d;--page-bg:#fbf6ee;--border:#eadfce;--soft-pink:#f8e8eb;--soft-green:#edf0e4}
+body{background:#fbf6ee;color:#10213e}
+.hero{min-height:650px;padding-bottom:115px;background:linear-gradient(90deg,rgba(4,17,43,.78),rgba(4,17,43,.28) 68%,rgba(4,17,43,.24)),url("https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=2200&q=88") center 48%/cover no-repeat}
+.topbar{border-bottom:1px solid rgba(255,255,255,.18)}
+.top-brand{font-family:Georgia,serif;font-size:1.3rem;letter-spacing:.08em}
+.top-brand b{color:#e7c47d}
+.top-nav{background:rgba(5,19,48,.48);border-color:rgba(255,255,255,.28)}
+.top-nav a:hover,.top-nav a.current{background:#e7c47d;color:#071b3d}
+.top-submit{background:#e7c47d;color:#071b3d}
+.hero-copy{margin-top:76px}
+.eyebrow,.section-kicker{color:#f2d58f}
+.hero-copy h1{font-family:Georgia,serif;font-weight:500;letter-spacing:-.035em;text-shadow:0 4px 24px #0008}
+.hero-copy h1 span{color:#f1d58f}
+.hero-copy p{color:#fff;font-size:1.08rem}
+.hero-cta{background:#bd1451;border:1px solid rgba(255,255,255,.25);box-shadow:0 8px 24px #0004}
+.hero-calendar-link{color:#fff}
+.hero-now{background:rgba(5,18,43,.68);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(10px)}
+.discovery-bar{border:1px solid #ead8b8}
+.discovery-submit{background:#bd1451}
+.section-heading h2{font-family:Georgia,serif;color:#10213e}
+.section-heading h2 em{color:#bd1451}
+.category-navigation{background:#fffaf2;border-color:#eadfce}
+.category-nav-btn{border-radius:8px}
+.nav-market,.nav-exhibition{background:#f8e8eb;color:#a40f45}
+.nav-public-event,.nav-live-music{background:#10213e;color:#f1d58f}
+.calendar-section,.things-to-do-section,.submit-section,.riviera-intro{background:#fffaf2;border-color:#eadfce}
+.event-card,.featured-card{border:1px solid #eadfce;box-shadow:0 8px 24px rgba(25,30,45,.08)}
+.btn-link{background:#f8e8eb;color:#94113f}
+.btn-link:hover{background:#bd1451}
+.christmas-home-banner{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;margin:0 auto 48px;padding:30px;border:1px solid #ead8b8;border-radius:22px;background:linear-gradient(115deg,#fffaf1,#f5ead8);box-shadow:0 12px 30px rgba(30,25,15,.07)}
+.christmas-home-banner .season-label{color:#a40f45;font-size:.72rem;font-weight:900;letter-spacing:.16em}
+.christmas-home-banner h2{font:500 clamp(1.7rem,3vw,2.6rem)/1.12 Georgia,serif;color:#10213e;margin:10px 0}
+.christmas-home-banner p{color:#596477;line-height:1.65}
+.christmas-home-banner a{display:inline-block;margin-top:15px;padding:12px 18px;border-radius:999px;background:#bd1451;color:#fff;text-decoration:none;font-weight:800}
+.christmas-home-banner .ornament{min-height:160px;border-radius:16px;background:linear-gradient(140deg,rgba(5,22,49,.22),rgba(5,22,49,.15)),url("https://images.unsplash.com/photo-1543589077-47d81606c1bf?auto=format&fit=crop&w=900&q=85") center/cover;color:#f8e8c0;display:flex;align-items:center;justify-content:center;font:italic 2rem Georgia,serif;text-shadow:0 2px 10px #000}
+footer{background:#071b3d!important}
+@media(max-width:700px){.hero{min-height:710px;padding:0 16px 100px}.hero-copy{margin-top:52px}.christmas-home-banner{grid-template-columns:1fr;padding:22px}.christmas-home-banner .ornament{min-height:145px;order:-1}.topbar{align-items:flex-start}}
+
 </style>
 </head>
 
@@ -1009,12 +1049,21 @@
       <div class="eyebrow" id="season-kicker">YOUR GUIDE TO WHAT'S HAPPENING</div>
       <h1 id="season-headline">Your Riviera, <span>what's on.</span></h1>
       <p id="season-description">Discover concerts, markets, festivals and local experiences from Sanremo and Bordighera to Menton and Monte Carlo.</p>
-      <div class="hero-actions"><a class="hero-cta" href="#upcoming">Explore this month's highlights <span aria-hidden="true">↗</span></a><a class="hero-calendar-link" href="#calendar">Browse the calendar →</a></div>
+      <div class="hero-actions"><a class="hero-cta" href="/christmas-2026-riviera.html">Read our Christmas guide <span aria-hidden="true">↗</span></a><a class="hero-calendar-link" href="#calendar">Browse the calendar →</a></div>
       <div class="hero-now" id="upcoming" aria-label="Featured upcoming events"><div class="hero-now-top"><div class="hero-now-label"><span class="now-pulse"></span> WHAT'S COMING UP <span id="hero-now-month"></span></div><div class="hero-carousel-controls"><button type="button" id="hero-carousel-prev" aria-label="Previous events" onclick="moveHeroCarousel(-1)">‹</button><span id="hero-carousel-status" aria-live="polite"></span><button type="button" id="hero-carousel-next" aria-label="Next events" onclick="moveHeroCarousel(1)">›</button></div></div><div class="hero-now-events" id="hero-now-events"><span class="hero-now-loading">Checking this month's highlights…</span></div></div>
     </div>
   </header>
 
   <main class="main-content">
+
+    <section class="christmas-home-banner" aria-label="Christmas on the Riviera guide">
+      <div><div class="season-label">THE FESTIVE RIVIERA · 2026</div>
+      <h2>Discover the Riviera this Christmas</h2>
+      <p>From sparkling Christmas markets and illuminated waterfronts to magnificent trees and festive events, explore the season from Sanremo to Monte-Carlo.</p>
+      <a href="/christmas-2026-riviera.html">Explore the Christmas guide →</a></div>
+      <div class="ornament" role="img" aria-label="Festive Christmas lights">A Riviera Christmas</div>
+    </section>
+
     <!-- Retained for the date-filter logic -->
     <select id="quick-date" aria-label="Date filter" hidden>
       <option value="today">Today</option>
@@ -2190,7 +2239,7 @@
         spring: {headline:'The Riviera <span>in bloom.</span>', kicker:'FRESH PLACES · EVENTS · EXPERIENCES', description:'Fresh discoveries, local markets and memorable days across the French and Italian Riviera.'},
         summer: {headline:'Your Riviera <span>summer starts here.</span>', kicker:'SUMMER DAYS · LONG NIGHTS · LOCAL EVENTS', description:'From seaside evenings to festivals and open-air events, discover what’s happening across the Riviera.'},
         autumn: {headline:'Autumn on <span>the Riviera.</span>', kicker:'NEW SEASON · NEW EXPERIENCES', description:'Markets, culture, live music and local discoveries across the French and Italian Riviera.'},
-        winter: {headline:'Winter moments <span>on the Riviera.</span>', kicker:'A DIFFERENT SIDE OF THE RIVIERA', description:'Explore winter events, cultural highlights and local experiences from Sanremo to Monte Carlo.'}
+        winter: {headline:'Christmas on <span>the Riviera.</span>', kicker:'CHRISTMAS MARKETS · LIGHTS · FESTIVE EVENTS', description:'Discover Christmas markets, illuminated towns and festive events from Sanremo to Monte Carlo.'}
       };
       const copy = seasonCopy[season];
       document.querySelector('.hero').dataset.season = season;
