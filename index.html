@@ -1875,6 +1875,16 @@ footer{background:#0f172a!important}
           event.date <= 31
         );
 
+        // Keep the last successful event list on this device for temporary outages.
+        try {
+          if (allEvents.length) {
+            localStorage.setItem('insideRivieraEventsCacheV1', JSON.stringify(allEvents));
+            localStorage.setItem('insideRivieraEventsCacheTimeV1', new Date().toISOString());
+          }
+        } catch (cacheError) {
+          console.warn('Could not save the local events copy:', cacheError);
+        }
+
         buildCalendar();
         updateAllListings();
         renderHeroHighlights();
@@ -1885,6 +1895,37 @@ footer{background:#0f172a!important}
           "Unable to load SheetDB events:",
           error
         );
+
+        // If SheetDB is offline, reuse the last successful list saved in this browser.
+        let cachedEvents = [];
+        try {
+          const saved = JSON.parse(localStorage.getItem('insideRivieraEventsCacheV1') || '[]');
+          if (Array.isArray(saved)) cachedEvents = saved;
+        } catch (cacheError) {
+          console.warn('The saved events copy could not be read:', cacheError);
+        }
+
+        if (cachedEvents.length) {
+          allEvents = cachedEvents;
+          buildCalendar();
+          updateAllListings();
+          renderFeaturedEvents();
+          renderHeroHighlights();
+          renderSavedEvents();
+          const container = document.getElementById('events-container');
+          const notice = document.createElement('div');
+          notice.className = 'no-events';
+          notice.setAttribute('role', 'status');
+          const savedAt = localStorage.getItem('insideRivieraEventsCacheTimeV1');
+          const savedDate = savedAt ? new Date(savedAt).toLocaleString('en-GB') : 'an earlier visit';
+          notice.innerHTML = '<h3>Showing your last saved event list</h3><p>Live event updates are temporarily unavailable. These events were last loaded on ' + escapeHtml(savedDate) + '. Please confirm details with organisers before travelling.</p>';
+          container.insertBefore(notice, container.firstChild);
+          const featured = document.getElementById('featured-track');
+          if (featured) featured.insertAdjacentHTML('afterbegin', '<p class="featured-status">Showing previously loaded event highlights while live updates are unavailable.</p>');
+          const heroHighlights = document.getElementById('hero-now-events');
+          if (heroHighlights) heroHighlights.setAttribute('aria-label', 'Previously loaded event highlights');
+          return;
+        }
 
         const container = document.getElementById(
           "events-container"
@@ -2104,7 +2145,9 @@ footer{background:#0f172a!important}
                 ${saveHeartHtml(event)}
                 <img
                   src="${escapeHtml(event.img)}"
-                  alt="${escapeHtml(event.title)}">
+                  alt="${escapeHtml(event.title)}"
+                  loading="lazy"
+                  decoding="async">
               </div>
 
               <div class="card-body">
