@@ -148,18 +148,26 @@ jobs:
             sleep 10
           done
           npx lighthouse https://www.insideriviera.net/ --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --screenEmulation.mobile --output=json --output-path=./lighthouse-live-mobile.json --chrome-flags="--headless --no-sandbox"
+      - name: Retrieve real-user Core Web Vitals when Google has field data
+        run: |
+          if curl --fail --silent --show-error --max-time 45 "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fwww.insideriviera.net%2F&strategy=mobile&category=performance" -o pagespeed-insights-mobile.json; then
+            echo "Retrieved PageSpeed Insights field data."
+          else
+            echo "PageSpeed Insights field data was unavailable; lab metrics are still recorded."
+            rm -f pagespeed-insights-mobile.json
+          fi
       - name: Summarize mobile Lighthouse metrics
         if: always() && hashFiles('lighthouse-mobile.json') != ''
         run: |
           node <<'JS'
           const fs = require('fs');
           const local = JSON.parse(fs.readFileSync('lighthouse-mobile.json', 'utf8'));
-          const live = fs.existsSync('lighthouse-live-mobile.json') ? JSON.parse(fs.readFileSync('lighthouse-live-mobile.json', 'utf8')) : null;
+          const live = fs.existsSync('lighthouse-live-mobile.json') ? JSON.parse(fs.readFileSync('lighthouse-live-mobile.json', 'utf8')) : null;\n          const psi = fs.existsSync('pagespeed-insights-mobile.json') ? JSON.parse(fs.readFileSync('pagespeed-insights-mobile.json', 'utf8')) : null;\n          const field = psi?.loadingExperience?.metrics || psi?.originLoadingExperience?.metrics || {};
           const metrics = (report, id, unit='ms') => {
             const value = report?.audits?.[id]?.numericValue;
             return Number.isFinite(value) ? (unit === 'ms' ? (value/1000).toFixed(2)+' s' : value.toFixed(3)) : 'not reported';
           };
-          const score = (report, id) => Number.isFinite(report?.categories?.[id]?.score) ? Math.round(report.categories[id].score*100)+'/100' : 'not reported';
+          const score = (report, id) => Number.isFinite(report?.categories?.[id]?.score) ? Math.round(report.categories[id].score*100)+'/100' : 'not reported';\n          const fieldValue = (id, divisor, unit) => Number.isFinite(field?.[id]?.percentile) ? (field[id].percentile/divisor).toFixed(unit === 'score' ? 3 : 2)+' '+unit+' ('+(field[id].category || 'field')+')' : 'not available';
           const rows = (report, label) => [
             '| Performance ('+label+') | '+score(report,'performance')+' |',
             '| Accessibility ('+label+') | '+score(report,'accessibility')+' |',
@@ -186,7 +194,15 @@ jobs:
             '|---|---:|',
             ...(live ? rows(live,'live') : ['| Live audit | not completed |']),
             '',
-            'Lighthouse lab results are not field Core Web Vitals. Real-user INP and CrUX data are reported separately when Google has sufficient traffic.'
+            '## Real-user Core Web Vitals (Google field data)',
+            '',
+            '| Metric | 75th percentile |',
+            '|---|---:|',
+            '| LCP | '+fieldValue('LARGEST_CONTENTFUL_PAINT_MS',1000,'s')+' |',
+            '| INP | '+fieldValue('INTERACTION_TO_NEXT_PAINT',1000,'s')+' |',
+            '| CLS | '+fieldValue('CUMULATIVE_LAYOUT_SHIFT_SCORE',1000,'score')+' |',
+            '',
+            'Field data is shown only when Google has enough eligible Chrome user experience data for this page or origin.'
           ].join('\n');
           fs.writeFileSync('priority4-lighthouse-summary.md', report);
           console.log(report);
@@ -205,5 +221,5 @@ jobs:
         if: always()
         with:
           name: priority-4-lighthouse-mobile
-          path: lighthouse-*-mobile.json
+          path: |\n            lighthouse-*-mobile.json\n            pagespeed-insights-mobile.json
           if-no-files-found: ignore
