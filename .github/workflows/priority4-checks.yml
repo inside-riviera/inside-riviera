@@ -228,7 +228,7 @@ jobs:
             '| INP | '+fieldValue('INTERACTION_TO_NEXT_PAINT',1000,'s')+' |',
             '| CLS | '+fieldValue('CUMULATIVE_LAYOUT_SHIFT_SCORE',1000,'score')+' |',
             '',
-            'PageSpeed Insights retrieval status: '+psiStatus+'. HTTP 429 indicates API rate limiting, not a confirmed absence of CrUX traffic.'
+            'PageSpeed Insights retrieval status: '+psiStatus+'. Field Core Web Vitals cannot be confirmed until the API request succeeds; an unavailable response does not establish whether CrUX data exists.'
           ].join('\n');
           fs.writeFileSync('priority4-lighthouse-summary.md', report);
           console.log(report);
