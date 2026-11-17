@@ -372,7 +372,7 @@
     };
 
     const fallbackImage =
-      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80";
+      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%230f172a'/%3E%3Cstop offset='1' stop-color='%230e7490'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='600' height='400' fill='url(%23g)'/%3E%3Ccircle cx='470' cy='95' r='48' fill='%23a3e635' opacity='.85'/%3E%3Cpath d='M0 300 Q120 230 240 300 T480 300 T720 300 V400 H0Z' fill='%230f172a'/%3E%3Cpath d='M0 330 Q120 260 240 330 T480 330 T720 330' fill='none' stroke='%23ff007a' stroke-width='8'/%3C/svg%3E";
 
     /* HELPERS */
 
@@ -1157,7 +1157,9 @@
                   src="${escapeHtml(event.img)}"
                   alt="${escapeHtml(event.title)}"
                   loading="lazy"
-                  decoding="async">
+                  decoding="async"
+                  crossorigin="anonymous"
+                  onerror="this.onerror=null;this.src='${fallbackImage}'">
               </div>
 
               <div class="card-body">
@@ -1309,7 +1311,7 @@
         const dateCode = [date.getFullYear(),date.getMonth(),date.getDate()].join("-");
         return `<article class="featured-card">
           <button type="button" class="featured-open" data-date="${dateCode}" aria-label="View ${escapeHtml(event.title)} on ${escapeHtml(dateText)}">
-            <span class="featured-image"><img src="${escapeHtml(event.img)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImage}'"><span class="featured-date">${escapeHtml(dayText)}<strong>${escapeHtml(dateText)}</strong></span></span>
+            <span class="featured-image"><img src="${escapeHtml(event.img)}" alt="" loading="lazy" decoding="async" crossorigin="anonymous" onerror="this.onerror=null;this.src='${fallbackImage}'"><span class="featured-date">${escapeHtml(dayText)}<strong>${escapeHtml(dateText)}</strong></span></span>
             <span class="featured-info"><strong>${escapeHtml(event.title || 'Riviera event')}</strong><span>📍 ${escapeHtml(event.city || 'Riviera')} ${event.time ? ' · '+escapeHtml(event.time) : ''}</span></span>
           </button>
         </article>`;
@@ -1369,7 +1371,7 @@
         const index=(heroCarouselIndex+offset)%heroCarouselItems.length;
         const {event,date}=heroCarouselItems[index];
         return `<div class="hero-event-wrap"><button type="button" class="hero-now-item" data-index="${index}" aria-label="See ${escapeHtml(event.title)} on ${escapeHtml(date.toLocaleDateString('en-GB'))}">
-          <span class="hero-event-photo"><img src="${escapeHtml(event.img||fallbackImage)}" alt="" loading="lazy"><span class="hero-event-date">${escapeHtml(date.toLocaleDateString('en-GB',{day:'numeric',month:'short'}))}</span></span>
+          <span class="hero-event-photo"><img src="${escapeHtml(event.img||fallbackImage)}" alt="" loading="lazy" decoding="async" crossorigin="anonymous" onerror="this.onerror=null;this.src='${fallbackImage}'"><span class="hero-event-date">${escapeHtml(date.toLocaleDateString('en-GB',{day:'numeric',month:'short'}))}</span></span>
           <span class="hero-event-info"><strong>${escapeHtml(event.title||'Riviera event')}</strong><small>📍 ${escapeHtml(event.city||'Riviera')} · ${escapeHtml(event.categories[0]||'Event')}</small></span>
         </button>${saveHeartHtml(event)}</div>`;
       }).join('');
@@ -1442,7 +1444,7 @@
           ? new Date(event.year,event.month,event.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';
         const matching=allEvents.find(e=>savedEventKey(e)===key);
         const link=matching&&matching.link?`<a href="/event.html?id=${encodeURIComponent(matching.eventId)}">Event details →</a>`:'';
-        return `<article class="saved-item"><img src="${escapeHtml(event.img||fallbackImage)}" alt="" loading="lazy"><div class="saved-item-body"><strong>${escapeHtml(event.title)}</strong><small>📍 ${escapeHtml(event.city||'Riviera')} · ${escapeHtml(date)}</small><div class="saved-item-actions">${link}${saveHeartHtml(event)}</div></div></article>`;
+        return `<article class="saved-item"><img src="${escapeHtml(event.img||fallbackImage)}" alt="" loading="lazy" decoding="async" crossorigin="anonymous" onerror="this.onerror=null;this.src='${fallbackImage}'"><div class="saved-item-body"><strong>${escapeHtml(event.title)}</strong><small>📍 ${escapeHtml(event.city||'Riviera')} · ${escapeHtml(date)}</small><div class="saved-item-actions">${link}${saveHeartHtml(event)}</div></div></article>`;
       }).join('');
     }
     document.addEventListener('click',function(event){
