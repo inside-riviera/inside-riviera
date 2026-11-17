@@ -79,6 +79,9 @@ jobs:
           for src in root.rglob('*.png'):
               temp = src.with_name(src.stem + '.optimized.png')
               with Image.open(src) as im:
+                  if src.name == 'favicon.png' and max(im.size) > 128:
+                      print(f'Resizing favicon from {im.size} to fit 128x128.')
+                      im.thumbnail((128, 128), Image.Resampling.LANCZOS)
                   im.save(temp, 'PNG', optimize=True)
               if temp.stat().st_size < src.stat().st_size:
                   bytes_before += src.stat().st_size
