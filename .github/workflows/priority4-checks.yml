@@ -128,6 +128,9 @@ jobs:
             await page.getByText('Showing your last saved event list', {exact:false}).waitFor({timeout:20000});
             await page.getByRole('heading', {name:'Offline test event'}).waitFor({timeout:20000});
             console.log('PASS: returning visitor sees cached event listings during outage.');
+            await page.goto('http://127.0.0.1:8080/event.html?id=0', {waitUntil:'domcontentloaded'});
+            await page.getByRole('heading', {name:'Offline test event'}).waitFor({timeout:20000});
+            console.log('PASS: cached event detail page opens during outage.');
             await browser.close();
           })().catch(e => { console.error(e); process.exit(1); });
           JS
