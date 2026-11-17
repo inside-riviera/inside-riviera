@@ -929,6 +929,13 @@
           return;
         }
 
+        // Keep the date calendar interactive even when no live or cached events exist.
+        // This lets visitors browse dates and use the search controls while the feed recovers.
+        buildCalendar();
+        updateAllListings();
+        renderFeaturedEvents();
+        renderSavedEvents();
+
         const container = document.getElementById(
           "events-container"
         );
@@ -939,11 +946,11 @@
         if (featured) featured.innerHTML = '<p class="featured-status">Upcoming events are temporarily unavailable. Please try again later.</p>';
         container.innerHTML = `
           <div class="no-events">
-            <h3>Events temporarily unavailable</h3>
+            <h3>Live event updates are temporarily unavailable</h3>
             <p>
-              The calendar is working, but events
-              could not be loaded from Google Sheets.
-              Please try refreshing the page.
+              The calendar is still available to browse, but no event listings
+              could be loaded. Please try refreshing later or check with the organiser
+              before making plans.
             </p>
           </div>
         `;
