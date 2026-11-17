@@ -33,15 +33,11 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from PIL import Image
-          import re
           root = Path('.')
           text_files = [p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in {'.html','.css','.js','.json'} and '.git' not in p.parts]
           texts = {p: p.read_text(encoding='utf-8') for p in text_files}
           candidates = []
-          social_refs = set()
-          for p, text in texts.items():
-              if 'og:image' in text or 'twitter:image' in text:
-                  social_refs.update(str(img) for img in re.findall(r'https?://[^"\\s>]+\\.(?:jpg|jpeg)', text, re.I))
+          social_texts = [text for text in texts.values() if 'og:image' in text or 'twitter:image' in text]
           for p in root.rglob('*.jpg'):
               rel = p.as_posix()
               if rel == 'halloween-2026-share.jpg':
@@ -53,7 +49,7 @@ jobs:
           jpeg_optimized = 0
           for src in candidates:
               rel = src.as_posix()
-              is_social = any(rel in url for url in social_refs) or any(rel in text and ('og:image' in text or 'twitter:image' in text) for text in texts.values())
+              is_social = any(rel in text for text in social_texts)
               if is_social:
                   temp = src.with_name(src.stem + '.optimized.jpg')
                   with Image.open(src) as im:
@@ -86,11 +82,6 @@ jobs:
                   png_optimized += 1
               else:
                   temp.unlink()
-          for p, text in texts.items():
-                  if old in text:
-                      texts[p] = text.replace(old, new)
-                  if '/' + old in texts[p]:
-                      texts[p] = texts[p].replace('/' + old, '/' + new)
           for p, text in texts.items():
               if p.as_posix() in {'homepage.css'}:
                   import rcssmin
