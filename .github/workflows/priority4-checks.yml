@@ -152,8 +152,15 @@ jobs:
           done
           npx lighthouse https://www.insideriviera.net/ --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --screenEmulation.mobile --output=json --output-path=./lighthouse-live-mobile.json --chrome-flags="--headless --no-sandbox"
       - name: Retrieve real-user Core Web Vitals when Google has field data
+        env:
+          PSI_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
         run: |
-          status=$(curl --silent --show-error --max-time 45 -o pagespeed-insights-mobile.json -w '%{http_code}' "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fwww.insideriviera.net%2F&strategy=mobile&category=performance" || true)
+          if [ -z "$PSI_API_KEY" ]; then
+            echo "No PAGESPEED_API_KEY repository secret configured." > pagespeed-insights-status.txt
+            echo "Skipping PageSpeed Insights field-data request until an API key is configured."
+            exit 0
+          fi
+          status=$(curl --silent --show-error --max-time 45 -o pagespeed-insights-mobile.json -w '%{http_code}' "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fwww.insideriviera.net%2F&strategy=mobile&category=performance&key=$PSI_API_KEY" || true)
           if [ "$status" = "200" ]; then
             echo "HTTP 200: PageSpeed Insights response received."
             rm -f pagespeed-insights-status.txt
