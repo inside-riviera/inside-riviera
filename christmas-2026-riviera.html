@@ -46,51 +46,88 @@
     footer{padding:35px 20px;background:#10243c;color:#e4e6ec;text-align:center;font:13px Arial,sans-serif}footer a{color:#e4e6ec;margin:0 8px}
     @media(max-width:650px){.event-list{grid-template-columns:1fr}.hero{padding:62px 18px}.top nav a{margin-left:10px}.route-card{padding:20px}.contents ul{columns:1}.section-title{font-size:26px}}
 
-    /* Inside Riviera Christmas edition — neon pink, lime and black */
-    :root{--navy:#0f172a;--pink:#ff007a;--cream:#090a0f;--gold:#a3e635;--green:#a3e635;--muted:#c4c8d2}
-    body{background:#090a0f;color:#f5f5f7;font-family:Arial,Helvetica,sans-serif;line-height:1.75}
-    .top{background:#050609;border-bottom:1px solid #ff007a55;box-shadow:0 5px 24px #0008}
-    .brand{color:#fff}.brand:after{content:" ✦";color:#a3e635}
-    .top nav a{color:#f5f5f7}.top nav a:hover{color:#ff007a}
-    .hero{min-height:430px;padding:100px 20px 96px;background-image:linear-gradient(100deg,#050609ed 0%,#080b12c9 48%,#090a0f70 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Place_du_Casino_decorated_for_Christmas_(50326752371).jpg?width=2400");background-position:center 48%;background-size:cover;border-bottom:3px solid #ff007a}
-    .hero:before{content:"";position:absolute;inset:15px;border:1px solid #a3e63566;border-radius:18px;pointer-events:none}
-    .hero:after{content:"✦  ❄  ✦  MERRY & BRIGHT  ✦  ❄  ✦";letter-spacing:.45em;color:#a3e635;opacity:.95;font:700 10px Arial,sans-serif}
-    .kicker{display:inline-block;padding:9px 15px;border:1px solid #a3e635;border-radius:99px;color:#a3e635;background:#050609aa}
-    .hero h1{text-shadow:0 5px 30px #000;font-size:clamp(42px,7vw,82px);letter-spacing:-.04em}
-    .hero p{font-size:17px;color:#fff;text-shadow:0 2px 12px #000;max-width:700px}
-    .wrap{max-width:1080px;padding-top:35px}
-    .breadcrumbs{color:#aeb4c1}.breadcrumbs a,.contents a,.route-card a,.event-list a,.faq a,.back{color:#ff4b9b}
-    .intro{font-size:17px;color:#e2e4e9}
-    .contents,.route-card,.event-item,.faq{background:linear-gradient(145deg,#151821,#10131b);border:1px solid #ffffff18;border-radius:18px;box-shadow:0 14px 38px #0006}
-    .contents{border-top:3px solid #a3e635}.contents h2{color:#a3e635}
-    .section-title{color:#fff;font-size:clamp(26px,4vw,34px);margin-top:56px}
-    .section-title:after{content:" ✦";color:#ff007a;font-size:.7em}
-    .subhead{color:#a3e635}
-    .route-card{padding:25px;border-left:3px solid #ff007a}
-    .route-card h3{color:#fff;font-size:25px}
-    .route-card p{color:#d4d7df}
-    .date{display:inline-block;background:#a3e635;color:#10130a;padding:5px 10px;border-radius:99px;font-size:10px;letter-spacing:.09em}
-    .route-photo{height:280px;border:1px solid #a3e63555}
-    .photo-credit,.event-credit{color:#aeb4c1}
-    .photo-credit a,.event-credit a{color:#a3e635}
-    .event-list{gap:17px}
-    .event-item{padding:14px;border-top:2px solid #a3e635;transition:transform .2s ease,border-color .2s ease}
-    .event-item:hover{transform:translateY(-3px);border-color:#ff007a}
-    .event-photo{height:205px;border-radius:12px}
-    .event-item strong{color:#fff;font-size:16px}
-    .event-item p{color:#cdd1da}
-    .tree-list{color:#e5e7eb}.tree-list li{padding:8px 0;border-bottom:1px solid #ffffff18}.tree-list strong{color:#a3e635}
-    .notice{background:#171b13;border-left:4px solid #a3e635;color:#e8f2d9;border-radius:0 14px 14px 0}
-    .faq{border-left:3px solid #ff007a}.faq h3{color:#a3e635}.faq p{color:#d2d5de}
-    .sources{color:#cdd1da}.sources a{color:#a3e635}
-    .article-photo{max-width:1180px!important;margin:0 auto 2rem!important;padding:18px 22px 0!important}
-    .article-photo img{border:1px solid #a3e63566;border-radius:18px!important;box-shadow:0 18px 55px #0009}
-    .article-photo figcaption{color:#aeb4c1!important}
-    .article-photo figcaption a{color:#a3e635}
-    footer{background:#050609;border-top:2px solid #ff007a;color:#cdd1da}
+    /* Inside Riviera editorial Christmas refresh — white, neon pink and lime */
+    :root{--navy:#151515;--pink:#ff007f;--cream:#fff;--gold:#a3e635;--green:#a3e635;--muted:#5d626b}
+    html{scroll-behavior:smooth}
+    body{background:#fff;color:#171717;font-family:Arial,Helvetica,sans-serif;line-height:1.72}
+    a{color:#e90070}
+    .top{background:#fff;color:#171717;padding-top:15px;padding-bottom:15px;border-bottom:1px solid #ececec;box-shadow:0 3px 16px #00000008}
+    .brand{color:#111;font-size:18px;letter-spacing:.13em}
+    .brand:after{content:" ✦";color:#a3e635}
+    .top nav a{color:#242424;font-weight:700}
+    .top nav a:hover{color:#ff007f}
+    .hero{position:relative;min-height:440px;padding:100px 20px 92px;background-image:linear-gradient(90deg,#101010b8,#10101070),url("https://commons.wikimedia.org/wiki/Special:FilePath/Place_du_Casino_decorated_for_Christmas_(50326752371).jpg?width=2400");background-position:center 48%;background-size:cover;color:#fff;text-align:left;border-bottom:6px solid #a3e635}
+    .hero:before{content:"";position:absolute;inset:15px;border:1px solid #ffffff75;pointer-events:none}
+    .hero:after{content:"✦  MERRY & BRIGHT  ✦";position:absolute;bottom:18px;left:max(28px,calc((100vw - 1040px)/2));right:auto;color:#a3e635;letter-spacing:.32em;opacity:1;font:800 10px Arial,sans-serif}
+    .kicker{display:inline-block;padding:7px 13px;border-radius:3px;background:#a3e635;color:#111;font:800 11px Arial,sans-serif;letter-spacing:.16em}
+    .hero h1{max-width:920px;margin:20px 0 14px;font:800 clamp(42px,7vw,78px)/.99 Arial,Helvetica,sans-serif;letter-spacing:-.055em;text-shadow:0 3px 22px #0008}
+    .hero p{max-width:650px;margin:0;font:18px/1.6 Arial,sans-serif;color:#fff}
+    .wrap{max-width:1040px;padding:34px 22px 78px}
+    .breadcrumbs{color:#777;font:12px Arial,sans-serif}
+    .breadcrumbs a,.contents a,.route-card a,.event-list a,.faq a,.back{color:#e90070}
+    .intro{max-width:850px;margin:0 auto 28px;font-size:18px;line-height:1.8;color:#333}
+    .intro p:first-child{font-size:20px;font-weight:600;color:#151515}
+    .contents{max-width:850px;margin:30px auto 48px;padding:23px 26px;background:#f8f8f8;border:0;border-left:5px solid #ff007f;border-radius:0;box-shadow:none}
+    .contents h2{font:800 16px Arial,sans-serif;text-transform:uppercase;letter-spacing:.06em;margin:0 0 12px;color:#151515}
+    .contents h2:after{content:"";display:inline-block;width:25px;height:5px;margin:0 0 3px 9px;background:#a3e635}
+    .contents ul{columns:2;column-gap:28px}
+    .contents li{margin:7px 0}
+    .contents a{font:700 14px Arial,sans-serif;text-decoration:none}
+    .section-title{font:800 clamp(27px,4vw,36px)/1.12 Arial,sans-serif;letter-spacing:-.04em;color:#151515;margin:58px 0 20px;padding-bottom:13px;border-bottom:2px solid #171717}
+    .section-title:after{content:"";display:block;width:72px;height:6px;background:#ff007f;margin-top:13px}
+    .subhead{font:800 22px Arial,sans-serif;color:#171717}
+    .route-card{display:grid;grid-template-columns:minmax(230px,38%) minmax(0,1fr);column-gap:25px;align-items:start;margin:0;padding:27px 0;border:0;border-bottom:1px solid #dedede;border-radius:0;background:#fff;box-shadow:none}
+    .route-card figure{grid-column:1;grid-row:1 / span 5;width:100%;margin:0!important}
+    .route-card .date,.route-card h3,.route-card p{grid-column:2}
+    .route-card h3{font:800 25px/1.18 Arial,sans-serif;letter-spacing:-.025em;margin:10px 0;color:#151515}
+    .route-card p{font:15px/1.72 Arial,sans-serif;color:#414141;margin:8px 0}
+    .route-card p strong{color:#151515}
+    .date{display:inline-block;justify-self:start;background:#a3e635;color:#141414;padding:5px 10px;border-radius:2px;font:800 10px Arial,sans-serif;letter-spacing:.09em;text-transform:uppercase}
+    .route-photo{height:245px;width:100%;object-fit:cover;border-radius:2px;margin:0 0 9px;border:0}
+    .photo-credit,.event-credit{font:10px/1.45 Arial,sans-serif;color:#777;margin:0 0 8px}
+    .photo-credit a,.event-credit a{color:#555;font-weight:600}
+    .event-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 25px}
+    .event-item{display:flex;flex-direction:column;align-items:flex-start;background:#fff;border:0;border-top:1px solid #dcdcdc;border-radius:0;padding:20px 0;box-shadow:none;transition:background .2s}
+    .event-item:hover{background:#fafafa}
+    .event-photo{width:100%;height:205px;object-fit:cover;border-radius:2px;margin:0 0 8px}
+    .event-item .event-credit{margin-bottom:10px}
+    .event-item strong{font:800 17px/1.3 Arial,sans-serif;color:#151515;margin:0 0 5px}
+    .event-item p{font:14px/1.6 Arial,sans-serif;color:#4b4b4b;margin:5px 0}
+    .event-item>a{font:700 13px Arial,sans-serif;margin-top:8px}
+    .tree-list{padding-left:24px}
+    .tree-list li{padding:12px 0;border-bottom:1px solid #eee;color:#333}
+    .tree-list li::marker{color:#ff007f;font-weight:800}
+    .tree-list strong{color:#151515}
+    .notice{background:#f6fbe9;border:0;border-left:5px solid #a3e635;border-radius:0;padding:18px 21px;margin:30px 0;color:#333;font:14px/1.7 Arial,sans-serif}
+    .faq{background:#fff;border:0;border-top:1px solid #ddd;border-radius:0;padding:20px 0;margin:0}
+    .faq:last-of-type{border-bottom:1px solid #ddd}
+    .faq h3{font:800 18px Arial,sans-serif;color:#151515;margin:0 0 7px}
+    .faq h3:before{content:"Q. ";color:#ff007f}
+    .faq p{margin:0;color:#4b4b4b;font:15px/1.7 Arial,sans-serif}
+    .sources{font:13px/1.8 Arial,sans-serif;color:#444}
+    .sources a{color:#e90070;font-weight:700}
+    .article-photo{max-width:1040px!important;margin:0 auto 28px!important;padding:0 22px!important}
+    .article-photo img{width:100%;max-height:500px;object-fit:cover;border-radius:2px!important;border-bottom:5px solid #a3e635;box-shadow:none}
+    .article-photo figcaption{color:#777!important;font:11px/1.5 Arial,sans-serif!important}
+    .article-photo figcaption a{color:#e90070}
+    .back{font-weight:800}
+    footer{background:#171717;border-top:6px solid #ff007f;color:#eee;text-align:center;font:13px Arial,sans-serif}
+    footer a{color:#fff;text-decoration:none}
     footer a:hover{color:#a3e635}
-    @media(max-width:650px){.hero{min-height:380px;padding:72px 18px}.hero:before{inset:8px}.route-photo{height:220px}.event-photo{height:190px}.route-card{padding:17px}}
-
+    @media(max-width:700px){
+      .hero{min-height:380px;padding:76px 24px 82px;text-align:left}
+      .hero:before{inset:8px}
+      .hero:after{left:24px;letter-spacing:.18em}
+      .wrap{padding:27px 18px 60px}
+      .route-card{grid-template-columns:1fr;row-gap:0;padding:23px 0}
+      .route-card figure{grid-column:1;grid-row:auto;margin:0 0 14px!important}
+      .route-card .date,.route-card h3,.route-card p{grid-column:1}
+      .route-photo{height:220px}
+      .event-list{grid-template-columns:1fr}
+      .event-photo{height:210px}
+      .contents ul{columns:1}
+      .section-title{margin-top:45px}
+    }
   </style>
   <script type="application/ld+json">{
     "@context":"https://schema.org","@type":"Article",
