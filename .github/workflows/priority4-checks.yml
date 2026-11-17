@@ -167,7 +167,8 @@ jobs:
           const local = JSON.parse(fs.readFileSync('lighthouse-mobile.json', 'utf8'));
           const live = fs.existsSync('lighthouse-live-mobile.json') ? JSON.parse(fs.readFileSync('lighthouse-live-mobile.json', 'utf8')) : null;
           const psi = fs.existsSync('pagespeed-insights-mobile.json') ? JSON.parse(fs.readFileSync('pagespeed-insights-mobile.json', 'utf8')) : null;
-          const field = psi?.loadingExperience?.metrics || psi?.originLoadingExperience?.metrics || {};\n          const psiStatus = fs.existsSync('pagespeed-insights-status.txt') ? fs.readFileSync('pagespeed-insights-status.txt','utf8').trim() : (psi ? 'HTTP 200' : 'not retrieved');
+          const field = psi?.loadingExperience?.metrics || psi?.originLoadingExperience?.metrics || {};
+          const psiStatus = fs.existsSync('pagespeed-insights-status.txt') ? fs.readFileSync('pagespeed-insights-status.txt','utf8').trim() : (psi ? 'HTTP 200' : 'not retrieved');
           const metrics = (report, id, unit='ms') => {
             const value = report?.audits?.[id]?.numericValue;
             return Number.isFinite(value) ? (unit === 'ms' ? (value/1000).toFixed(2)+' s' : value.toFixed(3)) : 'not reported';
@@ -231,5 +232,6 @@ jobs:
           name: priority-4-lighthouse-mobile
           path: |
             lighthouse-*-mobile.json
-            pagespeed-insights-mobile.json\n            pagespeed-insights-status.txt
+            pagespeed-insights-mobile.json
+            pagespeed-insights-status.txt
           if-no-files-found: ignore
