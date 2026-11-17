@@ -21,7 +21,100 @@
     .hero{background:linear-gradient(125deg,#103542,#17636b 72%,#8ba18a);color:white;padding:58px 24px 72px}.hero-inner{max-width:900px;margin:auto}.eyebrow{font-size:11px;letter-spacing:.18em;font-weight:800;color:#e6d8b8;text-transform:uppercase}.hero h1{font: bold clamp(35px,5.5vw,59px)/1.08 Georgia,serif;max-width:850px;margin:14px 0}.hero p{max-width:720px;font-size:18px;color:#e6f0ee;margin:0}
     main{max-width:900px;margin:-30px auto 70px;padding:0 22px;position:relative}.article{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:clamp(22px,5vw,48px)}.article p{margin:0 0 18px}.article h2{font:700 clamp(25px,3.5vw,32px)/1.2 Georgia,serif;margin:38px 0 14px}.article h3{font:700 21px/1.3 Georgia,serif;margin:25px 0 8px}.article ul,.article ol{padding-left:22px;margin:8px 0 20px}.article li{margin:7px 0}.intro{font-size:19px;color:#3d555d}.toc{background:#f2f7f6;border:1px solid #dce9e6;border-radius:13px;padding:20px 24px;margin:26px 0}.toc strong{display:block;margin-bottom:8px}.toc ul{columns:2;margin:0}.route{padding:0 0 23px;margin:0 0 24px;border-bottom:1px solid var(--line)}.route:last-child{border-bottom:0}.tag{display:inline-block;font-size:11px;letter-spacing:.08em;font-weight:800;text-transform:uppercase;color:#17636b;background:#eaf3f1;padding:4px 8px;border-radius:5px;margin:0 0 7px}.tip{background:var(--sand);border-radius:13px;padding:18px 20px;margin:24px 0}.tip strong{color:#6b4d2b}.small{font-size:13px;color:var(--muted)}.footer{max-width:900px;margin:0 auto;padding:0 22px 40px;color:var(--muted);font-size:12px}.stop{margin:10px 0 0;padding-left:17px;border-left:3px solid #d7e8e3}.stats{font-size:14px;color:var(--muted);font-weight:700}
     @media(max-width:600px){.site-head{padding:14px 18px}.hero{padding:45px 22px 58px}.toc ul{columns:1}.article{padding:23px 19px}}
-  </style>
+  
+/* Inside Riviera unified editorial system */
+:root{--ir-pink:#ff007f;--ir-lime:#a3e635;--ir-ink:#171717;--ir-paper:#fff;--ir-muted:#626262}
+html{scroll-behavior:smooth}
+body{background:var(--ir-paper)!important;color:var(--ir-ink)!important;font-family:Arial,Helvetica,sans-serif!important;line-height:1.72}
+a{color:#e90070}
+.site-head,.top,header .top{
+  min-height:76px;background:#fff!important;color:#171717!important;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  gap:8px;padding:12px 20px!important;border-bottom:1px solid #ededed;
+  box-shadow:0 3px 16px #00000008;font-family:Arial,Helvetica,sans-serif
+}
+.site-head .brand,.top .brand,.brand{
+  color:#111!important;font-size:19px;font-weight:900;letter-spacing:.15em;
+  line-height:1.2;text-decoration:none
+}
+.site-head .brand span,.top .brand span{color:#111}
+.site-head nav,.top nav{display:flex;justify-content:center;align-items:center;gap:23px;flex-wrap:wrap}
+.site-head nav a,.top nav a,.top .guide-trigger{
+  margin:0!important;color:#222!important;font:800 10px Arial,sans-serif!important;
+  letter-spacing:.12em;text-transform:uppercase;text-decoration:none
+}
+.site-head nav a:hover,.top nav a:hover,.top .guide-trigger:hover{color:var(--ir-pink)!important}
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:390px;padding:82px 24px 84px!important;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center!important;color:#fff!important;
+  background-color:#111820!important;background-position:center!important;background-size:cover!important;
+  border-bottom:7px solid var(--ir-lime)
+}
+.hero:before{
+  content:"";position:absolute;z-index:-1;inset:12px;
+  border:1px solid #ffffff75;pointer-events:none
+}
+.hero:after{
+  content:"✦  INSIDE RIVIERA  ✦";
+  position:absolute;left:0;right:0;bottom:19px;text-align:center;
+  color:var(--ir-lime);font:900 9px Arial,sans-serif;letter-spacing:.28em;
+  text-shadow:0 2px 12px #000
+}
+.hero .wrap{position:relative;z-index:1;width:100%;max-width:1000px;margin:auto}
+.hero .eyebrow,.hero .kicker,.hero .date,.eyebrow,.kicker{
+  display:inline-block;background:var(--ir-lime);color:#111!important;
+  padding:7px 13px;border-radius:99px;font:900 10px Arial,sans-serif!important;
+  letter-spacing:.15em;text-transform:uppercase
+}
+.hero h1{
+  max-width:1000px;margin:20px auto 15px!important;
+  color:#fff!important;font:900 clamp(40px,7vw,76px)/.99 Georgia,'Times New Roman',serif!important;
+  letter-spacing:-.045em!important;text-wrap:balance;
+  text-shadow:0 4px 25px #000b
+}
+.hero p{
+  max-width:720px;margin:0 auto!important;color:#fff!important;
+  font:17px/1.7 Arial,Helvetica,sans-serif!important;text-shadow:0 2px 14px #000
+}
+.hero .byline{margin-top:17px;color:#e9e9e9;font:12px Arial,sans-serif}
+.wrap,.content,.article-content,main{
+  color:var(--ir-ink)
+}
+.wrap{max-width:1080px}
+.article-photo{max-width:1080px!important;margin:0 auto 30px!important;padding:0 22px!important}
+.article-photo img{border-radius:3px!important;border-bottom:5px solid var(--ir-lime);box-shadow:none!important}
+.article-photo figcaption{color:#777!important;font:11px/1.5 Arial,sans-serif!important}
+h2,.section-title{color:#151515!important;font-family:Arial,Helvetica,sans-serif!important;font-weight:900!important;letter-spacing:-.035em}
+h2:after,.section-title:after{content:"";display:block;width:58px;height:5px;background:var(--ir-pink);margin-top:11px}
+h3{color:#171717!important;font-family:Arial,Helvetica,sans-serif!important;font-weight:800!important}
+p,li{color:inherit}
+.contents,.toc,.notice,.callout,.tip,.info-box{
+  border-radius:2px!important;box-shadow:none!important
+}
+.contents,.toc{background:#f7f7f7!important;border:0!important;border-left:5px solid var(--ir-pink)!important}
+.notice,.callout,.tip,.info-box{background:#f5fbe9!important;border-left:5px solid var(--ir-lime)!important}
+.card,.route-card,.event-item,.faq,.destination-card{
+  border-radius:3px!important;box-shadow:none!important
+}
+.card,.route-card,.event-item,.faq,.destination-card{
+  border-color:#e5e5e5!important;background:#fff!important
+}
+button,.button,.btn{border-radius:2px}
+footer{border-top:6px solid var(--ir-pink)}
+@media(max-width:650px){
+ .site-head,.top,header .top{gap:9px;padding:12px 14px!important}
+ .site-head nav,.top nav{gap:14px}
+ .site-head nav a,.top nav a,.top .guide-trigger{font-size:9px!important;letter-spacing:.07em}
+ .hero{min-height:360px;padding:65px 18px 76px!important}
+ .hero:before{inset:8px}
+ .hero h1{font-size:clamp(38px,12vw,58px)!important}
+ .hero p{font-size:15px!important;max-width:340px}
+ .hero:after{font-size:8px;letter-spacing:.17em}
+}
+
+</style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Article","headline":"Best Bike Paths on the French and Italian Riviera: Half-Day and Full-Day Rides","description":"A practical guide to coastal cycling routes, itineraries and cafe stops along the French and Italian Riviera.","author":{"@type":"Organization","name":"Inside Riviera"},"publisher":{"@type":"Organization","name":"Inside Riviera","url":"https://www.insideriviera.net/"},"mainEntityOfPage":"https://www.insideriviera.net/bike-paths-cycling-itineraries-french-italian-riviera.html"}
   </script>
