@@ -36,24 +36,30 @@ jobs:
           root = Path('.')
           text_files = [p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in {'.html','.css','.js','.json'} and '.git' not in p.parts]
           texts = {p: p.read_text(encoding='utf-8') for p in text_files}
-          candidates = []
           social_texts = [text for text in texts.values() if 'og:image' in text or 'twitter:image' in text]
-          for p in root.rglob('*.jpg'):
-              rel = p.as_posix()
-              if rel == 'halloween-2026-share.jpg':
-                  continue
-              if any(rel in text for text in texts.values()):
-                  candidates.append(p)
           converted = 0
-          before = after = 0
           jpeg_optimized = 0
-          for src in candidates:
+          png_optimized = 0
+          before = after = 0
+          for src in root.rglob('*.jpg'):
               rel = src.as_posix()
+              referenced = any(rel in text for text in texts.values())
               is_social = any(rel in text for text in social_texts)
-              if is_social:
+              if referenced and not is_social:
+                  dst = src.with_suffix('.webp')
+                  with Image.open(src) as im:
+                      im.convert('RGB').save(dst, 'WEBP', quality=80, method=6)
+                  before += src.stat().st_size
+                  after += dst.stat().st_size
+                  converted += 1
+                  old, new = src.as_posix(), dst.as_posix()
+                  for p, text in texts.items():
+                      if old in text:
+                          texts[p] = text.replace(old, new)
+              else:
                   temp = src.with_name(src.stem + '.optimized.jpg')
                   with Image.open(src) as im:
-                      im.convert('RGB').save(temp, 'JPEG', quality=88, optimize=True, progressive=True)
+                      im.convert('RGB').save(temp, 'JPEG', quality=84, optimize=True, progressive=True)
                   if temp.stat().st_size < src.stat().st_size:
                       before += src.stat().st_size
                       after += temp.stat().st_size
@@ -61,15 +67,18 @@ jobs:
                       jpeg_optimized += 1
                   else:
                       temp.unlink()
-                  continue
-              dst = src.with_suffix('.webp')
+          for src in root.rglob('*.png'):
+              temp = src.with_name(src.stem + '.optimized.png')
               with Image.open(src) as im:
-                  im.convert('RGB').save(dst, 'WEBP', quality=80, method=6)
-              before += src.stat().st_size
-              after += dst.stat().st_size
-              converted += 1
-              old, new = src.as_posix(), dst.as_posix()
-              for p, text in texts.items():
+                  im.save(temp, 'PNG', optimize=True)
+              if temp.stat().st_size < src.stat().st_size:
+                  before += src.stat().st_size
+                  after += temp.stat().st_size
+                  temp.replace(src)
+                  png_optimized += 1
+              else:
+                  temp.unlink()
+          for p, text in texts.items():
                   if old in text:
                       texts[p] = text.replace(old, new)
           png_optimized = 0
@@ -88,7 +97,7 @@ jobs:
                   text = rcssmin.cssmin(text)
               if text != p.read_text(encoding='utf-8'):
                   p.write_text(text, encoding='utf-8')
-          print(f'Converted {converted} inline JPG images to WebP; optimized {jpeg_optimized} social JPEGs and {png_optimized} PNGs; bytes before={before}; after={after}; saved={before-after}.')
+          print(f'Converted {converted} referenced JPG images to WebP; optimized {jpeg_optimized} local JPEGs and {png_optimized} PNGs; bytes before={before}; after={after}; saved={before-after}.')
           PY
       - name: Install browser test tools
         run: |
