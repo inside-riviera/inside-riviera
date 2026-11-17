@@ -91,10 +91,12 @@ jobs:
             if (dayCells < 28) throw new Error('Calendar grid did not render for a first-time visitor.');
             console.log('PASS: first-time visitor sees a working calendar and a clear no-cache outage message.');
             await page.evaluate(() => {
+              const today = new Date();
               localStorage.setItem('insideRivieraEventsCacheV1', JSON.stringify([{
                 title:'Offline test event', city:'Sanremo', location:'Test venue',
-                time:'18:00', description:'Automated outage test', link:'', categories:['Music'], priority:'1',
-                year:2026, month:10, date:20, endYear:2026, endMonth:10, endDate:20, img:''
+                time:'18:00', description:'Automated outage test', link:'', categories:['Live Music'], priority:'1',
+                year:today.getFullYear(), month:today.getMonth(), date:today.getDate(),
+                endYear:today.getFullYear(), endMonth:today.getMonth(), endDate:today.getDate(), img:''
               }]));
               localStorage.setItem('insideRivieraEventsCacheTimeV1', new Date().toISOString());
             });
