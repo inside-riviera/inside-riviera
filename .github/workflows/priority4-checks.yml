@@ -150,10 +150,13 @@ jobs:
           npx lighthouse https://www.insideriviera.net/ --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --screenEmulation.mobile --output=json --output-path=./lighthouse-live-mobile.json --chrome-flags="--headless --no-sandbox"
       - name: Retrieve real-user Core Web Vitals when Google has field data
         run: |
-          if curl --fail --silent --show-error --max-time 45 "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fwww.insideriviera.net%2F&strategy=mobile&category=performance" -o pagespeed-insights-mobile.json; then
-            echo "Retrieved PageSpeed Insights field data."
+          status=$(curl --silent --show-error --max-time 45 -o pagespeed-insights-mobile.json -w '%{http_code}' "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fwww.insideriviera.net%2F&strategy=mobile&category=performance" || true)
+          if [ "$status" = "200" ]; then
+            echo "HTTP 200: PageSpeed Insights response received."
+            rm -f pagespeed-insights-status.txt
           else
-            echo "PageSpeed Insights field data was unavailable; lab metrics are still recorded."
+            echo "HTTP $status" > pagespeed-insights-status.txt
+            echo "PageSpeed Insights request did not return field data (HTTP $status)."
             rm -f pagespeed-insights-mobile.json
           fi
       - name: Summarize mobile Lighthouse metrics
@@ -164,13 +167,13 @@ jobs:
           const local = JSON.parse(fs.readFileSync('lighthouse-mobile.json', 'utf8'));
           const live = fs.existsSync('lighthouse-live-mobile.json') ? JSON.parse(fs.readFileSync('lighthouse-live-mobile.json', 'utf8')) : null;
           const psi = fs.existsSync('pagespeed-insights-mobile.json') ? JSON.parse(fs.readFileSync('pagespeed-insights-mobile.json', 'utf8')) : null;
-          const field = psi?.loadingExperience?.metrics || psi?.originLoadingExperience?.metrics || {};
+          const field = psi?.loadingExperience?.metrics || psi?.originLoadingExperience?.metrics || {};\n          const psiStatus = fs.existsSync('pagespeed-insights-status.txt') ? fs.readFileSync('pagespeed-insights-status.txt','utf8').trim() : (psi ? 'HTTP 200' : 'not retrieved');
           const metrics = (report, id, unit='ms') => {
             const value = report?.audits?.[id]?.numericValue;
             return Number.isFinite(value) ? (unit === 'ms' ? (value/1000).toFixed(2)+' s' : value.toFixed(3)) : 'not reported';
           };
           const score = (report, id) => Number.isFinite(report?.categories?.[id]?.score) ? Math.round(report.categories[id].score*100)+'/100' : 'not reported';
-          const fieldValue = (id, divisor, unit) => Number.isFinite(field?.[id]?.percentile) ? (field[id].percentile/divisor).toFixed(unit === 'score' ? 3 : 2)+' '+unit+' ('+(field[id].category || 'field')+')' : 'not available';
+          const fieldValue = (id, divisor, unit) => Number.isFinite(field?.[id]?.percentile) ? (field[id].percentile/divisor).toFixed(unit === 'score' ? 3 : 2)+' '+unit+' ('+(field[id].category || 'field')+')' : (psiStatus === 'HTTP 200' ? 'no field data in response' : 'not retrieved ('+psiStatus+')');
           const rows = (report, label) => [
             '| Performance ('+label+') | '+score(report,'performance')+' |',
             '| Accessibility ('+label+') | '+score(report,'accessibility')+' |',
@@ -207,7 +210,7 @@ jobs:
             '| INP | '+fieldValue('INTERACTION_TO_NEXT_PAINT',1000,'s')+' |',
             '| CLS | '+fieldValue('CUMULATIVE_LAYOUT_SHIFT_SCORE',1000,'score')+' |',
             '',
-            'Field data is shown only when Google has enough eligible Chrome user experience data for this page or origin.'
+            'PageSpeed Insights retrieval status: '+psiStatus+'. HTTP 429 indicates API rate limiting, not a confirmed absence of CrUX traffic.'
           ].join('\n');
           fs.writeFileSync('priority4-lighthouse-summary.md', report);
           console.log(report);
@@ -228,5 +231,5 @@ jobs:
           name: priority-4-lighthouse-mobile
           path: |
             lighthouse-*-mobile.json
-            pagespeed-insights-mobile.json
+            pagespeed-insights-mobile.json\n            pagespeed-insights-status.txt
           if-no-files-found: ignore
