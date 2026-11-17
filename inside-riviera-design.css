@@ -20,7 +20,8 @@ img { max-width: 100%; }
   border:0; font-family:inherit;
 }
 .site-head nav, .top nav, .top-nav { display:flex; align-items:center; gap:clamp(10px,2vw,22px); flex-wrap:wrap; }
-.site-head nav a, .top nav a, .top-nav a { color:#fff; text-decoration:none; font-weight:700; transition:color .18s ease; }\n.top nav a { margin-left:0; }
+.site-head nav a, .top nav a, .top-nav a { color:#fff; text-decoration:none; font-weight:700; transition:color .18s ease; }
+.top nav a { margin-left:0; }
 .site-head nav a:hover, .top nav a:hover, .top-nav a:hover { color:var(--ir-lime); }
 .brand, .top-brand { color:#fff; font-weight:900; text-decoration:none; letter-spacing:.045em; }
 .brand span, .top-brand span { color:var(--ir-lime); }
@@ -72,7 +73,8 @@ footer { margin-top:48px; }
     height:clamp(220px,65vw,330px); border-radius:15px;
   }
   .article { padding:clamp(20px,5vw,30px); }
-  .hero:not(#home) { padding-top:48px !important; padding-bottom:54px !important; }\n  .hero#home { padding-bottom:140px !important; }
+  .hero:not(#home) { padding-top:48px !important; padding-bottom:54px !important; }
+  .hero#home { padding-bottom:140px !important; }
   .hero h1 { font-size:clamp(2.15rem,10vw,3.7rem) !important; }
   .hero p, .lead { font-size:1.04rem; }
   .toc, .quick, .info, .info-box { padding:20px !important; }
