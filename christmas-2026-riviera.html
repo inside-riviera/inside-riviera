@@ -128,6 +128,64 @@
       .contents ul{columns:1}
       .section-title{margin-top:45px}
     }
+
+    /* Centered festive masthead and cinematic Christmas hero */
+    .top{min-height:76px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;padding:12px 20px 13px;text-align:center}
+    .brand{display:block;font-size:19px;line-height:1.2;letter-spacing:.16em}
+    .top nav{display:flex;justify-content:center;align-items:center;gap:26px}
+    .top nav a{margin:0;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+    .hero{
+      min-height:535px;padding:112px 24px 105px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;
+      background-image:
+        radial-gradient(circle at 12% 18%,#ffffffa8 0 1px,transparent 2px),
+        radial-gradient(circle at 82% 22%,#ffffffa0 0 1.5px,transparent 2.5px),
+        radial-gradient(circle at 72% 76%,#ffffff80 0 1px,transparent 2px),
+        radial-gradient(circle at 25% 82%,#ffffff90 0 1.5px,transparent 2.5px),
+        linear-gradient(180deg,#07101a70 0%,#07101a36 38%,#07101ac9 100%),
+        url("https://commons.wikimedia.org/wiki/Special:FilePath/Place_du_Casino_decorated_for_Christmas_(50326752371).jpg?width=2400);
+      background-position:center,center,center,center,center,center 46%;
+      background-size:auto,auto,auto,auto,cover,cover;
+      border-bottom:7px solid #a3e635;
+    }
+    .hero:before{inset:18px;border:1px solid #ffffff9c;box-shadow:inset 0 0 80px #ffffff12}
+    .hero:after{
+      content:"✦  MERRY CHRISTMAS  ✦  JOYEUSES FÊTES  ✦";
+      left:0;right:0;bottom:24px;text-align:center;
+      color:#c5ff69;letter-spacing:.22em;font:800 10px Arial,sans-serif;
+      text-shadow:0 2px 12px #000;
+    }
+    .kicker{
+      position:relative;z-index:1;display:inline-block;
+      padding:9px 17px;border:1px solid #d0ff75;border-radius:99px;
+      background:#a3e635;color:#10130a;
+      font:900 10px Arial,sans-serif;letter-spacing:.2em;
+      box-shadow:0 0 28px #a3e63555;
+    }
+    .hero h1{
+      position:relative;z-index:1;max-width:950px;width:100%;
+      margin:23px auto 16px;text-align:center;
+      font:900 clamp(46px,7.5vw,88px)/.98 Georgia,'Times New Roman',serif;
+      letter-spacing:-.045em;text-wrap:balance;
+      text-shadow:0 4px 28px #000b,0 0 45px #0008;
+    }
+    .hero p{
+      position:relative;z-index:1;max-width:690px;margin:0 auto;
+      text-align:center;font:17px/1.7 Arial,sans-serif;
+      color:#fff;text-shadow:0 2px 15px #000;
+    }
+    @media(max-width:650px){
+      .top{min-height:72px;gap:8px}
+      .top nav{gap:17px}
+      .top nav a{font-size:10px;letter-spacing:.07em}
+      .hero{min-height:470px;padding:80px 20px 88px;background-position:center,center,center,center,center,58% center}
+      .hero:before{inset:9px}
+      .hero:after{bottom:20px;font-size:9px;letter-spacing:.1em}
+      .hero h1{font-size:clamp(43px,13vw,64px);margin:20px auto 14px}
+      .hero p{font-size:15px;max-width:340px}
+      .kicker{font-size:9px;letter-spacing:.12em;padding:8px 12px}
+    }
   </style>
   <script type="application/ld+json">{
     "@context":"https://schema.org","@type":"Article",
