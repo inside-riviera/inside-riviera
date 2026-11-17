@@ -162,12 +162,15 @@ jobs:
           node <<'JS'
           const fs = require('fs');
           const local = JSON.parse(fs.readFileSync('lighthouse-mobile.json', 'utf8'));
-          const live = fs.existsSync('lighthouse-live-mobile.json') ? JSON.parse(fs.readFileSync('lighthouse-live-mobile.json', 'utf8')) : null;\n          const psi = fs.existsSync('pagespeed-insights-mobile.json') ? JSON.parse(fs.readFileSync('pagespeed-insights-mobile.json', 'utf8')) : null;\n          const field = psi?.loadingExperience?.metrics || psi?.originLoadingExperience?.metrics || {};
+          const live = fs.existsSync('lighthouse-live-mobile.json') ? JSON.parse(fs.readFileSync('lighthouse-live-mobile.json', 'utf8')) : null;
+          const psi = fs.existsSync('pagespeed-insights-mobile.json') ? JSON.parse(fs.readFileSync('pagespeed-insights-mobile.json', 'utf8')) : null;
+          const field = psi?.loadingExperience?.metrics || psi?.originLoadingExperience?.metrics || {};
           const metrics = (report, id, unit='ms') => {
             const value = report?.audits?.[id]?.numericValue;
             return Number.isFinite(value) ? (unit === 'ms' ? (value/1000).toFixed(2)+' s' : value.toFixed(3)) : 'not reported';
           };
-          const score = (report, id) => Number.isFinite(report?.categories?.[id]?.score) ? Math.round(report.categories[id].score*100)+'/100' : 'not reported';\n          const fieldValue = (id, divisor, unit) => Number.isFinite(field?.[id]?.percentile) ? (field[id].percentile/divisor).toFixed(unit === 'score' ? 3 : 2)+' '+unit+' ('+(field[id].category || 'field')+')' : 'not available';
+          const score = (report, id) => Number.isFinite(report?.categories?.[id]?.score) ? Math.round(report.categories[id].score*100)+'/100' : 'not reported';
+          const fieldValue = (id, divisor, unit) => Number.isFinite(field?.[id]?.percentile) ? (field[id].percentile/divisor).toFixed(unit === 'score' ? 3 : 2)+' '+unit+' ('+(field[id].category || 'field')+')' : 'not available';
           const rows = (report, label) => [
             '| Performance ('+label+') | '+score(report,'performance')+' |',
             '| Accessibility ('+label+') | '+score(report,'accessibility')+' |',
@@ -221,5 +224,7 @@ jobs:
         if: always()
         with:
           name: priority-4-lighthouse-mobile
-          path: |\n            lighthouse-*-mobile.json\n            pagespeed-insights-mobile.json
+          path: |
+            lighthouse-*-mobile.json
+            pagespeed-insights-mobile.json
           if-no-files-found: ignore
