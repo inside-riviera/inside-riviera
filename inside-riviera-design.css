@@ -20,7 +20,7 @@ img { max-width: 100%; }
   border:0; font-family:inherit;
 }
 .site-head nav, .top nav, .top-nav { display:flex; align-items:center; gap:clamp(10px,2vw,22px); flex-wrap:wrap; }
-.site-head nav a, .top nav a, .top-nav a { color:#fff; text-decoration:none; font-weight:700; transition:color .18s ease; }
+.site-head nav a, .top nav a, .top-nav a { color:#fff; text-decoration:none; font-weight:700; transition:color .18s ease; }\n.top nav a { margin-left:0; }
 .site-head nav a:hover, .top nav a:hover, .top-nav a:hover { color:var(--ir-lime); }
 .brand, .top-brand { color:#fff; font-weight:900; text-decoration:none; letter-spacing:.045em; }
 .brand span, .top-brand span { color:var(--ir-lime); }
@@ -42,7 +42,7 @@ img { max-width: 100%; }
 }
 .photo { box-shadow:var(--ir-shadow); }
 .event-photo, .route-photo, .article-photo { margin:22px 0; }
-button, .btn, .btn-link, .cta a, .hero-cta, .submit-btn, .discovery-submit {
+ .btn, .btn-link, .cta a, .hero-cta, .submit-btn, .discovery-submit {
   border-radius:999px; border:2px solid var(--ir-pink); background:var(--ir-pink); color:#fff;
   font-weight:800; transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
@@ -50,7 +50,7 @@ button, .btn, .btn-link, .cta a, .hero-cta, .submit-btn, .discovery-submit {
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
   padding:12px 21px; text-decoration:none;
 }
-button:hover, .btn:hover, .btn-link:hover, .cta a:hover, .hero-cta:hover, .submit-btn:hover, .discovery-submit:hover {
+.btn:hover, .btn-link:hover, .cta a:hover, .hero-cta:hover, .submit-btn:hover, .discovery-submit:hover {
   transform:translateY(-1px); box-shadow:0 8px 20px rgba(15,23,42,.14);
 }
 a:focus-visible, button:focus-visible { outline:3px solid var(--ir-pink); outline-offset:3px; }
@@ -72,7 +72,7 @@ footer { margin-top:48px; }
     height:clamp(220px,65vw,330px); border-radius:15px;
   }
   .article { padding:clamp(20px,5vw,30px); }
-  .hero { padding-top:48px !important; padding-bottom:54px !important; }
+  .hero:not(#home) { padding-top:48px !important; padding-bottom:54px !important; }\n  .hero#home { padding-bottom:140px !important; }
   .hero h1 { font-size:clamp(2.15rem,10vw,3.7rem) !important; }
   .hero p, .lead { font-size:1.04rem; }
   .toc, .quick, .info, .info-box { padding:20px !important; }
