@@ -1,0 +1,123 @@
+name: Priority 4 performance and outage checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/priority4-checks.yml'
+      - 'index.html'
+      - 'homepage.css'
+      - 'event.html'
+      - 'images/**'
+      - '*.jpg'
+      - '*.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Convert referenced local photos and minify homepage CSS
+        run: |
+          python -m pip install --quiet Pillow rcssmin
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import re
+          root = Path('.')
+          text_files = [p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in {'.html','.css','.js','.json'} and '.git' not in p.parts]
+          texts = {p: p.read_text(encoding='utf-8') for p in text_files}
+          candidates = []
+          for p in root.rglob('*.jpg'):
+              rel = p.as_posix()
+              if rel == 'halloween-2026-share.jpg':
+                  continue
+              if any(rel in text for text in texts.values()):
+                  candidates.append(p)
+          converted = 0
+          before = after = 0
+          for src in candidates:
+              dst = src.with_suffix('.webp')
+              with Image.open(src) as im:
+                  im = im.convert('RGB')
+                  im.save(dst, 'WEBP', quality=80, method=6)
+              before += src.stat().st_size
+              after += dst.stat().st_size
+              converted += 1
+              old, new = src.as_posix(), dst.as_posix()
+              for p, text in texts.items():
+                  if old in text:
+                      texts[p] = text.replace(old, new)
+                  if '/' + old in texts[p]:
+                      texts[p] = texts[p].replace('/' + old, '/' + new)
+          for p, text in texts.items():
+              if p.as_posix() in {'homepage.css'}:
+                  import rcssmin
+                  text = rcssmin.cssmin(text)
+              if text != p.read_text(encoding='utf-8'):
+                  p.write_text(text, encoding='utf-8')
+          print(f'Converted {converted} referenced JPG images; source bytes={before}; WebP bytes={after}; saved={before-after}.')
+          PY
+      - name: Install browser test tools
+        run: |
+          npm init -y
+          npm install --no-save playwright lighthouse
+          npx playwright install --with-deps chromium
+      - name: Run outage tests against the site files
+        run: |
+          python -m http.server 8080 > /tmp/inside-riviera-http.log 2>&1 &
+          echo $! > /tmp/inside-riviera-http.pid
+          node <<'JS'
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch({headless:true, args:['--no-sandbox']});
+            const page = await browser.newPage();
+            await page.route('**/*sheetdb.io/**', route => route.abort());
+            await page.goto('http://127.0.0.1:8080/', {waitUntil:'domcontentloaded'});
+            await page.evaluate(() => localStorage.clear());
+            await page.reload({waitUntil:'domcontentloaded'});
+            await page.getByText('Events temporarily unavailable', {exact:false}).waitFor({timeout:20000});
+            console.log('PASS: first-time visitor sees a clear no-cache outage message.');
+            await page.evaluate(() => {
+              localStorage.setItem('insideRivieraEventsCacheV1', JSON.stringify([{
+                title:'Offline test event', city:'Sanremo', location:'Test venue',
+                time:'18:00', description:'Automated outage test', link:'',
+                year:2026, month:10, date:20, endYear:2026, endMonth:10, endDate:20, img:''
+              }]));
+              localStorage.setItem('insideRivieraEventsCacheTimeV1', new Date().toISOString());
+            });
+            await page.reload({waitUntil:'domcontentloaded'});
+            await page.getByText('Showing your last saved event list', {exact:false}).waitFor({timeout:20000});
+            await page.getByText('Offline test event', {exact:false}).waitFor({timeout:20000});
+            console.log('PASS: returning visitor sees cached event listings during outage.');
+            await browser.close();
+          })().catch(e => { console.error(e); process.exit(1); });
+          JS
+      - name: Run Lighthouse mobile audit
+        run: |
+          npx lighthouse http://127.0.0.1:8080/ --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --screenEmulation.mobile --output=json --output-path=./lighthouse-mobile.json --chrome-flags="--headless --no-sandbox"
+      - name: Commit image and CSS optimizations
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add homepage.css '*.webp' '*.html' '*.css' '*.js' 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Optimize referenced images and minify homepage CSS"
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: priority-4-lighthouse-mobile
+          path: lighthouse-mobile.json
+          if-no-files-found: ignore
