@@ -86,12 +86,14 @@ jobs:
             await page.goto('http://127.0.0.1:8080/', {waitUntil:'domcontentloaded'});
             await page.evaluate(() => localStorage.clear());
             await page.reload({waitUntil:'domcontentloaded'});
-            await page.getByText('Events temporarily unavailable', {exact:false}).waitFor({timeout:20000});
-            console.log('PASS: first-time visitor sees a clear no-cache outage message.');
+            await page.getByText('Live event updates are temporarily unavailable', {exact:false}).waitFor({timeout:20000});
+            const dayCells = await page.locator('#days-grid .day-cell').count();
+            if (dayCells < 28) throw new Error('Calendar grid did not render for a first-time visitor.');
+            console.log('PASS: first-time visitor sees a working calendar and a clear no-cache outage message.');
             await page.evaluate(() => {
               localStorage.setItem('insideRivieraEventsCacheV1', JSON.stringify([{
                 title:'Offline test event', city:'Sanremo', location:'Test venue',
-                time:'18:00', description:'Automated outage test', link:'',
+                time:'18:00', description:'Automated outage test', link:'', categories:['Music'], priority:'1',
                 year:2026, month:10, date:20, endYear:2026, endMonth:10, endDate:20, img:''
               }]));
               localStorage.setItem('insideRivieraEventsCacheTimeV1', new Date().toISOString());
