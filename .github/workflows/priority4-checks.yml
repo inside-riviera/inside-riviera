@@ -137,7 +137,7 @@ jobs:
       - name: Run Lighthouse on the deployed mobile homepage
         run: |
           for attempt in $(seq 1 60); do
-            if curl -fsSL https://www.insideriviera.net/ | grep -q 'priority4-live-check'; then
+            if curl -fsSL https://www.insideriviera.net/ | grep -q 'priority4-live-check: 2026-11-17-anonymous-images'; then
               echo "Confirmed the new homepage build is live."
               break
             fi
@@ -180,7 +180,9 @@ jobs:
             '| Largest Contentful Paint ('+label+') | '+metrics(report,'largest-contentful-paint')+' |',
             '| Total Blocking Time ('+label+') | '+metrics(report,'total-blocking-time')+' |',
             '| Cumulative Layout Shift ('+label+') | '+metrics(report,'cumulative-layout-shift','score')+' |',
-            '| Speed Index ('+label+') | '+metrics(report,'speed-index')+' |'
+            '| Speed Index ('+label+') | '+metrics(report,'speed-index')+' |',
+            '| Third-party cookie audit ('+label+') | '+(report?.audits?.['third-party-cookies']?.displayValue || 'none reported')+' |',
+            '| Chrome DevTools issues ('+label+') | '+(report?.audits?.['inspector-issues']?.details?.items?.length ?? 0)+' |'
           ];
           const report = [
             '# Mobile Lighthouse report',
