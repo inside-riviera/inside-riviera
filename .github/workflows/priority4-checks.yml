@@ -137,7 +137,7 @@ jobs:
       - name: Run Lighthouse on the deployed mobile homepage
         run: |
           for attempt in $(seq 1 60); do
-            if curl -fsSL https://www.insideriviera.net/ | grep -q 'priority4-live-check: 2026-11-17-local-unsplash-fallback'; then
+            if curl -fsSL https://www.insideriviera.net/ | grep -q 'priority4-live-check: 2026-11-17-final-verified'; then
               echo "Confirmed the new homepage build is live."
               break
             fi
