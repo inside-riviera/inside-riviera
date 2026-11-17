@@ -140,7 +140,7 @@ jobs:
             '| Speed Index | '+fmt('speed-index')+' |',
             '',
             'This is a Lighthouse lab run, not field Core Web Vitals. Real-user INP and CrUX field data are reported separately when Google has sufficient traffic.'
-          ].join('\\n');
+          ].join('\n');
           fs.writeFileSync('priority4-lighthouse-summary.md', report);
           console.log(report);
           JS
