@@ -43,7 +43,8 @@ img { max-width: 100%; }
 .photo { box-shadow:var(--ir-shadow); }
 .event-photo, .route-photo, .article-photo { margin:22px 0; }
 button, .btn, .btn-link, .cta a, .hero-cta, .submit-btn, .discovery-submit {
-  border-radius:999px; font-weight:800; transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  border-radius:999px; border:2px solid var(--ir-pink); background:var(--ir-pink); color:#fff;
+  font-weight:800; transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 .btn, .btn-link, .cta a, .hero-cta, .submit-btn, .discovery-submit {
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
