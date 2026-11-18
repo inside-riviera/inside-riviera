@@ -231,7 +231,7 @@ jobs:
             '| Metric | 75th percentile |',
             '|---|---:|',
             '| LCP | '+fieldValue('largest_contentful_paint',1000,'s')+' |',
-            '| INP | '+fieldValue('interaction_to_next_paint',1000,'s')+' |',
+            '| INP | '+fieldValue('interaction_to_next_paint',1,'ms')+' |',
             '| CLS | '+fieldValue('cumulative_layout_shift',1,'score')+' |',
             '',
             'Chrome UX Report retrieval status: '+cruxStatus+'. Google field data reflects eligible real-user experiences over the recent 28-day collection period; no-data responses do not provide a real-user measurement.'
