@@ -167,13 +167,13 @@ jobs:
             echo "Skipping Chrome UX Report field-data request until an API key is configured."
             exit 0
           fi
-          endpoint="https://chromeuxreport.googleapis.com/v1/records:queryRecord?key=$CRUX_API_KEY"
-          url_status=$(curl --silent --show-error --max-time 45 -o crux-url-mobile.json -w '%{http_code}' -H 'Content-Type: application/json' -d '{"url":"https://www.insideriviera.net/","formFactor":"PHONE"}' "$endpoint" || true)
+          endpoint="https://chromeuxreport.googleapis.com/v1/records:queryRecord"
+          url_status=$(curl --silent --show-error --max-time 45 -o crux-url-mobile.json -w '%{http_code}' -H 'Content-Type: application/json' -H "x-goog-api-key: $CRUX_API_KEY" -d '{"url":"https://www.insideriviera.net/","formFactor":"PHONE"}' "$endpoint" || true)
           if [ "$url_status" = "200" ] && node -e "const r=require('./crux-url-mobile.json');process.exit(r.record?.metrics?0:1)"; then
             mv crux-url-mobile.json crux-mobile.json
             echo "URL-level Chrome UX Report data retrieved (mobile)." > crux-status.txt
           else
-            origin_status=$(curl --silent --show-error --max-time 45 -o crux-origin-mobile.json -w '%{http_code}' -H 'Content-Type: application/json' -d '{"origin":"https://www.insideriviera.net","formFactor":"PHONE"}' "$endpoint" || true)
+            origin_status=$(curl --silent --show-error --max-time 45 -o crux-origin-mobile.json -w '%{http_code}' -H 'Content-Type: application/json' -H "x-goog-api-key: $CRUX_API_KEY" -d '{"origin":"https://www.insideriviera.net","formFactor":"PHONE"}' "$endpoint" || true)
             if [ "$origin_status" = "200" ] && node -e "const r=require('./crux-origin-mobile.json');process.exit(r.record?.metrics?0:1)"; then
               mv crux-origin-mobile.json crux-mobile.json
               echo "Origin-level Chrome UX Report data retrieved (mobile); URL-level data was unavailable." > crux-status.txt
