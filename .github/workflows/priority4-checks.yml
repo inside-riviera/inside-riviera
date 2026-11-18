@@ -158,23 +158,29 @@ jobs:
             sleep 10
           done
           npx lighthouse https://www.insideriviera.net/ --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --screenEmulation.mobile --output=json --output-path=./lighthouse-live-mobile.json --chrome-flags="--headless --no-sandbox"
-      - name: Retrieve real-user Core Web Vitals when Google has field data
+      - name: Retrieve real-user Core Web Vitals from the Chrome UX Report
         env:
-          PSI_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+          CRUX_API_KEY: ${{ secrets.CRUX_API_KEY }}
         run: |
-          if [ -z "$PSI_API_KEY" ]; then
-            echo "No PAGESPEED_API_KEY repository secret configured." > pagespeed-insights-status.txt
-            echo "Skipping PageSpeed Insights field-data request until an API key is configured."
+          if [ -z "$CRUX_API_KEY" ]; then
+            echo "No CRUX_API_KEY repository secret configured." > crux-status.txt
+            echo "Skipping Chrome UX Report field-data request until an API key is configured."
             exit 0
           fi
-          status=$(curl --silent --show-error --max-time 45 -o pagespeed-insights-mobile.json -w '%{http_code}' "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fwww.insideriviera.net%2F&strategy=mobile&category=performance&key=$PSI_API_KEY" || true)
-          if [ "$status" = "200" ]; then
-            echo "HTTP 200: PageSpeed Insights response received."
-            rm -f pagespeed-insights-status.txt
+          endpoint="https://chromeuxreport.googleapis.com/v1/records:queryRecord?key=$CRUX_API_KEY"
+          url_status=$(curl --silent --show-error --max-time 45 -o crux-url-mobile.json -w '%{http_code}' -H 'Content-Type: application/json' -d '{"url":"https://www.insideriviera.net/","formFactor":"PHONE"}' "$endpoint" || true)
+          if [ "$url_status" = "200" ] && node -e "const r=require('./crux-url-mobile.json');process.exit(r.record?.metrics?0:1)"; then
+            mv crux-url-mobile.json crux-mobile.json
+            echo "URL-level Chrome UX Report data retrieved (mobile)." > crux-status.txt
           else
-            echo "HTTP $status" > pagespeed-insights-status.txt
-            echo "PageSpeed Insights request did not return field data (HTTP $status)."
-            rm -f pagespeed-insights-mobile.json
+            origin_status=$(curl --silent --show-error --max-time 45 -o crux-origin-mobile.json -w '%{http_code}' -H 'Content-Type: application/json' -d '{"origin":"https://www.insideriviera.net","formFactor":"PHONE"}' "$endpoint" || true)
+            if [ "$origin_status" = "200" ] && node -e "const r=require('./crux-origin-mobile.json');process.exit(r.record?.metrics?0:1)"; then
+              mv crux-origin-mobile.json crux-mobile.json
+              echo "Origin-level Chrome UX Report data retrieved (mobile); URL-level data was unavailable." > crux-status.txt
+            else
+              echo "No usable Chrome UX Report field data. URL request HTTP $url_status; origin request HTTP $origin_status. Google may not have sufficient eligible real-user samples yet, or the API/key may need attention." > crux-status.txt
+              rm -f crux-url-mobile.json crux-origin-mobile.json crux-mobile.json
+            fi
           fi
       - name: Summarize mobile Lighthouse metrics
         if: always() && hashFiles('lighthouse-mobile.json') != ''
@@ -183,15 +189,15 @@ jobs:
           const fs = require('fs');
           const local = JSON.parse(fs.readFileSync('lighthouse-mobile.json', 'utf8'));
           const live = fs.existsSync('lighthouse-live-mobile.json') ? JSON.parse(fs.readFileSync('lighthouse-live-mobile.json', 'utf8')) : null;
-          const psi = fs.existsSync('pagespeed-insights-mobile.json') ? JSON.parse(fs.readFileSync('pagespeed-insights-mobile.json', 'utf8')) : null;
-          const field = psi?.loadingExperience?.metrics || psi?.originLoadingExperience?.metrics || {};
-          const psiStatus = fs.existsSync('pagespeed-insights-status.txt') ? fs.readFileSync('pagespeed-insights-status.txt','utf8').trim() : (psi ? 'HTTP 200' : 'not retrieved');
+          const crux = fs.existsSync('crux-mobile.json') ? JSON.parse(fs.readFileSync('crux-mobile.json', 'utf8')) : null;
+          const field = crux?.record?.metrics || {};
+          const cruxStatus = fs.existsSync('crux-status.txt') ? fs.readFileSync('crux-status.txt','utf8').trim() : (crux ? 'Chrome UX Report data retrieved' : 'not retrieved');
           const metrics = (report, id, unit='ms') => {
             const value = report?.audits?.[id]?.numericValue;
             return Number.isFinite(value) ? (unit === 'ms' ? (value/1000).toFixed(2)+' s' : value.toFixed(3)) : 'not reported';
           };
           const score = (report, id) => Number.isFinite(report?.categories?.[id]?.score) ? Math.round(report.categories[id].score*100)+'/100' : 'not reported';
-          const fieldValue = (id, divisor, unit) => Number.isFinite(field?.[id]?.percentile) ? (field[id].percentile/divisor).toFixed(unit === 'score' ? 3 : 2)+' '+unit+' ('+(field[id].category || 'field')+')' : (psiStatus === 'HTTP 200' ? 'no field data in response' : 'not retrieved ('+psiStatus+')');
+          const fieldValue = (id, divisor, unit) => { const raw = field?.[id]?.percentiles?.p75; const value = raw === undefined ? NaN : Number(raw); return Number.isFinite(value) ? (value/divisor).toFixed(unit === 'score' ? 3 : 2)+' '+unit : 'not available ('+cruxStatus+')'; };
           const rows = (report, label) => [
             '| Performance ('+label+') | '+score(report,'performance')+' |',
             '| Accessibility ('+label+') | '+score(report,'accessibility')+' |',
@@ -224,11 +230,11 @@ jobs:
             '',
             '| Metric | 75th percentile |',
             '|---|---:|',
-            '| LCP | '+fieldValue('LARGEST_CONTENTFUL_PAINT_MS',1000,'s')+' |',
-            '| INP | '+fieldValue('INTERACTION_TO_NEXT_PAINT',1000,'s')+' |',
-            '| CLS | '+fieldValue('CUMULATIVE_LAYOUT_SHIFT_SCORE',1000,'score')+' |',
+            '| LCP | '+fieldValue('largest_contentful_paint',1000,'s')+' |',
+            '| INP | '+fieldValue('interaction_to_next_paint',1000,'s')+' |',
+            '| CLS | '+fieldValue('cumulative_layout_shift',1,'score')+' |',
             '',
-            'PageSpeed Insights retrieval status: '+psiStatus+'. Field Core Web Vitals cannot be confirmed until the API request succeeds; an unavailable response does not establish whether CrUX data exists.'
+            'Chrome UX Report retrieval status: '+cruxStatus+'. Google field data reflects eligible real-user experiences over the recent 28-day collection period; no-data responses do not provide a real-user measurement.'
           ].join('\n');
           fs.writeFileSync('priority4-lighthouse-summary.md', report);
           console.log(report);
@@ -250,6 +256,6 @@ jobs:
           name: priority-4-lighthouse-mobile
           path: |
             lighthouse-*-mobile.json
-            pagespeed-insights-mobile.json
-            pagespeed-insights-status.txt
+            crux-mobile.json
+            crux-status.txt
           if-no-files-found: ignore
