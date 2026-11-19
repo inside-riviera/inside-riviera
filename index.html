@@ -462,16 +462,40 @@
       if (!value) return "";
 
       let url = String(value).trim();
+      const markdownMatch = url.match(/\((https?:\/\/[^)\s]+)\)/);
+      if (markdownMatch) url = markdownMatch[1];
+      url = url.replace(/^["']|["']$/g, "").trim();
 
-      const match = url.match(
-        /\((https?:\/\/[^)\s]+)\)/
-      );
+      // Accept only direct web image URLs. Search-result thumbnail URLs are
+      // unreliable hotlinks, so use the site's branded fallback instead.
+      try {
+        const parsed = new URL(url);
+        if (!["http:", "https:"].includes(parsed.protocol)) return "";
+        if (parsed.hostname === "encrypted-tbn0.gstatic.com") return "";
+        if (parsed.hostname === "drive.google.com") {
+          const id = parsed.pathname.match(/\/file\/d\/([^/]+)/)?.[1] || parsed.searchParams.get("id");
+          if (id) return "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(id);
+        }
+        return url;
+      } catch (_) {
+        return "";
+      }
+    }
 
-      if (match) url = match[1];
+    function extractImageUrl(value) {
+      const text = String(value || "");
+      const match = text.match(/https?:\/\/[^\s<>"']+/i);
+      return match ? cleanImageUrl(match[0].replace(/[),.;]+$/, "")) : "";
+    }
 
-      return url
-        .replace(/^["']|["']$/g, "")
-        .trim();
+    function cleanEventDescription(value, imageUrl) {
+      let description = String(value || "");
+      if (imageUrl) {
+        description = description.replace(imageUrl, "");
+      }
+      // Avoid showing pasted image links as event description text.
+      description = description.replace(/https?:\/\/[^\s<>"']+/gi, "").trim();
+      return description;
     }
 
     function getCategoryClass(category) {
@@ -829,13 +853,21 @@
             ])
           );
 
-          const image = cleanImageUrl(
+          let image = cleanImageUrl(
             getField(clean, [
               "img", "image", "photo",
               "picture", "foto",
               "imgurl", "imageurl"
             ])
           );
+
+          const rawDescription = getField(clean, [
+            "description", "desc", "descrizione", "details", "info"
+          ]);
+          // Some spreadsheet rows have the photo URL pasted into Description
+          // instead of the dedicated image column. Recover it automatically.
+          if (!image) image = extractImageUrl(rawDescription);
+          const description = cleanEventDescription(rawDescription, image);
 
           return {
             year: year,
@@ -865,10 +897,7 @@
               "address", "place"
             ]),
 
-            description: getField(clean, [
-              "description", "desc",
-              "descrizione", "details", "info"
-            ]),
+            description: description,
 
             link: getField(clean, [
               "link", "url", "website",
