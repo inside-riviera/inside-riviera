@@ -471,7 +471,6 @@
       try {
         const parsed = new URL(url);
         if (!["http:", "https:"].includes(parsed.protocol)) return "";
-        if (parsed.hostname === "encrypted-tbn0.gstatic.com") return "";
         if (parsed.hostname === "drive.google.com") {
           const id = parsed.pathname.match(/\/file\/d\/([^/]+)/)?.[1] || parsed.searchParams.get("id");
           if (id) return "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(id);
