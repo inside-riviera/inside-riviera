@@ -24,6 +24,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add event-*.html event-pages-manifest.json sitemap.xml
+          git add -A
           git diff --cached --quiet || git commit -m "Publish individual upcoming event pages"
           git push
