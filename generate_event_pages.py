@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 API = "https://sheetdb.io/api/v1/nxxtx0pb2uuw7"
-SHEET_NAME = os.environ.get("SHEETDB_SHEET", "").strip()
+SHEET_NAME = os.environ.get("SHEETDB_SHEET", "events").strip()
 API_URL = API + ("?sheet=" + quote(SHEET_NAME) if SHEET_NAME else "")
 BASE = "https://www.insideriviera.net"
 MANIFEST = ROOT / "event-pages-manifest.json"
@@ -65,14 +65,10 @@ def page_for(event, canonical):
     schema = {
         "@context": "https://schema.org", "@type": "Event",
         "name": event["title"], "startDate": event["start"].isoformat(),
-        "eventStatus": "https://schema.org/EventScheduled",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
         "location": place, "url": canonical
     }
     if event["end"]:
         schema["endDate"] = event["end"].isoformat()
-    if official:
-        schema["sameAs"] = official
     if image:
         schema["image"] = [image]
     if event["description"]:
