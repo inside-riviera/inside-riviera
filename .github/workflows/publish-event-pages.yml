@@ -19,6 +19,8 @@ jobs:
         with:
           python-version: "3.11"
       - name: Generate pages from the events spreadsheet
+        env:
+          SHEETDB_SHEET: events
         run: python generate_event_pages.py
       - name: Commit updated event pages and sitemap
         run: |
