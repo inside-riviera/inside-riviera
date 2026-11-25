@@ -1,0 +1,44 @@
+name: Validate AdSense and event publishing setup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'generate_event_pages.py'
+      - 'index.html'
+      - 'ads.txt'
+      - 'sitemap.xml'
+      - '.github/workflows/adsense-event-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check Python syntax
+        run: python -m py_compile generate_event_pages.py
+      - name: Validate sitemap and AdSense ownership setup
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import xml.etree.ElementTree as ET
+
+          ET.parse('sitemap.xml')
+          ads = Path('ads.txt').read_text(encoding='utf-8').strip()
+          expected = 'google.com, pub-1783038837894885, DIRECT, f08c47fec0942fa0'
+          assert expected in ads, 'Expected publisher record is missing from ads.txt'
+          home = Path('index.html').read_text(encoding='utf-8')
+          assert 'name="google-adsense-account" content="ca-pub-1783038837894885"' in home, 'AdSense verification meta tag is missing'
+          assert 'pagead/js/adsbygoogle.js' not in home, 'Ad serving must remain disabled until consent configuration is confirmed'
+          script = Path('generate_event_pages.py').read_text(encoding='utf-8')
+          assert 'len(description) < 180' in script, 'Thin event-page publishing threshold is missing'
+          print('PASS: Python syntax, sitemap XML, ads.txt publisher record, AdSense verification meta tag and event quality threshold.')
+          PY
