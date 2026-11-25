@@ -59,6 +59,8 @@ def page_for(event, canonical):
     meta = html.escape(meta[:155])
     official = event["official"]
     image = event["image"]
+    event_time = html.escape(event["time"])
+    category = html.escape(event["category"])
     place = {"@type": "Place", "name": event["venue"] or event["city"]}
     if event["city"]:
         place["address"] = {"@type": "PostalAddress", "addressLocality": event["city"]}
@@ -76,6 +78,8 @@ def page_for(event, canonical):
     img_html = f'<img class="event-image" src="{html.escape(image, quote=True)}" alt="{title}" loading="lazy">' if image else ""
     official_html = f'<p><a class="button" href="{html.escape(official, quote=True)}" rel="noopener noreferrer">Check the organiser’s event information ↗</a></p>' if official else ""
     venue_line = f'<p class="meta">📍 {venue + " · " if venue else ""}{city}</p>' if city or venue else ""
+    time_line = f'<p class="meta">🕒 {event_time}</p>' if event_time else ""
+    category_line = f'<p class="meta">Event type: {category}</p>' if category else ""
     return f"""<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -86,6 +90,7 @@ def page_for(event, canonical):
 <meta property="og:title" content="{title} in {city}"><meta property="og:description" content="{meta}">
 <meta property="og:url" content="{canonical}">
 {f'<meta property="og:image" content="{html.escape(image, quote=True)}">' if image else ''}
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="ea71097e-77cf-48d5-b2ec-c10ddde7a251" data-blockingmode="auto" type="text/javascript"></script>
 <link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/inside-riviera-design.css">
 <script type="application/ld+json">{json_script(schema)}</script>
 <style>
@@ -101,7 +106,7 @@ h1{{font-size:clamp(32px,6vw,52px);line-height:1.12;margin:10px 0}}
 </style></head><body>
 <header><a href="/">INSIDE RIVIERA</a></header><main>
 <a class="back" href="/events-riviera.html">← Explore Riviera events</a>
-<article>{img_html}<p class="meta">📅 {html.escape(date_label)}</p>{venue_line}
+<article>{img_html}<p class="meta">📅 {html.escape(date_label)}</p>{venue_line}{time_line}{category_line}
 <h1>{title}</h1>
 {f'<p>{description}</p>' if description else '<p>For the latest programme, timing and access information, check the organiser’s event information before travelling.</p>'}
 {official_html}
@@ -152,8 +157,12 @@ def main():
         official = safe_http(get(row, "link", "url", "website", "sito", "ticketlink"))
         venue = get(row, "venue", "location", "luogo", "address", "place")
         image = safe_http(get(row, "img", "image", "photo", "picture", "foto", "imgurl", "imageurl"))
-        # Publish only rows with enough event-specific information to be useful.
-        if len(description) < 45 and not (official and (venue or get(row, "time", "orario", "hours", "ora"))):
+        event_time = get(row, "time", "orario", "hours", "ora")
+        category = get(row, "category", "categoria", "type", "tipo")
+        # Keep thin spreadsheet entries out of Google’s index. A page needs a substantial
+        # event-specific description plus at least two useful supporting details.
+        supporting_details = [official, venue, event_time, category, image]
+        if len(description) < 180 or sum(bool(value) for value in supporting_details) < 2:
             continue
         identity = "|".join([title.lower(), city.lower(), start.isoformat()])
         suffix = hashlib.sha1(identity.encode("utf-8")).hexdigest()[:7]
@@ -161,7 +170,8 @@ def main():
         filename = f"event-{slug}.html"
         canonical = f"{BASE}/{filename}"
         event = {"title": title, "city": city, "venue": venue, "description": description,
-                 "official": official, "image": image, "start": start, "end": end}
+                 "official": official, "image": image, "time": event_time, "category": category,
+                 "start": start, "end": end}
         (ROOT / filename).write_text(page_for(event, canonical), encoding="utf-8")
         generated.append(filename)
 
