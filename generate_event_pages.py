@@ -6,12 +6,15 @@ import html
 import json
 import os
 import re
+from urllib.parse import quote
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 API = "https://sheetdb.io/api/v1/nxxtx0pb2uuw7"
+SHEET_NAME = os.environ.get("SHEETDB_SHEET", "").strip()
+API_URL = API + ("?sheet=" + quote(SHEET_NAME) if SHEET_NAME else "")
 BASE = "https://www.insideriviera.net"
 MANIFEST = ROOT / "event-pages-manifest.json"
 SITEMAP = ROOT / "sitemap.xml"
@@ -111,11 +114,13 @@ h1{{font-size:clamp(32px,6vw,52px);line-height:1.12;margin:10px 0}}
 </body></html>"""
 
 def main():
-    req = urllib.request.Request(API, headers={"User-Agent": "InsideRivieraEventPublisher/1.0"})
+    req = urllib.request.Request(API_URL, headers={"User-Agent": "InsideRivieraEventPublisher/1.0"})
     with urllib.request.urlopen(req, timeout=30) as response:
         rows = json.loads(response.read().decode("utf-8"))
     if not isinstance(rows, list):
         raise RuntimeError("SheetDB did not return an event list.")
+    if not rows:
+        raise RuntimeError("SheetDB returned zero rows. No pages or sitemap entries were changed; check the selected worksheet tab and API permissions.")
 
     today = dt.date.today()
     generated = []
