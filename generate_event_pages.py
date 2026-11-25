@@ -82,6 +82,13 @@ def page_for(event, canonical):
     category_line = f'<p class="meta">Event type: {category}</p>' if category else ""
     return f"""<!doctype html>
 <html lang="en"><head>
+<script async type="text/plain" data-cookieconsent="statistics" src="https://www.googletagmanager.com/gtag/js?id=G-B9L3VNZEH6"></script>
+<script type="text/plain" data-cookieconsent="statistics">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-B9L3VNZEH6');
+</script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title} in {city} | Inside Riviera</title>
 <meta name="description" content="{meta}">
